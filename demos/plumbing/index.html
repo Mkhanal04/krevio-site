@@ -821,6 +821,40 @@ body {
 .kb-info-text { font-size: 13px; color: var(--t2); }
 .detail-cell { padding: 0 !important; border-bottom: none !important; }
 
+/* ═══════════════════════════════════════════
+   RECEIPT & EXPENSE TRACKER
+═══════════════════════════════════════════ */
+.receipt-actions { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.btn-receipt-upload { padding: 10px 20px; border-radius: 10px; border: none; background: var(--accent); color: var(--bg); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.btn-receipt-upload:hover { opacity: 0.9; transform: translateY(-1px); }
+.receipt-ai-insight { display: flex; gap: 12px; align-items: flex-start; background: var(--accentS); border: 1px solid var(--accentB); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
+.receipt-ai-icon { font-size: 18px; flex-shrink: 0; }
+.receipt-ai-text { font-size: 13px; color: var(--t1); line-height: 1.5; }
+.receipt-ai-text strong { color: var(--accent); }
+.receipt-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.receipt-table th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--t2); border-bottom: 2px solid var(--border); }
+.receipt-table td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.receipt-id { font-family: monospace; font-size: 12px; color: var(--t2); }
+.receipt-vendor { font-weight: 500; color: var(--t0); }
+.receipt-note { font-size: 12px; color: var(--t2); margin-top: 2px; }
+.receipt-amount { font-weight: 600; color: var(--t0); white-space: nowrap; }
+.receipt-type { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+.receipt-type--business { background: var(--accentS); color: var(--accent); }
+.receipt-type--personal { background: var(--bg2); color: var(--t2); }
+.receipt-flag { display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; margin-right: 6px; }
+.receipt-flag--review { background: var(--amberS); color: var(--amber); }
+.receipt-flag--split { background: var(--blueS); color: var(--blue); }
+.receipt-status { display: inline-block; font-size: 11px; font-weight: 500; }
+.receipt-status--verified { color: var(--green); }
+.receipt-status--pending { color: var(--t2); }
+.cpa-modal-overlay { position: fixed; inset: 0; background: var(--overlay); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.cpa-modal { background: var(--bg1); border: 1px solid var(--border); border-radius: 16px; padding: 24px; max-width: 400px; width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+.cpa-modal-title { font-size: 16px; font-weight: 700; color: var(--t0); margin-bottom: 8px; }
+.cpa-modal-desc { font-size: 13px; color: var(--t2); margin-bottom: 16px; line-height: 1.5; }
+.cpa-modal-options { margin-bottom: 16px; }
+.cpa-month-select { width: 100%; }
+.cpa-modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
 /* Summary grid column variants (used by Customers=4col, Money=5col) */
 .dispatch-summary.summary-4col { grid-template-columns: repeat(4, 1fr); }
 .dispatch-summary.summary-5col { grid-template-columns: repeat(5, 1fr); }
@@ -895,6 +929,10 @@ body {
   /* --- Platform grid: tighter on tablet --- */
   .platform-grid, .platform-grid-row { grid-template-columns: 1.2fr 1fr 1fr; }
   .platform-grid-row { font-size: 12px; padding: 8px 0; }
+
+  /* --- Receipts --- */
+  .receipt-table .hide-mobile { display: none; }
+  .receipt-ai-insight { padding: 12px 14px; }
 
   /* --- Chatbot: wider on tablet --- */
   .chat-window { width: 320px; right: 12px; bottom: 80px; }
@@ -1016,6 +1054,16 @@ body {
   .invoice-card { overflow-x: auto; }
   .invoice-table { min-width: 480px; }
   .invoice-table th, .invoice-table td { padding: 8px; font-size: 12px; }
+
+  /* --- Receipts --- */
+  .receipt-actions { gap: 8px; }
+  .btn-receipt-upload { padding: 8px 16px; font-size: 13px; }
+  .receipt-ai-insight { padding: 10px 12px; gap: 8px; }
+  .receipt-ai-text { font-size: 12px; }
+  .receipt-table { min-width: 480px; }
+  .receipt-table th, .receipt-table td { padding: 8px; font-size: 12px; }
+  .receipt-note { font-size: 11px; }
+  .cpa-modal { padding: 20px; }
 
   /* --- Automation --- */
   .auto-metrics { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -1299,6 +1347,9 @@ body {
       <button class="od-nav-item" id="nav-money" role="tab" aria-selected="false" onclick="showOdView('money')">
         <span class="nav-icon">💰</span><span>Money</span>
       </button>
+      <button class="od-nav-item" id="nav-receipts" role="tab" aria-selected="false" onclick="showOdView('receipts')">
+        <span class="nav-icon">🧾</span><span>Receipts</span>
+      </button>
       <button class="od-nav-item" id="nav-automation" role="tab" aria-selected="false" onclick="showOdView('automation')">
         <span class="nav-icon">⚡</span><span>Automation</span>
       </button>
@@ -1346,6 +1397,13 @@ body {
           <div class="od-main-sub">Revenue tracking, invoices, and cost comparison</div>
         </div>
         <div id="moneyContent"></div>
+      </div>
+      <div id="od-receipts" class="od-view" role="tabpanel" style="display:none;">
+        <div class="od-main-header">
+          <div class="od-main-title">Receipts & Expenses</div>
+          <div class="od-main-sub">AI-powered expense tracking, categorization, and CPA-ready exports</div>
+        </div>
+        <div id="receiptsContent"></div>
       </div>
       <div id="od-geo" class="od-view" role="tabpanel" style="display:none;">
         <div class="od-main-header">
@@ -1648,6 +1706,22 @@ const DATA = {
       { month: 'Feb', amount: 13600 },
       { month: 'Mar', amount: 15100 },
       { month: 'Apr', amount: 18400 }
+    ]
+  },
+
+  receipts: {
+    summary: { mtdTotal: '$3,240', businessPct: '72%', personalPct: '28%', flagged: 2, receiptCount: 12 },
+    items: [
+      { id: 'R-001', date: 'Apr 5', vendor: 'Ferguson Plumbing Supply', amount: '$847.50', category: 'Parts & Materials', type: 'business', flag: null, status: 'verified', note: 'PEX fittings + copper for Baker repipe job' },
+      { id: 'R-002', date: 'Apr 4', vendor: 'Shell Gas Station — Plano', amount: '$78.40', category: 'Fuel', type: 'business', flag: 'review', status: 'pending', note: 'Saturday fill-up — confirm business use', flagNote: 'Weekend purchase — confirm business use' },
+      { id: 'R-003', date: 'Apr 3', vendor: 'Home Depot', amount: '$234.00', category: 'Tools & Equipment', type: 'business', flag: null, status: 'verified', note: 'Replacement drain snake + fittings' },
+      { id: 'R-004', date: 'Apr 2', vendor: 'State Farm Insurance', amount: '$420.00', category: 'Insurance', type: 'business', flag: null, status: 'verified', note: 'Monthly business liability premium' },
+      { id: 'R-005', date: 'Apr 1', vendor: 'Verizon Wireless', amount: '$156.00', category: 'Phone & Internet', type: 'business', flag: 'split', status: 'pending', note: '3 lines — 2 business, 1 personal', flagNote: 'Mixed use — split 67% business / 33% personal' },
+      { id: 'R-006', date: 'Mar 30', vendor: 'QuickBooks', amount: '$35.00', category: 'Software', type: 'business', flag: null, status: 'verified', note: 'Monthly subscription' },
+      { id: 'R-007', date: 'Mar 29', vendor: 'Costco', amount: '$124.80', category: 'Supplies', type: 'personal', flag: null, status: 'verified', note: 'Groceries (personal)' },
+      { id: 'R-008', date: 'Mar 28', vendor: 'Toyota Dealership — Plano', amount: '$380.00', category: 'Vehicle Maintenance', type: 'business', flag: null, status: 'verified', note: 'Oil change + tire rotation — work van' },
+      { id: 'R-009', date: 'Mar 27', vendor: 'Lone Star Uniforms', amount: '$185.00', category: 'Uniforms & Apparel', type: 'business', flag: null, status: 'verified', note: '3 new crew shirts + embroidery' },
+      { id: 'R-010', date: 'Mar 25', vendor: 'Amazon', amount: '$67.50', category: 'Office Supplies', type: 'business', flag: 'review', status: 'pending', note: 'Printer ink + paper — home office', flagNote: 'Home office — verify business deduction eligibility' }
     ]
   }
 };
@@ -2449,6 +2523,183 @@ function toggleCustomerDetail(id) {
 }
 
 /* ═══════════════════════════════════════════
+   RECEIPTS & EXPENSES RENDER
+═══════════════════════════════════════════ */
+function renderReceipts() {
+  const el = document.getElementById('receiptsContent');
+  if (!el || el.dataset.rendered) return;
+  el.dataset.rendered = '1';
+  const d = DATA.receipts;
+  const s = d.summary;
+
+  const summaryHtml = `
+    <div class="dispatch-summary summary-5col">
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.mtdTotal)}</div><div class="dispatch-stat-label">Expenses (MTD)</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.receiptCount)}</div><div class="dispatch-stat-label">Receipts</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value stat-value--positive">${escapeHtml(s.businessPct)}</div><div class="dispatch-stat-label">Business</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.personalPct)}</div><div class="dispatch-stat-label">Personal</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value" style="color:var(--amber)">${escapeHtml(s.flagged)}</div><div class="dispatch-stat-label">Flagged</div></div>
+    </div>`;
+
+  const actionsHtml = `
+    <div class="receipt-actions">
+      <button class="btn-receipt-upload" onclick="simulateReceiptUpload()">📸 Snap a Receipt</button>
+      <button class="btn-accent-outline" onclick="showCpaExportModal()">📦 Export CPA Package</button>
+    </div>`;
+
+  const aiInsightHtml = d.items.filter(r => r.flag).length > 0 ? `
+    <div class="receipt-ai-insight">
+      <div class="receipt-ai-icon">✨</div>
+      <div class="receipt-ai-text">
+        <strong>AI Insight:</strong> ${d.items.filter(r => r.flag).length} receipts flagged for review.
+        ${d.items.find(r => r.flag === 'split') ? 'Verizon bill detected as mixed use — recommend 67/33 business/personal split.' : ''}
+        ${d.items.find(r => r.flag === 'review') ? 'Weekend fuel purchase may need mileage log for IRS compliance.' : ''}
+      </div>
+    </div>` : '';
+
+  const filterHtml = `
+    <div class="filter-bar">
+      <div class="filter-search-wrap"><input class="filter-search" id="receiptSearch" placeholder="Search receipts..." oninput="filterReceipts()"></div>
+      <select class="filter-select" id="receiptCategoryFilter" onchange="filterReceipts()">
+        <option value="all">All Categories</option>
+        <option value="Parts & Materials">Parts & Materials</option>
+        <option value="Fuel">Fuel</option>
+        <option value="Tools & Equipment">Tools & Equipment</option>
+        <option value="Insurance">Insurance</option>
+        <option value="Phone & Internet">Phone & Internet</option>
+        <option value="Software">Software</option>
+        <option value="Vehicle Maintenance">Vehicle</option>
+        <option value="Office Supplies">Office</option>
+        <option value="Uniforms">Uniforms</option>
+        <option value="Supplies">Supplies</option>
+      </select>
+      <select class="filter-select" id="receiptTypeFilter" onchange="filterReceipts()">
+        <option value="all">All Types</option>
+        <option value="business">Business</option>
+        <option value="personal">Personal</option>
+      </select>
+    </div>`;
+
+  const flagBadge = (flag) => {
+    if (!flag) return '';
+    if (flag === 'review') return '<span class="receipt-flag receipt-flag--review">⚠ Review</span>';
+    if (flag === 'split') return '<span class="receipt-flag receipt-flag--split">↔ Split</span>';
+    return '';
+  };
+  const statusBadge = (status) => {
+    if (status === 'verified') return '<span class="receipt-status receipt-status--verified">✓ Verified</span>';
+    return '<span class="receipt-status receipt-status--pending">○ Pending</span>';
+  };
+  const typeBadge = (type) => {
+    if (type === 'business') return '<span class="receipt-type receipt-type--business">Business</span>';
+    return '<span class="receipt-type receipt-type--personal">Personal</span>';
+  };
+
+  const tableRows = d.items.map((r, i) => `
+    <tr class="receipt-row" id="receipt-row-${i}" data-category="${r.category}" data-type="${r.type}" data-vendor="${r.vendor.toLowerCase()}">
+      <td class="receipt-id">${escapeHtml(r.id)}</td>
+      <td class="td-muted">${escapeHtml(r.date)}</td>
+      <td>
+        <div class="receipt-vendor">${escapeHtml(r.vendor)}</div>
+        <div class="receipt-note">${escapeHtml(r.note)}</div>
+      </td>
+      <td class="receipt-amount">${escapeHtml(r.amount)}</td>
+      <td class="hide-mobile">${escapeHtml(r.category)}</td>
+      <td>${typeBadge(r.type)}</td>
+      <td>${flagBadge(r.flag)}${statusBadge(r.status)}</td>
+    </tr>
+  `).join('');
+
+  const tableHtml = `
+    <div class="table-card">
+      <div class="scroll-x">
+        <table class="receipt-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Vendor / Notes</th>
+              <th>Amount</th>
+              <th class="hide-mobile">Category</th>
+              <th>Type</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+    </div>`;
+
+  el.innerHTML = summaryHtml + actionsHtml + aiInsightHtml + filterHtml + tableHtml;
+}
+
+function filterReceipts() {
+  const search = (document.getElementById('receiptSearch').value || '').toLowerCase();
+  const category = document.getElementById('receiptCategoryFilter').value;
+  const type = document.getElementById('receiptTypeFilter').value;
+  let visibleCount = 0;
+  document.querySelectorAll('.receipt-row').forEach(row => {
+    const vendor = row.dataset.vendor || '';
+    const cat = row.dataset.category || '';
+    const t = row.dataset.type || '';
+    const text = row.textContent.toLowerCase();
+    const matchSearch = !search || text.includes(search);
+    const matchCategory = category === 'all' || cat.includes(category);
+    const matchType = type === 'all' || t === type;
+    const show = matchSearch && matchCategory && matchType;
+    if (show) visibleCount++;
+    row.style.display = show ? '' : 'none';
+  });
+  let emptyEl = document.getElementById('receiptEmptyState');
+  if (visibleCount === 0) {
+    if (!emptyEl) {
+      emptyEl = document.createElement('div');
+      emptyEl.id = 'receiptEmptyState';
+      emptyEl.className = 'empty-state';
+      emptyEl.textContent = 'No receipts match your filters.';
+      document.querySelector('.receipt-table')?.parentElement?.after(emptyEl);
+    }
+    emptyEl.style.display = '';
+  } else if (emptyEl) {
+    emptyEl.style.display = 'none';
+  }
+}
+
+function simulateReceiptUpload() {
+  showToast('📸 Processing receipt with AI OCR...');
+  setTimeout(() => {
+    showToast('✅ Receipt captured: Home Depot — $67.30 — Tools & Equipment (Business)');
+  }, 2000);
+}
+
+function showCpaExportModal() {
+  const modal = document.createElement('div');
+  modal.className = 'cpa-modal-overlay';
+  modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+  modal.innerHTML = `
+    <div class="cpa-modal">
+      <div class="cpa-modal-title">📦 Export CPA Package</div>
+      <p class="cpa-modal-desc">Select a period to export all categorized receipts, expense summary, and deduction report.</p>
+      <div class="cpa-modal-options">
+        <select class="filter-select cpa-month-select" id="cpaMonth">
+          <option>April 2026</option>
+          <option>March 2026</option>
+          <option>February 2026</option>
+          <option>January 2026</option>
+          <option>Q1 2026 (Jan–Mar)</option>
+          <option>2025 Full Year</option>
+        </select>
+      </div>
+      <div class="cpa-modal-actions">
+        <button class="btn-accent-outline" onclick="this.closest('.cpa-modal-overlay').remove()">Cancel</button>
+        <button class="btn-receipt-upload" onclick="this.closest('.cpa-modal-overlay').remove(); showToast('📦 CPA package exported — 10 receipts, $3,240 total, ready for your accountant')">Export →</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+/* ═══════════════════════════════════════════
    MONEY / REVENUE RENDER
 ═══════════════════════════════════════════ */
 function renderMoney() {
@@ -2577,7 +2828,7 @@ function switchView(view) {
 }
 
 function showOdView(view) {
-  ['dashboard', 'dispatch', 'pipeline', 'customers', 'money', 'automation', 'geo', 'kb'].forEach(v => {
+  ['dashboard', 'dispatch', 'pipeline', 'customers', 'money', 'receipts', 'automation', 'geo', 'kb'].forEach(v => {
     const el = document.getElementById('od-' + v);
     if (el) el.style.display = v === view ? 'block' : 'none';
     const nav = document.getElementById('nav-' + v);
@@ -2593,6 +2844,7 @@ function showOdView(view) {
   if (view === 'pipeline') renderPipeline();
   if (view === 'customers') renderCustomers();
   if (view === 'money') renderMoney();
+  if (view === 'receipts') renderReceipts();
   if (view === 'geo') renderGeo();
   if (view === 'kb') renderKb();
   if (view === 'automation') renderAutomation();
