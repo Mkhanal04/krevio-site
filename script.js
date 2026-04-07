@@ -331,10 +331,10 @@ function removeTyping() {
 
 function addDemoCard(industry) {
   const demos = {
-    landscaping: { url: 'https://milankhanal.com/demos/landscaping/', name: 'Landscaping Demo', desc: 'Booking, seasonal follow-ups, before/after gallery' },
-    realestate: { url: 'https://milankhanal.com/demos/realestate/', name: 'Real Estate Demo', desc: 'Project portfolios, multi-service booking' },
-    plumbing: { url: 'https://milankhanal.com/demos/plumbing/', name: 'Plumbing Demo', desc: 'Emergency routing, 24/7 service, priority booking' },
-    hvac: { url: 'https://milankhanal.com/demos/hvac/', name: 'HVAC Demo', desc: 'System tracking, maintenance plans, seasonal campaigns' }
+    landscaping: { url: '/demos/landscaping/', name: 'Landscaping Demo', desc: 'Booking, seasonal follow-ups, before/after gallery' },
+    realestate: { url: '/demos/realestate/', name: 'Real Estate Demo', desc: 'Project portfolios, multi-service booking' },
+    plumbing: { url: '/demos/plumbing/', name: 'Plumbing Demo', desc: 'Emergency routing, 24/7 service, priority booking' },
+    hvac: { url: '/demos/hvac/', name: 'HVAC Demo', desc: 'System tracking, maintenance plans, seasonal campaigns' }
   };
   const demo = demos[industry];
   if (!demo) return;

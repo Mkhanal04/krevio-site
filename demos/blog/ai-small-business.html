@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How AI Helps Small Businesses Get More Customers | Krevio</title>
+<meta name="description" content="Most small businesses spend $300/mo on lead platforms. AI-powered websites bring customers to you for a fraction of the cost.">
+<link rel="canonical" href="https://krevio.dev/demos/blog/ai-small-business.html">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script defer src="/_vercel/insights/script.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How AI Helps Small Businesses Get More Customers",
+  "description": "Most small businesses spend $300/mo on lead platforms. AI-powered websites bring customers to you for a fraction of the cost.",
+  "author": {
+    "@type": "Person",
+    "name": "Krevio",
+    "url": "https://krevio.dev"
+  },
+  "datePublished": "2026-04-05",
+  "publisher": {
+    "@type": "Person",
+    "name": "Krevio"
+  },
+  "url": "https://krevio.dev/demos/blog/ai-small-business.html"
+}
+</script>
+
+<style>
+  :root {
+    --green: #22C55E;
+    --greenS: rgba(34,197,94,0.12);
+    --bg: #0A0F0D;
+    --bg1: #111A14;
+    --bg2: #172A1C;
+    --bg3: #1C3225;
+    --border: rgba(34,197,94,0.15);
+    --t0: #F0FDF4;
+    --t1: #BBF7D0;
+    --t2: #86EFAC;
+    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  [data-theme="light"] {
+    --green: #16A34A;
+    --greenS: rgba(22,163,74,0.10);
+    --bg: #F9FAFB;
+    --bg1: #FFFFFF;
+    --bg2: #F0FDF4;
+    --bg3: #DCFCE7;
+    --border: rgba(22,163,74,0.20);
+    --t0: #14532D;
+    --t1: #166534;
+    --t2: #15803D;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--t0);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  .blog-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .blog-nav a { font-size: 14px; font-weight: 500; color: var(--green); }
+  .blog-nav a:hover { text-decoration: underline; }
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--t1);
+  }
+
+  /* ARTICLE */
+  .blog-article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+
+  .blog-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .blog-meta span {
+    font-size: 13px;
+    color: var(--t2);
+    background: var(--greenS);
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.2;
+    color: var(--t0);
+    margin-bottom: 24px;
+  }
+
+  .blog-lede {
+    font-size: 1.15rem;
+    color: var(--t1);
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--t0);
+    margin: 40px 0 16px;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--t0);
+    margin: 28px 0 10px;
+  }
+
+  p { color: var(--t1); margin-bottom: 18px; }
+
+  ul, ol {
+    padding-left: 24px;
+    margin-bottom: 18px;
+    color: var(--t1);
+  }
+  li { margin-bottom: 8px; }
+
+  .highlight-box {
+    background: var(--greenS);
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    color: var(--t1);
+    font-size: 0.95rem;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .stat-card {
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--green);
+    display: block;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--t2);
+    margin-top: 4px;
+  }
+
+  /* CTA */
+  .blog-cta {
+    background: linear-gradient(135deg, #052e16 0%, #14532d 50%, #166534 100%);
+    border-top: 1px solid var(--border);
+    padding: 64px 24px;
+    text-align: center;
+  }
+  [data-theme="light"] .blog-cta {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  }
+  .blog-cta h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    color: #F0FDF4;
+  }
+  [data-theme="light"] .blog-cta h3 { color: #14532d; }
+  .blog-cta p { color: #BBF7D0; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  [data-theme="light"] .blog-cta p { color: #166534; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--green);
+    color: #052e16;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 14px 32px;
+    border-radius: 10px;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); text-decoration: none; }
+
+  /* FOOTER */
+  .blog-footer {
+    padding: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--t2);
+    border-top: 1px solid var(--border);
+    background: var(--bg1);
+  }
+  .blog-footer a { color: var(--green); }
+
+  @media (max-width: 600px) {
+    .stat-row { grid-template-columns: 1fr; }
+    .blog-article { padding: 32px 16px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <a href="/demos/">← Back to Demos</a>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">☀</button>
+</nav>
+
+<article class="blog-article">
+  <div class="blog-meta">
+    <span>April 2026</span>
+    <span>5 min read</span>
+  </div>
+
+  <h1>How AI Helps Small Businesses Get More Customers</h1>
+
+  <p class="blog-lede">Most small businesses spend $300+ per month renting leads from platforms like Thumbtack, Angi, and HomeAdvisor. You're not building an asset — you're feeding a machine that pockets most of the margin. AI has made a better model possible.</p>
+
+  <h2>The Problem With Rented Leads</h2>
+
+  <p>When a homeowner in McKinney searches for a landscaper on Thumbtack, they see 6 profiles. All six of you paid to show up. The homeowner picks one, maybe two. The other five paid for nothing.</p>
+
+  <p>This is the model these platforms depend on. They're not trying to help you win — they're trying to keep you spending. As soon as you stop paying, your leads stop.</p>
+
+  <div class="highlight-box">
+    The average small service business spends $3,600–$6,000 per year on lead platforms. At the end of that year, they own zero relationships, zero data, and zero leverage. The platform owns everything.
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <span class="stat-value">$45</span>
+      <span class="stat-label">Avg Thumbtack lead cost</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">6</span>
+      <span class="stat-label">Competitors per lead</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">0</span>
+      <span class="stat-label">Leads you own after</span>
+    </div>
+  </div>
+
+  <h2>What AI Changes</h2>
+
+  <p>AI can now do the things that used to require a $50K agency build or a full-time marketing team. Here are the three areas where it has the biggest impact for local service businesses:</p>
+
+  <h3>1. AI Chatbot: Qualifies Leads 24/7</h3>
+
+  <p>Most small business websites have a contact form that maybe 5% of visitors fill out. An AI chatbot changes that. It answers questions instantly, captures name and contact info, and asks qualifying questions — all while you're on a job site or asleep.</p>
+
+  <p>The chatbot doesn't replace you. It does the intake work so that by the time a lead hits your inbox, they're warm, qualified, and ready to book.</p>
+
+  <h3>2. GEO Optimization: Get Found by AI Search</h3>
+
+  <p>Google isn't the only search engine anymore. ChatGPT, Gemini, and Perplexity now answer questions like "find me a landscaper near McKinney TX." These AI assistants pull from websites that have the right structured data: JSON-LD schema, consistent business information, and clear service pages.</p>
+
+  <p>Most local business websites don't have any of this. That means your competitors aren't showing up either — and whoever gets there first wins by default.</p>
+
+  <h3>3. Smart Follow-Ups: Bring Back Past Customers</h3>
+
+  <p>The easiest customer to get is one you already have. AI can flag customers who haven't booked in 90+ days, identify the right service to recommend based on their history, and trigger a follow-up message at the right time.</p>
+
+  <p>This alone can add 20–30% revenue from your existing customer base — customers you already paid to acquire.</p>
+
+  <h2>What This Looks Like in Practice</h2>
+
+  <p>We built a working prototype of exactly this for a landscaping business in McKinney. It includes:</p>
+
+  <ul>
+    <li>A customer-facing website with AI chat, booking, and reviews</li>
+    <li>An owner dashboard showing leads, GEO score, and follow-up suggestions</li>
+    <li>A Thumbtack cost comparison showing what rented leads are actually costing</li>
+    <li>AI content generation to keep the site fresh for AI search engines</li>
+  </ul>
+
+  <p>The whole thing was built in under 30 minutes. It's live and you can interact with it right now.</p>
+
+  <div class="highlight-box">
+    <strong>The core insight:</strong> You don't need to outspend Thumbtack. You need to own the channel. An AI-powered website does that for a one-time cost, with no monthly fees and no competing bids.
+  </div>
+
+  <h2>Is This Right for Your Business?</h2>
+
+  <p>AI-powered websites work best for service businesses where:</p>
+
+  <ul>
+    <li>Customers research before calling (landscaping, painting, HVAC, plumbing)</li>
+    <li>Repeat business matters (maintenance plans, seasonal services)</li>
+    <li>You're currently paying for leads you don't own</li>
+    <li>You want to be findable on Google AND AI assistants</li>
+  </ul>
+
+  <p>If that sounds like your business, the demo below is worth 5 minutes of your time. It's built for a landscaping company but the same system works for any home services trade.</p>
+</article>
+
+<div class="blog-cta">
+  <h3>Want to see what this looks like for your business?</h3>
+  <p>Browse a working demo built for a local landscaping company — chatbot, owner dashboard, GEO score, and Thumbtack comparison all included.</p>
+  <a href="/demos/" class="btn-primary">Browse a Live Demo →</a>
+</div>
+
+<footer class="blog-footer">
+  <p>© 2026 <a href="/">Krevio</a> · AI-powered systems for local service businesses · <a href="/demos/">Browse Demos</a></p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('demos-theme', next);
+    document.querySelector('.theme-toggle').textContent = next === 'dark' ? '☀' : '🌙';
+  }
+  (function() {
+    const saved = localStorage.getItem('demos-theme');
+    if (saved) {
+      document.documentElement.setAttribute('data-theme', saved);
+      const btn = document.querySelector('.theme-toggle');
+      if (btn) btn.textContent = saved === 'dark' ? '☀' : '🌙';
+    }
+  })();
+</script>
+</body>
+</html>

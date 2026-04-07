@@ -39,10 +39,10 @@
     "Any local service business"
   ],
   "demos_available": {
-    "landscaping": { "url": "https://milankhanal.com/demos/landscaping/", "highlights": "Booking, seasonal follow-ups, before/after gallery" },
-    "realestate": { "url": "https://milankhanal.com/demos/realestate/", "highlights": "Project portfolios, multi-service booking" },
-    "plumbing": { "url": "https://milankhanal.com/demos/plumbing/", "highlights": "Emergency routing, 24/7 service, priority booking" },
-    "hvac": { "url": "https://milankhanal.com/demos/hvac/", "highlights": "System tracking, maintenance plans, seasonal campaigns" }
+    "landscaping": { "url": "/demos/landscaping/", "highlights": "Booking, seasonal follow-ups, before/after gallery" },
+    "realestate": { "url": "/demos/realestate/", "highlights": "Project portfolios, multi-service booking" },
+    "plumbing": { "url": "/demos/plumbing/", "highlights": "Emergency routing, 24/7 service, priority booking" },
+    "hvac": { "url": "/demos/hvac/", "highlights": "System tracking, maintenance plans, seasonal campaigns" }
   },
   "differentiators": [
     "vs Thumbtack/Angi: You own nothing there. With us, you own everything.",
