@@ -3117,28 +3117,56 @@ function toggleVoiceMode() {
   showToast(voiceMode ? 'Voice responses ON' : 'Voice responses OFF');
 }
 
+let micSendTimer = null;
+
 function initSpeechRecognition() {
   const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SpeechRec) return;
   const micBtn = document.getElementById('chatMic');
   if (micBtn) micBtn.style.display = '';
   recognition = new SpeechRec();
-  recognition.continuous = false;
+  recognition.continuous = true;
   recognition.interimResults = true;
   recognition.lang = currentLang === 'es' ? 'es-US' : 'en-US';
   recognition.onresult = (event) => {
     let transcript = '';
-    for (let i = event.resultIndex; i < event.results.length; i++) {
+    for (let i = 0; i < event.results.length; i++) {
       transcript += event.results[i][0].transcript;
     }
     document.getElementById('chatInput').value = transcript;
-    if (event.results[event.results.length - 1].isFinal) {
-      stopMic();
-      sendChat();
+    // Reset the send timer on every result — gives the user time to pause and continue
+    clearTimeout(micSendTimer);
+    const lastResult = event.results[event.results.length - 1];
+    if (lastResult.isFinal) {
+      // Wait 2 seconds after final result before sending — user may keep talking
+      micSendTimer = setTimeout(() => {
+        if (isRecording && document.getElementById('chatInput').value.trim()) {
+          stopMic();
+          sendChat();
+        }
+      }, 2000);
     }
   };
-  recognition.onerror = () => stopMic();
-  recognition.onend = () => stopMic();
+  recognition.onerror = (e) => {
+    if (e.error !== 'no-speech') stopMic();
+  };
+  recognition.onend = () => {
+    // In continuous mode, browser may still fire onend (e.g. after long silence)
+    // If user is still "recording", restart — otherwise finalize
+    if (isRecording) {
+      const input = document.getElementById('chatInput').value.trim();
+      if (input) {
+        // User stopped talking with text in the box — send after brief delay
+        clearTimeout(micSendTimer);
+        micSendTimer = setTimeout(() => {
+          if (isRecording) { stopMic(); sendChat(); }
+        }, 1500);
+      } else {
+        // No speech detected at all, just stop
+        stopMic();
+      }
+    }
+  };
 }
 
 function toggleMic() {
@@ -3154,6 +3182,7 @@ function toggleMic() {
 
 function stopMic() {
   isRecording = false;
+  clearTimeout(micSendTimer);
   const micBtn = document.getElementById('chatMic');
   const label = document.getElementById('chatVoiceLabel');
   if (micBtn) micBtn.classList.remove('recording');
