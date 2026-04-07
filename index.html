@@ -4,7 +4,74 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Krevio — AI Systems for Local Service Businesses</title>
-  <meta name="description" content="Krevio builds complete online systems for local service businesses — custom website, AI chatbot, lead dashboard, and SEO. Starting at $2,500. DFW metro area." />
+  <meta name="description" content="Krevio builds AI-powered online systems for local service businesses in DFW — custom websites, chatbots, dashboards, and GEO/SEO optimization. You own everything we build." />
+  <meta name="keywords" content="AI chatbot, local business website, GEO optimization, SEO, Dallas Fort Worth, small business, lead generation, custom website" />
+  <meta property="og:title" content="Krevio — AI-Powered Systems for Local Service Businesses" />
+  <meta property="og:description" content="Custom websites, AI chatbots, dashboards, and GEO/SEO optimization. Built for DFW service businesses. You own everything." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://krevio.dev" />
+  <meta property="og:image" content="https://krevio.dev/assets/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Krevio — AI-Powered Systems for Local Service Businesses" />
+  <meta name="twitter:description" content="Custom websites, AI chatbots, dashboards, and GEO/SEO optimization for DFW service businesses." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Krevio",
+    "description": "AI-powered online systems for local service businesses — custom websites, chatbots, dashboards, and GEO/SEO optimization. Serving the Dallas-Fort Worth metro area.",
+    "url": "https://krevio.dev",
+    "email": "kreviodev@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dallas-Fort Worth",
+      "addressRegion": "TX",
+      "addressCountry": "US"
+    },
+    "areaServed": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": "32.7767",
+        "longitude": "-96.7970"
+      },
+      "geoRadius": "80000"
+    },
+    "priceRange": "$$",
+    "openingHours": "Mo-Fr 09:00-18:00",
+    "sameAs": []
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"What does Krevio build?","acceptedAnswer":{"@type":"Answer","text":"Krevio builds complete online systems for local service businesses: custom websites, AI chatbots (English and Spanish), owner dashboards, and GEO/SEO optimization. You own everything we build."}},
+      {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Projects start at $2,500 for a complete custom build. Optional managed services start at $500/month. No per-lead charges. Cancel anytime and keep everything."}},
+      {"@type":"Question","name":"What is GEO and why does it matter?","acceptedAnswer":{"@type":"Answer","text":"GEO stands for Generative Engine Optimization. It makes your business show up when people search using AI tools like ChatGPT, Google AI, or Perplexity. Traditional SEO only covers Google search results. GEO covers the new AI search engines that more and more people use every day."}},
+      {"@type":"Question","name":"Do I own what you build?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your website, leads, data, and code are 100% yours. If you cancel managed services, everything stays with you. No lock-in, no per-lead fees."}},
+      {"@type":"Question","name":"What industries do you serve?","acceptedAnswer":{"@type":"Answer","text":"We specialize in local service businesses in the DFW metro area: landscaping, plumbing, HVAC, real estate, painting, electrical, roofing, and more. We build custom systems for any service industry."}}
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "AI-Powered Business Solutions",
+    "provider": {"@type":"LocalBusiness","name":"Krevio"},
+    "areaServed": "Dallas-Fort Worth, TX",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Krevio Services",
+      "itemListElement": [
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Custom Website + AI Chatbot + Dashboard Build","description":"Complete online system: mobile-first website, bilingual AI chatbot, owner dashboard with lead tracking, GEO/SEO optimization"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Managed Services","description":"Ongoing chatbot management, content updates, GEO monitoring, priority support, monthly performance reports"}}
+      ]
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -21,6 +88,27 @@
       --krevio-success: #22C55E;
       --krevio-error: #EF4444;
     }
+
+    /* ── LIGHT THEME ── */
+    [data-theme="light"] {
+      --krevio-yellow: #E5A600;
+      --krevio-dark: #FFFFFF;
+      --krevio-darker: #F5F5F5;
+      --krevio-white: #1C1C2E;
+      --krevio-gray: #64748B;
+      --krevio-card-bg: #FFFFFF;
+      --krevio-border: #E2E8F0;
+      --krevio-yellow-hover: #CC9200;
+    }
+    [data-theme="light"] nav { background: rgba(255, 255, 255, 0.92); }
+    [data-theme="light"] .hero-eyebrow { background: rgba(229, 166, 0, 0.08); border-color: rgba(229, 166, 0, 0.2); }
+    [data-theme="light"] .hero-pill { background: var(--krevio-card-bg); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    [data-theme="light"] .compare-table tr:hover td { background: rgba(0,0,0,0.02); }
+    [data-theme="light"] .form-group input,
+    [data-theme="light"] .form-group select,
+    [data-theme="light"] .form-group textarea { background: var(--krevio-darker); }
+    [data-theme="light"] .form-group select option { background: var(--krevio-darker); }
+    [data-theme="light"] .chat-panel { box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -559,6 +647,164 @@
     .social-icon:hover { border-color: var(--krevio-yellow); color: var(--krevio-yellow); }
     .footer-copy { font-size: 13px; color: rgba(160,160,176,0.6); }
 
+    /* ── NAV TOGGLES ── */
+    .nav-toggles { display: flex; align-items: center; gap: 8px; margin-right: 12px; }
+    .theme-toggle, .lang-toggle {
+      background: transparent; border: 1px solid var(--krevio-border); border-radius: 8px;
+      color: var(--krevio-gray); cursor: pointer; padding: 6px 10px; font-size: 14px;
+      font-family: 'Inter', sans-serif; font-weight: 500; transition: all 0.15s;
+      display: flex; align-items: center; justify-content: center; min-height: 36px; min-width: 36px;
+    }
+    .theme-toggle:hover, .lang-toggle:hover { border-color: var(--krevio-yellow); color: var(--krevio-yellow); }
+    .lang-toggle { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; padding: 6px 12px; }
+    .lang-toggle .active { color: var(--krevio-yellow); }
+
+    /* ── QUOTE STEPPER ── */
+    .quote-stepper { display: none; margin-top: 32px; }
+    .quote-stepper.active { display: block; }
+    .quote-step { display: none; }
+    .quote-step.active { display: block; }
+    .quote-step-header { font-size: 16px; font-weight: 700; color: var(--krevio-white); margin-bottom: 16px; }
+    .quote-step-counter { font-size: 12px; color: var(--krevio-gray); margin-bottom: 8px; }
+    .quote-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .quote-pill {
+      padding: 10px 18px; border-radius: 100px; font-size: 14px; font-weight: 500;
+      border: 1px solid var(--krevio-border); background: var(--krevio-card-bg);
+      color: var(--krevio-gray); cursor: pointer; transition: all 0.15s;
+      font-family: 'Inter', sans-serif; min-height: 44px; display: flex; align-items: center;
+    }
+    .quote-pill:hover { border-color: var(--krevio-yellow); color: var(--krevio-white); }
+    .quote-pill.selected { background: var(--krevio-yellow); color: var(--krevio-darker); border-color: var(--krevio-yellow); font-weight: 600; }
+    .quote-pill.checkbox::before { content: ''; width: 16px; height: 16px; border: 2px solid var(--krevio-border); border-radius: 4px; margin-right: 8px; flex-shrink: 0; }
+    .quote-pill.checkbox.selected::before { background: var(--krevio-darker); border-color: var(--krevio-darker); background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%23FFB800' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.3 4.3L6.5 11.1 3.2 7.8l1.1-1.1 2.2 2.2 5.7-5.7 1.1 1.1z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; background-size: 14px; }
+    .quote-nav { display: flex; gap: 12px; margin-top: 20px; }
+    .quote-contact-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .quote-contact-row .form-group { margin-bottom: 0; }
+    .quote-success { text-align: center; padding: 32px 20px; }
+    .quote-success-icon { font-size: 40px; margin-bottom: 12px; }
+    .quote-success h3 { font-size: 20px; font-weight: 700; color: var(--krevio-white); margin-bottom: 8px; }
+    .quote-success p { font-size: 14px; color: var(--krevio-gray); }
+
+    /* ── CHAT WIDGET ── */
+    .chat-trigger {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--krevio-yellow); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(255, 184, 0, 0.3); transition: transform 0.18s;
+    }
+    .chat-trigger:hover { transform: scale(1.08); }
+    .chat-trigger svg { width: 24px; height: 24px; fill: var(--krevio-darker); }
+    .chat-trigger.pulse { animation: chatPulse 2s ease-in-out 3; }
+    @keyframes chatPulse {
+      0%, 100% { box-shadow: 0 4px 16px rgba(255, 184, 0, 0.3); }
+      50% { box-shadow: 0 4px 24px rgba(255, 184, 0, 0.6); }
+    }
+    .chat-trigger.open svg.icon-chat { display: none; }
+    .chat-trigger:not(.open) svg.icon-close { display: none; }
+
+    .chat-panel {
+      position: fixed; bottom: 92px; right: 24px; z-index: 10000;
+      width: 380px; height: 520px;
+      background: var(--krevio-darker); border: 1px solid var(--krevio-border);
+      border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      display: none; flex-direction: column; overflow: hidden;
+    }
+    .chat-panel.open { display: flex; }
+
+    .chat-header {
+      padding: 16px; border-bottom: 1px solid var(--krevio-border);
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .chat-header-left { display: flex; align-items: center; gap: 10px; }
+    .chat-header-icon {
+      width: 32px; height: 32px; background: var(--krevio-yellow); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: var(--krevio-darker);
+    }
+    .chat-header-text h3 { font-size: 15px; font-weight: 700; color: var(--krevio-white); line-height: 1.2; }
+    .chat-header-text p { font-size: 11px; color: var(--krevio-gray); }
+    .chat-header-actions { display: flex; gap: 6px; }
+    .chat-header-btn {
+      width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--krevio-border);
+      background: transparent; color: var(--krevio-gray); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+    }
+    .chat-header-btn:hover { border-color: var(--krevio-yellow); color: var(--krevio-yellow); }
+    .chat-header-btn.voice-active { border-color: var(--krevio-yellow); color: var(--krevio-yellow); background: rgba(255,184,0,0.1); }
+    .chat-header-btn svg { width: 16px; height: 16px; }
+
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 16px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .chat-msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; word-wrap: break-word; }
+    .chat-msg.bot { align-self: flex-start; background: var(--krevio-card-bg); color: var(--krevio-white); border-bottom-left-radius: 4px; }
+    .chat-msg.user { align-self: flex-end; background: var(--krevio-yellow); color: var(--krevio-darker); border-bottom-right-radius: 4px; }
+    .chat-msg.bot.speaking { animation: speakPulse 1.5s ease-in-out infinite; }
+    @keyframes speakPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.85; } }
+
+    .chat-typing { align-self: flex-start; display: flex; gap: 4px; padding: 12px 16px; background: var(--krevio-card-bg); border-radius: 12px; border-bottom-left-radius: 4px; }
+    .chat-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--krevio-gray); animation: typingDot 1.4s infinite; }
+    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingDot { 0%, 60%, 100% { opacity: 0.3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-4px); } }
+
+    .chat-demo-card {
+      display: block; background: var(--krevio-card-bg); border: 1px solid var(--krevio-border);
+      border-radius: 10px; padding: 12px 14px; text-decoration: none; margin-top: 8px; transition: border-color 0.15s;
+    }
+    .chat-demo-card:hover { border-color: var(--krevio-yellow); }
+    .chat-demo-card .card-title { font-size: 13px; font-weight: 600; color: var(--krevio-yellow); margin-bottom: 4px; }
+    .chat-demo-card .card-desc { font-size: 12px; color: var(--krevio-gray); }
+
+    .chat-lead-card {
+      background: var(--krevio-card-bg); border: 1px solid var(--krevio-border);
+      border-radius: 10px; padding: 14px; margin-top: 8px;
+    }
+    .chat-lead-card .lead-label { font-size: 11px; font-weight: 600; color: var(--krevio-gray); margin-bottom: 4px; }
+    .chat-lead-card input, .chat-lead-card select {
+      width: 100%; padding: 8px 10px; border-radius: 6px; font-size: 13px;
+      background: var(--krevio-dark); border: 1px solid var(--krevio-border);
+      color: var(--krevio-white); font-family: 'Inter', sans-serif; margin-bottom: 8px;
+    }
+    .chat-lead-card input:focus, .chat-lead-card select:focus { outline: none; border-color: var(--krevio-yellow); }
+    .chat-lead-card select option { background: var(--krevio-dark); }
+    .chat-lead-card button {
+      width: 100%; padding: 8px; border-radius: 6px; border: none;
+      background: var(--krevio-yellow); color: var(--krevio-darker);
+      font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif;
+      min-height: 36px;
+    }
+    .chat-lead-card button:hover { background: var(--krevio-yellow-hover); }
+    .chat-lead-card.submitted { opacity: 0.7; pointer-events: none; }
+    .chat-lead-card.submitted button { background: var(--krevio-success); }
+
+    .chat-input-area {
+      padding: 12px; border-top: 1px solid var(--krevio-border);
+      display: flex; gap: 8px; align-items: center; flex-shrink: 0;
+    }
+    .chat-input {
+      flex: 1; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--krevio-border);
+      background: var(--krevio-dark); color: var(--krevio-white); font-size: 14px;
+      font-family: 'Inter', sans-serif; min-height: 44px;
+    }
+    .chat-input::placeholder { color: rgba(160,160,176,0.5); }
+    .chat-input:focus { outline: none; border-color: var(--krevio-yellow); }
+    .chat-send, .chat-mic {
+      width: 44px; height: 44px; border-radius: 8px; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: all 0.15s; flex-shrink: 0;
+    }
+    .chat-send { background: var(--krevio-yellow); }
+    .chat-send:hover { background: var(--krevio-yellow-hover); }
+    .chat-send svg { width: 18px; height: 18px; fill: var(--krevio-darker); }
+    .chat-mic { background: transparent; border: 1px solid var(--krevio-border); color: var(--krevio-gray); }
+    .chat-mic:hover { border-color: var(--krevio-yellow); color: var(--krevio-yellow); }
+    .chat-mic.recording { border-color: var(--krevio-error); color: var(--krevio-error); animation: micPulse 1.5s infinite; }
+    @keyframes micPulse { 0%, 100% { box-shadow: none; } 50% { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2); } }
+    .chat-mic svg { width: 18px; height: 18px; fill: currentColor; }
+    .chat-voice-label { font-size: 11px; color: var(--krevio-gray); text-align: center; padding: 0 12px 8px; flex-shrink: 0; }
+
     /* ── SCROLL REVEAL ── */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -579,6 +825,10 @@
       .form-wrapper { padding: 28px 20px; }
       .form-row { grid-template-columns: 1fr; }
       .nav-link { display: none; }
+      .chat-panel { bottom: 0; right: 0; left: 0; width: 100%; height: 70vh; border-radius: 16px 16px 0 0; }
+      .chat-trigger { bottom: 16px; right: 16px; }
+      .quote-contact-row { grid-template-columns: 1fr; }
+      .nav-toggles { gap: 4px; margin-right: 8px; }
     }
 
     @media (max-width: 480px) {
@@ -590,6 +840,14 @@
       .features-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
+  <script>
+    // Anti-flash: set theme before render
+    (function() {
+      var t = localStorage.getItem('krevio-theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
 </head>
 <body>
 
@@ -602,9 +860,18 @@
           <span class="nav-wordmark">Krevio</span>
         </a>
         <div class="nav-cta">
-          <a href="#demos" class="nav-link">See Demos</a>
-          <a href="#pricing" class="nav-link">Pricing</a>
-          <a href="#contact" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">Let's Talk</a>
+          <a href="#demos" class="nav-link" data-en="See Demos" data-es="Ver Demos">See Demos</a>
+          <a href="#pricing" class="nav-link" data-en="Pricing" data-es="Precios">Pricing</a>
+          <div class="nav-toggles">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+              <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+            <button class="lang-toggle" id="lang-toggle" aria-label="Toggle language">
+              <span class="active">EN</span>&nbsp;|&nbsp;<span>ES</span>
+            </button>
+          </div>
+          <a href="#contact" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;" data-en="Let's Talk" data-es="Hablemos">Let's Talk</a>
         </div>
       </div>
     </div>
@@ -617,13 +884,13 @@
         <span>🌟</span>
         Now serving DFW home service businesses
       </div>
-      <h1 class="hero-title">
+      <h1 class="hero-title" data-en="Stop renting leads. Start owning them." data-es="Deja de alquilar clientes. Empieza a ser dueno.">
         Stop renting leads.<br />
         <span>Start owning them.</span>
       </h1>
-      <p class="hero-sub">
+      <p class="hero-sub" data-en="We build complete online systems for local service businesses — website, AI chatbot, lead dashboard, and visibility on Google + AI search." data-es="Construimos sistemas completos en linea para negocios de servicios locales — sitio web, chatbot con IA, panel de control y visibilidad en Google + busqueda con IA.">
         We build complete online systems for local service businesses —
-        website, AI chatbot, lead dashboard, and SEO that works.
+        website, AI chatbot, lead dashboard, and visibility on Google + AI search.
       </p>
       <div class="hero-ctas">
         <a href="#demos" class="btn btn-primary">See Live Demos ↓</a>
@@ -640,8 +907,8 @@
   <!-- SECTION 2: WHAT YOU GET -->
   <section class="section section-alt" id="features">
     <div class="container">
-      <p class="section-label reveal">What You Get</p>
-      <h2 class="section-title reveal">Everything your business needs<br />online — built custom, owned by you.</h2>
+      <p class="section-label reveal" data-en="What You Get" data-es="Lo Que Recibes">What You Get</p>
+      <h2 class="section-title reveal" data-en="Everything your business needs online — built custom, owned by you." data-es="Todo lo que tu negocio necesita en linea — hecho a medida, tuyo para siempre.">Everything your business needs<br />online — built custom, owned by you.</h2>
       <div class="features-grid">
         <div class="feature-card reveal">
           <span class="feature-icon">🌐</span>
@@ -660,8 +927,8 @@
         </div>
         <div class="feature-card reveal">
           <span class="feature-icon">🔍</span>
-          <div class="feature-title">GEO/SEO Optimization</div>
-          <div class="feature-desc">Get found on Google AND AI search (ChatGPT, Gemini). Built-in structured data from day one.</div>
+          <div class="feature-title" data-en="Get Found Everywhere" data-es="Aparece en Todas Partes">Get Found Everywhere</div>
+          <div class="feature-desc" data-en="Google, ChatGPT, Gemini, Perplexity — when someone searches for your service, you show up. We optimize for traditional search AND the new AI search engines." data-es="Google, ChatGPT, Gemini, Perplexity — cuando alguien busca tu servicio, tu apareces. Optimizamos para busqueda tradicional Y los nuevos motores de busqueda con IA.">Google, ChatGPT, Gemini, Perplexity — when someone searches for your service, you show up. We optimize for traditional search AND the new AI search engines.</div>
         </div>
         <div class="feature-card reveal">
           <span class="feature-icon">📲</span>
@@ -680,9 +947,9 @@
   <!-- SECTION 3: LIVE DEMOS -->
   <section class="section" id="demos">
     <div class="container">
-      <p class="section-label reveal">Live Demos</p>
-      <h2 class="section-title reveal">See what we build.</h2>
-      <p class="section-sub reveal">Click any industry to explore a working demo — AI chatbot, owner dashboard, and all.</p>
+      <p class="section-label reveal" data-en="Live Demos" data-es="Demos en Vivo">Live Demos</p>
+      <h2 class="section-title reveal" data-en="See what we build." data-es="Mira lo que construimos.">See what we build.</h2>
+      <p class="section-sub reveal" data-en="Click any industry to explore a working demo — AI chatbot, owner dashboard, and all." data-es="Haz clic en cualquier industria para explorar un demo funcional — chatbot con IA, panel de control y mas.">Click any industry to explore a working demo — AI chatbot, owner dashboard, and all.</p>
       <div class="demos-grid">
         <a class="demo-card reveal" href="https://milankhanal.com/demos/landscaping/" target="_blank" rel="noopener noreferrer">
           <div class="demo-card-top">
@@ -731,8 +998,8 @@
   <!-- SECTION 4: HOW IT WORKS -->
   <section class="section section-alt" id="how">
     <div class="container">
-      <p class="section-label reveal">How It Works</p>
-      <h2 class="section-title reveal">From demo to your custom system<br />in 3 steps.</h2>
+      <p class="section-label reveal" data-en="How It Works" data-es="Como Funciona">How It Works</p>
+      <h2 class="section-title reveal" data-en="From demo to your custom system in 3 steps." data-es="De demo a tu sistema personalizado en 3 pasos.">From demo to your custom system<br />in 3 steps.</h2>
       <div class="steps">
         <div class="step reveal">
           <div class="step-number">1</div>
@@ -745,7 +1012,7 @@
           <div class="step-number">2</div>
           <div class="step-text">
             <div class="step-title">Build</div>
-            <div class="step-desc">We build your complete system — website, chatbot, dashboard, SEO — custom for your business. Typical turnaround: 2–4 weeks.</div>
+            <div class="step-desc" data-en="We build your complete system — website, chatbot, dashboard, GEO — custom for your business. Typical turnaround: 2-4 weeks." data-es="Construimos tu sistema completo — sitio web, chatbot, panel de control, GEO — hecho a medida para tu negocio. Tiempo tipico: 2-4 semanas.">We build your complete system — website, chatbot, dashboard, GEO — custom for your business. Typical turnaround: 2-4 weeks.</div>
           </div>
         </div>
         <div class="step reveal">
@@ -762,47 +1029,104 @@
   <!-- SECTION 5: PRICING -->
   <section class="section" id="pricing">
     <div class="container">
-      <p class="section-label reveal" style="text-align:center;">Pricing</p>
-      <h2 class="section-title reveal" style="text-align:center;">Invest once. Own everything.</h2>
+      <p class="section-label reveal" style="text-align:center;" data-en="Pricing" data-es="Precios">Pricing</p>
+      <h2 class="section-title reveal" style="text-align:center;" data-en="Invest Once. Own Everything." data-es="Invierte Una Vez. Dueno de Todo.">Invest Once. Own Everything.</h2>
       <div class="pricing-grid reveal">
         <div class="pricing-card primary">
-          <span class="pricing-badge">Most Popular</span>
-          <div class="pricing-title">The Build</div>
-          <div class="pricing-price">$2,500 <span>one-time</span></div>
-          <div class="pricing-sub">Most clients recover this in the first 3 months by owning their leads instead of renting them.</div>
-          <ul class="pricing-features">
-            <li>Custom mobile-first website on your domain</li>
-            <li>AI chatbot in English & Spanish</li>
-            <li>Owner dashboard with lead pipeline</li>
-            <li>GEO/SEO optimization + structured data</li>
-            <li>Communication automation setup</li>
-            <li>You own the website, leads, data, and code</li>
-            <li>No monthly platform fees. Ever.</li>
-          </ul>
+          <span class="pricing-badge" data-en="Most Popular" data-es="Mas Popular">Most Popular</span>
+          <div class="pricing-title" data-en="The Build" data-es="La Construccion">The Build</div>
+          <div class="pricing-price">Starting at $2,500</div>
+          <div class="pricing-sub" data-en="Custom website + AI chatbot + owner dashboard + GEO/SEO optimization. You own the website, the leads, the data, and the code. Most clients recover this in the first 3 months." data-es="Sitio web personalizado + chatbot con IA + panel de control + optimizacion GEO/SEO. Tu eres dueno del sitio, los clientes potenciales, los datos y el codigo.">Custom website + AI chatbot + owner dashboard + GEO/SEO optimization. You own the website, the leads, the data, and the code. Most clients recover this in the first 3 months.</div>
+          <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top: 20px;" id="quote-cta" data-en="Get a Quote in 2 Minutes →" data-es="Obten una Cotizacion en 2 Minutos →">Get a Quote in 2 Minutes →</button>
         </div>
         <div class="pricing-card">
-          <div class="pricing-title">Managed Services</div>
-          <div class="pricing-price">$500 <span>/month</span></div>
-          <div class="pricing-sub">Optional add-on after The Build. Cancel anytime — everything stays yours.</div>
-          <ul class="pricing-features">
-            <li>Chatbot stays active (API costs covered)</li>
-            <li>Monthly content + campaigns</li>
-            <li>GEO monitoring + updates</li>
-            <li>Priority support</li>
-            <li>Monthly performance reports</li>
-            <li>New feature builds at reduced rate</li>
-          </ul>
+          <div class="pricing-title" data-en="Managed Services" data-es="Servicios Administrados">Managed Services</div>
+          <div class="pricing-price">From $500<span>/month</span></div>
+          <div class="pricing-sub" data-en="Chatbot stays active (API costs covered) • Monthly content + campaigns • GEO monitoring • Priority support • Performance reports" data-es="Chatbot activo (costos de API incluidos) • Contenido + campanas mensuales • Monitoreo GEO • Soporte prioritario • Reportes de rendimiento">Chatbot stays active (API costs covered) • Monthly content + campaigns • GEO monitoring • Priority support • Performance reports</div>
+          <p style="font-size:14px; color:var(--krevio-gray); margin-top:16px;" data-en="Cancel anytime — everything stays yours." data-es="Cancela cuando quieras — todo sigue siendo tuyo.">Cancel anytime — everything stays yours.</p>
         </div>
       </div>
-      <p class="pricing-note reveal"><strong>Cancel anytime</strong> — if you cancel Managed Services, everything we built stays yours. No lock-in.</p>
+
+      <!-- Quote Stepper -->
+      <div class="quote-stepper" id="quote-stepper">
+        <div class="form-wrapper" style="margin-top:0;">
+          <!-- Step 1: Industry -->
+          <div class="quote-step active" id="quote-step-1">
+            <div class="quote-step-counter">Step 1 of 3</div>
+            <div class="quote-step-header" data-en="What's your industry?" data-es="Cual es tu industria?">What's your industry?</div>
+            <div class="quote-pills" id="quote-industry-pills">
+              <button class="quote-pill" data-value="Landscaping">Landscaping</button>
+              <button class="quote-pill" data-value="Plumbing">Plumbing</button>
+              <button class="quote-pill" data-value="HVAC">HVAC</button>
+              <button class="quote-pill" data-value="Real Estate">Real Estate</button>
+              <button class="quote-pill" data-value="Painting">Painting</button>
+              <button class="quote-pill" data-value="Electrical">Electrical</button>
+              <button class="quote-pill" data-value="Roofing">Roofing</button>
+              <button class="quote-pill" data-value="Other">Other</button>
+            </div>
+            <div class="quote-nav">
+              <button class="btn btn-primary" id="quote-next-1" disabled data-en="Next →" data-es="Siguiente →">Next →</button>
+            </div>
+          </div>
+          <!-- Step 2: Services -->
+          <div class="quote-step" id="quote-step-2">
+            <div class="quote-step-counter">Step 2 of 3</div>
+            <div class="quote-step-header" data-en="What do you need?" data-es="Que necesitas?">What do you need?</div>
+            <div class="quote-pills" id="quote-service-pills">
+              <button class="quote-pill checkbox selected" data-value="Custom website">Custom website</button>
+              <button class="quote-pill checkbox selected" data-value="AI chatbot">AI chatbot</button>
+              <button class="quote-pill checkbox selected" data-value="Owner dashboard">Owner dashboard</button>
+              <button class="quote-pill checkbox selected" data-value="GEO/SEO optimization">GEO/SEO optimization</button>
+              <button class="quote-pill checkbox selected" data-value="Communication automation">Communication automation</button>
+            </div>
+            <div class="quote-nav">
+              <button class="btn btn-outline" id="quote-back-2" data-en="← Back" data-es="← Atras">← Back</button>
+              <button class="btn btn-primary" id="quote-next-2" data-en="Next →" data-es="Siguiente →">Next →</button>
+            </div>
+          </div>
+          <!-- Step 3: Contact -->
+          <div class="quote-step" id="quote-step-3">
+            <div class="quote-step-counter">Step 3 of 3</div>
+            <div class="quote-step-header" data-en="How should we reach you?" data-es="Como te contactamos?">How should we reach you?</div>
+            <div class="quote-contact-row">
+              <div class="form-group">
+                <label data-en="Your Name *" data-es="Tu Nombre *">Your Name *</label>
+                <input type="text" id="quote-name" placeholder="Maria Garcia" autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label data-en="Email *" data-es="Correo Electronico *">Email *</label>
+                <input type="email" id="quote-email" placeholder="maria@example.com" autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label data-en="Phone (optional)" data-es="Telefono (opcional)">Phone (optional)</label>
+              <input type="tel" id="quote-phone" placeholder="(214) 555-0000" autocomplete="tel" />
+            </div>
+            <div class="quote-nav">
+              <button class="btn btn-outline" id="quote-back-3" data-en="← Back" data-es="← Atras">← Back</button>
+              <button class="btn btn-primary" id="quote-submit" data-en="Get My Quote →" data-es="Obtener Mi Cotizacion →">Get My Quote →</button>
+            </div>
+          </div>
+          <!-- Success -->
+          <div class="quote-step" id="quote-step-success">
+            <div class="quote-success">
+              <div class="quote-success-icon">🎉</div>
+              <h3 id="quote-success-heading" data-en="Thanks! We'll send your custom quote within 24 hours." data-es="Gracias! Te enviaremos tu cotizacion personalizada en 24 horas.">Thanks! We'll send your custom quote within 24 hours.</h3>
+              <p data-en="We'll reach out to schedule a quick call and walk you through a demo tailored to your business." data-es="Nos pondremos en contacto para programar una llamada y mostrarte un demo adaptado a tu negocio.">We'll reach out to schedule a quick call and walk you through a demo tailored to your business.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="pricing-note reveal" data-en="Not sure what you need? Chat with us — our AI assistant can help." data-es="No estas seguro de lo que necesitas? Chatea con nosotros — nuestro asistente de IA puede ayudarte.">Not sure what you need? <a href="#" id="pricing-chat-link" style="color:var(--krevio-yellow); text-decoration:underline;">Chat with us</a> — our AI assistant can help.</p>
     </div>
   </section>
 
   <!-- SECTION 6: WHY KREVIO -->
   <section class="section section-alt" id="why">
     <div class="container">
-      <p class="section-label reveal">Why Krevio</p>
-      <h2 class="section-title reveal">We're not the cheapest. We're the<br />only option where you own it all.</h2>
+      <p class="section-label reveal" data-en="Why Krevio" data-es="Por Que Krevio">Why Krevio</p>
+      <h2 class="section-title reveal" data-en="We're not the cheapest. We're the only option where you own it all." data-es="No somos los mas baratos. Somos la unica opcion donde tu eres dueno de todo.">We're not the cheapest. We're the<br />only option where you own it all.</h2>
       <div class="reveal" style="background: var(--krevio-card-bg); border: 1px solid var(--krevio-border); border-radius: 12px; overflow: hidden;">
         <table class="compare-table">
           <thead>
@@ -842,9 +1166,9 @@
   <!-- SECTION 7: CONTACT FORM -->
   <section class="section" id="contact">
     <div class="container">
-      <p class="section-label reveal" style="text-align:center;">Get in Touch</p>
-      <h2 class="section-title reveal" style="text-align:center;">Let's talk about your business.</h2>
-      <p class="section-sub reveal" style="margin: 0 auto 36px; text-align:center;">Projects start at $2,500 — most clients recover that in the first 3 months by owning their leads instead of renting them.</p>
+      <p class="section-label reveal" style="text-align:center;" data-en="Get in Touch" data-es="Contactanos">Get in Touch</p>
+      <h2 class="section-title reveal" style="text-align:center;" data-en="Let's talk about your business." data-es="Hablemos de tu negocio.">Let's talk about your business.</h2>
+      <p class="section-sub reveal" style="margin: 0 auto 36px; text-align:center;" data-en="Projects start at $2,500 — most clients recover that in the first 3 months by owning their leads instead of renting them." data-es="Los proyectos empiezan en $2,500 — la mayoria de los clientes recuperan esa inversion en los primeros 3 meses.">Projects start at $2,500 — most clients recover that in the first 3 months by owning their leads instead of renting them.</p>
       <div class="form-wrapper reveal">
         <div id="inquiry-form-wrap">
           <form id="inquiry-form" novalidate>
@@ -929,6 +1253,43 @@
       </div>
     </div>
   </footer>
+
+  <!-- CHAT WIDGET -->
+  <button class="chat-trigger pulse" id="chat-trigger" aria-label="Open chat">
+    <svg class="icon-chat" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/><path d="M7 9h10v2H7zm0-3h10v2H7zm0 6h7v2H7z"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+  </button>
+
+  <div class="chat-panel" id="chat-panel">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="chat-header-icon">K</div>
+        <div class="chat-header-text">
+          <h3>Krevio AI</h3>
+          <p data-en="Ask me anything about our services" data-es="Preguntame sobre nuestros servicios">Ask me anything about our services</p>
+        </div>
+      </div>
+      <div class="chat-header-actions">
+        <button class="chat-header-btn" id="voice-toggle" aria-label="Toggle voice mode" title="Toggle voice mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        </button>
+        <button class="chat-header-btn" id="chat-close" aria-label="Close chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-voice-label" id="chat-voice-label" style="display:none;"></div>
+    <div class="chat-input-area">
+      <input class="chat-input" id="chat-input" type="text" placeholder="Type a message..." autocomplete="off" />
+      <button class="chat-mic" id="chat-mic" aria-label="Voice input" title="Voice input" style="display:none;">
+        <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1-9c0-.55.45-1 1-1s1 .45 1 1v6c0 .55-.45 1-1 1s-1-.45-1-1V5z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+      </button>
+      <button class="chat-send" id="chat-send" aria-label="Send message">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

@@ -1,14 +1,21 @@
 const ALLOWED_ORIGINS = [
   'https://krevio.dev',
   'https://www.krevio.dev',
+  'https://krevio-site.vercel.app',
   'http://localhost:3000',
   'http://localhost:5500',
   'http://127.0.0.1:5500'
 ];
 
+function isAllowedOrigin(origin) {
+  if (ALLOWED_ORIGINS.includes(origin)) return true;
+  if (/^https:\/\/krevio-site[a-z0-9-]*\.vercel\.app$/.test(origin)) return true;
+  return false;
+}
+
 export default async function handler(req, res) {
   const origin = req.headers.origin || '';
-  const corsOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  const corsOrigin = isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0];
   res.setHeader('Access-Control-Allow-Origin', corsOrigin);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -40,7 +47,7 @@ export default async function handler(req, res) {
     business_name: sanitize(body.businessName || ''),
     industry: sanitize(industry),
     additional_notes: sanitize(body.additionalNotes || ''),
-    source: 'krevio.dev',
+    source: ['krevio.dev', 'krevio-chatbot', 'krevio-quote-flow'].includes(body.source) ? body.source : 'krevio.dev',
     created_at: new Date().toISOString()
   };
 
@@ -79,7 +86,7 @@ export default async function handler(req, res) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          content: `🔔 **New Krevio Inquiry**\n**Name:** ${inquiry.name}\n**Email:** ${inquiry.email}\n**Industry:** ${inquiry.industry}\n**Business:** ${inquiry.business_name || 'N/A'}\n**Phone:** ${inquiry.phone || 'N/A'}\n**Source:** krevio.dev`
+          content: `🔔 **New Krevio Inquiry${inquiry.source !== 'krevio.dev' ? ` (via ${inquiry.source === 'krevio-chatbot' ? 'Chatbot' : 'Quote Flow'})` : ''}**\n**Name:** ${inquiry.name}\n**Email:** ${inquiry.email}\n**Industry:** ${inquiry.industry}\n**Business:** ${inquiry.business_name || 'N/A'}\n**Phone:** ${inquiry.phone || 'N/A'}\n**Source:** ${inquiry.source}`
         }),
         signal: AbortSignal.timeout(3000)
       });
