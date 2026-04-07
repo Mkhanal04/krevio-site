@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Krevio — AI Systems for Local Service Businesses</title>
-  <meta name="description" content="Krevio builds AI-powered online systems for local service businesses in DFW — custom websites, chatbots, dashboards, and GEO/SEO optimization. You own everything we build." />
+  <meta name="description" content="Krevio builds AI-powered online systems for local service businesses — custom websites, chatbots, dashboards, and GEO/SEO optimization. You own everything we build." />
   <meta name="keywords" content="AI chatbot, local business website, GEO optimization, SEO, Dallas Fort Worth, small business, lead generation, custom website" />
   <meta property="og:title" content="Krevio — AI-Powered Systems for Local Service Businesses" />
-  <meta property="og:description" content="Custom websites, AI chatbots, dashboards, and GEO/SEO optimization. Built for DFW service businesses. You own everything." />
+  <meta property="og:description" content="Custom websites, AI chatbots, dashboards, and GEO/SEO optimization. Built for local service businesses. You own everything." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://krevio.dev" />
   <meta property="og:image" content="https://krevio.dev/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Krevio — AI-Powered Systems for Local Service Businesses" />
-  <meta name="twitter:description" content="Custom websites, AI chatbots, dashboards, and GEO/SEO optimization for DFW service businesses." />
+  <meta name="twitter:description" content="Custom websites, AI chatbots, dashboards, and GEO/SEO optimization for local service businesses." />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Krevio",
-    "description": "AI-powered online systems for local service businesses — custom websites, chatbots, dashboards, and GEO/SEO optimization. Serving the Dallas-Fort Worth metro area.",
+    "description": "AI-powered online systems for local service businesses — custom websites, chatbots, dashboards, and GEO/SEO optimization. Serving local service businesses across the United States.",
     "url": "https://krevio.dev",
     "email": "kreviodev@gmail.com",
     "address": {
@@ -28,15 +28,7 @@
       "addressRegion": "TX",
       "addressCountry": "US"
     },
-    "areaServed": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "latitude": "32.7767",
-        "longitude": "-96.7970"
-      },
-      "geoRadius": "80000"
-    },
+    "areaServed": "United States",
     "priceRange": "$$",
     "openingHours": "Mo-Fr 09:00-18:00",
     "sameAs": []
@@ -48,10 +40,10 @@
     "@type": "FAQPage",
     "mainEntity": [
       {"@type":"Question","name":"What does Krevio build?","acceptedAnswer":{"@type":"Answer","text":"Krevio builds complete online systems for local service businesses: custom websites, AI chatbots (English and Spanish), owner dashboards, and GEO/SEO optimization. You own everything we build."}},
-      {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Projects start at $2,500 for a complete custom build. Optional managed services start at $500/month. No per-lead charges. Cancel anytime and keep everything."}},
+      {"@type":"Question","name":"How much does it cost?","acceptedAnswer":{"@type":"Answer","text":"Custom builds start at $2,500. Managed services have 3 tiers: Starter ($199/mo), Growth ($499/mo), and Accelerator ($999/mo). Founding client rates for our first 5 clients. No per-lead charges. Month-to-month — cancel anytime and keep everything."}},
       {"@type":"Question","name":"What is GEO and why does it matter?","acceptedAnswer":{"@type":"Answer","text":"GEO stands for Generative Engine Optimization. It makes your business show up when people search using AI tools like ChatGPT, Google AI, or Perplexity. Traditional SEO only covers Google search results. GEO covers the new AI search engines that more and more people use every day."}},
       {"@type":"Question","name":"Do I own what you build?","acceptedAnswer":{"@type":"Answer","text":"Yes. Your website, leads, data, and code are 100% yours. If you cancel managed services, everything stays with you. No lock-in, no per-lead fees."}},
-      {"@type":"Question","name":"What industries do you serve?","acceptedAnswer":{"@type":"Answer","text":"We specialize in local service businesses in the DFW metro area: landscaping, plumbing, HVAC, real estate, painting, electrical, roofing, and more. We build custom systems for any service industry."}}
+      {"@type":"Question","name":"What industries do you serve?","acceptedAnswer":{"@type":"Answer","text":"We specialize in local service businesses: landscaping, plumbing, HVAC, real estate, painting, electrical, roofing, and more. We build custom systems for any service industry."}}
     ]
   }
   </script>
@@ -61,7 +53,7 @@
     "@type": "Service",
     "serviceType": "AI-Powered Business Solutions",
     "provider": {"@type":"LocalBusiness","name":"Krevio"},
-    "areaServed": "Dallas-Fort Worth, TX",
+    "areaServed": "United States",
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Krevio Services",
@@ -434,9 +426,9 @@
     /* ── PRICING ── */
     .pricing-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      max-width: 860px;
+      max-width: 960px;
       margin: 0 auto;
     }
     .pricing-card {
@@ -497,6 +489,22 @@
       font-weight: 700;
       flex-shrink: 0;
       margin-top: 1px;
+    }
+    .pricing-founding {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--krevio-yellow);
+      border: 1px solid var(--krevio-yellow);
+      border-radius: 100px;
+      padding: 2px 10px;
+      margin-bottom: 8px;
+    }
+    .pricing-standard {
+      font-size: 14px;
+      color: var(--krevio-gray);
+      text-decoration: line-through;
+      margin-left: 8px;
     }
     .pricing-note {
       text-align: center;
@@ -882,7 +890,7 @@
     <div class="container">
       <div class="hero-eyebrow">
         <span>🌟</span>
-        Now serving DFW home service businesses
+        Now serving local service businesses
       </div>
       <h1 class="hero-title" data-en="Stop renting leads. Start owning them." data-es="Deja de alquilar clientes. Empieza a ser dueno.">
         Stop renting leads.<br />
@@ -899,7 +907,7 @@
       <div class="hero-pills">
         <span class="hero-pill">Built for local service companies</span>
         <span class="hero-pill">You own everything we build</span>
-        <span class="hero-pill">Serving the DFW metro area</span>
+        <span class="hero-pill">Serving businesses nationwide</span>
       </div>
     </div>
   </section>
@@ -1030,21 +1038,66 @@
   <section class="section" id="pricing">
     <div class="container">
       <p class="section-label reveal" style="text-align:center;" data-en="Pricing" data-es="Precios">Pricing</p>
-      <h2 class="section-title reveal" style="text-align:center;" data-en="Invest Once. Own Everything." data-es="Invierte Una Vez. Dueno de Todo.">Invest Once. Own Everything.</h2>
+      <h2 class="section-title reveal" style="text-align:center;" data-en="Build Once. Grow Every Month." data-es="Construye Una Vez. Crece Cada Mes.">Build Once. Grow Every Month.</h2>
       <div class="pricing-grid reveal">
-        <div class="pricing-card primary">
-          <span class="pricing-badge" data-en="Most Popular" data-es="Mas Popular">Most Popular</span>
+        <div class="pricing-card" style="grid-column: 1 / -1;">
           <div class="pricing-title" data-en="The Build" data-es="La Construccion">The Build</div>
           <div class="pricing-price">Starting at $2,500</div>
-          <div class="pricing-sub" data-en="Custom website + AI chatbot + owner dashboard + GEO/SEO optimization. You own the website, the leads, the data, and the code. Most clients recover this in the first 3 months." data-es="Sitio web personalizado + chatbot con IA + panel de control + optimizacion GEO/SEO. Tu eres dueno del sitio, los clientes potenciales, los datos y el codigo.">Custom website + AI chatbot + owner dashboard + GEO/SEO optimization. You own the website, the leads, the data, and the code. Most clients recover this in the first 3 months.</div>
+          <div class="pricing-sub" data-en="Custom website + AI chatbot + owner dashboard + GEO/SEO optimization. You own the website, the leads, the data, and the code." data-es="Sitio web personalizado + chatbot con IA + panel de control + optimizacion GEO/SEO. Tu eres dueno del sitio, los leads, los datos y el codigo.">Custom website + AI chatbot + owner dashboard + GEO/SEO optimization. You own the website, the leads, the data, and the code.</div>
           <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top: 20px;" id="quote-cta" data-en="Get a Quote in 2 Minutes →" data-es="Obten una Cotizacion en 2 Minutos →">Get a Quote in 2 Minutes →</button>
         </div>
-        <div class="pricing-card">
-          <div class="pricing-title" data-en="Managed Services" data-es="Servicios Administrados">Managed Services</div>
-          <div class="pricing-price">From $500<span>/month</span></div>
-          <div class="pricing-sub" data-en="Chatbot stays active (API costs covered) • Monthly content + campaigns • GEO monitoring • Priority support • Performance reports" data-es="Chatbot activo (costos de API incluidos) • Contenido + campanas mensuales • Monitoreo GEO • Soporte prioritario • Reportes de rendimiento">Chatbot stays active (API costs covered) • Monthly content + campaigns • GEO monitoring • Priority support • Performance reports</div>
-          <p style="font-size:14px; color:var(--krevio-gray); margin-top:16px;" data-en="Cancel anytime — everything stays yours." data-es="Cancela cuando quieras — todo sigue siendo tuyo.">Cancel anytime — everything stays yours.</p>
+
+        <!-- Managed Services Header -->
+        <div style="grid-column: 1 / -1; text-align: center; margin-top: 12px;">
+          <p class="section-label" style="margin-bottom: 4px;" data-en="Managed Services" data-es="Servicios Administrados">Managed Services</p>
+          <p style="font-size: 13px; color: var(--krevio-yellow); font-weight: 600;" data-en="Founding Client Rate — first 5 clients lock this price for 12 months" data-es="Tarifa de Cliente Fundador — los primeros 5 clientes aseguran este precio por 12 meses">Founding Client Rate — first 5 clients lock this price for 12 months</p>
         </div>
+
+        <!-- Starter -->
+        <div class="pricing-card">
+          <div class="pricing-title" data-en="Starter" data-es="Inicial">Starter</div>
+          <div class="pricing-price">$199<span>/mo</span></div>
+          <div class="pricing-standard" data-en="Standard: $249/mo" data-es="Estandar: $249/mes">Standard: $249/mo</div>
+          <ul class="pricing-features">
+            <li data-en="AI chatbot hosting + voice" data-es="Chatbot con IA + voz">AI chatbot hosting + voice</li>
+            <li data-en="Basic GEO monitoring" data-es="Monitoreo GEO basico">Basic GEO monitoring</li>
+            <li data-en="Monthly performance report" data-es="Reporte de rendimiento mensual">Monthly performance report</li>
+            <li data-en="Email support (48h)" data-es="Soporte por email (48h)">Email support (48h)</li>
+          </ul>
+        </div>
+
+        <!-- Growth -->
+        <div class="pricing-card primary">
+          <span class="pricing-badge" data-en="Most Popular" data-es="Mas Popular">Most Popular</span>
+          <div class="pricing-title" data-en="Growth" data-es="Crecimiento">Growth</div>
+          <div class="pricing-price">$499<span>/mo</span></div>
+          <div class="pricing-standard" data-en="Standard: $599/mo" data-es="Estandar: $599/mes">Standard: $599/mo</div>
+          <ul class="pricing-features">
+            <li data-en="Everything in Starter" data-es="Todo lo del plan Inicial">Everything in Starter</li>
+            <li data-en="2-4 monthly content updates (GEO + SEO)" data-es="2-4 actualizaciones de contenido mensuales (GEO + SEO)">2-4 monthly content updates (GEO + SEO)</li>
+            <li data-en="Google Business Profile management" data-es="Gestion de Google Business Profile">Google Business Profile management</li>
+            <li data-en="Lead capture optimization" data-es="Optimizacion de captura de leads">Lead capture optimization</li>
+            <li data-en="Email support (24h)" data-es="Soporte por email (24h)">Email support (24h)</li>
+          </ul>
+        </div>
+
+        <!-- Accelerator -->
+        <div class="pricing-card">
+          <div class="pricing-title" data-en="Accelerator" data-es="Acelerador">Accelerator</div>
+          <div class="pricing-price">$999<span>/mo</span></div>
+          <div class="pricing-standard" data-en="Standard: $1,199/mo" data-es="Estandar: $1,199/mes">Standard: $1,199/mo</div>
+          <ul class="pricing-features">
+            <li data-en="Everything in Growth" data-es="Todo lo del plan Crecimiento">Everything in Growth</li>
+            <li data-en="Active GEO optimization (schema, citations)" data-es="Optimizacion GEO activa (schema, citas)">Active GEO optimization (schema, citations)</li>
+            <li data-en="Lead generation campaigns" data-es="Campanas de generacion de leads">Lead generation campaigns</li>
+            <li data-en="Full website management" data-es="Gestion completa del sitio web">Full website management</li>
+            <li data-en="Quarterly strategy calls" data-es="Llamadas de estrategia trimestrales">Quarterly strategy calls</li>
+            <li data-en="Priority support (12h)" data-es="Soporte prioritario (12h)">Priority support (12h)</li>
+          </ul>
+        </div>
+
+        <!-- Cancel note -->
+        <p style="grid-column: 1 / -1; text-align: center; font-size: 13px; color: var(--krevio-gray); margin-top: 4px;" data-en="Month-to-month. Cancel anytime — everything stays yours. 10% off with quarterly commitment." data-es="Mes a mes. Cancela cuando quieras — todo sigue siendo tuyo. 10% de descuento con compromiso trimestral.">Month-to-month. Cancel anytime — everything stays yours. 10% off with quarterly commitment.</p>
       </div>
 
       <!-- Quote Stepper -->
@@ -1139,13 +1192,13 @@
           <tbody>
             <tr>
               <td><strong style="color:var(--krevio-white);">Thumbtack / Angi</strong></td>
-              <td class="compare-col-them">You pay per lead forever. You own nothing. They own your customers.</td>
+              <td class="compare-col-them">$500-$2,000/mo for shared leads (4-8 competitors per lead, 10-20% close rate). 12-month contracts. You own nothing.</td>
               <td class="compare-col-us">Your leads go directly to you. No per-lead fees. Your data, always.</td>
             </tr>
             <tr>
               <td><strong style="color:var(--krevio-white);">Big Agencies</strong></td>
-              <td class="compare-col-them">$10K–$50K setup, slow timelines, generic deliverables.</td>
-              <td class="compare-col-us">Agency-grade quality at $2,500. Built custom in 2–4 weeks.</td>
+              <td class="compare-col-them">$10K–$50K setup, $1,500-$3,000/mo for SEO alone. No chatbot, no GEO.</td>
+              <td class="compare-col-us">Agency-grade quality at $2,500 + managed services from $199/mo. Built custom in 2–4 weeks.</td>
             </tr>
             <tr>
               <td><strong style="color:var(--krevio-white);">Freelancers</strong></td>
@@ -1163,12 +1216,41 @@
     </div>
   </section>
 
+  <!-- SECTION: INSIGHTS -->
+  <section class="section" id="insights">
+    <div class="container">
+      <p class="section-label reveal" data-en="Insights" data-es="Articulos">Insights</p>
+      <h2 class="section-title reveal" data-en="What smart business owners are asking" data-es="Lo que los duenos de negocios inteligentes preguntan">What smart business owners are asking</h2>
+      <p class="section-sub reveal" data-en="Answers to the questions we hear most from local service companies." data-es="Respuestas a las preguntas que mas escuchamos de empresas de servicios locales.">Answers to the questions we hear most from local service companies.</p>
+      <div class="demos-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <a class="demo-card reveal" href="/demos/blog/ai-small-business.html" style="text-decoration:none;">
+          <div class="demo-card-top"><span class="demo-card-icon">🤖</span><span class="demo-live-badge" style="background:var(--krevio-card-bg); color:var(--krevio-gray); border:1px solid var(--krevio-border);">Guide</span></div>
+          <div class="demo-card-name">How AI Helps Small Businesses Get More Customers</div>
+          <div class="demo-card-desc">You're spending $300+/mo renting leads from Thumbtack. What if your website generated them instead?</div>
+          <div class="demo-card-arrow">Read →</div>
+        </a>
+        <a class="demo-card reveal" href="/demos/blog/thumbtack-vs-own-site.html" style="text-decoration:none;">
+          <div class="demo-card-top"><span class="demo-card-icon">💰</span><span class="demo-live-badge" style="background:var(--krevio-card-bg); color:var(--krevio-gray); border:1px solid var(--krevio-border);">Comparison</span></div>
+          <div class="demo-card-name">Thumbtack vs Your Own AI-Powered Website: The Real Cost</div>
+          <div class="demo-card-desc">After a year on Thumbtack, you've spent $4,000 and own nothing. Here's the math.</div>
+          <div class="demo-card-arrow">Read →</div>
+        </a>
+        <a class="demo-card reveal" href="/demos/blog/what-is-geo.html" style="text-decoration:none;">
+          <div class="demo-card-top"><span class="demo-card-icon">🔍</span><span class="demo-live-badge" style="background:var(--krevio-card-bg); color:var(--krevio-gray); border:1px solid var(--krevio-border);">Explainer</span></div>
+          <div class="demo-card-name">What is GEO? Why AI Search Can't Find Your Business</div>
+          <div class="demo-card-desc">When a customer asks ChatGPT "find me a landscaper near me," does your business show up?</div>
+          <div class="demo-card-arrow">Read →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- SECTION 7: CONTACT FORM -->
   <section class="section" id="contact">
     <div class="container">
       <p class="section-label reveal" style="text-align:center;" data-en="Get in Touch" data-es="Contactanos">Get in Touch</p>
       <h2 class="section-title reveal" style="text-align:center;" data-en="Let's talk about your business." data-es="Hablemos de tu negocio.">Let's talk about your business.</h2>
-      <p class="section-sub reveal" style="margin: 0 auto 36px; text-align:center;" data-en="Projects start at $2,500 — most clients recover that in the first 3 months by owning their leads instead of renting them." data-es="Los proyectos empiezan en $2,500 — la mayoria de los clientes recuperan esa inversion en los primeros 3 meses.">Projects start at $2,500 — most clients recover that in the first 3 months by owning their leads instead of renting them.</p>
+      <p class="section-sub reveal" style="margin: 0 auto 36px; text-align:center;" data-en="Projects start at $2,500. Managed services from $199/mo. Most clients recover their investment in the first 3 months by owning their leads instead of renting them." data-es="Los proyectos empiezan en $2,500. Servicios administrados desde $199/mes. La mayoria de los clientes recuperan su inversion en los primeros 3 meses al ser duenos de sus leads.">Projects start at $2,500. Managed services from $199/mo. Most clients recover their investment in the first 3 months by owning their leads instead of renting them.</p>
       <div class="form-wrapper reveal">
         <div id="inquiry-form-wrap">
           <form id="inquiry-form" novalidate>
