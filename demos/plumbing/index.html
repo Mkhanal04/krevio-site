@@ -423,20 +423,23 @@ body {
 .metric-sub { font-size: 11px; color: var(--t2); margin-top: 2px; }
 
 /* ═══════════════════════════════════════════
-   OWNER DASHBOARD — PLATFORM COMPARISON
+   OWNER DASHBOARD — TODAY'S SCHEDULE
 ═══════════════════════════════════════════ */
-.platform-card { background: var(--bg1); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow-sm); margin-bottom: 20px; }
-.platform-card-title { font-weight: 700; font-size: 14px; color: var(--t0); margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
-.platform-savings { color: var(--green); font-size: 13px; font-weight: 600; }
-.platform-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-.platform-row:last-child { border-bottom: none; }
-.platform-key { color: var(--t2); }
-.platform-them { color: var(--red); font-weight: 600; }
-.platform-us { color: var(--accent); font-weight: 600; }
-.platform-bar-wrap { margin-top: 16px; }
-.platform-bar-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--t2); margin-bottom: 6px; }
-.platform-bar-track { height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
-.platform-bar-fill { height: 100%; border-radius: 4px; background: var(--accent); transition: width 1s ease; }
+.today-schedule-card { background: var(--bg1); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow-sm); margin-bottom: 20px; }
+.today-schedule-header { margin-bottom: 16px; }
+.today-schedule-title { font-weight: 700; font-size: 15px; color: var(--t0); margin-bottom: 4px; }
+.today-schedule-date { font-size: 12px; color: var(--t2); }
+.today-schedule-list { display: flex; flex-direction: column; gap: 0; }
+.today-job { display: grid; grid-template-columns: 70px 1fr auto auto auto; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.today-job:last-child { border-bottom: none; }
+.today-job-time { font-weight: 600; font-size: 13px; color: var(--accent); }
+.today-job-customer { font-weight: 500; font-size: 13px; color: var(--t0); }
+.today-job-service { font-size: 12px; color: var(--t2); margin-top: 1px; }
+.today-job-tech { font-size: 12px; color: var(--t2); background: var(--bg2); padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
+.today-job-value { font-weight: 600; font-size: 13px; color: var(--t0); white-space: nowrap; }
+.today-job-status { font-size: 11px; font-weight: 600; white-space: nowrap; }
+.today-job-status--confirmed { color: var(--green); }
+.today-job-status--pending { color: var(--amber); }
 
 /* ═══════════════════════════════════════════
    OWNER DASHBOARD — AI SUMMARY
@@ -785,18 +788,7 @@ body {
 .td-accent { font-weight: 600; color: var(--accent); }
 .stat-value--positive { color: var(--green); }
 
-/* ═══════════════════════════════════════════
-   PLATFORM COMPARISON GRID (extracted from inline)
-═══════════════════════════════════════════ */
-.platform-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
-.platform-grid-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 6px 0; }
-.platform-grid-header--category { color: var(--t2); }
-.platform-grid-header--them { color: var(--red); text-align: center; }
-.platform-grid-header--us { color: var(--accent); text-align: center; }
-.platform-grid-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--border); padding: 10px 0; font-size: 13px; }
-.platform-grid-key { color: var(--t2); }
-.platform-grid-them { color: var(--red); font-weight: 600; text-align: center; }
-.platform-grid-us { color: var(--accent); font-weight: 600; text-align: center; }
+/* (platform comparison grid removed — replaced by today's schedule) */
 
 /* ═══════════════════════════════════════════
    UNASSIGNED JOB ITEMS (extracted from inline)
@@ -854,6 +846,24 @@ body {
 .cpa-modal-options { margin-bottom: 16px; }
 .cpa-month-select { width: 100%; }
 .cpa-modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+/* Receipt upload modal */
+.receipt-upload-zone { border: 2px dashed var(--border); border-radius: 12px; padding: 32px 20px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+.receipt-upload-zone:hover { border-color: var(--accent); background: var(--accentS); }
+.receipt-upload-icon { font-size: 36px; margin-bottom: 8px; }
+.receipt-upload-text { font-size: 14px; font-weight: 500; color: var(--t0); margin-bottom: 4px; }
+.receipt-upload-hint { font-size: 12px; color: var(--t2); }
+.receipt-processing { padding: 20px; text-align: center; }
+.receipt-spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; margin: 0 auto 12px; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.receipt-processing-text { font-size: 13px; color: var(--t2); }
+.receipt-result { text-align: center; }
+.receipt-result-icon { font-size: 28px; margin-bottom: 6px; }
+.receipt-result-title { font-size: 15px; font-weight: 700; color: var(--t0); margin-bottom: 12px; }
+.receipt-result-details { text-align: left; display: flex; flex-direction: column; gap: 8px; }
+.receipt-result-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.receipt-result-row span { color: var(--t2); }
+.receipt-result-row strong { color: var(--t0); }
 
 /* Summary grid column variants (used by Customers=4col, Money=5col) */
 .dispatch-summary.summary-4col { grid-template-columns: repeat(4, 1fr); }
@@ -926,9 +936,9 @@ body {
   .pipeline-wrap { -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
   .pipeline-board { min-width: 800px; }
 
-  /* --- Platform grid: tighter on tablet --- */
-  .platform-grid, .platform-grid-row { grid-template-columns: 1.2fr 1fr 1fr; }
-  .platform-grid-row { font-size: 12px; padding: 8px 0; }
+  /* --- Today's Schedule: hide tech+status cols on tablet --- */
+  .today-job { grid-template-columns: 60px 1fr auto auto; gap: 8px; }
+  .today-job-status { display: none; }
 
   /* --- Receipts --- */
   .receipt-table .hide-mobile { display: none; }
@@ -999,14 +1009,15 @@ body {
   .metric-value { font-size: 1.5rem; }
   .metric-label { font-size: 11px; }
 
-  /* --- Platform comparison card --- */
-  .platform-card { padding: 16px; }
-  .platform-row { font-size: 12px; padding: 8px 0; }
-  .platform-grid, .platform-grid-row { grid-template-columns: 1fr; gap: 4px; }
-  .platform-grid-header--them, .platform-grid-header--us { text-align: left; }
-  .platform-grid-them, .platform-grid-us { text-align: left; }
-  .platform-grid-row { padding: 8px 0; border-top: 1px solid var(--border); }
-  .platform-grid-key { font-weight: 600; }
+  /* --- Today's Schedule: stack on phone --- */
+  .today-schedule-card { padding: 16px; }
+  .today-job { grid-template-columns: 55px 1fr auto; gap: 6px; padding: 10px 0; }
+  .today-job-tech { display: none; }
+  .today-job-status { display: none; }
+  .today-job-time { font-size: 12px; }
+  .today-job-customer { font-size: 12px; }
+  .today-job-service { font-size: 11px; }
+  .today-job-value { font-size: 12px; }
 
   /* --- Leads table: horizontal scroll --- */
   .leads-card { padding: 14px; overflow-x: auto; }
@@ -1496,22 +1507,17 @@ const DATA = {
     { name: 'Deepak S.', rating: 5, text: 'They found a slab leak our last plumber missed. Trenchless repair saved us from tearing up the floor.' }
   ],
   metrics: [
-    { label: 'Leads This Week', value: '14', trend: '+3 vs last week', sub: 'New service requests', up: true },
-    { label: 'Emergency Calls', value: '4', trend: 'Typical', sub: 'After-hours this month', neutral: true },
-    { label: 'Avg Response', value: '38 min', trend: '-12 min improvement', sub: 'Emergency arrival', up: true },
-    { label: 'Revenue (MTD)', value: '$18.4K', trend: '+22% vs last month', sub: 'April to date', up: true }
+    { label: 'Revenue (MTD)', value: '$18.4K', trend: '+22% vs last month', sub: 'April to date', up: true },
+    { label: 'Jobs Completed', value: '11', trend: '+4 vs last week', sub: 'This week', up: true },
+    { label: 'Outstanding Invoices', value: '$4,200', trend: '2 overdue', sub: '5 invoices pending', down: true },
+    { label: 'Avg Response', value: '38 min', trend: '-12 min improvement', sub: 'Emergency arrival', up: true }
   ],
-  platform: {
-    label: 'HomeAdvisor / Angi',
-    rows: [
-      { key: 'Avg cost per lead', them: '$35', us: '$0' },
-      { key: 'Monthly leads', them: '12', us: '18' },
-      { key: 'Monthly spend', them: '$420 + fees', us: '$0' },
-      { key: 'Annual cost', them: '$5,340', us: 'Fixed, one-time' }
-    ],
-    savings: 5340,
-    barPct: 74
-  },
+  todaySchedule: [
+    { time: '9:00 AM', customer: 'Mike Williams', service: 'Water Heater Replacement', tech: 'Jose Martinez', location: 'Richardson', value: '$2,200', status: 'confirmed' },
+    { time: '11:00 AM', customer: 'Karen Lewis', service: 'Slab Leak Detection', tech: 'Mike K.', location: 'Richardson', value: '$1,800', status: 'confirmed' },
+    { time: '1:30 PM', customer: 'Priya Nair', service: 'Repiping Estimate', tech: 'Jose Martinez', location: 'Murphy', value: '$4,500', status: 'pending' },
+    { time: '3:00 PM', customer: 'Ana Rodriguez', service: 'Toilet Install', tech: 'Danny Reeves', location: 'Garland', value: '$350', status: 'confirmed' }
+  ],
   followUps: [
     { name: 'Jennifer M.', initials: 'JM', last: 'Mar 2026', service: 'Emergency pipe repair', value: '$1,200', suggestion: 'She mentioned neighbor needs repiping — ask for referral', days: 12 },
     { name: 'Robert Kim', initials: 'RK', last: 'Jan 2026', service: 'Water heater install', value: '$2,800', suggestion: '6-month check — offer annual maintenance plan', days: 75 },
@@ -1948,29 +1954,26 @@ function renderDashboard() {
     </div>
   `;
 
-  // Platform comparison
-  const { label, rows, savings, barPct } = DATA.platform;
-  const platformHtml = `
-    <div class="platform-card">
-      <div class="platform-card-title">
-        Platform Cost Comparison
-        <span class="platform-savings">💰 Save $${savings.toLocaleString()}/yr</span>
+  // Today's Schedule
+  const scheduleHtml = `
+    <div class="today-schedule-card">
+      <div class="today-schedule-header">
+        <div class="today-schedule-title">📅 Today's Schedule</div>
+        <div class="today-schedule-date">Tuesday, Apr 8 · ${DATA.todaySchedule.length} jobs · $${DATA.todaySchedule.reduce((sum, j) => sum + parseInt(j.value.replace(/[^0-9]/g, '')), 0).toLocaleString()} est. revenue</div>
       </div>
-      <div class="platform-grid" style="margin-bottom:8px;">
-        <div class="platform-grid-header platform-grid-header--category">Category</div>
-        <div class="platform-grid-header platform-grid-header--them">${escapeHtml(label)}</div>
-        <div class="platform-grid-header platform-grid-header--us">Your System</div>
-      </div>
-      ${rows.map(r => `
-        <div class="platform-grid-row">
-          <div class="platform-grid-key">${escapeHtml(r.key)}</div>
-          <div class="platform-grid-them">${escapeHtml(r.them)}</div>
-          <div class="platform-grid-us">${escapeHtml(r.us)}</div>
-        </div>
-      `).join('')}
-      <div class="platform-bar-wrap">
-        <div class="platform-bar-label"><span>Their spend vs yours</span><span>${barPct}% savings</span></div>
-        <div class="platform-bar-track"><div class="platform-bar-fill" style="width:${barPct}%;"></div></div>
+      <div class="today-schedule-list">
+        ${DATA.todaySchedule.map(job => `
+          <div class="today-job">
+            <div class="today-job-time">${escapeHtml(job.time)}</div>
+            <div class="today-job-info">
+              <div class="today-job-customer">${escapeHtml(job.customer)}</div>
+              <div class="today-job-service">${escapeHtml(job.service)} · ${escapeHtml(job.location)}</div>
+            </div>
+            <div class="today-job-tech">${escapeHtml(job.tech)}</div>
+            <div class="today-job-value">${escapeHtml(job.value)}</div>
+            <span class="today-job-status today-job-status--${job.status}">${job.status === 'confirmed' ? '✓ Confirmed' : '○ Pending'}</span>
+          </div>
+        `).join('')}
       </div>
     </div>
   `;
@@ -2049,11 +2052,7 @@ function renderDashboard() {
     </div>
   `;
 
-  el.innerHTML = metricsHtml + platformHtml + aiHtml + followupsHtml + leadsHtml;
-  setTimeout(() => {
-    const fill = document.querySelector('.platform-bar-fill');
-    if (fill) fill.style.width = DATA.platform.barPct + '%';
-  }, 300);
+  el.innerHTML = metricsHtml + scheduleHtml + aiHtml + followupsHtml + leadsHtml;
 }
 
 function renderPipeline() {
@@ -2666,9 +2665,53 @@ function filterReceipts() {
 }
 
 function simulateReceiptUpload() {
-  showToast('📸 Processing receipt with AI OCR...');
+  const modal = document.createElement('div');
+  modal.className = 'cpa-modal-overlay';
+  modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+  modal.innerHTML = `
+    <div class="cpa-modal" style="max-width:420px;">
+      <div class="cpa-modal-title">📸 Capture Receipt</div>
+      <p class="cpa-modal-desc">Take a photo or upload an image. AI will extract vendor, amount, date, and auto-categorize the expense.</p>
+      <div class="receipt-upload-zone" id="receiptUploadZone">
+        <div class="receipt-upload-icon">📷</div>
+        <div class="receipt-upload-text">Tap to take photo or drop an image</div>
+        <div class="receipt-upload-hint">JPG, PNG, or PDF · Max 10MB</div>
+      </div>
+      <div class="cpa-modal-actions" style="margin-top:16px;">
+        <button class="btn-accent-outline" onclick="this.closest('.cpa-modal-overlay').remove()">Cancel</button>
+        <button class="btn-receipt-upload" onclick="processReceiptUpload(this.closest('.cpa-modal-overlay'))">
+          📸 Take Photo
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+function processReceiptUpload(modal) {
+  const zone = modal.querySelector('.receipt-upload-zone');
+  zone.innerHTML = '<div class="receipt-processing"><div class="receipt-spinner"></div><div class="receipt-processing-text">AI is reading your receipt...</div></div>';
+  modal.querySelector('.cpa-modal-actions').style.display = 'none';
   setTimeout(() => {
-    showToast('✅ Receipt captured: Home Depot — $67.30 — Tools & Equipment (Business)');
+    zone.innerHTML = `
+      <div class="receipt-result">
+        <div class="receipt-result-icon">✅</div>
+        <div class="receipt-result-title">Receipt Captured</div>
+        <div class="receipt-result-details">
+          <div class="receipt-result-row"><span>Vendor</span><strong>Home Depot</strong></div>
+          <div class="receipt-result-row"><span>Amount</span><strong>$67.30</strong></div>
+          <div class="receipt-result-row"><span>Date</span><strong>Apr 7, 2026</strong></div>
+          <div class="receipt-result-row"><span>Category</span><strong>Tools & Equipment</strong></div>
+          <div class="receipt-result-row"><span>Type</span><strong style="color:var(--accent);">Business</strong></div>
+        </div>
+      </div>
+    `;
+    const actions = modal.querySelector('.cpa-modal-actions');
+    actions.style.display = 'flex';
+    actions.innerHTML = `
+      <button class="btn-accent-outline" onclick="this.closest('.cpa-modal-overlay').remove()">Edit</button>
+      <button class="btn-receipt-upload" onclick="this.closest('.cpa-modal-overlay').remove(); showToast('✅ Receipt saved — Home Depot · $67.30 · Tools & Equipment')">Save Receipt</button>
+    `;
   }, 2000);
 }
 
