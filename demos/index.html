@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Powered Business Systems for Local Companies | Krevio</title>
+<meta name="description" content="We build complete AI-powered business systems for local service companies — website, chatbot, lead dashboard, and SEO. Browse live demos for landscaping, real estate, plumbing, and HVAC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script defer src="/_vercel/insights/script.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Krevio",
+      "url": "https://krevio.dev/demos/",
+      "description": "Complete AI-powered business systems for local service companies in DFW",
+      "founder": {
+        "@type": "Person",
+        "name": "Milan Khanal",
+        "url": "https://krevio.dev",
+        "sameAs": ["https://linkedin.com/in/milankhanal"]
+      },
+      "areaServed": ["McKinney", "Frisco", "Allen", "Plano", "Dallas-Fort Worth"],
+      "contactPoint": { "@type": "ContactPoint", "email": "hello@krevio.dev", "contactType": "sales" }
+    },
+    {
+      "@type": "WebPage",
+      "name": "AI-Powered Business Systems — Live Demos",
+      "description": "Browse live demos of complete AI-powered business systems built for landscaping, real estate, plumbing, and HVAC companies.",
+      "url": "https://krevio.dev/demos/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does a complete AI-powered business system include?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Every system includes a custom website, AI chatbot (English and Spanish), owner dashboard with lead tracking, GEO and SEO optimization, and smart follow-up tools. You own everything we build. Optional managed services available for ongoing support." }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does an AI-powered business system cost?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Projects start at $2,500 for a complete custom build. One-time investment with no per-lead charges. Optional monthly management available for ongoing chatbot, content updates, and GEO optimization. Most clients save $3,000–$5,000 in the first year compared to lead platforms like Thumbtack." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is GEO and why does my business need it?",
+          "acceptedAnswer": { "@type": "Answer", "text": "GEO (Generative Engine Optimization) makes your business visible to AI assistants like ChatGPT, Gemini, and Perplexity — not just Google. More customers are using AI to find local businesses. We build GEO optimization in from day one." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; }
+input, textarea, select { font-family: inherit; }
+a { text-decoration: none; color: inherit; }
+
+/* ═══════════════════════════════════════════
+   THEME TOKENS (same as landscaping demo)
+═══════════════════════════════════════════ */
+[data-theme="light"] {
+  --bg: #FAFAFA; --bg1: #FFFFFF; --bg2: #F4F4F5; --bg3: #E4E4E7;
+  --border: rgba(0,0,0,0.06); --borderH: rgba(0,0,0,0.12);
+  --t0: #18181B; --t1: #3F3F46; --t2: #71717A; --t3: #D4D4D8;
+  --green: #16A34A; --greenS: rgba(22,163,74,0.06); --greenB: rgba(22,163,74,0.14);
+  --amber: #CA8A04; --amberS: rgba(202,138,4,0.06); --amberB: rgba(202,138,4,0.14);
+  --red: #DC2626; --redS: rgba(220,38,38,0.06);
+  --blue: #2563EB; --blueS: rgba(37,99,235,0.06);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
+  --hero-bg: linear-gradient(135deg, #14532D 0%, #166534 60%, #15803D 100%);
+  --table-highlight: rgba(22,163,74,0.06);
+}
+[data-theme="dark"] {
+  --bg: #09090B; --bg1: #0F0F12; --bg2: #17171C; --bg3: #1E1E26;
+  --border: rgba(255,255,255,0.06); --borderH: rgba(255,255,255,0.13);
+  --t0: #F4F4F5; --t1: #D4D4D8; --t2: #A1A1AA; --t3: #3F3F46;
+  --green: #22C55E; --greenS: rgba(34,197,94,0.08); --greenB: rgba(34,197,94,0.18);
+  --amber: #EAB308; --amberS: rgba(234,179,8,0.08); --amberB: rgba(234,179,8,0.18);
+  --red: #F87171; --redS: rgba(248,113,113,0.08);
+  --blue: #3B82F6; --blueS: rgba(59,130,246,0.08);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.4);
+  --hero-bg: linear-gradient(135deg, #052E16 0%, #064E3B 60%, #065F46 100%);
+  --table-highlight: rgba(34,197,94,0.08);
+}
+
+/* ═══════════════════════════════════════════
+   GLOBAL BASE
+═══════════════════════════════════════════ */
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg); color: var(--t0);
+  line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 4px; }
+
+/* ═══════════════════════════════════════════
+   THEME TOGGLE (top-right fixed)
+═══════════════════════════════════════════ */
+.theme-btn {
+  position: fixed; top: 14px; right: 16px; z-index: 200;
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg1); color: var(--t1);
+  font-size: 16px; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s; box-shadow: var(--shadow-sm);
+}
+.theme-btn:hover { background: var(--bg2); }
+
+/* ═══════════════════════════════════════════
+   SECTION LAYOUT
+═══════════════════════════════════════════ */
+.section { padding: 80px 24px; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 8px;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--t0); margin-bottom: 12px; line-height: 1.2;
+}
+.section-sub { font-size: 1rem; color: var(--t2); max-width: 560px; }
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero {
+  background: var(--hero-bg); padding: 100px 24px 80px;
+  color: white; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-split {
+  max-width: 1100px; margin: 0 auto; position: relative;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+.hero-text { }
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.1; margin-bottom: 20px; color: white;
+}
+.hero-sub {
+  font-size: 1.1rem; color: rgba(255,255,255,0.78);
+  margin-bottom: 36px; max-width: 480px;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+.btn-primary {
+  padding: 13px 30px; background: white; color: #14532D;
+  font-weight: 700; font-size: 14px; border-radius: 8px; border: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
+.btn-outline {
+  padding: 13px 30px; background: transparent; color: white;
+  font-weight: 600; font-size: 14px; border-radius: 8px;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  transition: background 0.15s, border-color 0.15s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+.hero-trust {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+.trust-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px; padding: 8px 18px; font-size: 13px;
+  color: rgba(255,255,255,0.88); font-weight: 500; backdrop-filter: blur(6px);
+}
+
+/* Hero device mockup */
+.hero-device-wrap {
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-device {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+  width: 100%; max-width: 480px;
+}
+.hero-device-bar {
+  background: rgba(255,255,255,0.06); padding: 10px 16px;
+  display: flex; align-items: center; gap: 7px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.hero-device-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+}
+.hero-device-screen {
+  aspect-ratio: 16/10;
+  background: linear-gradient(135deg, rgba(34,197,94,0.15) 0%, rgba(5,46,22,0.8) 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; padding: 24px; text-align: center;
+}
+.hero-device-screen img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  border-radius: 0;
+}
+.hero-device-placeholder {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.hero-device-placeholder-icon { font-size: 2.5rem; opacity: 0.7; }
+.hero-device-placeholder-text {
+  font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6);
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.hero-device-placeholder-sub {
+  font-size: 11px; color: rgba(255,255,255,0.4);
+}
+
+/* ═══════════════════════════════════════════
+   WHAT'S INCLUDED (new section)
+═══════════════════════════════════════════ */
+.features-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; margin-top: 40px;
+}
+.feature-card {
+  background: var(--bg1); border-radius: 16px; padding: 28px 24px;
+  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.feature-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.feature-icon { font-size: 2rem; margin-bottom: 14px; }
+.feature-title { font-weight: 700; font-size: 1rem; color: var(--t0); margin-bottom: 8px; }
+.feature-desc { font-size: 0.87rem; color: var(--t2); line-height: 1.6; }
+
+/* ═══════════════════════════════════════════
+   INDUSTRY CARDS
+═══════════════════════════════════════════ */
+.industry-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px;
+}
+.industry-card {
+  background: var(--bg1); border-radius: 16px; padding: 28px 22px;
+  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: 14px;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.industry-card.live {
+  border-color: var(--green); box-shadow: var(--shadow-sm), 0 0 0 1px var(--greenB);
+}
+.industry-card:not(.live):hover { box-shadow: var(--shadow-md); }
+.industry-card.live:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.industry-icon { font-size: 2.2rem; }
+.industry-name { font-weight: 700; font-size: 1.05rem; color: var(--t0); }
+.industry-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.05em; width: fit-content;
+}
+.badge-live { background: var(--greenS); color: var(--green); border: 1px solid var(--greenB); }
+.badge-soon { background: var(--amberS); color: var(--amber); border: 1px solid var(--amberB); }
+.industry-teaser { font-size: 0.8rem; color: var(--t2); font-style: italic; line-height: 1.4; }
+.industry-desc { font-size: 0.85rem; color: var(--t2); line-height: 1.5; flex: 1; }
+.industry-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  background: var(--green); color: white; border: none;
+  transition: opacity 0.15s, transform 0.15s; text-decoration: none;
+}
+.industry-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+.notify-form { display: flex; gap: 8px; flex-direction: column; }
+.notify-input {
+  padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--bg2); color: var(--t0); font-size: 12px;
+  transition: border-color 0.15s;
+}
+.notify-input:focus { border-color: var(--green); outline: none; background: var(--bg1); }
+.notify-btn {
+  padding: 8px 14px; border-radius: 6px; font-size: 12px; font-weight: 600;
+  background: var(--bg2); color: var(--t1); border: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.notify-btn:hover { background: var(--bg3); }
+.notify-confirm { font-size: 12px; color: var(--green); font-weight: 500; padding: 4px 0; }
+
+/* "Not your industry?" block */
+.not-your-industry {
+  margin-top: 32px; padding: 28px 32px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; text-align: center;
+}
+.not-your-industry p { font-size: 1.05rem; font-weight: 600; color: var(--t0); margin-bottom: 6px; }
+.not-your-industry span { font-size: 0.9rem; color: var(--t2); }
+.not-your-industry button {
+  display: inline-block; margin-top: 16px;
+  padding: 11px 24px; background: var(--green); color: white;
+  font-weight: 700; font-size: 13px; border-radius: 8px; border: none;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.not-your-industry button:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* ═══════════════════════════════════════════
+   HOW IT WORKS
+═══════════════════════════════════════════ */
+.hiw-bg { background: var(--bg1); }
+.steps-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px;
+  position: relative;
+}
+.steps-grid::before {
+  content: '';
+  position: absolute; top: 52px; left: calc(16.67% + 28px); right: calc(16.67% + 28px);
+  height: 2px; background: var(--greenB); z-index: 0;
+}
+.step-card {
+  background: var(--bg1); border-radius: 16px; padding: 28px 24px;
+  box-shadow: var(--shadow-sm); position: relative; z-index: 1;
+  border: 1px solid var(--border);
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.step-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.step-num {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: var(--green); color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif; font-size: 1.4rem;
+  margin-bottom: 16px;
+}
+.step-icon { font-size: 1.5rem; margin-bottom: 12px; }
+.step-title { font-weight: 700; font-size: 1rem; color: var(--t0); margin-bottom: 8px; }
+.step-desc { font-size: 0.88rem; color: var(--t2); line-height: 1.6; }
+
+/* ═══════════════════════════════════════════
+   TRUST SECTION
+═══════════════════════════════════════════ */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px;
+}
+.stat-card {
+  background: var(--bg1); border-radius: 14px; padding: 24px 20px;
+  border: 1px solid var(--border); text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+.stat-value {
+  font-family: 'DM Serif Display', serif; font-size: 2.2rem;
+  color: var(--green); line-height: 1; margin-bottom: 4px;
+}
+.stat-label { font-size: 13px; font-weight: 600; color: var(--t0); margin-bottom: 4px; }
+.stat-sub { font-size: 11px; color: var(--t2); }
+.pricing-signal { font-size: 0.88rem; color: var(--t2); margin: 8px 0 24px; }
+.pricing-signal strong { color: var(--t0); }
+.compare-wrap { overflow-x: auto; }
+.compare-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--bg1); border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  min-width: 520px;
+}
+.compare-table th {
+  padding: 14px 20px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em; color: var(--t2);
+  background: var(--bg2); border-bottom: 1px solid var(--border); text-align: center;
+}
+.compare-table th:first-child { text-align: left; }
+.compare-table th.col-us { background: var(--table-highlight); color: var(--green); }
+.compare-table td {
+  padding: 13px 20px; font-size: 13px; color: var(--t1);
+  border-bottom: 1px solid var(--border); text-align: center;
+}
+.compare-table td:first-child { font-weight: 600; color: var(--t0); text-align: left; }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:hover td { background: var(--bg2); }
+.compare-table td.col-us { background: var(--table-highlight); font-weight: 600; color: var(--green); }
+.compare-table tr:hover td.col-us { background: var(--greenS); }
+.check-yes { color: var(--green); font-weight: 700; }
+.check-no { color: var(--red); }
+
+/* ═══════════════════════════════════════════
+   BLOG / RESOURCES
+═══════════════════════════════════════════ */
+.blog-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px;
+}
+.blog-card {
+  background: var(--bg1); border-radius: 16px; overflow: hidden;
+  box-shadow: var(--shadow-sm); display: flex; flex-direction: column;
+  transition: box-shadow 0.25s, transform 0.25s;
+  border: 1px solid var(--border);
+}
+.blog-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.blog-card-img {
+  height: 140px;
+  background: linear-gradient(135deg, var(--bg3) 0%, var(--bg2) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem;
+}
+.blog-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.blog-card-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--green);
+}
+.blog-card-title { font-weight: 700; font-size: 0.95rem; color: var(--t0); line-height: 1.35; }
+.blog-card-snippet { font-size: 0.82rem; color: var(--t2); line-height: 1.5; flex: 1; }
+.blog-card-link {
+  font-size: 12px; font-weight: 600; color: var(--green);
+  display: flex; align-items: center; gap: 4px; margin-top: 4px;
+  transition: gap 0.15s;
+}
+.blog-card:hover .blog-card-link { gap: 8px; }
+
+/* ═══════════════════════════════════════════
+   INTAKE FORM
+═══════════════════════════════════════════ */
+.form-bg { background: var(--bg2); }
+.form-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px;
+}
+.form-card {
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px; grid-column: 1 / -1;
+  box-shadow: var(--shadow-md);
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 12px; font-weight: 600; color: var(--t1); }
+.form-input, .form-select, .form-textarea {
+  padding: 10px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--bg2); color: var(--t0);
+  font-size: 13px; transition: border-color 0.15s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--green); outline: none; background: var(--bg1);
+}
+.form-textarea { resize: vertical; min-height: 80px; }
+.form-select { appearance: none; -webkit-appearance: none; cursor: pointer; }
+.checkbox-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.checkbox-label {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--t1); cursor: pointer;
+  padding: 7px 10px; border-radius: 6px; transition: background 0.12s;
+}
+.checkbox-label:hover { background: var(--bg2); }
+.checkbox-label input[type="checkbox"] { display: none; }
+.checkbox-box {
+  width: 18px; height: 18px; border-radius: 4px; flex-shrink: 0;
+  border: 1.5px solid var(--border); background: var(--bg2);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+.checkbox-label input:checked + .checkbox-box {
+  background: var(--green); border-color: var(--green);
+}
+.checkbox-label input:checked + .checkbox-box::after {
+  content: '✓'; color: white; font-size: 11px; font-weight: 700;
+}
+.ref-field-wrap { display: none; }
+.ref-field-wrap.show { display: flex; flex-direction: column; gap: 5px; }
+.btn-submit {
+  width: 100%; padding: 14px; background: var(--green); color: white;
+  font-weight: 700; font-size: 14px; border-radius: 8px; border: none;
+  transition: opacity 0.15s, transform 0.15s; margin-top: 8px;
+}
+.btn-submit:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.form-error { font-size: 12px; color: var(--red); margin-top: 4px; }
+.form-success {
+  display: none; text-align: center; padding: 40px 24px;
+}
+.form-success-icon { font-size: 3rem; margin-bottom: 16px; }
+.form-success h3 { font-size: 1.2rem; font-weight: 700; color: var(--t0); margin-bottom: 8px; }
+.form-success p { font-size: 0.9rem; color: var(--t2); }
+
+/* ═══════════════════════════════════════════
+   REFERRAL SECTION
+═══════════════════════════════════════════ */
+.referral-bg { background: var(--hero-bg); }
+.referral-bg .section-label { color: rgba(255,255,255,0.65); }
+.referral-bg .section-title { color: white; }
+.referral-bg .section-sub { color: rgba(255,255,255,0.72); }
+.referral-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; margin-bottom: 32px;
+}
+.referral-card {
+  background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px); border-radius: 16px; padding: 28px 22px;
+}
+.referral-tier {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.6); margin-bottom: 8px;
+}
+.referral-reward {
+  font-family: 'DM Serif Display', serif; font-size: 2rem;
+  color: white; line-height: 1; margin-bottom: 8px;
+}
+.referral-title { font-weight: 700; font-size: 0.95rem; color: white; margin-bottom: 8px; }
+.referral-desc { font-size: 0.83rem; color: rgba(255,255,255,0.72); line-height: 1.5; }
+.referral-link-box {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px; padding: 20px 24px;
+}
+.referral-link-label {
+  font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.65);
+  margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.referral-link-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.referral-link-text {
+  flex: 1; padding: 10px 14px; border-radius: 8px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.88); font-size: 13px; font-family: 'DM Sans', sans-serif;
+  min-width: 200px;
+}
+.copy-btn {
+  padding: 10px 18px; background: white; color: #14532D;
+  font-weight: 700; font-size: 13px; border-radius: 8px; border: none;
+  transition: opacity 0.15s; white-space: nowrap;
+}
+.copy-btn:hover { opacity: 0.9; }
+.referral-note {
+  font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 10px;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer {
+  background: var(--bg); border-top: 1px solid var(--border);
+  padding: 40px 24px; text-align: center;
+}
+.footer-name {
+  font-family: 'DM Serif Display', serif; font-size: 1.2rem;
+  color: var(--t0); margin-bottom: 6px;
+}
+.footer-tagline { font-size: 13px; color: var(--t2); margin-bottom: 20px; }
+.footer-links {
+  display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  font-size: 13px; color: var(--t1); margin-bottom: 20px;
+}
+.footer-links a { color: var(--green); font-weight: 500; }
+.footer-links a:hover { text-decoration: underline; }
+.footer-copy { font-size: 11px; color: var(--t2); }
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.revealed { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+.toast {
+  position: fixed; bottom: 24px; left: 24px; z-index: 9999;
+  background: var(--t0); color: var(--bg); padding: 10px 18px;
+  border-radius: 8px; font-size: 13px; font-weight: 500;
+  box-shadow: var(--shadow-lg); opacity: 1; transition: all 0.25s;
+  pointer-events: none;
+}
+.toast.hide { opacity: 0; transform: translateY(8px); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — TABLET
+═══════════════════════════════════════════ */
+@media (max-width: 1023px) {
+  .hero-split { grid-template-columns: 1fr; gap: 40px; }
+  .hero-device-wrap { display: none; }
+  .hero { text-align: center; }
+  .hero-ctas { justify-content: center; }
+  .hero-trust { justify-content: center; }
+  .hero-sub { margin-left: auto; margin-right: auto; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .industry-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .referral-grid { grid-template-columns: 1fr; }
+  .steps-grid::before { display: none; }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — MOBILE (<768)
+═══════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .section { padding: 48px 16px; }
+  .hero { padding: 72px 20px 60px; }
+  .hero-ctas { flex-direction: column; align-items: center; }
+  .hero-trust { gap: 10px; }
+  .features-grid { grid-template-columns: 1fr; }
+  .industry-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .steps-grid::before { display: none; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .blog-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .referral-grid { grid-template-columns: 1fr; }
+  .referral-link-row { flex-direction: column; }
+  .referral-link-text { min-width: 0; width: 100%; }
+  .footer-links { flex-direction: column; gap: 10px; }
+  .not-your-industry { padding: 20px 16px; }
+}
+
+/* ═══════════════════════════════════════════
+   BUILD vs MANAGED
+═══════════════════════════════════════════ */
+.pricing-cols {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px;
+}
+.pricing-col {
+  background: var(--bg1); border: 1px solid var(--border); border-radius: 16px;
+  padding: 32px 28px; display: flex; flex-direction: column;
+}
+.pricing-col.managed {
+  border-color: var(--green); box-shadow: 0 0 0 1px var(--greenB);
+}
+.pricing-col-header { margin-bottom: 20px; }
+.pricing-col-icon { font-size: 1.8rem; margin-bottom: 8px; }
+.pricing-col-title { font-weight: 700; font-size: 1.15rem; color: var(--t0); }
+.pricing-col-subtitle { font-size: 0.82rem; color: var(--t2); margin-top: 2px; }
+.pricing-col-list {
+  list-style: none; padding: 0; margin: 0 0 24px; flex: 1;
+}
+.pricing-col-list li {
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+  font-size: 0.9rem; color: var(--t1); display: flex; align-items: center; gap: 8px;
+}
+.pricing-col-list li::before { content: '✓'; color: var(--green); font-weight: 700; }
+.pricing-col-price {
+  font-size: 1.1rem; color: var(--t0); font-weight: 600; margin-top: auto;
+}
+.pricing-col-price strong { font-size: 1.4rem; color: var(--green); }
+.pricing-col-note {
+  font-size: 0.8rem; color: var(--t2); margin-top: 8px; font-style: italic;
+}
+@media (max-width: 640px) {
+  .pricing-cols { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+  <span id="themeIcon">☀</span>
+</button>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-split">
+    <div class="hero-text">
+      <h1>Stop renting leads.<br>Start owning them.</h1>
+      <p class="hero-sub">We build complete online systems for local service companies — website, AI chatbot, lead dashboard, and SEO that actually works.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="document.getElementById('included').scrollIntoView({behavior:'smooth'})">
+          See What's Included ↓
+        </button>
+        <button class="btn-outline" onclick="document.getElementById('intake').scrollIntoView({behavior:'smooth'})">
+          Let's Talk →
+        </button>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-pill">🏡 Built for local service companies</div>
+        <div class="trust-pill">✓ You own everything we build — cancel anytime</div>
+        <div class="trust-pill">📍 Serving the DFW metro area</div>
+      </div>
+    </div>
+    <div class="hero-device-wrap">
+      <div class="hero-device">
+        <div class="hero-device-bar">
+          <div class="hero-device-dot"></div>
+          <div class="hero-device-dot"></div>
+          <div class="hero-device-dot"></div>
+        </div>
+        <div class="hero-device-screen">
+          <img src="/demos/assets/demo-preview.png" alt="Live demo preview"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="hero-device-placeholder" style="display:none;">
+            <div class="hero-device-placeholder-icon">🌿</div>
+            <div class="hero-device-placeholder-text">Live Demo Preview</div>
+            <div class="hero-device-placeholder-sub">See a real example in the demos below</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ WHAT'S INCLUDED ═══════════════════ -->
+<section class="section" id="included">
+  <div class="section-inner">
+    <div class="section-label">What You Get</div>
+    <h2 class="section-title">One system. Everything your business needs.</h2>
+    <p class="section-sub">Every client gets the same complete platform — customized for their industry, their market, and their brand.</p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🌐</div>
+        <div class="feature-title">Your Website</div>
+        <div class="feature-desc">Custom design, your branding, mobile-ready, optimized to convert visitors into customers.</div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">💬</div>
+        <div class="feature-title">AI Chatbot</div>
+        <div class="feature-desc">Answers customer questions 24/7 in English and Spanish. Qualifies leads while you sleep.</div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📊</div>
+        <div class="feature-title">Owner Dashboard</div>
+        <div class="feature-desc">See every lead, every follow-up, every metric. Know exactly how your business is performing online.</div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔍</div>
+        <div class="feature-title">GEO &amp; SEO</div>
+        <div class="feature-desc">Get found on Google, ChatGPT, and AI search engines. We optimize for where customers actually look.</div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔄</div>
+        <div class="feature-title">Smart Follow-Ups</div>
+        <div class="feature-desc">Never lose a repeat customer. The system flags who to call back and when.</div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔑</div>
+        <div class="feature-title">You Own Everything</div>
+        <div class="feature-desc">Your website, your leads, your data — always yours. Optional managed services keep your chatbot running and leads flowing. Cancel anytime — everything stays with you.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ BUILD vs MANAGED ═══════════════════ -->
+<section class="section" id="pricing-model">
+  <div class="section-inner">
+    <div class="section-label">After Launch</div>
+    <h2 class="section-title">Build once. Manage your way.</h2>
+    <p class="section-sub">Every project starts with a one-time build. After launch, you choose how much support you want.</p>
+    <div class="pricing-cols">
+      <div class="pricing-col reveal">
+        <div class="pricing-col-header">
+          <div class="pricing-col-icon">🔨</div>
+          <div class="pricing-col-title">The Build</div>
+          <div class="pricing-col-subtitle">One-time investment</div>
+        </div>
+        <ul class="pricing-col-list">
+          <li>Custom website on your domain</li>
+          <li>AI chatbot (English &amp; Spanish)</li>
+          <li>Owner dashboard + lead tracking</li>
+          <li>GEO/SEO optimization</li>
+          <li>You own everything — code, data, leads</li>
+        </ul>
+        <div class="pricing-col-price">Starting at <strong>$2,500</strong></div>
+      </div>
+      <div class="pricing-col managed reveal">
+        <div class="pricing-col-header">
+          <div class="pricing-col-icon">🛡️</div>
+          <div class="pricing-col-title">Managed Services</div>
+          <div class="pricing-col-subtitle">Optional monthly</div>
+        </div>
+        <ul class="pricing-col-list">
+          <li>Chatbot stays active (API costs covered)</li>
+          <li>Monthly content + seasonal campaigns</li>
+          <li>GEO monitoring + optimization</li>
+          <li>Priority support + bug fixes</li>
+          <li>Monthly performance reports</li>
+        </ul>
+        <div class="pricing-col-price">From <strong>$500</strong>/month</div>
+        <div class="pricing-col-note">Cancel anytime — everything stays yours</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+<div class="hiw-bg">
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">From demo to your own system</h2>
+      <div class="steps-grid">
+        <div class="step-card reveal">
+          <div class="step-num">1</div>
+          <div class="step-icon">🎯</div>
+          <div class="step-title">See What's Possible</div>
+          <div class="step-desc">Browse a working demo for your industry. Experience it as your customer would — then switch to the owner dashboard and see the intelligence behind it.</div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">2</div>
+          <div class="step-icon">🛠️</div>
+          <div class="step-title">We Build Yours</div>
+          <div class="step-desc">We take your brand, your services, and your market — and build a custom system tailored to your business. Not a template. Not a copy-paste. Yours.</div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">3</div>
+          <div class="step-icon">🔑</div>
+          <div class="step-title">You Own Everything</div>
+          <div class="step-desc">Your website, your leads, your data — always yours. We offer ongoing management if you want it, but you're never locked in. Cancel the retainer? Everything stays with you.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ LIVE DEMOS ═══════════════════ -->
+<section class="section" id="demos">
+  <div class="section-inner">
+    <div class="section-label">Live Demos</div>
+    <h2 class="section-title">See what we've built</h2>
+    <p class="section-sub">Each demo is a complete system — website, AI chatbot, lead dashboard, and SEO optimization. Click one to experience it as a customer AND as the business owner.</p>
+    <div class="industry-grid">
+
+      <!-- Landscaping — LIVE -->
+      <div class="industry-card live reveal">
+        <div class="industry-icon">🌿</div>
+        <div class="industry-name">Landscaping</div>
+        <div class="industry-badge badge-live">✓ Live</div>
+        <div class="industry-teaser">Lawn care booking, seasonal follow-ups, before/after gallery</div>
+        <div class="industry-desc">Full demo with AI chatbot, online booking, owner dashboard, GEO score, and leads tracking.</div>
+        <a href="/demos/landscaping/" class="industry-cta" onclick="trackEvent('demo_click',{industry:'landscaping'})">Experience Demo →</a>
+      </div>
+
+      <!-- Real Estate — LIVE -->
+      <div class="industry-card reveal">
+        <div class="industry-icon">🏠</div>
+        <div class="industry-name">Real Estate &amp; Home Services</div>
+        <div class="industry-badge badge-live">✓ Live</div>
+        <div class="industry-teaser">Project portfolios, multi-service booking, property management dashboard</div>
+        <div class="industry-desc">Full demo with AI chatbot, portfolio gallery, owner dashboard, neighborhood expertise, and pipeline tracking.</div>
+        <a href="/demos/realestate/" class="industry-cta" onclick="trackEvent('demo_click',{industry:'realestate'})">Experience Demo →</a>
+      </div>
+
+      <!-- Plumbing — LIVE -->
+      <div class="industry-card reveal">
+        <div class="industry-icon">🔧</div>
+        <div class="industry-name">Plumbing</div>
+        <div class="industry-badge badge-live">✓ Live</div>
+        <div class="industry-teaser">Emergency urgency toggle, 24/7 service routing, before/after gallery</div>
+        <div class="industry-desc">Full demo with emergency booking, AI chatbot, owner dashboard, GEO score, and pipeline tracking.</div>
+        <a href="/demos/plumbing/" class="industry-cta" onclick="trackEvent('demo_click',{industry:'plumbing'})">Experience Demo →</a>
+      </div>
+
+      <!-- HVAC — LIVE -->
+      <div class="industry-card reveal">
+        <div class="industry-icon">❄️</div>
+        <div class="industry-name">HVAC</div>
+        <div class="industry-badge badge-live">✓ Live</div>
+        <div class="industry-teaser">System age tracking, maintenance plans, bilingual EN/ES toggle, automation dashboard</div>
+        <div class="industry-desc">Full demo with seasonal booking, AI chatbot, owner dashboard, GEO score, and communication automation.</div>
+        <a href="/demos/hvac/" class="industry-cta" onclick="trackEvent('demo_click',{industry:'hvac'})">Experience Demo →</a>
+      </div>
+
+    </div>
+    <div class="not-your-industry">
+      <p>Don't see your industry?</p>
+      <span>We build custom systems for any local service business. Tell us what you do — we'll show you what's possible.</span>
+      <br>
+      <button onclick="document.getElementById('intake').scrollIntoView({behavior:'smooth'})">Tell Us About Your Business ↓</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ TRUST & COMPARISON ═══════════════════ -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Why Us</div>
+    <h2 class="section-title">The agency experience without the agency price</h2>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Industries with live demos</div>
+        <div class="stat-sub">Landscaping, Real Estate, Plumbing &amp; HVAC</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-value">$4,320+</div>
+        <div class="stat-label">Average first-year savings</div>
+        <div class="stat-sub">vs lead platforms like Thumbtack</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-value">24/7</div>
+        <div class="stat-label">Your AI chatbot never sleeps</div>
+        <div class="stat-sub">Qualifies leads while you're on the job</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-value">100%</div>
+        <div class="stat-label">You own your leads</div>
+        <div class="stat-sub">No per-lead fees. No lock-in. Ever.</div>
+      </div>
+    </div>
+    <div class="compare-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Thumbtack / Angi</th>
+            <th>Web Agency</th>
+            <th class="col-us">Your Custom System ✓</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Monthly cost</td>
+            <td>$300+/mo</td>
+            <td>$0</td>
+            <td class="col-us">$0</td>
+          </tr>
+          <tr>
+            <td>Build time</td>
+            <td>N/A</td>
+            <td>8–16 weeks</td>
+            <td class="col-us">Custom-built for you</td>
+          </tr>
+          <tr>
+            <td>Own your leads</td>
+            <td><span class="check-no">✗</span></td>
+            <td><span class="check-yes">✓</span></td>
+            <td class="col-us"><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>AI chatbot</td>
+            <td><span class="check-no">✗</span></td>
+            <td>$5K extra</td>
+            <td class="col-us">Built-in</td>
+          </tr>
+          <tr>
+            <td>GEO optimized</td>
+            <td><span class="check-no">✗</span></td>
+            <td><span class="check-no">✗</span></td>
+            <td class="col-us"><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Per-lead fees</td>
+            <td>$15–50 each</td>
+            <td>$0</td>
+            <td class="col-us">$0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ RESOURCES ═══════════════════ -->
+<div style="background:var(--bg1);">
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">Insights</div>
+      <h2 class="section-title">What smart business owners are asking</h2>
+      <p class="section-sub">Answers to the questions we hear most from local service companies.</p>
+      <div class="blog-grid">
+        <a href="/demos/blog/ai-small-business.html" class="blog-card reveal" onclick="trackEvent('article_click',{article_slug:'ai-small-business'})">
+          <div class="blog-card-img">🤖</div>
+          <div class="blog-card-body">
+            <div class="blog-card-label">Guide</div>
+            <div class="blog-card-title">How AI Helps Small Businesses Get More Customers</div>
+            <div class="blog-card-snippet">You're spending $300+/mo renting leads from Thumbtack. What if your website generated them instead?</div>
+            <div class="blog-card-link">Read → </div>
+          </div>
+        </a>
+        <a href="/demos/blog/thumbtack-vs-own-site.html" class="blog-card reveal" onclick="trackEvent('article_click',{article_slug:'thumbtack-vs-own-site'})">
+          <div class="blog-card-img">💰</div>
+          <div class="blog-card-body">
+            <div class="blog-card-label">Comparison</div>
+            <div class="blog-card-title">Thumbtack vs Your Own AI-Powered Website: The Real Cost</div>
+            <div class="blog-card-snippet">After a year on Thumbtack, you've spent $4,000 and own nothing. Here's the math.</div>
+            <div class="blog-card-link">Read → </div>
+          </div>
+        </a>
+        <a href="/demos/blog/what-is-geo.html" class="blog-card reveal" onclick="trackEvent('article_click',{article_slug:'what-is-geo'})">
+          <div class="blog-card-img">🔍</div>
+          <div class="blog-card-body">
+            <div class="blog-card-label">Explainer</div>
+            <div class="blog-card-title">What is GEO? Why AI Search Can't Find Your Business</div>
+            <div class="blog-card-snippet">When a customer asks ChatGPT "find me a landscaper near me," does your business show up?</div>
+            <div class="blog-card-link">Read → </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ INTAKE FORM ═══════════════════ -->
+<div class="form-bg">
+  <section class="section" id="intake">
+    <div class="section-inner">
+      <div class="section-label">Let's Talk</div>
+      <h2 class="section-title">Tell us about your business</h2>
+      <p class="section-sub">No sales pitch, no pressure. We'll review your situation and show you exactly what we'd build — with a working prototype, not a slide deck.</p>
+      <p class="pricing-signal">Projects start at <strong>$2,500</strong> — most clients recover that in the first 3 months by owning their leads instead of renting them.</p>
+      <div class="form-card reveal">
+        <form id="intakeForm" onsubmit="submitIntake(event)" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="fieldName">Your Name *</label>
+              <input class="form-input" id="fieldName" type="text" placeholder="Maria Garcia" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fieldBusiness">Business Name</label>
+              <input class="form-input" id="fieldBusiness" type="text" placeholder="Garcia Painting Co">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fieldEmail">Email *</label>
+              <input class="form-input" id="fieldEmail" type="email" placeholder="maria@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fieldPhone">Phone</label>
+              <input class="form-input" id="fieldPhone" type="tel" placeholder="(214) 555-0000">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fieldIndustry">Industry *</label>
+              <select class="form-select" id="fieldIndustry" required>
+                <option value="">Select your industry...</option>
+                <option>Landscaping</option>
+                <option>Real Estate / Home Services</option>
+                <option>Plumbing</option>
+                <option>HVAC</option>
+                <option>Painting</option>
+                <option>Other</option>
+              </select>
+              <div id="industryOtherWrap" style="display:none;margin-top:8px;">
+                <input class="form-input" id="fieldIndustryOther" type="text" placeholder="Your industry">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="fieldTeamSize">Team Size</label>
+              <select class="form-select" id="fieldTeamSize">
+                <option value="">Select...</option>
+                <option>Just me</option>
+                <option>2–5 people</option>
+                <option>6–15 people</option>
+                <option>15+</option>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <div class="form-label" style="margin-bottom:10px;">What's costing you the most right now? (check all that apply)</div>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="challenge" value="Getting new customers"><span class="checkbox-box"></span>Getting new customers</label>
+                <label class="checkbox-label"><input type="checkbox" name="challenge" value="Following up with past customers"><span class="checkbox-box"></span>Following up with past customers</label>
+                <label class="checkbox-label"><input type="checkbox" name="challenge" value="Managing scheduling / bookings"><span class="checkbox-box"></span>Managing scheduling / bookings</label>
+                <label class="checkbox-label"><input type="checkbox" name="challenge" value="Online presence (website, Google, reviews)"><span class="checkbox-box"></span>Online presence (website, Google, reviews)</label>
+                <label class="checkbox-label"><input type="checkbox" name="challenge" value="Paying for leads I don't own (Thumbtack, Angi)"><span class="checkbox-box"></span>Paying for leads I don't own (Thumbtack, Angi)</label>
+                <label class="checkbox-label"><input type="checkbox" name="challenge" value="Other"><span class="checkbox-box"></span>Other</label>
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <div class="form-label" style="margin-bottom:10px;">What would help your business the most? (check all that apply)</div>
+              <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="service" value="AI-powered website with online booking"><span class="checkbox-box"></span>AI-powered website with online booking</label>
+                <label class="checkbox-label"><input type="checkbox" name="service" value="AI chatbot for customer inquiries"><span class="checkbox-box"></span>AI chatbot for customer inquiries</label>
+                <label class="checkbox-label"><input type="checkbox" name="service" value="GEO/SEO optimization (get found on Google & AI search)"><span class="checkbox-box"></span>GEO/SEO optimization (get found on Google &amp; AI search)</label>
+                <label class="checkbox-label"><input type="checkbox" name="service" value="Customer follow-up automation"><span class="checkbox-box"></span>Customer follow-up automation</label>
+                <label class="checkbox-label"><input type="checkbox" name="service" value="Owner dashboard with lead tracking"><span class="checkbox-box"></span>Owner dashboard with lead tracking</label>
+                <label class="checkbox-label"><input type="checkbox" name="service" value="Review management"><span class="checkbox-box"></span>Review management</label>
+                <label class="checkbox-label"><input type="checkbox" name="service" value="Employee scheduling"><span class="checkbox-box"></span>Employee scheduling</label>
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <label class="form-label" for="fieldNotes">Anything else you'd like us to know? (optional)</label>
+              <textarea class="form-textarea" id="fieldNotes" placeholder="Current setup, service area, goals..."></textarea>
+            </div>
+
+            <div class="form-group ref-field-wrap" id="refFieldWrap">
+              <label class="form-label" for="fieldRef">Referral Code</label>
+              <input class="form-input" id="fieldRef" type="text" placeholder="e.g. jake">
+            </div>
+
+          </div>
+          <div id="formError" class="form-error" style="display:none;margin-bottom:12px;"></div>
+          <button class="btn-submit" id="formSubmitBtn" type="submit">Let's Talk →</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div class="form-success-icon">🌿</div>
+          <h3 id="formSuccessName">Thanks!</h3>
+          <p>We'll reach out within 24 hours with a custom demo walkthrough tailored to your business.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ REFERRAL ═══════════════════ -->
+<div class="referral-bg">
+  <section class="section" id="referral">
+    <div class="section-inner">
+      <div class="section-label">Referrals</div>
+      <h2 class="section-title">Know someone who needs this?</h2>
+      <p class="section-sub">If you refer a business owner who works with us, you earn a percentage of the project. No caps, no strings.</p>
+      <div class="referral-grid">
+        <div class="referral-card reveal">
+          <div class="referral-tier">Tier 1</div>
+          <div class="referral-reward">10–15%</div>
+          <div class="referral-title">Direct Referral</div>
+          <div class="referral-desc">You refer a business owner directly → earn 10–15% of their first project when they sign a contract.</div>
+        </div>
+        <div class="referral-card reveal">
+          <div class="referral-tier">Tier 2</div>
+          <div class="referral-reward">5%</div>
+          <div class="referral-title">Extended Referral</div>
+          <div class="referral-desc">Your referral refers someone else → you still earn 5% of that project. No extra effort needed.</div>
+        </div>
+        <div class="referral-card reveal">
+          <div class="referral-tier">Client Perk</div>
+          <div class="referral-reward">$500 off</div>
+          <div class="referral-title">Client Referral</div>
+          <div class="referral-desc">Already working with us? Refer a peer → $500 off your next invoice or add-on project.</div>
+        </div>
+      </div>
+      <div class="referral-link-box reveal">
+        <div class="referral-link-label">Your referral link</div>
+        <div class="referral-link-row">
+          <input class="referral-link-text" id="referralLinkInput" type="text" value="krevio.dev/demos/?ref=YOUR_CODE" readonly aria-label="Your referral link">
+          <button class="copy-btn" onclick="copyReferralLink()">📋 Copy Link</button>
+        </div>
+        <div class="referral-note">Share this link. We track referrals automatically and pay out after the client's first payment clears.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer class="footer">
+  <div class="footer-name">Krevio</div>
+  <div class="footer-tagline">We build AI-powered business systems for local service companies in DFW.</div>
+  <div class="footer-links">
+    <span>📧 <a href="mailto:hello@krevio.dev">hello@krevio.dev</a></span>
+    <span>📍 McKinney, TX</span>
+    <span>🌐 <a href="/">krevio.dev</a></span>
+  </div>
+  <div class="footer-copy">© 2026 Krevio. All rights reserved.</div>
+</footer>
+
+<!-- Toast -->
+<div class="toast hide" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function() {
+  // Restore theme
+  const saved = localStorage.getItem('demos-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.getElementById('themeIcon').textContent = saved === 'dark' ? '☽' : '☀';
+
+  // Parse URL params
+  const params = new URLSearchParams(window.location.search);
+  const refCode = params.get('ref');
+  const utmSource = params.get('utm_source');
+  const utmMedium = params.get('utm_medium');
+
+  if (refCode) {
+    sessionStorage.setItem('demos-ref', refCode);
+    const refWrap = document.getElementById('refFieldWrap');
+    const refInput = document.getElementById('fieldRef');
+    if (refWrap && refInput) {
+      refWrap.classList.add('show');
+      refInput.value = refCode;
+    }
+    const linkInput = document.getElementById('referralLinkInput');
+    if (linkInput) linkInput.value = 'krevio.dev/demos/?ref=' + refCode;
+  }
+
+  if (utmSource) sessionStorage.setItem('demos-utm-source', utmSource);
+  if (utmMedium) sessionStorage.setItem('demos-utm-medium', utmMedium);
+
+  // Industry "Other" toggle
+  const industrySelect = document.getElementById('fieldIndustry');
+  if (industrySelect) {
+    industrySelect.addEventListener('change', function() {
+      const wrap = document.getElementById('industryOtherWrap');
+      if (wrap) wrap.style.display = this.value === 'Other' ? '' : 'none';
+    });
+  }
+
+  // Form first-interaction tracking
+  const intakeForm = document.getElementById('intakeForm');
+  if (intakeForm) {
+    let formStarted = false;
+    intakeForm.addEventListener('focusin', function(e) {
+      if (!formStarted && e.target.tagName !== 'BUTTON') {
+        formStarted = true;
+        trackEvent('form_start', { field: e.target.id || e.target.name || 'unknown' });
+      }
+    });
+  }
+
+  // Scroll depth tracking
+  initScrollDepth();
+
+  // Scroll reveal
+  initScrollReveal();
+
+  // Page view
+  trackEvent('page_view', {
+    page: window.location.pathname,
+    referrer: document.referrer,
+    ref_code: refCode || null,
+    utm_source: utmSource || null
+  });
+});
+
+/* ═══════════════════════════════════════════
+   THEME
+═══════════════════════════════════════════ */
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('demos-theme', next);
+  document.getElementById('themeIcon').textContent = next === 'dark' ? '☽' : '☀';
+}
+
+/* ═══════════════════════════════════════════
+   COMING SOON NOTIFY
+═══════════════════════════════════════════ */
+function submitNotify(industry) {
+  const input = document.getElementById('notifyEmail' + industry.charAt(0).toUpperCase() + industry.slice(1));
+  const wrap = document.getElementById('notify' + industry.charAt(0).toUpperCase() + industry.slice(1));
+  if (!input || !input.value.trim()) {
+    showToast('Please enter your email');
+    return;
+  }
+  // Mock: store in localStorage
+  const key = 'demos-notify-' + industry;
+  const existing = JSON.parse(localStorage.getItem(key) || '[]');
+  existing.push({ email: input.value.trim(), ts: Date.now() });
+  localStorage.setItem(key, JSON.stringify(existing));
+
+  trackEvent('notify_signup', { industry, email_domain: input.value.split('@')[1] || '' });
+
+  wrap.innerHTML = '<div class="notify-confirm">✓ We\'ll let you know when it\'s ready!</div>';
+}
+
+/* ═══════════════════════════════════════════
+   INTAKE FORM
+═══════════════════════════════════════════ */
+async function submitIntake(e) {
+  e.preventDefault();
+  const errEl = document.getElementById('formError');
+  errEl.style.display = 'none';
+
+  const name = document.getElementById('fieldName').value.trim();
+  const email = document.getElementById('fieldEmail').value.trim();
+  const industryRaw = document.getElementById('fieldIndustry').value;
+  const industryOther = document.getElementById('fieldIndustryOther').value.trim();
+  const industry = industryRaw === 'Other' ? (industryOther || 'Other') : industryRaw;
+
+  if (!name) { showFormError('Please enter your name.'); return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFormError('Please enter a valid email address.'); return; }
+  if (!industry) { showFormError('Please select your industry.'); return; }
+
+  const challenges = [...document.querySelectorAll('input[name="challenge"]:checked')].map(el => el.value);
+  const services = [...document.querySelectorAll('input[name="service"]:checked')].map(el => el.value);
+
+  const refCode = document.getElementById('fieldRef').value.trim() || sessionStorage.getItem('demos-ref') || '';
+  const utmSource = sessionStorage.getItem('demos-utm-source') || '';
+
+  const payload = {
+    name,
+    email,
+    phone: document.getElementById('fieldPhone').value.trim(),
+    businessName: document.getElementById('fieldBusiness').value.trim(),
+    industry,
+    teamSize: document.getElementById('fieldTeamSize').value,
+    challenges,
+    servicesInterested: services,
+    additionalNotes: document.getElementById('fieldNotes').value.trim(),
+    referralCode: refCode,
+    source: window.location.href,
+    utmSource
+  };
+
+  const btn = document.getElementById('formSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  try {
+    const res = await fetch('/api/demos/inquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: AbortSignal.timeout(10000)
+    });
+    const data = await res.json();
+    if (data.success) {
+      trackEvent('form_submit', { industry, team_size: payload.teamSize, services_count: services.length });
+      document.getElementById('intakeForm').style.display = 'none';
+      const successEl = document.getElementById('formSuccess');
+      const nameEl = document.getElementById('formSuccessName');
+      if (nameEl) nameEl.textContent = 'Thanks, ' + escapeHtml(name.split(' ')[0]) + '!';
+      successEl.style.display = 'block';
+    } else {
+      showFormError(data.message || 'Something went wrong. Please email hello@krevio.dev directly.');
+      btn.disabled = false;
+      btn.textContent = 'Let\'s Talk →';
+    }
+  } catch (err) {
+    showFormError('Something went wrong. Please email hello@krevio.dev directly.');
+    btn.disabled = false;
+    btn.textContent = 'Let\'s Talk →';
+  }
+}
+
+function showFormError(msg) {
+  const el = document.getElementById('formError');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+/* ═══════════════════════════════════════════
+   REFERRAL COPY
+═══════════════════════════════════════════ */
+function copyReferralLink() {
+  const input = document.getElementById('referralLinkInput');
+  const text = 'https://' + (input ? input.value : 'krevio.dev/demos/?ref=YOUR_CODE');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast('Link copied!');
+      const refCode = new URLSearchParams(window.location.search).get('ref') || 'YOUR_CODE';
+      trackEvent('referral_copy', { ref_code: refCode });
+    });
+  } else {
+    showToast('Copy: ' + text);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   ANALYTICS
+═══════════════════════════════════════════ */
+function trackEvent(event, data) {
+  console.log('[Analytics]', event, data);
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon('/api/demos/inquiry', JSON.stringify({
+      type: 'event',
+      event,
+      data,
+      timestamp: new Date().toISOString(),
+      referrer: document.referrer,
+      ref: new URLSearchParams(window.location.search).get('ref') || null
+    }));
+  }
+}
+
+function initScrollDepth() {
+  const marks = [25, 50, 75, 100];
+  const fired = new Set();
+  window.addEventListener('scroll', function() {
+    const scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+    marks.forEach(m => {
+      if (scrolled >= m && !fired.has(m)) {
+        fired.add(m);
+        trackEvent('scroll_depth', { depth: m });
+      }
+    });
+  }, { passive: true });
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+function initScrollReveal() {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+
+/* ═══════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════ */
+function escapeHtml(str) {
+  const d = document.createElement('div');
+  d.textContent = String(str);
+  return d.innerHTML;
+}
+
+let toastTimer = null;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.remove('hide');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.add('hide'), 2000);
+}
+</script>
+</body>
+</html>

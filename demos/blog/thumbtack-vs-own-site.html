@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thumbtack vs Your Own AI-Powered Website: The Real Cost | Krevio</title>
+<meta name="description" content="Thumbtack charges $15-50 per lead. After a year, you've spent $4,000+ and own nothing. Here's the alternative.">
+<link rel="canonical" href="https://krevio.dev/demos/blog/thumbtack-vs-own-site.html">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script defer src="/_vercel/insights/script.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Thumbtack vs Your Own AI-Powered Website: The Real Cost",
+  "description": "Thumbtack charges $15-50 per lead. After a year, you've spent $4,000+ and own nothing. Here's the alternative.",
+  "author": {
+    "@type": "Person",
+    "name": "Krevio",
+    "url": "https://krevio.dev"
+  },
+  "datePublished": "2026-04-05",
+  "publisher": {
+    "@type": "Person",
+    "name": "Krevio"
+  },
+  "url": "https://krevio.dev/demos/blog/thumbtack-vs-own-site.html"
+}
+</script>
+
+<style>
+  :root {
+    --green: #22C55E;
+    --greenS: rgba(34,197,94,0.12);
+    --bg: #0A0F0D;
+    --bg1: #111A14;
+    --bg2: #172A1C;
+    --bg3: #1C3225;
+    --border: rgba(34,197,94,0.15);
+    --t0: #F0FDF4;
+    --t1: #BBF7D0;
+    --t2: #86EFAC;
+    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+    --red: #EF4444;
+    --redS: rgba(239,68,68,0.12);
+  }
+  [data-theme="light"] {
+    --green: #16A34A;
+    --greenS: rgba(22,163,74,0.10);
+    --bg: #F9FAFB;
+    --bg1: #FFFFFF;
+    --bg2: #F0FDF4;
+    --bg3: #DCFCE7;
+    --border: rgba(22,163,74,0.20);
+    --t0: #14532D;
+    --t1: #166534;
+    --t2: #15803D;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --red: #DC2626;
+    --redS: rgba(220,38,38,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--t0);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .blog-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .blog-nav a { font-size: 14px; font-weight: 500; color: var(--green); }
+  .blog-nav a:hover { text-decoration: underline; }
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--t1);
+  }
+
+  .blog-article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+
+  .blog-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .blog-meta span {
+    font-size: 13px;
+    color: var(--t2);
+    background: var(--greenS);
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.2;
+    color: var(--t0);
+    margin-bottom: 24px;
+  }
+
+  .blog-lede {
+    font-size: 1.15rem;
+    color: var(--t1);
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--t0);
+    margin: 40px 0 16px;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--t0);
+    margin: 28px 0 10px;
+  }
+
+  p { color: var(--t1); margin-bottom: 18px; }
+
+  ul, ol {
+    padding-left: 24px;
+    margin-bottom: 18px;
+    color: var(--t1);
+  }
+  li { margin-bottom: 8px; }
+
+  .highlight-box {
+    background: var(--greenS);
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    color: var(--t1);
+    font-size: 0.95rem;
+  }
+
+  .warning-box {
+    background: var(--redS);
+    border-left: 3px solid var(--red);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    color: var(--t1);
+    font-size: 0.95rem;
+  }
+
+  /* Comparison table */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-size: 14px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .comparison-table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    background: var(--bg2);
+    color: var(--t0);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .comparison-table th.col-us {
+    background: var(--greenS);
+    color: var(--green);
+  }
+  .comparison-table td {
+    padding: 14px 16px;
+    border-top: 1px solid var(--border);
+    color: var(--t1);
+  }
+  .comparison-table td.col-us {
+    background: var(--greenS);
+    color: var(--t0);
+    font-weight: 500;
+  }
+  .comparison-table tr:hover td {
+    background: rgba(34,197,94,0.04);
+  }
+  .comparison-table tr:hover td.col-us {
+    background: var(--greenS);
+  }
+  .check { color: var(--green); font-weight: 700; }
+  .cross { color: var(--red); }
+
+  /* Cost calc */
+  .cost-calc {
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin: 32px 0;
+  }
+  .cost-calc h3 { margin-top: 0; margin-bottom: 16px; }
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--t1);
+  }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-value { font-weight: 700; color: var(--t0); }
+  .cost-value.bad { color: var(--red); }
+  .cost-value.good { color: var(--green); }
+  .cost-total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 16px;
+    margin-top: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--t0);
+    border-top: 2px solid var(--border);
+  }
+
+  /* CTA */
+  .blog-cta {
+    background: linear-gradient(135deg, #052e16 0%, #14532d 50%, #166534 100%);
+    border-top: 1px solid var(--border);
+    padding: 64px 24px;
+    text-align: center;
+  }
+  [data-theme="light"] .blog-cta {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  }
+  .blog-cta h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    color: #F0FDF4;
+  }
+  [data-theme="light"] .blog-cta h3 { color: #14532d; }
+  .blog-cta p { color: #BBF7D0; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  [data-theme="light"] .blog-cta p { color: #166534; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--green);
+    color: #052e16;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 14px 32px;
+    border-radius: 10px;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); text-decoration: none; }
+
+  .blog-footer {
+    padding: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--t2);
+    border-top: 1px solid var(--border);
+    background: var(--bg1);
+  }
+  .blog-footer a { color: var(--green); }
+
+  @media (max-width: 600px) {
+    .blog-article { padding: 32px 16px 48px; }
+    .comparison-table { font-size: 12px; }
+    .comparison-table th, .comparison-table td { padding: 10px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <a href="/demos/">← Back to Demos</a>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">☀</button>
+</nav>
+
+<article class="blog-article">
+  <div class="blog-meta">
+    <span>April 2026</span>
+    <span>5 min read</span>
+  </div>
+
+  <h1>Thumbtack vs Your Own AI-Powered Website: The Real Cost</h1>
+
+  <p class="blog-lede">Thumbtack charges $15–50 per lead. After 12 months, you've spent $3,600–$6,000 — and you own nothing. No customer list. No website. No data. The moment you stop paying, you disappear. There's a better model.</p>
+
+  <h2>How Thumbtack Actually Works</h2>
+
+  <p>Thumbtack and similar platforms (Angi, HomeAdvisor) operate on a simple premise: they own the customer relationship, and they charge you to access it. Every time a homeowner submits a request, the platform sells that lead to multiple contractors at once.</p>
+
+  <p>You're not buying exclusivity. You're buying a shot. The customer gets 3–6 quotes, picks one, and the rest of you paid $15–50 for nothing.</p>
+
+  <div class="warning-box">
+    <strong>The fine print:</strong> Many lead platforms charge you for leads even if the customer never responds. You pay for the intro, not the job. Some contractors report closing rates as low as 15% on Thumbtack leads — meaning $300 in leads for every job won.
+  </div>
+
+  <h2>The Real Math Over 12 Months</h2>
+
+  <div class="cost-calc">
+    <h3>Thumbtack Annual Cost Estimate</h3>
+    <div class="cost-row">
+      <span>Average cost per lead</span>
+      <span class="cost-value bad">$35–45</span>
+    </div>
+    <div class="cost-row">
+      <span>Leads per month to stay competitive</span>
+      <span class="cost-value bad">8–12</span>
+    </div>
+    <div class="cost-row">
+      <span>Monthly spend</span>
+      <span class="cost-value bad">$300–540</span>
+    </div>
+    <div class="cost-row">
+      <span>Annual spend</span>
+      <span class="cost-value bad">$3,600–6,480</span>
+    </div>
+    <div class="cost-row">
+      <span>Leads you own after 12 months</span>
+      <span class="cost-value bad">0</span>
+    </div>
+    <div class="cost-row">
+      <span>Customer data you control</span>
+      <span class="cost-value bad">None</span>
+    </div>
+    <div class="cost-total">
+      <span>Total investment in rented leads</span>
+      <span class="bad">$3,600+ and nothing to show</span>
+    </div>
+  </div>
+
+  <div class="cost-calc">
+    <h3>AI-Powered Website — One-Time Cost</h3>
+    <div class="cost-row">
+      <span>Build cost (one time)</span>
+      <span class="cost-value good">$5,000</span>
+    </div>
+    <div class="cost-row">
+      <span>Monthly platform fees</span>
+      <span class="cost-value good">$0</span>
+    </div>
+    <div class="cost-row">
+      <span>Per-lead cost after launch</span>
+      <span class="cost-value good">$0</span>
+    </div>
+    <div class="cost-row">
+      <span>Customer data you own</span>
+      <span class="cost-value good">All of it</span>
+    </div>
+    <div class="cost-row">
+      <span>Break-even vs Thumbtack</span>
+      <span class="cost-value good">~14 months</span>
+    </div>
+    <div class="cost-total">
+      <span>After year 2</span>
+      <span class="good">$0/mo, unlimited leads you own</span>
+    </div>
+  </div>
+
+  <h2>Feature-for-Feature Comparison</h2>
+
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Thumbtack</th>
+        <th>Agency Website</th>
+        <th class="col-us">AI-Powered Site</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Monthly cost</td>
+        <td>$300+/mo</td>
+        <td>$0</td>
+        <td class="col-us">$0</td>
+      </tr>
+      <tr>
+        <td>Build time</td>
+        <td>N/A</td>
+        <td>8–16 weeks</td>
+        <td class="col-us">30 minutes</td>
+      </tr>
+      <tr>
+        <td>You own your leads</td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="check">✓</span></td>
+        <td class="col-us"><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>AI chatbot</td>
+        <td><span class="cross">✗</span></td>
+        <td>$5K extra</td>
+        <td class="col-us"><span class="check">✓ Built-in</span></td>
+      </tr>
+      <tr>
+        <td>GEO optimized</td>
+        <td><span class="cross">✗</span></td>
+        <td><span class="cross">✗</span></td>
+        <td class="col-us"><span class="check">✓</span></td>
+      </tr>
+      <tr>
+        <td>Per-lead fees</td>
+        <td>$15–50 each</td>
+        <td>$0</td>
+        <td class="col-us">$0</td>
+      </tr>
+      <tr>
+        <td>Customer follow-up</td>
+        <td><span class="cross">✗</span></td>
+        <td>Manual</td>
+        <td class="col-us"><span class="check">✓ AI-assisted</span></td>
+      </tr>
+      <tr>
+        <td>Owner dashboard</td>
+        <td>Basic</td>
+        <td><span class="cross">✗</span></td>
+        <td class="col-us"><span class="check">✓ Full analytics</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>The Hidden Cost of Competing Bids</h2>
+
+  <p>The most underappreciated cost of Thumbtack isn't the per-lead fee — it's the race to the bottom on price. When a homeowner is comparing 5 quotes, price becomes the main differentiator. Your quality, your reputation, and your 5-star reviews get buried.</p>
+
+  <p>An AI-powered website changes the dynamic. The homeowner finds you organically, reads your reviews, chats with your AI assistant, and books — all before you've said a word. You're not competing on price in a lead marketplace. You're the default choice.</p>
+
+  <div class="highlight-box">
+    <strong>The real value:</strong> When a customer comes through your own website, they've already decided to contact you specifically. Your close rate on owned leads is typically 3–5x higher than marketplace leads.
+  </div>
+
+  <h2>When Thumbtack Still Makes Sense</h2>
+
+  <p>To be fair: Thumbtack is useful when you're just starting out and need leads immediately while you build your reputation. It's a distribution channel, not a strategy.</p>
+
+  <p>The problem is most businesses stay on the platform long after they should have transitioned to owned channels. They keep paying because it works, without calculating what it's costing them or what they're not building.</p>
+
+  <p>The goal isn't to leave Thumbtack immediately. It's to have a plan for when you're ready to own your leads — and an AI-powered website is the fastest path to that.</p>
+
+  <h2>See the Comparison Live</h2>
+
+  <p>In our landscaping demo, the owner dashboard includes a live Thumbtack cost comparison. It shows what you'd spend over 12 months vs what an AI-powered website would cost — with your actual lead volume plugged in. It's the clearest way to see the math for your specific situation.</p>
+</article>
+
+<div class="blog-cta">
+  <h3>Want to see what this looks like for your business?</h3>
+  <p>Browse our landscaping demo — the owner dashboard includes a live Thumbtack cost comparison built right in.</p>
+  <a href="/demos/" class="btn-primary">Browse a Live Demo →</a>
+</div>
+
+<footer class="blog-footer">
+  <p>© 2026 <a href="/">Krevio</a> · AI-powered systems for local service businesses · <a href="/demos/">Browse Demos</a></p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('demos-theme', next);
+    document.querySelector('.theme-toggle').textContent = next === 'dark' ? '☀' : '🌙';
+  }
+  (function() {
+    const saved = localStorage.getItem('demos-theme');
+    if (saved) {
+      document.documentElement.setAttribute('data-theme', saved);
+      const btn = document.querySelector('.theme-toggle');
+      if (btn) btn.textContent = saved === 'dark' ? '☀' : '🌙';
+    }
+  })();
+</script>
+</body>
+</html>

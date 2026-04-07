@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is GEO? Why AI Search Engines Can't Find Your Business | Krevio</title>
+<meta name="description" content="Google isn't the only search engine anymore. ChatGPT, Gemini, and Perplexity are sending customers to businesses with the right signals.">
+<link rel="canonical" href="https://krevio.dev/demos/blog/what-is-geo.html">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script defer src="/_vercel/insights/script.js"></script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What is GEO? Why AI Search Engines Can't Find Your Business",
+  "description": "Google isn't the only search engine anymore. ChatGPT, Gemini, and Perplexity are sending customers to businesses with the right signals.",
+  "author": {
+    "@type": "Person",
+    "name": "Krevio",
+    "url": "https://krevio.dev"
+  },
+  "datePublished": "2026-04-05",
+  "publisher": {
+    "@type": "Person",
+    "name": "Krevio"
+  },
+  "url": "https://krevio.dev/demos/blog/what-is-geo.html"
+}
+</script>
+
+<style>
+  :root {
+    --green: #22C55E;
+    --greenS: rgba(34,197,94,0.12);
+    --bg: #0A0F0D;
+    --bg1: #111A14;
+    --bg2: #172A1C;
+    --bg3: #1C3225;
+    --border: rgba(34,197,94,0.15);
+    --t0: #F0FDF4;
+    --t1: #BBF7D0;
+    --t2: #86EFAC;
+    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+    --amber: #F59E0B;
+    --amberS: rgba(245,158,11,0.12);
+  }
+  [data-theme="light"] {
+    --green: #16A34A;
+    --greenS: rgba(22,163,74,0.10);
+    --bg: #F9FAFB;
+    --bg1: #FFFFFF;
+    --bg2: #F0FDF4;
+    --bg3: #DCFCE7;
+    --border: rgba(22,163,74,0.20);
+    --t0: #14532D;
+    --t1: #166534;
+    --t2: #15803D;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --amber: #D97706;
+    --amberS: rgba(217,119,6,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--t0);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .blog-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .blog-nav a { font-size: 14px; font-weight: 500; color: var(--green); }
+  .blog-nav a:hover { text-decoration: underline; }
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--t1);
+  }
+
+  .blog-article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+
+  .blog-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .blog-meta span {
+    font-size: 13px;
+    color: var(--t2);
+    background: var(--greenS);
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.2;
+    color: var(--t0);
+    margin-bottom: 24px;
+  }
+
+  .blog-lede {
+    font-size: 1.15rem;
+    color: var(--t1);
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--t0);
+    margin: 40px 0 16px;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--t0);
+    margin: 28px 0 10px;
+  }
+
+  p { color: var(--t1); margin-bottom: 18px; }
+
+  ul, ol {
+    padding-left: 24px;
+    margin-bottom: 18px;
+    color: var(--t1);
+  }
+  li { margin-bottom: 8px; }
+
+  .highlight-box {
+    background: var(--greenS);
+    border-left: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    color: var(--t1);
+    font-size: 0.95rem;
+  }
+
+  .amber-box {
+    background: var(--amberS);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    color: var(--t1);
+    font-size: 0.95rem;
+  }
+
+  /* SEO vs GEO comparison */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .two-col-card {
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .two-col-card.highlight {
+    border-color: var(--green);
+    background: var(--greenS);
+  }
+  .two-col-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--t2);
+    margin-bottom: 12px;
+  }
+  .two-col-card.highlight h4 { color: var(--green); }
+  .two-col-card p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--t1);
+  }
+
+  /* Signals checklist */
+  .signals-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .signals-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--t1);
+  }
+  .signals-list li:last-child { border-bottom: none; }
+  .sig-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .sig-icon.good { background: var(--greenS); }
+  .sig-icon.warn { background: var(--amberS); }
+  .sig-text strong { display: block; font-weight: 600; color: var(--t0); margin-bottom: 2px; }
+
+  .signals-card {
+    background: var(--bg1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+  }
+  .signals-card h3 { margin-top: 0; margin-bottom: 16px; }
+
+  /* CTA */
+  .blog-cta {
+    background: linear-gradient(135deg, #052e16 0%, #14532d 50%, #166534 100%);
+    border-top: 1px solid var(--border);
+    padding: 64px 24px;
+    text-align: center;
+  }
+  [data-theme="light"] .blog-cta {
+    background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  }
+  .blog-cta h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    color: #F0FDF4;
+  }
+  [data-theme="light"] .blog-cta h3 { color: #14532d; }
+  .blog-cta p { color: #BBF7D0; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  [data-theme="light"] .blog-cta p { color: #166534; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--green);
+    color: #052e16;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 14px 32px;
+    border-radius: 10px;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); text-decoration: none; }
+
+  .blog-footer {
+    padding: 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--t2);
+    border-top: 1px solid var(--border);
+    background: var(--bg1);
+  }
+  .blog-footer a { color: var(--green); }
+
+  @media (max-width: 600px) {
+    .blog-article { padding: 32px 16px 48px; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="blog-nav">
+  <a href="/demos/">← Back to Demos</a>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">☀</button>
+</nav>
+
+<article class="blog-article">
+  <div class="blog-meta">
+    <span>April 2026</span>
+    <span>5 min read</span>
+  </div>
+
+  <h1>What is GEO? Why AI Search Engines Can't Find Your Business</h1>
+
+  <p class="blog-lede">Google is no longer the only search engine that matters. When someone asks ChatGPT, Gemini, or Perplexity "find me a good landscaper near McKinney TX," those AI assistants pull from a completely different set of signals than Google does. Most local businesses are invisible to them.</p>
+
+  <h2>SEO vs GEO: What's the Difference?</h2>
+
+  <div class="two-col">
+    <div class="two-col-card">
+      <h4>Traditional SEO</h4>
+      <p>Optimizes for Google's ranking algorithm.</p>
+      <p>Focuses on: keywords, backlinks, page speed, meta tags.</p>
+      <p>Goal: rank on page 1 of Google search results.</p>
+      <p>Has been around 25+ years. Most businesses have some SEO.</p>
+    </div>
+    <div class="two-col-card highlight">
+      <h4>GEO — What's New</h4>
+      <p>Optimizes for AI assistants (ChatGPT, Gemini, Perplexity).</p>
+      <p>Focuses on: structured data, factual accuracy, E-E-A-T signals, content freshness.</p>
+      <p>Goal: get cited when someone asks an AI to find a business like yours.</p>
+      <p>Emerging now. Most businesses have zero GEO optimization.</p>
+    </div>
+  </div>
+
+  <p>The shift matters because AI-assisted search is growing fast. Younger homeowners in particular are skipping Google entirely and asking ChatGPT or Gemini for recommendations. If you're not visible to those engines, you're invisible to a growing slice of your potential customers.</p>
+
+  <h2>How AI Search Engines Decide Who to Recommend</h2>
+
+  <p>When ChatGPT or Perplexity answers a local search query, they're doing something different from Google. They're not ranking a list of links — they're synthesizing an answer. They might say "Based on reviews and online presence, Green Valley Landscaping in McKinney is highly regarded for lawn maintenance."</p>
+
+  <p>To do that, the AI needs to find and trust information about your business. Here's what it's looking for:</p>
+
+  <div class="signals-card">
+    <h3>What AI Search Engines Look For</h3>
+    <ul class="signals-list">
+      <li>
+        <div class="sig-icon good">🗂️</div>
+        <div class="sig-text">
+          <strong>Structured data (JSON-LD schema)</strong>
+          Machine-readable markup that tells AI your business name, address, phone, services, and hours with absolute certainty. Without this, AI has to guess.
+        </div>
+      </li>
+      <li>
+        <div class="sig-icon good">📍</div>
+        <div class="sig-text">
+          <strong>NAP consistency</strong>
+          Your Name, Address, and Phone number must be identical everywhere — your website, Google Business Profile, Yelp, Bing. Inconsistency = lower confidence in the AI's recommendation.
+        </div>
+      </li>
+      <li>
+        <div class="sig-icon good">⭐</div>
+        <div class="sig-text">
+          <strong>Reviews with responses</strong>
+          AI models weight businesses with recent, responded-to reviews more heavily. They signal active ownership and real customer relationships.
+        </div>
+      </li>
+      <li>
+        <div class="sig-icon good">📝</div>
+        <div class="sig-text">
+          <strong>Fresh, factual content</strong>
+          Blog posts, FAQ pages, and service descriptions that answer real questions help AI models understand what you do and cite you with confidence.
+        </div>
+      </li>
+      <li>
+        <div class="sig-icon warn">⚠️</div>
+        <div class="sig-text">
+          <strong>E-E-A-T signals (Experience, Expertise, Authoritativeness, Trust)</strong>
+          AI models give extra weight to businesses that demonstrate expertise. For a landscaper, that means detailed service pages, project photos, licensing info, and years in business.
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <h2>What Most Local Businesses Are Missing</h2>
+
+  <p>We've looked at hundreds of local service business websites in the DFW area. The pattern is consistent:</p>
+
+  <ul>
+    <li><strong>No JSON-LD schema markup</strong> — the most common and most fixable gap. AI can't reliably extract business info without it.</li>
+    <li><strong>Inconsistent NAP data</strong> — the phone number on the website doesn't match Google Maps, which doesn't match Yelp. Small inconsistencies, but they erode AI confidence.</li>
+    <li><strong>No FAQ content</strong> — homeowners ask questions like "how much does lawn maintenance cost in McKinney?" A website that answers these questions gets cited. A website that doesn't, doesn't.</li>
+    <li><strong>Stale content</strong> — a website last updated in 2021 with no new content signals to AI models that the business may no longer be active.</li>
+    <li><strong>No review response pattern</strong> — responding to reviews is a trust signal. Businesses that never respond to reviews look less legitimate to AI systems trained on human behavior patterns.</li>
+  </ul>
+
+  <div class="amber-box">
+    <strong>The opportunity:</strong> Because most local businesses have zero GEO optimization, getting the basics right puts you ahead of your entire local market. The bar is low. The early movers win by default.
+  </div>
+
+  <h2>GEO in Practice: What an Optimized Local Business Looks Like</h2>
+
+  <p>A GEO-optimized website for a local service business has a few non-negotiable elements:</p>
+
+  <ol>
+    <li><strong>JSON-LD LocalBusiness schema</strong> on every page — name, address, phone, geo coordinates, service area, opening hours, aggregate rating.</li>
+    <li><strong>FAQ schema</strong> on service pages — structured Q&A that AI models can extract directly.</li>
+    <li><strong>Service pages with specific content</strong> — not just "we do landscaping" but "lawn maintenance in McKinney TX starting at $X, weekly and bi-weekly plans."</li>
+    <li><strong>Fresh content calendar</strong> — even one new article per month keeps the AI models refreshing their understanding of your business.</li>
+    <li><strong>Google Business Profile fully populated</strong> — this is where many AI assistants pull local data first.</li>
+  </ol>
+
+  <div class="highlight-box">
+    <strong>The shift in one sentence:</strong> Traditional SEO makes you findable. GEO makes you recommendable. For a local service business, being recommended by an AI assistant when a homeowner asks for help is worth more than a page-2 Google ranking.
+  </div>
+
+  <h2>How We Build This In</h2>
+
+  <p>Every website we build includes GEO optimization from day one — not as an add-on. The JSON-LD schema is in the HTML. The service pages are structured for both human readers and AI parsing. The FAQ section answers the questions homeowners actually ask AI assistants.</p>
+
+  <p>We also built a GEO Score tracker into the owner dashboard so you can see, in real time, how your AI visibility compares to local competitors. It's one of the features in the demo below.</p>
+</article>
+
+<div class="blog-cta">
+  <h3>Want to see what this looks like for your business?</h3>
+  <p>Browse our landscaping demo — the owner dashboard includes a live GEO Score view showing exactly how AI search visibility is measured.</p>
+  <a href="/demos/" class="btn-primary">Browse a Live Demo →</a>
+</div>
+
+<footer class="blog-footer">
+  <p>© 2026 <a href="/">Krevio</a> · AI-powered systems for local service businesses · <a href="/demos/">Browse Demos</a></p>
+</footer>
+
+<script>
+  function toggleTheme() {
+    const html = document.documentElement;
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('demos-theme', next);
+    document.querySelector('.theme-toggle').textContent = next === 'dark' ? '☀' : '🌙';
+  }
+  (function() {
+    const saved = localStorage.getItem('demos-theme');
+    if (saved) {
+      document.documentElement.setAttribute('data-theme', saved);
+      const btn = document.querySelector('.theme-toggle');
+      if (btn) btn.textContent = saved === 'dark' ? '☀' : '🌙';
+    }
+  })();
+</script>
+</body>
+</html>
