@@ -878,8 +878,7 @@ body {
   .auto-metrics { grid-template-columns: repeat(2, 1fr); }
 
   /* --- Pipeline: horizontal scroll with hint --- */
-  .pipeline-wrap { -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; position: relative; }
-  .pipeline-wrap::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 40px; background: linear-gradient(to left, var(--bg), transparent); pointer-events: none; z-index: 1; }
+  .pipeline-wrap { -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
   .pipeline-board { min-width: 800px; }
 
   /* --- Platform grid: tighter on tablet --- */
