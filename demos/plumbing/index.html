@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -720,7 +720,7 @@ body {
 .filter-pill { padding: 6px 14px; background: var(--bg1); border: 1px solid var(--border); border-radius: 99px; font-size: 12px; font-weight: 500; color: var(--t1); cursor: pointer; transition: all 0.15s; }
 .filter-pill:hover { border-color: var(--accent); color: var(--accent); }
 .filter-pill.active { background: var(--accentS); border-color: var(--accent); color: var(--accent); font-weight: 600; }
-@media (max-width: 600px) { .filter-bar { flex-direction: column; } .filter-search-wrap { width: 100%; } }
+/* filter-bar responsive — see main responsive section below */
 
 /* ═══════════════════════════════════════════
    MONEY / REVENUE
@@ -759,15 +759,23 @@ body {
 .invoice-card-title { font-size: 14px; font-weight: 600; color: var(--t0); }
 .invoice-card-btn { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accentS); border: none; padding: 6px 14px; border-radius: 8px; cursor: pointer; }
 
+/* Summary grid column variants (used by Customers=4col, Money=5col) */
+.dispatch-summary.summary-4col { grid-template-columns: repeat(4, 1fr); }
+.dispatch-summary.summary-5col { grid-template-columns: repeat(5, 1fr); }
+
 /* ═══════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — TABLET (≤ 900px)
 ═══════════════════════════════════════════ */
 @media (max-width: 900px) {
-  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery-grid { grid-template-columns: 1fr; }
-  .reviews-grid { grid-template-columns: 1fr; }
-  .geo-layout { grid-template-columns: 1fr; }
+  /* --- Demo bar: hide non-essential items --- */
+  .demo-bar { padding: 0 10px; gap: 8px; }
+  .demo-bar-label { display: none; }
+  .demo-bar-back { display: none; }
+  .demo-bar-title { font-size: 11px; }
+  .demo-bar-btn { padding: 3px 8px; font-size: 10px; }
+  .demo-bar-theme { width: 26px; height: 26px; font-size: 12px; }
+
+  /* --- Owner Dashboard sidebar → mobile drawer --- */
   .od-sidebar {
     position: fixed; top: 40px; left: 0; bottom: 0; width: 260px; padding: 16px 12px;
     z-index: 200; transform: translateX(-100%); transition: transform 0.25s ease;
@@ -780,23 +788,219 @@ body {
   .od-hamburger { display: flex; }
   .od-sidebar-overlay { display: none; position: fixed; inset: 0; top: 40px; background: rgba(0,0,0,0.4); z-index: 199; }
   .od-sidebar-overlay.show { display: block; }
+
+  /* --- Hamburger: reposition so it doesn't overlap title --- */
+  .od-hamburger { top: 48px; left: 8px; }
   .od-main { padding: 16px; }
+  .od-main-header { padding-left: 44px; }
+
+  /* --- Customer View grids --- */
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
+
+  /* --- Dashboard metrics --- */
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* --- GEO layout --- */
+  .geo-layout { grid-template-columns: 1fr; }
+
+  /* --- Dispatch + summary variants --- */
   .dispatch-summary { grid-template-columns: repeat(3, 1fr); }
+  .dispatch-summary.summary-4col { grid-template-columns: repeat(2, 1fr); }
+  .dispatch-summary.summary-5col { grid-template-columns: repeat(3, 1fr); }
   .job-row { grid-template-columns: 70px 1fr; }
   .job-value { grid-column: 2; text-align: left; }
+
+  /* --- Customers --- */
   .customer-detail { padding: 12px; }
   .history-row { grid-template-columns: 1fr 1fr; }
   .history-date { grid-column: 1 / -1; font-size: 11px; }
   .customer-table .hide-mobile { display: none; }
+
+  /* --- Money --- */
   .revenue-bar-row { grid-template-columns: 100px 1fr auto; }
   .trend-bars { gap: 6px; height: 120px; }
+
+  /* --- Automation metrics --- */
+  .auto-metrics { grid-template-columns: repeat(2, 1fr); }
+
+  /* --- Pipeline: horizontal scroll with hint --- */
+  .pipeline-wrap { -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
+  .pipeline-board { min-width: 800px; }
+
+  /* --- Chatbot: wider on tablet --- */
+  .chat-window { width: 320px; right: 12px; bottom: 80px; }
+  .chat-bubble { bottom: 16px; right: 16px; }
 }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — PHONE (≤ 600px)
+═══════════════════════════════════════════ */
 @media (max-width: 600px) {
-  .metrics-grid { grid-template-columns: 1fr 1fr; }
-  .services-grid { grid-template-columns: 1fr; }
+  /* --- Demo bar: compact single row --- */
+  .demo-bar { height: 36px; padding: 0 8px; gap: 6px; }
+  .demo-bar-title .dot { width: 6px; height: 6px; }
+  .demo-bar-title { font-size: 10px; }
+  .lang-toggle { padding: 2px 6px; font-size: 11px; }
+  .demo-bar-toggle { padding: 1px; }
+  .demo-bar-btn { padding: 2px 6px; font-size: 10px; }
+  .demo-bar-theme { width: 24px; height: 24px; font-size: 11px; }
+
+  /* --- Customer View: Hero --- */
+  .cv-hero { padding: 60px 16px 48px; }
+  .cv-hero h1 { font-size: 1.7rem; }
+  .cv-hero-sub { font-size: 0.95rem; }
+  .cv-hero-pills { gap: 6px; }
+  .cv-hero-pill { font-size: 11px; padding: 4px 10px; }
+  .cv-hero-stats { gap: 16px; }
+  .cv-hero-stat-num { font-size: 1.4rem; }
+  .cv-hero-ctas { flex-direction: column; align-items: stretch; }
+  .btn-primary, .btn-outline { justify-content: center; padding: 12px 20px; font-size: 14px; }
+
+  /* --- Customer View: Sections --- */
+  .cv-section { padding: 40px 16px; }
+  .cv-section-title { font-size: 1.4rem; }
+
+  /* --- Customer View: Services --- */
+  .services-grid { grid-template-columns: 1fr; gap: 14px; }
+  .service-card { padding: 20px 18px; }
+
+  /* --- Customer View: Reviews --- */
+  .cv-reviews-bg { padding: 40px 0; }
+  .cv-reviews-inner { padding: 0 16px; }
+  .review-card { padding: 18px; }
+
+  /* --- Customer View: Booking --- */
+  .booking-card { padding: 24px 18px; margin: 24px auto 0; }
   .urgency-btns { grid-template-columns: 1fr; }
-  .dispatch-summary { grid-template-columns: repeat(2, 1fr); }
+
+  /* --- Customer View: Footer --- */
+  .cv-footer { padding: 32px 16px 24px; }
+  .cv-footer-contact { flex-direction: column; gap: 10px; align-items: center; }
+
+  /* --- Owner Dashboard --- */
+  .od-hamburger { top: 44px; }
+  .od-sidebar { top: 36px; }
+  .od-sidebar-overlay { top: 36px; }
+  .od-main { padding: 12px; }
+  .od-main-header { padding-left: 44px; margin-bottom: 16px; }
+  .od-main-title { font-size: 1.3rem; }
+  .od-main-sub { font-size: 0.8rem; }
+
+  /* --- Dashboard metrics: 2-col --- */
+  .metrics-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .metric-card { padding: 14px; }
+  .metric-value { font-size: 1.5rem; }
+  .metric-label { font-size: 10px; }
+
+  /* --- Platform comparison card --- */
+  .platform-card { padding: 16px; }
+  .platform-row { font-size: 12px; padding: 8px 0; }
+
+  /* --- Leads table: horizontal scroll --- */
+  .leads-card { padding: 14px; overflow-x: auto; }
+  .leads-table { min-width: 500px; }
+
+  /* --- Filter bar: horizontal scroll for pills --- */
+  .filter-bar { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 8px; padding-bottom: 4px; }
+  .filter-bar::-webkit-scrollbar { display: none; }
+  .filter-search-wrap { min-width: 160px; flex-shrink: 0; }
+  .filter-select { flex-shrink: 0; }
+  .filter-pill { flex-shrink: 0; white-space: nowrap; }
+
+  /* --- Dispatch + summary variants --- */
+  .dispatch-summary, .dispatch-summary.summary-4col, .dispatch-summary.summary-5col { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .dispatch-stat { padding: 10px; }
+  .dispatch-stat-value { font-size: 18px; }
+  .dispatch-stat-label { font-size: 10px; }
+  .tech-card-header { padding: 10px 12px; }
+  .job-row { grid-template-columns: 60px 1fr; gap: 6px; padding: 10px 12px; }
+  .job-time { font-size: 12px; }
+  .job-service { font-size: 12px; }
+
+  /* --- Pipeline: scroll hint --- */
+  .pipeline-wrap { margin: 0 -12px; padding: 0 12px; }
+  .pipeline-board { min-width: 700px; gap: 10px; }
+  .pipeline-col { min-width: 150px; }
+
+  /* --- Customers --- */
+  .customer-table { font-size: 12px; }
+  .customer-table th { padding: 8px 8px; font-size: 10px; }
+  .customer-table td { padding: 10px 8px; }
+  .customer-detail { padding: 10px; }
+  .customer-contact { gap: 10px; font-size: 12px; flex-direction: column; }
+  .history-row { grid-template-columns: 1fr; gap: 2px; font-size: 12px; }
+  .history-date { font-size: 11px; color: var(--t2); }
+  .history-amount { text-align: left; }
+
+  /* --- Money --- */
+  .revenue-bar-row { grid-template-columns: 80px 1fr auto; gap: 8px; }
+  .revenue-bar-label { font-size: 11px; }
+  .revenue-bar-amount { font-size: 11px; }
+  .revenue-bar-track { height: 18px; }
+  .trend-bars { gap: 4px; height: 100px; }
+  .trend-bar-amount { font-size: 10px; }
+  .trend-bar-label { font-size: 10px; }
+  .invoice-card { overflow-x: auto; }
+  .invoice-table { min-width: 480px; }
+  .invoice-table th, .invoice-table td { padding: 8px; font-size: 12px; }
+
+  /* --- Automation --- */
+  .auto-metrics { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .auto-metric-card { padding: 12px; }
+  .auto-metric-value { font-size: 18px; }
+  .auto-metric-label { font-size: 11px; }
+  .campaign-card { padding: 12px; }
+  .campaign-stats { font-size: 11px; }
+  .missed-call-item { font-size: 12px; flex-wrap: wrap; }
+  .auto-msg-table { font-size: 12px; }
+  .auto-msg-table th, .auto-msg-table td { padding: 5px 6px; }
+
+  /* --- GEO --- */
+  .geo-gauge-card { padding: 20px 16px; }
+  .geo-recs-card { padding: 16px; }
+  .geo-rec-text { font-size: 12px; }
+
+  /* --- Knowledge Base --- */
+  .kb-card { padding: 16px; }
+  .kb-q { font-size: 12px; }
+  .kb-a { font-size: 12px; }
+
+  /* --- Chatbot: full-width on phone --- */
+  .chat-window { width: calc(100vw - 24px); right: 12px; bottom: 72px; height: 420px; }
+  .chat-bubble { width: 46px; height: 46px; font-size: 20px; bottom: 12px; right: 12px; }
+
+  /* --- AI summary --- */
+  .ai-summary-card { padding: 16px; }
+  .ai-summary-text { font-size: 12px; }
+
+  /* --- Follow-ups --- */
+  .followups-card { padding: 16px; }
+  .followup-item { gap: 10px; }
+  .followup-avatar { width: 32px; height: 32px; font-size: 13px; }
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — SMALL PHONE (≤ 375px)
+═══════════════════════════════════════════ */
+@media (max-width: 375px) {
+  .cv-hero { padding: 52px 12px 40px; }
+  .cv-hero h1 { font-size: 1.5rem; }
+  .cv-hero-stats { gap: 12px; }
+  .cv-hero-stat-num { font-size: 1.2rem; }
+  .cv-section { padding: 32px 12px; }
+  .od-main { padding: 10px; }
+  .od-main-header { padding-left: 40px; }
+  .metrics-grid { gap: 8px; }
+  .metric-card { padding: 12px; }
+  .metric-value { font-size: 1.3rem; }
+  .dispatch-summary { gap: 6px; }
+  .dispatch-stat { padding: 8px; }
+  .dispatch-stat-value { font-size: 16px; }
+  .booking-card { padding: 18px 14px; }
+  .chat-window { height: 380px; }
 }
 </style>
 </head>
@@ -2003,7 +2207,7 @@ function renderCustomers() {
   const s = d.summary;
 
   const summaryHtml = `
-    <div class="dispatch-summary" style="grid-template-columns:repeat(4,1fr);">
+    <div class="dispatch-summary summary-4col">
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.total)}</div><div class="dispatch-stat-label">Total Customers</div></div>
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.active)}</div><div class="dispatch-stat-label">Active (30 days)</div></div>
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.avgLifetimeValue)}</div><div class="dispatch-stat-label">Avg Lifetime Value</div></div>
@@ -2136,7 +2340,7 @@ function renderMoney() {
   const s = d.summary;
 
   const summaryHtml = `
-    <div class="dispatch-summary" style="grid-template-columns:repeat(5,1fr);">
+    <div class="dispatch-summary summary-5col">
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.mtdRevenue)}</div><div class="dispatch-stat-label">Revenue (MTD)</div></div>
       <div class="dispatch-stat"><div class="dispatch-stat-value" style="color:var(--green)">${escapeHtml(s.mtdTrend)} ↑</div><div class="dispatch-stat-label">Trend</div></div>
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.outstandingInvoices)}${' <span class="dispatch-stat-dot" style="background:var(--amber)"></span>'}</div><div class="dispatch-stat-label">Outstanding</div></div>
@@ -2436,7 +2640,7 @@ function showToast(msg) {
     document.documentElement.setAttribute('data-theme', saved);
     updateThemeBtn(saved);
   } else {
-    updateThemeBtn('dark');
+    updateThemeBtn('light');
   }
 
   // Restore language
