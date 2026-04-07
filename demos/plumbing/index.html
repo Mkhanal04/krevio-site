@@ -696,6 +696,25 @@ body {
 
 .customer-next { margin-top: 12px; padding: 8px 12px; background: var(--accentS); border-radius: 8px; font-size: 13px; color: var(--accent); font-weight: 500; }
 
+/* Shared expandable row pattern — any clickable row with detail view */
+.expand-chevron { color: var(--t3); font-size: 12px; transition: transform 0.2s; display: inline-block; }
+.expanded .expand-chevron { transform: rotate(90deg); color: var(--accent); }
+.expand-hint { font-size: 11px; color: var(--t3); font-weight: 400; margin-left: 8px; opacity: 0; transition: opacity 0.15s; }
+.customer-row:hover .expand-hint { opacity: 1; }
+
+/* Shared filter toolbar — used across Customers, Pipeline, Dispatch */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; align-items: center; }
+.filter-search { flex: 1; min-width: 180px; padding: 9px 12px 9px 34px; background: var(--bg1); border: 1px solid var(--border); border-radius: 8px; color: var(--t0); font-size: 13px; }
+.filter-search:focus { outline: none; border-color: var(--accent); }
+.filter-search-wrap { position: relative; flex: 1; min-width: 180px; }
+.filter-search-wrap::before { content: '🔍'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; }
+.filter-select { padding: 9px 12px; background: var(--bg1); border: 1px solid var(--border); border-radius: 8px; color: var(--t0); font-size: 13px; cursor: pointer; appearance: none; -webkit-appearance: none; padding-right: 28px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2371717a'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+.filter-select:focus { outline: none; border-color: var(--accent); }
+.filter-pill { padding: 6px 14px; background: var(--bg1); border: 1px solid var(--border); border-radius: 99px; font-size: 12px; font-weight: 500; color: var(--t1); cursor: pointer; transition: all 0.15s; }
+.filter-pill:hover { border-color: var(--accent); color: var(--accent); }
+.filter-pill.active { background: var(--accentS); border-color: var(--accent); color: var(--accent); font-weight: 600; }
+@media (max-width: 600px) { .filter-bar { flex-direction: column; } .filter-search-wrap { width: 100%; } }
+
 /* ═══════════════════════════════════════════
    MONEY / REVENUE
 ═══════════════════════════════════════════ */
@@ -956,7 +975,7 @@ body {
       <div class="cv-footer-contact-item">🕐 24/7 Emergency</div>
     </div>
     <p class="cv-footer-credit">Built by <a href="/">Krevio</a> · AI-powered systems for local businesses</p>
-    <p class="cv-footer-referral">Know a business owner who needs this? <a href="/demos/#referral">Learn about our referral program →</a></p>
+    <p class="cv-footer-referral">Know a business owner who needs this? <a href="/">Get a free AI demo for your business →</a></p>
   </footer>
 
 </div><!-- /customer-view -->
@@ -1159,17 +1178,17 @@ const DATA = {
   geo: {
     overall: 55,
     categories: [
-      { name: 'Schema Markup', score: 70, icon: '🏷️', desc: 'Structured data for AI search engines' },
-      { name: 'NAP Consistency', score: 38, icon: '📍', desc: 'Business info across Google, Yelp, Angi, BBB' },
-      { name: 'Review Signals', score: 75, icon: '⭐', desc: 'Volume, recency, and response rate' },
-      { name: 'Content Authority', score: 30, icon: '📝', desc: 'Service pages, FAQ depth, area pages' },
-      { name: 'Platform Coverage', score: 62, icon: '🌐', desc: 'Google Business, Yelp, Angi, NextDoor, BBB' }
+      { name: 'AI Search Readiness', score: 70, icon: '🏷️', desc: 'How well AI assistants can find and recommend you' },
+      { name: 'Business Info Accuracy', score: 38, icon: '📍', desc: 'Is your name, address & phone the same everywhere?' },
+      { name: 'Review Strength', score: 75, icon: '⭐', desc: 'How many reviews, how recent, and your response rate' },
+      { name: 'Website Content Depth', score: 30, icon: '📝', desc: 'Service pages, FAQs, and city-specific pages' },
+      { name: 'Online Presence', score: 62, icon: '🌐', desc: 'Google Business, Yelp, Angi, NextDoor, BBB' }
     ],
     recommendations: [
-      { priority: 'p1', text: 'Fix NAP: listed as "Lone Star Plumbing LLC" on Yelp but "Lone Star Plumbing" on Google. AI search engines flag inconsistencies.' },
-      { priority: 'p1', text: 'No service area pages. Create pages for each city: "Plumber in Richardson TX", "Emergency Plumber Plano TX".' },
-      { priority: 'p2', text: 'Only 3 reviews in last 30 days. Ask recent customers for Google reviews — aim for 5+/month.' },
-      { priority: 'p3', text: 'Add FAQ schema: "How much does a water heater cost?", "How fast can a plumber get here?"' }
+      { priority: 'p1', text: 'Fix your business name: listed as "Lone Star Plumbing LLC" on Yelp but "Lone Star Plumbing" on Google. AI assistants get confused by mismatches.' },
+      { priority: 'p1', text: 'No city-specific pages. Create pages like "Plumber in Richardson TX" and "Emergency Plumber Plano TX" so AI recommends you locally.' },
+      { priority: 'p2', text: 'Only 3 reviews in last 30 days. Text recent customers a Google review link — aim for 5+/month.' },
+      { priority: 'p3', text: 'Add common questions to your website: "How much does a water heater cost?", "How fast can a plumber get here?" — AI assistants pull from these.' }
     ]
   },
   faqs: [
@@ -1669,6 +1688,20 @@ function renderPipeline() {
   if (!el || el.dataset.rendered) return;
   el.dataset.rendered = '1';
 
+  const filterBar = `
+    <div class="filter-bar" style="margin-bottom:12px;">
+      <div class="filter-pill active" onclick="setPipelineFilter(this,'week')">This Week</div>
+      <div class="filter-pill" onclick="setPipelineFilter(this,'month')">This Month</div>
+      <div class="filter-pill" onclick="setPipelineFilter(this,'all')">All Time</div>
+      <select class="filter-select" style="margin-left:auto;" onchange="">
+        <option>All Services</option>
+        <option>Emergency</option>
+        <option>Water Heater</option>
+        <option>Drain Cleaning</option>
+        <option>Repiping</option>
+      </select>
+    </div>`;
+
   const board = `
     <div class="pipeline-board">
       ${DATA.pipelineCols.map(col => {
@@ -1695,7 +1728,14 @@ function renderPipeline() {
       }).join('')}
     </div>
   `;
-  el.innerHTML = board;
+  el.innerHTML = filterBar + board;
+}
+
+function setPipelineFilter(btn, range) {
+  btn.parentElement.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  // Demo: show toast to indicate filter applied
+  showToast('Showing ' + (range === 'all' ? 'all jobs' : range === 'month' ? 'this month' : 'this week'));
 }
 
 function renderGeo() {
@@ -1822,6 +1862,16 @@ function renderDispatch() {
 
   const statusColors = { 'in-progress': 'var(--green)', 'scheduled': 'var(--amber)', 'complete': 'var(--t2)' };
 
+  const dispatchFilterHtml = `
+    <div class="filter-bar">
+      <div class="filter-search-wrap"><input class="filter-search" placeholder="Search jobs or techs..." oninput="filterDispatch(this.value)"></div>
+      <select class="filter-select" id="dispatchTechFilter" onchange="filterDispatchTech(this.value)">
+        <option value="all">All Technicians</option>
+        ${d.techs.map(t => `<option value="${escapeHtml(t.name)}">${escapeHtml(t.name)}</option>`).join('')}
+      </select>
+      <div class="filter-pill active" onclick="toggleDispatchEmergency(this)" id="dispatchEmergencyPill">🚨 Emergencies First</div>
+    </div>`;
+
   const summaryHtml = `
     <div class="dispatch-summary">
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.totalJobs)}</div><div class="dispatch-stat-label">Total Jobs</div></div>
@@ -1887,7 +1937,39 @@ function renderDispatch() {
       `).join('')}
     </div>` : '';
 
-  el.innerHTML = summaryHtml + techsHtml + unassignedHtml;
+  el.innerHTML = dispatchFilterHtml + summaryHtml + techsHtml + unassignedHtml;
+}
+
+function filterDispatch(query) {
+  const q = query.toLowerCase();
+  document.querySelectorAll('.tech-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = !q || text.includes(q) ? '' : 'none';
+  });
+}
+
+function filterDispatchTech(name) {
+  document.querySelectorAll('.tech-card').forEach(card => {
+    const cardName = card.querySelector('.tech-name').textContent;
+    card.style.display = name === 'all' || cardName === name ? '' : 'none';
+  });
+}
+
+function toggleDispatchEmergency(btn) {
+  btn.classList.toggle('active');
+  const isActive = btn.classList.contains('active');
+  if (isActive) {
+    // Move emergency cards to top by reordering DOM
+    const container = document.getElementById('dispatchContent');
+    const cards = [...container.querySelectorAll('.tech-card')];
+    const hasEmergency = cards.filter(c => c.querySelector('.emergency'));
+    const noEmergency = cards.filter(c => !c.querySelector('.emergency'));
+    const parent = cards[0]?.parentElement;
+    if (parent) {
+      hasEmergency.forEach(c => parent.insertBefore(c, parent.querySelector('.tech-card')));
+    }
+  }
+  showToast(isActive ? 'Emergency jobs shown first' : 'Default order');
 }
 
 /* ═══════════════════════════════════════════
@@ -1908,14 +1990,34 @@ function renderCustomers() {
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.repeatRate)}</div><div class="dispatch-stat-label">Repeat Rate</div></div>
     </div>`;
 
+  const filterHtml = `
+    <div class="filter-bar">
+      <div class="filter-search-wrap"><input class="filter-search" id="custSearch" placeholder="Search customers..." oninput="filterCustomers()"></div>
+      <select class="filter-select" id="custStatusFilter" onchange="filterCustomers()">
+        <option value="all">All Statuses</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+        <option value="dormant">Dormant</option>
+      </select>
+      <select class="filter-select" id="custServiceFilter" onchange="filterCustomers()">
+        <option value="all">All Services</option>
+        <option value="water heater">Water Heater</option>
+        <option value="drain">Drain Cleaning</option>
+        <option value="emergency">Emergency</option>
+        <option value="sewer">Sewer / Camera</option>
+        <option value="fixture">Fixture Install</option>
+        <option value="repiping">Repiping</option>
+      </select>
+    </div>`;
+
   const ltvNum = v => parseInt(v.replace(/[^0-9]/g, ''), 10);
 
   const tableRows = d.list.map((c, i) => {
     const ltvStyle = ltvNum(c.ltv) >= 1000 ? 'font-weight:600;color:var(--accent)' : '';
     const langBadge = c.language === 'es' ? ' <span class="lang-badge">ES 🇲🇽</span>' : '';
     return `
-      <tr class="customer-row" id="cust-row-${i}" onclick="toggleCustomerDetail(${i})">
-        <td><div style="display:flex;align-items:center;gap:8px;"><div class="tech-avatar" style="width:28px;height:28px;font-size:11px;">${escapeHtml(c.initials)}</div><span>${escapeHtml(c.name)}${langBadge}</span></div></td>
+      <tr class="customer-row" id="cust-row-${i}" onclick="toggleCustomerDetail(${i})" title="Click to see details">
+        <td><div style="display:flex;align-items:center;gap:8px;"><span class="expand-chevron" id="cust-chevron-${i}">▸</span><div class="tech-avatar" style="width:28px;height:28px;font-size:11px;">${escapeHtml(c.initials)}</div><span>${escapeHtml(c.name)}${langBadge}</span><span class="expand-hint">click to expand</span></div></td>
         <td class="hide-mobile">${escapeHtml(c.location)}</td>
         <td class="hide-mobile">${escapeHtml(c.jobs)}</td>
         <td style="${ltvStyle}">${escapeHtml(c.ltv)}</td>
@@ -1964,7 +2066,27 @@ function renderCustomers() {
       </div>
     </div>`;
 
-  el.innerHTML = summaryHtml + tableHtml;
+  el.innerHTML = summaryHtml + filterHtml + tableHtml;
+}
+
+function filterCustomers() {
+  const search = (document.getElementById('custSearch').value || '').toLowerCase();
+  const status = document.getElementById('custStatusFilter').value;
+  const service = document.getElementById('custServiceFilter').value;
+  const rows = document.querySelectorAll('.customer-row');
+  rows.forEach((row, i) => {
+    const c = DATA.customers.list[i];
+    if (!c) return;
+    const matchSearch = !search || c.name.toLowerCase().includes(search) || c.location.toLowerCase().includes(search) || c.phone.includes(search);
+    const matchStatus = status === 'all' || c.status === status;
+    const matchService = service === 'all' || c.history.some(h => h.service.toLowerCase().includes(service));
+    const show = matchSearch && matchStatus && matchService;
+    row.style.display = show ? '' : 'none';
+    const detail = document.getElementById('cust-detail-' + i);
+    if (detail && !show) { detail.classList.remove('show'); row.classList.remove('expanded'); }
+    // Also hide the detail <tr>
+    if (row.nextElementSibling) row.nextElementSibling.style.display = show ? '' : 'none';
+  });
 }
 
 function toggleCustomerDetail(id) {
@@ -1974,9 +2096,12 @@ function toggleCustomerDetail(id) {
   const isOpen = detail.classList.contains('show');
   document.querySelectorAll('.customer-detail.show').forEach(d => d.classList.remove('show'));
   document.querySelectorAll('.customer-row.expanded').forEach(r => r.classList.remove('expanded'));
+  document.querySelectorAll('.expand-chevron').forEach(c => { c.textContent = '▸'; });
   if (!isOpen) {
     detail.classList.add('show');
     row.classList.add('expanded');
+    const chevron = document.getElementById('cust-chevron-' + id);
+    if (chevron) chevron.textContent = '▾';
   }
 }
 
