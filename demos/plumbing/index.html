@@ -903,11 +903,10 @@ body {
   .leads-card { padding: 14px; overflow-x: auto; }
   .leads-table { min-width: 500px; }
 
-  /* --- Filter bar: horizontal scroll for pills --- */
-  .filter-bar { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 8px; padding-bottom: 4px; }
-  .filter-bar::-webkit-scrollbar { display: none; }
-  .filter-search-wrap { min-width: 160px; flex-shrink: 0; }
-  .filter-select { flex-shrink: 0; }
+  /* --- Filter bar: wrap search+selects, scroll pills --- */
+  .filter-bar { flex-wrap: wrap; gap: 8px; }
+  .filter-search-wrap { flex: 1 1 100%; min-width: 0; }
+  .filter-select { flex: 1 1 calc(50% - 4px); min-width: 0; font-size: 12px; padding: 8px 10px; padding-right: 24px; }
   .filter-pill { flex-shrink: 0; white-space: nowrap; }
 
   /* --- Dispatch + summary variants --- */
