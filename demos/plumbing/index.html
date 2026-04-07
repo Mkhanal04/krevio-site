@@ -101,9 +101,11 @@ a { text-decoration: none; color: inherit; }
   --t0: #18181B; --t1: #3F3F46; --t2: #71717A; --t3: #D4D4D8;
   --accent: #0891B2; --accentS: rgba(8,145,178,0.06); --accentB: rgba(8,145,178,0.14);
   --amber: #CA8A04; --amberS: rgba(202,138,4,0.06); --amberB: rgba(202,138,4,0.14);
-  --red: #DC2626; --redS: rgba(220,38,38,0.06);
+  --red: #DC2626; --redS: rgba(220,38,38,0.06); --redB: rgba(220,38,38,0.14);
   --green: #16A34A; --greenS: rgba(22,163,74,0.06); --greenB: rgba(22,163,74,0.14);
-  --blue: #2563EB; --blueS: rgba(37,99,235,0.06);
+  --blue: #2563EB; --blueS: rgba(37,99,235,0.06); --blueB: rgba(37,99,235,0.14);
+  --overlay: rgba(0,0,0,0.4);
+  --hero-text: #FFFFFF; --hero-text-muted: rgba(255,255,255,0.65); --star-color: #FCD34D;
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
   --shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
@@ -119,9 +121,11 @@ a { text-decoration: none; color: inherit; }
   --t0: #F4F4F5; --t1: #D4D4D8; --t2: #A1A1AA; --t3: #3F3F46;
   --accent: #22D3EE; --accentS: rgba(34,211,238,0.08); --accentB: rgba(34,211,238,0.18);
   --amber: #EAB308; --amberS: rgba(234,179,8,0.08); --amberB: rgba(234,179,8,0.18);
-  --red: #F87171; --redS: rgba(248,113,113,0.08);
+  --red: #F87171; --redS: rgba(248,113,113,0.08); --redB: rgba(248,113,113,0.18);
   --green: #22C55E; --greenS: rgba(34,197,94,0.08); --greenB: rgba(34,197,94,0.18);
-  --blue: #3B82F6; --blueS: rgba(59,130,246,0.08);
+  --blue: #3B82F6; --blueS: rgba(59,130,246,0.08); --blueB: rgba(59,130,246,0.18);
+  --overlay: rgba(0,0,0,0.5);
+  --hero-text: #FFFFFF; --hero-text-muted: rgba(255,255,255,0.65); --star-color: #FCD34D;
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
   --shadow-lg: 0 12px 32px rgba(0,0,0,0.4);
@@ -162,7 +166,7 @@ body {
 .demo-bar-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
 .demo-bar-spacer { flex: 1; }
 .demo-bar-toggle { display: flex; background: var(--bg2); border-radius: 6px; padding: 2px; gap: 1px; }
-.demo-bar-btn { padding: 3px 12px; border-radius: 4px; font-size: 11px; font-weight: 500; border: none; cursor: pointer; background: transparent; color: var(--t2); transition: all 0.15s; }
+.demo-bar-btn { padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 500; border: none; cursor: pointer; background: transparent; color: var(--t2); transition: all 0.15s; min-height: 32px; }
 .demo-bar-btn.active { background: var(--bg1); color: var(--t0); box-shadow: var(--shadow-sm); }
 .demo-bar-theme { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg2); color: var(--t1); font-size: 14px; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
 .demo-bar-theme:hover { background: var(--bg3); }
@@ -178,7 +182,7 @@ body {
   background: var(--hero-bg);
   padding: 80px 24px 72px;
   text-align: center;
-  color: white;
+  color: var(--hero-text);
   position: relative; overflow: hidden;
 }
 .cv-hero::before {
@@ -193,13 +197,13 @@ body {
   border-radius: 20px; padding: 4px 14px; font-size: 13px; font-weight: 500;
   margin-bottom: 24px; color: rgba(255,255,255,0.9);
 }
-.cv-hero-badge .stars { color: #FCD34D; letter-spacing: 1px; }
+.cv-hero-badge .stars { color: var(--star-color); letter-spacing: 1px; }
 .cv-hero h1 {
   font-family: 'DM Serif Display', serif;
   font-size: clamp(2.2rem, 5vw, 3.4rem);
-  line-height: 1.1; margin-bottom: 16px; color: white;
+  line-height: 1.1; margin-bottom: 16px; color: var(--hero-text);
 }
-.cv-hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.75); margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
+.cv-hero-sub { font-size: 1.1rem; color: var(--hero-text-muted); margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
 .cv-hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .btn-primary {
   padding: 12px 28px; background: white; color: #134E4A;
@@ -219,8 +223,8 @@ body {
 .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
 .cv-hero-stats { display: flex; gap: 32px; justify-content: center; margin-top: 48px; flex-wrap: wrap; }
 .cv-hero-stat { text-align: center; }
-.cv-hero-stat-num { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: white; }
-.cv-hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.6); }
+.cv-hero-stat-num { font-family: 'DM Serif Display', serif; font-size: 1.8rem; color: var(--hero-text); }
+.cv-hero-stat-label { font-size: 12px; color: var(--hero-text-muted); }
 /* Hero trust pills */
 .cv-hero-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
 .cv-hero-pill {
@@ -245,7 +249,7 @@ body {
 .service-card { background: var(--bg); box-shadow: var(--shadow-sm); border-radius: 16px; padding: 28px 24px; transition: box-shadow 0.25s, transform 0.25s; }
 .service-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
 .service-icon { font-size: 2rem; margin-bottom: 16px; }
-.service-name { font-weight: 700; font-size: 1.05rem; color: var(--t0); margin-bottom: 8px; }
+.service-name { font-weight: 700; font-size: 1rem; color: var(--t0); margin-bottom: 8px; }
 .service-desc { font-size: 0.9rem; color: var(--t2); margin-bottom: 16px; line-height: 1.5; }
 .service-price {
   display: inline-flex; align-items: center; gap: 6px;
@@ -284,7 +288,7 @@ body {
 .gallery-ba-desc { font-size: 11px; color: var(--t2); text-align: center; padding: 0 8px; line-height: 1.3; }
 .gallery-info { padding: 18px 20px; }
 .gallery-job { font-weight: 700; font-size: 0.9rem; color: var(--t0); margin-bottom: 4px; }
-.gallery-location { font-size: 0.8rem; color: var(--t2); }
+.gallery-location { font-size: 0.85rem; color: var(--t2); }
 
 /* ═══════════════════════════════════════════
    CUSTOMER VIEW — REVIEWS
@@ -304,7 +308,7 @@ body {
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 16px; padding: 24px;
 }
-.review-stars { color: #FCD34D; font-size: 14px; letter-spacing: 2px; margin-bottom: 12px; }
+.review-stars { color: var(--star-color); font-size: 14px; letter-spacing: 2px; margin-bottom: 12px; }
 .review-text { font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 16px; font-style: italic; }
 .review-author { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.9); }
 
@@ -346,7 +350,7 @@ body {
 .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--accent); }
 .form-textarea { min-height: 90px; resize: vertical; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.form-submit { width: 100%; padding: 14px; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.15s; margin-top: 8px; }
+.form-submit { width: 100%; padding: 14px; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.15s; margin-top: 8px; }
 .form-submit.emergency-submit { background: var(--red); color: white; }
 .form-submit.emergency-submit:hover { opacity: 0.88; transform: translateY(-1px); }
 .form-submit.schedule-submit { background: var(--accent); color: white; }
@@ -452,14 +456,14 @@ body {
 .followups-dormant { font-size: 12px; color: var(--amber); font-weight: 600; }
 .followup-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
 .followup-item:last-child { border-bottom: none; }
-.followup-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--accentS); border: 2px solid var(--accentB); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+.followup-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--accentS); border: 2px solid var(--accentB); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: var(--accent); flex-shrink: 0; }
 .followup-info { flex: 1; min-width: 0; }
 .followup-name { font-size: 13px; font-weight: 600; color: var(--t0); }
 .followup-meta { font-size: 12px; color: var(--t2); margin-top: 2px; }
 .followup-suggestion { font-size: 12px; color: var(--t1); margin-top: 4px; background: var(--accentS); border-radius: 6px; padding: 4px 8px; display: inline-block; }
 .followup-value { font-size: 12px; font-weight: 600; color: var(--accent); white-space: nowrap; }
 .followup-actions { display: flex; gap: 6px; margin-top: 8px; }
-.followup-btn { font-size: 11px; padding: 3px 10px; border-radius: 5px; border: 1px solid var(--border); background: var(--bg2); color: var(--t1); cursor: pointer; }
+.followup-btn { font-size: 11px; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg2); color: var(--t1); cursor: pointer; min-height: 36px; }
 .followup-btn:hover { border-color: var(--accent); color: var(--accent); }
 
 /* ═══════════════════════════════════════════
@@ -477,7 +481,7 @@ body {
 .score-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 36px; padding: 2px 7px; border-radius: 20px; font-size: 11px; font-weight: 700; }
 .score-high { background: var(--greenS); color: var(--green); }
 .score-mid { background: var(--amberS); color: var(--amber); }
-.score-low { background: var(--bg2); color: var(--t2); }
+.score-low { background: var(--bg2); color: var(--t1); }
 .status-badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
 .status-new { background: var(--accentS); color: var(--accent); }
 .status-scheduled { background: var(--amberS); color: var(--amber); }
@@ -535,7 +539,7 @@ body {
    OWNER DASHBOARD — KNOWLEDGE BASE
 ═══════════════════════════════════════════ */
 .kb-card { background: var(--bg1); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
-.kb-card-title { font-weight: 700; color: var(--t0); font-size: 15px; margin-bottom: 14px; }
+.kb-card-title { font-weight: 700; color: var(--t0); font-size: 14px; margin-bottom: 14px; }
 .auto-metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px; }
 .auto-metric-card { background: var(--bg1); border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: center; box-shadow: var(--shadow-sm); }
 .auto-metric-icon { font-size: 22px; margin-bottom: 6px; }
@@ -563,7 +567,7 @@ body {
 .auto-msg-table tr:last-child td { border-bottom: none; }
 .kb-faq { border-bottom: 1px solid var(--border); padding: 14px 0; }
 .kb-faq:last-child { border-bottom: none; }
-.kb-q { font-size: 13px; font-weight: 600; color: var(--t0); margin-bottom: 6px; display: flex; justify-content: space-between; gap: 12px; cursor: pointer; }
+.kb-q { font-size: 13px; font-weight: 600; color: var(--t0); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer; padding: 10px 0; min-height: 44px; }
 .kb-q:hover { color: var(--accent); }
 .kb-a { font-size: 13px; color: var(--t2); line-height: 1.55; display: none; }
 .kb-a.show { display: block; }
@@ -594,7 +598,7 @@ body {
 .chat-header-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 .chat-header-name { font-size: 13px; font-weight: 700; color: var(--t0); }
 .chat-header-status { font-size: 11px; color: var(--accent); }
-.chat-close { margin-left: auto; background: none; border: none; color: var(--t2); font-size: 18px; cursor: pointer; padding: 0 4px; }
+.chat-close { margin-left: auto; background: none; border: none; color: var(--t2); font-size: 18px; cursor: pointer; padding: 8px; min-width: 36px; min-height: 36px; display: flex; align-items: center; justify-content: center; }
 .chat-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
 .chat-msg { max-width: 82%; }
 .chat-msg-bot { align-self: flex-start; }
@@ -639,15 +643,15 @@ body {
 /* ═══════════════════════════════════════════
    DISPATCH BOARD
 ═══════════════════════════════════════════ */
-.dispatch-summary { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 20px; }
-.dispatch-stat { background: var(--bg1); border: 1px solid var(--border); border-radius: 12px; padding: 14px; text-align: center; }
+.dispatch-summary { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 20px; }
+.dispatch-stat { background: var(--bg1); border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: center; }
 .dispatch-stat-value { font-size: 22px; font-weight: 700; color: var(--t0); }
 .dispatch-stat-label { font-size: 11px; color: var(--t2); margin-top: 2px; }
 .dispatch-stat-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-left: 4px; vertical-align: middle; }
 
 .tech-card { background: var(--bg1); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 16px; overflow: hidden; }
 .tech-card-header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
-.tech-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.tech-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: var(--hero-text); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
 .tech-name { font-weight: 600; font-size: 14px; color: var(--t0); }
 .tech-role { font-size: 12px; color: var(--t2); }
 .tech-status { margin-left: auto; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 99px; }
@@ -717,7 +721,7 @@ body {
 .filter-search-wrap::before { content: '🔍'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; }
 .filter-select { padding: 9px 12px; background: var(--bg1); border: 1px solid var(--border); border-radius: 8px; color: var(--t0); font-size: 13px; cursor: pointer; appearance: none; -webkit-appearance: none; padding-right: 28px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2371717a'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
 .filter-select:focus { outline: none; border-color: var(--accent); }
-.filter-pill { padding: 6px 14px; background: var(--bg1); border: 1px solid var(--border); border-radius: 99px; font-size: 12px; font-weight: 500; color: var(--t1); cursor: pointer; transition: all 0.15s; }
+.filter-pill { padding: 8px 14px; background: var(--bg1); border: 1px solid var(--border); border-radius: 99px; font-size: 12px; font-weight: 500; color: var(--t1); cursor: pointer; transition: all 0.15s; min-height: 36px; display: inline-flex; align-items: center; }
 .filter-pill:hover { border-color: var(--accent); color: var(--accent); }
 .filter-pill.active { background: var(--accentS); border-color: var(--accent); color: var(--accent); font-weight: 600; }
 /* filter-bar responsive — see main responsive section below */
@@ -749,7 +753,7 @@ body {
 .invoice-status { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 99px; display: inline-block; }
 .invoice-status.paid { background: var(--greenS); color: var(--green); }
 .invoice-status.sent { background: var(--accentS); color: var(--accent); }
-.invoice-status.draft { background: var(--bg3); color: var(--t2); }
+.invoice-status.draft { background: var(--bg3); color: var(--t1); }
 .invoice-status.overdue { background: var(--redS); color: var(--red); }
 .invoice-row.overdue { background: var(--redS); }
 .invoice-amount { font-weight: 600; color: var(--t0); }
@@ -758,6 +762,53 @@ body {
 .invoice-card-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--border); }
 .invoice-card-title { font-size: 14px; font-weight: 600; color: var(--t0); }
 .invoice-card-btn { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accentS); border: none; padding: 6px 14px; border-radius: 8px; cursor: pointer; }
+
+/* ═══════════════════════════════════════════
+   UTILITY CLASSES
+═══════════════════════════════════════════ */
+.scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.empty-state { text-align: center; padding: 24px; color: var(--t2); font-size: 13px; }
+.btn-accent-outline { padding: 8px 16px; border-radius: 8px; border: 1px solid var(--accentB); background: var(--accentS); color: var(--accent); font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+.btn-accent-outline:hover { background: var(--accentB); }
+.td-muted { color: var(--t2); }
+.td-accent { font-weight: 600; color: var(--accent); }
+.stat-value--positive { color: var(--green); }
+
+/* ═══════════════════════════════════════════
+   PLATFORM COMPARISON GRID (extracted from inline)
+═══════════════════════════════════════════ */
+.platform-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+.platform-grid-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 6px 0; }
+.platform-grid-header--category { color: var(--t2); }
+.platform-grid-header--them { color: var(--red); text-align: center; }
+.platform-grid-header--us { color: var(--accent); text-align: center; }
+.platform-grid-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-top: 1px solid var(--border); padding: 10px 0; font-size: 13px; }
+.platform-grid-key { color: var(--t2); }
+.platform-grid-them { color: var(--red); font-weight: 600; text-align: center; }
+.platform-grid-us { color: var(--accent); font-weight: 600; text-align: center; }
+
+/* ═══════════════════════════════════════════
+   UNASSIGNED JOB ITEMS (extracted from inline)
+═══════════════════════════════════════════ */
+.unassigned-item-title { font-size: 13px; font-weight: 500; color: var(--t0); }
+.unassigned-item-meta { font-size: 12px; color: var(--t2); margin-top: 4px; }
+
+/* ═══════════════════════════════════════════
+   CUSTOMER NAME CELL (extracted from inline)
+═══════════════════════════════════════════ */
+.customer-name-cell { display: flex; align-items: center; gap: 8px; }
+.customer-name-cell .tech-avatar { width: 28px; height: 28px; font-size: 11px; }
+
+/* ═══════════════════════════════════════════
+   TABLE CARD WRAPPER (extracted from inline)
+═══════════════════════════════════════════ */
+.table-card { background: var(--bg1); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+
+/* ═══════════════════════════════════════════
+   KB INFO + PIPELINE EMPTY STATE (extracted from inline)
+═══════════════════════════════════════════ */
+.kb-info-text { font-size: 13px; color: var(--t2); }
+.detail-cell { padding: 0 !important; border-bottom: none !important; }
 
 /* Summary grid column variants (used by Customers=4col, Money=5col) */
 .dispatch-summary.summary-4col { grid-template-columns: repeat(4, 1fr); }
@@ -772,7 +823,7 @@ body {
   .demo-bar-label { display: none; }
   .demo-bar-back { display: none; }
   .demo-bar-title { font-size: 11px; }
-  .demo-bar-btn { padding: 3px 8px; font-size: 10px; }
+  .demo-bar-btn { padding: 3px 8px; font-size: 11px; }
   .demo-bar-theme { width: 26px; height: 26px; font-size: 12px; }
 
   /* --- Owner Dashboard sidebar → mobile drawer --- */
@@ -786,7 +837,7 @@ body {
   .od-nav-item span { display: inline; }
   .od-nav-item { justify-content: flex-start; padding: 10px 12px; }
   .od-hamburger { display: flex; }
-  .od-sidebar-overlay { display: none; position: fixed; inset: 0; top: 40px; background: rgba(0,0,0,0.4); z-index: 199; }
+  .od-sidebar-overlay { display: none; position: fixed; inset: 0; top: 40px; background: var(--overlay); z-index: 199; }
   .od-sidebar-overlay.show { display: block; }
 
   /* --- Hamburger: reposition so it doesn't overlap title --- */
@@ -827,8 +878,13 @@ body {
   .auto-metrics { grid-template-columns: repeat(2, 1fr); }
 
   /* --- Pipeline: horizontal scroll with hint --- */
-  .pipeline-wrap { -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
+  .pipeline-wrap { -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; position: relative; }
+  .pipeline-wrap::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 40px; background: linear-gradient(to left, var(--bg), transparent); pointer-events: none; z-index: 1; }
   .pipeline-board { min-width: 800px; }
+
+  /* --- Platform grid: tighter on tablet --- */
+  .platform-grid, .platform-grid-row { grid-template-columns: 1.2fr 1fr 1fr; }
+  .platform-grid-row { font-size: 12px; padding: 8px 0; }
 
   /* --- Chatbot: wider on tablet --- */
   .chat-window { width: 320px; right: 12px; bottom: 80px; }
@@ -842,16 +898,16 @@ body {
   /* --- Demo bar: compact single row --- */
   .demo-bar { height: 36px; padding: 0 8px; gap: 6px; }
   .demo-bar-title .dot { width: 6px; height: 6px; }
-  .demo-bar-title { font-size: 10px; }
+  .demo-bar-title { font-size: 11px; }
   .lang-toggle { padding: 2px 6px; font-size: 11px; }
   .demo-bar-toggle { padding: 1px; }
-  .demo-bar-btn { padding: 2px 6px; font-size: 10px; }
-  .demo-bar-theme { width: 24px; height: 24px; font-size: 11px; }
+  .demo-bar-btn { padding: 2px 8px; font-size: 11px; }
+  .demo-bar-theme { width: 32px; height: 32px; font-size: 13px; }
 
   /* --- Customer View: Hero --- */
   .cv-hero { padding: 60px 16px 48px; }
   .cv-hero h1 { font-size: 1.7rem; }
-  .cv-hero-sub { font-size: 0.95rem; }
+  .cv-hero-sub { font-size: 1rem; }
   .cv-hero-pills { gap: 6px; }
   .cv-hero-pill { font-size: 11px; padding: 4px 10px; }
   .cv-hero-stats { gap: 16px; }
@@ -887,17 +943,22 @@ body {
   .od-main { padding: 12px; }
   .od-main-header { padding-left: 44px; margin-bottom: 16px; }
   .od-main-title { font-size: 1.3rem; }
-  .od-main-sub { font-size: 0.8rem; }
+  .od-main-sub { font-size: 0.85rem; }
 
   /* --- Dashboard metrics: 2-col --- */
   .metrics-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .metric-card { padding: 14px; }
   .metric-value { font-size: 1.5rem; }
-  .metric-label { font-size: 10px; }
+  .metric-label { font-size: 11px; }
 
   /* --- Platform comparison card --- */
   .platform-card { padding: 16px; }
   .platform-row { font-size: 12px; padding: 8px 0; }
+  .platform-grid, .platform-grid-row { grid-template-columns: 1fr; gap: 4px; }
+  .platform-grid-header--them, .platform-grid-header--us { text-align: left; }
+  .platform-grid-them, .platform-grid-us { text-align: left; }
+  .platform-grid-row { padding: 8px 0; border-top: 1px solid var(--border); }
+  .platform-grid-key { font-weight: 600; }
 
   /* --- Leads table: horizontal scroll --- */
   .leads-card { padding: 14px; overflow-x: auto; }
@@ -913,7 +974,7 @@ body {
   .dispatch-summary, .dispatch-summary.summary-4col, .dispatch-summary.summary-5col { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .dispatch-stat { padding: 10px; }
   .dispatch-stat-value { font-size: 18px; }
-  .dispatch-stat-label { font-size: 10px; }
+  .dispatch-stat-label { font-size: 11px; }
   .tech-card-header { padding: 10px 12px; }
   .job-row { grid-template-columns: 60px 1fr; gap: 6px; padding: 10px 12px; }
   .job-time { font-size: 12px; }
@@ -926,7 +987,7 @@ body {
 
   /* --- Customers --- */
   .customer-table { font-size: 12px; }
-  .customer-table th { padding: 8px 8px; font-size: 10px; }
+  .customer-table th { padding: 8px 8px; font-size: 11px; }
   .customer-table td { padding: 10px 8px; }
   .customer-detail { padding: 10px; }
   .customer-contact { gap: 10px; font-size: 12px; flex-direction: column; }
@@ -940,8 +1001,8 @@ body {
   .revenue-bar-amount { font-size: 11px; }
   .revenue-bar-track { height: 18px; }
   .trend-bars { gap: 4px; height: 100px; }
-  .trend-bar-amount { font-size: 10px; }
-  .trend-bar-label { font-size: 10px; }
+  .trend-bar-amount { font-size: 11px; }
+  .trend-bar-label { font-size: 11px; }
   .invoice-card { overflow-x: auto; }
   .invoice-table { min-width: 480px; }
   .invoice-table th, .invoice-table td { padding: 8px; font-size: 12px; }
@@ -1117,24 +1178,24 @@ body {
         <!-- Emergency Form -->
         <div class="emergency-fields" id="emergencyFields">
           <div class="emergency-alert">
-            ⚡ We'll call you back within 15 minutes. If you have active flooding, shut off your main water valve first and call us at (469) 555-0789.
+            ⚡ We'll call you back within 15 minutes. If you have active flooding, shut off your main water valve first and call us at <a href="tel:4695550789" style="color:inherit;font-weight:600;">(469) 555-0789</a>.
           </div>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" data-en="Your Name *" data-es="Tu nombre">Your Name *</label>
-              <input class="form-input" type="text" placeholder="Jane Smith" data-ph-en="Jane Smith" data-ph-es="María García" />
+              <input class="form-input" type="text" placeholder="Jane Smith" data-ph-en="Jane Smith" data-ph-es="María García" required />
             </div>
             <div class="form-group">
               <label class="form-label" data-en="Phone Number *" data-es="Teléfono">Phone Number *</label>
-              <input class="form-input" type="tel" placeholder="(469) 555-0000" data-ph-en="(469) 555-0000" data-ph-es="(469) 555-0000" />
+              <input class="form-input" type="tel" placeholder="(469) 555-0000" data-ph-en="(469) 555-0000" data-ph-es="(469) 555-0000" required />
             </div>
           </div>
           <div class="form-group">
             <label class="form-label" data-en="Brief Description *" data-es="Describe la emergencia">Brief Description *</label>
-            <textarea class="form-textarea" placeholder="Describe the problem (e.g., burst pipe under sink, no hot water, sewage smell...)" data-ph-en="Describe the problem (e.g., burst pipe under sink, no hot water, sewage smell...)" data-ph-es="Describe la emergencia (ej. tubería rota, sin agua caliente...)" style="min-height:80px;"></textarea>
+            <textarea class="form-textarea" placeholder="Describe the problem (e.g., burst pipe under sink, no hot water, sewage smell...)" data-ph-en="Describe the problem (e.g., burst pipe under sink, no hot water, sewage smell...)" data-ph-es="Describe la emergencia (ej. tubería rota, sin agua caliente...)" style="min-height:80px;" required></textarea>
           </div>
-          <button class="form-submit emergency-submit" onclick="submitBooking('emergency')" data-en="📞 Call Me Now →" data-es="Llámame Ahora →">📞 Call Me Now →</button>
-          <p class="form-note">We'll call within 15 minutes · (469) 555-0789</p>
+          <button class="form-submit emergency-submit" onclick="submitBooking('emergency')" data-en="📞 Call Me Now →" data-es="Llámame Ahora →" type="button">📞 Call Me Now →</button>
+          <p class="form-note">We'll call within 15 minutes · <a href="tel:4695550789" style="color:inherit;">(469) 555-0789</a></p>
         </div>
 
         <!-- Schedule Form -->
@@ -1142,11 +1203,11 @@ body {
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" data-en="Your Name *" data-es="Tu nombre">Your Name *</label>
-              <input class="form-input" type="text" placeholder="Jane Smith" data-ph-en="Jane Smith" data-ph-es="María García" />
+              <input class="form-input" type="text" placeholder="Jane Smith" data-ph-en="Jane Smith" data-ph-es="María García" required />
             </div>
             <div class="form-group">
               <label class="form-label" data-en="Phone Number *" data-es="Teléfono">Phone Number *</label>
-              <input class="form-input" type="tel" placeholder="(469) 555-0000" data-ph-en="(469) 555-0000" data-ph-es="(469) 555-0000" />
+              <input class="form-input" type="tel" placeholder="(469) 555-0000" data-ph-en="(469) 555-0000" data-ph-es="(469) 555-0000" required />
             </div>
           </div>
           <div class="form-group">
@@ -1189,7 +1250,7 @@ body {
     <div class="cv-footer-name">🚰 Lone Star Plumbing</div>
     <p class="cv-footer-tagline" data-en="Licensed plumbers serving Plano, Richardson &amp; East DFW — 24/7 emergency service" data-es="Sirviendo a Plano, Allen, McKinney y Richardson — disponibles 24/7">Licensed plumbers serving Plano, Richardson & East DFW — 24/7 emergency service</p>
     <div class="cv-footer-contact">
-      <div class="cv-footer-contact-item">📞 <strong>(469) 555-0789</strong></div>
+      <div class="cv-footer-contact-item">📞 <a href="tel:4695550789" style="color:inherit;text-decoration:none;"><strong>(469) 555-0789</strong></a></div>
       <div class="cv-footer-contact-item">📍 Plano, TX 75074</div>
       <div class="cv-footer-contact-item">⭐ 4.9 (150+ reviews)</div>
       <div class="cv-footer-contact-item">🕐 24/7 Emergency</div>
@@ -1208,89 +1269,89 @@ body {
     <div class="od-sidebar-overlay" id="odOverlay" onclick="toggleOdSidebar()"></div>
 
     <!-- Sidebar -->
-    <nav class="od-sidebar" id="odSidebar">
+    <nav class="od-sidebar" id="odSidebar" role="tablist" aria-label="Dashboard navigation">
       <div class="od-sidebar-logo">
         <div class="od-sidebar-logo-name">Lone Star</div>
         <div class="od-sidebar-logo-sub">Plumbing</div>
       </div>
-      <button class="od-nav-item active" id="nav-dashboard" onclick="showOdView('dashboard')">
+      <button class="od-nav-item active" id="nav-dashboard" role="tab" aria-selected="true" aria-current="page" onclick="showOdView('dashboard')">
         <span class="nav-icon">📊</span><span>Dashboard</span>
       </button>
-      <button class="od-nav-item" id="nav-dispatch" onclick="showOdView('dispatch')">
+      <button class="od-nav-item" id="nav-dispatch" role="tab" aria-selected="false" onclick="showOdView('dispatch')">
         <span class="nav-icon">🚛</span><span>Dispatch</span>
       </button>
-      <button class="od-nav-item" id="nav-pipeline" onclick="showOdView('pipeline')">
+      <button class="od-nav-item" id="nav-pipeline" role="tab" aria-selected="false" onclick="showOdView('pipeline')">
         <span class="nav-icon">📋</span><span>Pipeline</span>
       </button>
-      <button class="od-nav-item" id="nav-customers" onclick="showOdView('customers')">
+      <button class="od-nav-item" id="nav-customers" role="tab" aria-selected="false" onclick="showOdView('customers')">
         <span class="nav-icon">👥</span><span>Customers</span>
       </button>
-      <button class="od-nav-item" id="nav-money" onclick="showOdView('money')">
+      <button class="od-nav-item" id="nav-money" role="tab" aria-selected="false" onclick="showOdView('money')">
         <span class="nav-icon">💰</span><span>Money</span>
       </button>
-      <button class="od-nav-item" id="nav-automation" onclick="showOdView('automation')">
+      <button class="od-nav-item" id="nav-automation" role="tab" aria-selected="false" onclick="showOdView('automation')">
         <span class="nav-icon">⚡</span><span>Automation</span>
       </button>
-      <button class="od-nav-item" id="nav-geo" onclick="showOdView('geo')">
+      <button class="od-nav-item" id="nav-geo" role="tab" aria-selected="false" onclick="showOdView('geo')">
         <span class="nav-icon">🎯</span><span>GEO Score</span>
       </button>
-      <button class="od-nav-item" id="nav-kb" onclick="showOdView('kb')">
+      <button class="od-nav-item" id="nav-kb" role="tab" aria-selected="false" onclick="showOdView('kb')">
         <span class="nav-icon">📚</span><span>Knowledge</span>
       </button>
     </nav>
 
     <!-- Main -->
     <main class="od-main">
-      <div id="od-dashboard" class="od-view">
+      <div id="od-dashboard" class="od-view" role="tabpanel">
         <div class="od-main-header">
           <div class="od-main-title">Dashboard</div>
           <div class="od-main-sub">Week of Apr 5, 2026 · Plano, TX</div>
         </div>
         <div id="dashboardContent"></div>
       </div>
-      <div id="od-dispatch" class="od-view" style="display:none;">
+      <div id="od-dispatch" class="od-view" role="tabpanel" style="display:none;">
         <div class="od-main-header">
           <div class="od-main-title">Dispatch Board</div>
           <div class="od-main-sub">Today's schedule — assign jobs, track your team</div>
         </div>
         <div id="dispatchContent"></div>
       </div>
-      <div id="od-pipeline" class="od-view" style="display:none;">
+      <div id="od-pipeline" class="od-view" role="tabpanel" style="display:none;">
         <div class="od-main-header">
           <div class="od-main-title">Service Pipeline</div>
           <div class="od-main-sub">Active jobs and upcoming appointments</div>
         </div>
         <div id="pipelineContent" class="pipeline-wrap"></div>
       </div>
-      <div id="od-customers" class="od-view" style="display:none;">
+      <div id="od-customers" class="od-view" role="tabpanel" style="display:none;">
         <div class="od-main-header">
           <div class="od-main-title">Customers</div>
           <div class="od-main-sub">Customer history, lifetime value, and service records</div>
         </div>
         <div id="customersContent"></div>
       </div>
-      <div id="od-money" class="od-view" style="display:none;">
+      <div id="od-money" class="od-view" role="tabpanel" style="display:none;">
         <div class="od-main-header">
           <div class="od-main-title">Money</div>
           <div class="od-main-sub">Revenue tracking, invoices, and cost comparison</div>
         </div>
         <div id="moneyContent"></div>
       </div>
-      <div id="od-geo" class="od-view" style="display:none;">
+      <div id="od-geo" class="od-view" role="tabpanel" style="display:none;">
         <div class="od-main-header">
           <div class="od-main-title">GEO Score</div>
           <div class="od-main-sub">How AI search engines find you</div>
         </div>
         <div id="geoContent"></div>
       </div>
-      <div id="od-kb" class="od-view" style="display:none;">
+      <div id="od-kb" class="od-view" role="tabpanel" style="display:none;">
         <div class="od-main-header">
           <div class="od-main-title">Knowledge Base</div>
           <div class="od-main-sub">FAQs your AI chatbot uses to answer customers</div>
         </div>
         <div id="kbContent"></div>
       </div>
-      <div id="od-automation" class="od-view" style="display:none;">
+      <div id="od-automation" class="od-view" role="tabpanel" style="display:none;">
         <div class="od-main-header">
           <div class="od-main-title">Communication Automation</div>
           <div class="od-main-sub">Automated campaigns, missed call recovery, and message tracking</div>
@@ -1806,16 +1867,16 @@ function renderDashboard() {
         Platform Cost Comparison
         <span class="platform-savings">💰 Save $${savings.toLocaleString()}/yr</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:8px;">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--t2);padding:6px 0;">Category</div>
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--red);padding:6px 0;text-align:center;">${escapeHtml(label)}</div>
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);padding:6px 0;text-align:center;">Your System</div>
+      <div class="platform-grid" style="margin-bottom:8px;">
+        <div class="platform-grid-header platform-grid-header--category">Category</div>
+        <div class="platform-grid-header platform-grid-header--them">${escapeHtml(label)}</div>
+        <div class="platform-grid-header platform-grid-header--us">Your System</div>
       </div>
       ${rows.map(r => `
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border);padding:10px 0;font-size:13px;">
-          <div style="color:var(--t2);">${escapeHtml(r.key)}</div>
-          <div style="color:var(--red);font-weight:600;text-align:center;">${escapeHtml(r.them)}</div>
-          <div style="color:var(--accent);font-weight:600;text-align:center;">${escapeHtml(r.us)}</div>
+        <div class="platform-grid-row">
+          <div class="platform-grid-key">${escapeHtml(r.key)}</div>
+          <div class="platform-grid-them">${escapeHtml(r.them)}</div>
+          <div class="platform-grid-us">${escapeHtml(r.us)}</div>
         </div>
       `).join('')}
       <div class="platform-bar-wrap">
@@ -1886,11 +1947,11 @@ function renderDashboard() {
             return `
               <tr>
                 <td><div class="lead-name">${escapeHtml(l.name)}</div><div class="lead-service">${escapeHtml(l.service)}</div></td>
-                <td style="color:var(--t2);">${escapeHtml(l.location)}</td>
+                <td class="td-muted">${escapeHtml(l.location)}</td>
                 <td><span class="score-badge ${scoreClass}">${l.score}</span></td>
                 <td><span class="status-badge ${statusClass}">${escapeHtml(l.status.replace('-', ' '))}</span></td>
-                <td style="font-weight:600;color:var(--accent);">${escapeHtml(l.value)}</td>
-                <td style="color:var(--t2);">${escapeHtml(l.date)}</td>
+                <td class="td-accent">${escapeHtml(l.value)}</td>
+                <td class="td-muted">${escapeHtml(l.date)}</td>
               </tr>
             `;
           }).join('')}
@@ -1912,11 +1973,11 @@ function renderPipeline() {
   el.dataset.rendered = '1';
 
   const filterBar = `
-    <div class="filter-bar" style="margin-bottom:12px;">
+    <div class="filter-bar">
       <div class="filter-pill active" onclick="setPipelineFilter(this,'week')">This Week</div>
       <div class="filter-pill" onclick="setPipelineFilter(this,'month')">This Month</div>
       <div class="filter-pill" onclick="setPipelineFilter(this,'all')">All Time</div>
-      <select class="filter-select" style="margin-left:auto;" onchange="">
+      <select class="filter-select" onchange="filterPipelineService(this.value)">
         <option>All Services</option>
         <option>Emergency</option>
         <option>Water Heater</option>
@@ -1944,7 +2005,7 @@ function renderPipeline() {
                   <div class="pipeline-card-date">${escapeHtml(c.date)} · ${escapeHtml(c.location)}</div>
                 </div>
               `).join('')}
-              ${cards.length === 0 ? '<div style="font-size:12px;color:var(--t2);text-align:center;padding:16px 0;">No jobs here</div>' : ''}
+              ${cards.length === 0 ? '<div class="empty-state">No jobs in this stage</div>' : ''}
             </div>
           </div>
         `;
@@ -1957,8 +2018,16 @@ function renderPipeline() {
 function setPipelineFilter(btn, range) {
   btn.parentElement.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
-  // Demo: show toast to indicate filter applied
   showToast('Showing ' + (range === 'all' ? 'all jobs' : range === 'month' ? 'this month' : 'this week'));
+}
+
+function filterPipelineService(value) {
+  const cards = document.querySelectorAll('.pipeline-card');
+  cards.forEach(card => {
+    const service = card.querySelector('.pipeline-card-service')?.textContent?.toLowerCase() || '';
+    card.style.display = (value === 'All Services' || service.includes(value.toLowerCase())) ? '' : 'none';
+  });
+  showToast(value === 'All Services' ? 'Showing all services' : 'Filtered: ' + value);
 }
 
 function renderGeo() {
@@ -2020,7 +2089,7 @@ function renderKb() {
     <div class="kb-card">
       ${DATA.faqs.map((f, i) => `
         <div class="kb-faq">
-          <div class="kb-q" onclick="toggleFaq(${i})">
+          <div class="kb-q" tabindex="0" role="button" aria-expanded="false" id="faq-q-${i}" onclick="toggleFaq(${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFaq(${i})}">
             <span>${escapeHtml(f.q)}</span>
             <span id="faq-arrow-${i}">▾</span>
           </div>
@@ -2029,8 +2098,8 @@ function renderKb() {
       `).join('')}
     </div>
     <div class="kb-card" style="margin-top:16px;">
-      <p style="font-size:13px;color:var(--t2);">These FAQs train your AI chatbot. When customers ask questions, the chatbot pulls from this knowledge base to give accurate, on-brand answers. Add, edit, or remove FAQs at any time.</p>
-      <button style="margin-top:12px;padding:8px 16px;border-radius:8px;border:1px solid var(--accentB);background:var(--accentS);color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;" onclick="showToast('FAQ added (demo only)')">+ Add FAQ</button>
+      <p class="kb-info-text">These FAQs train your AI chatbot. When customers ask questions, the chatbot pulls from this knowledge base to give accurate, on-brand answers. Add, edit, or remove FAQs at any time.</p>
+      <button class="btn-accent-outline" style="margin-top:12px;" onclick="showToast('FAQ added (demo only)')">+ Add FAQ</button>
     </div>
   `;
 }
@@ -2038,9 +2107,12 @@ function renderKb() {
 function toggleFaq(i) {
   const a = document.getElementById('faq-a-' + i);
   const arrow = document.getElementById('faq-arrow-' + i);
+  const q = document.getElementById('faq-q-' + i);
   if (!a) return;
   a.classList.toggle('show');
-  if (arrow) arrow.textContent = a.classList.contains('show') ? '▴' : '▾';
+  const isOpen = a.classList.contains('show');
+  if (arrow) arrow.textContent = isOpen ? '▴' : '▾';
+  if (q) q.setAttribute('aria-expanded', isOpen);
 }
 
 /* ═══════════════════════════════════════════
@@ -2146,14 +2218,14 @@ function renderDispatch() {
     <div class="unassigned-card">
       <div class="unassigned-header">
         <span>⚠️ Unassigned Jobs (${d.unassigned.length})</span>
-        <button style="font-size:12px;font-weight:600;color:var(--accent);background:var(--accentS);border:none;padding:6px 14px;border-radius:8px;cursor:pointer;">Assign ↗</button>
+        <button class="invoice-card-btn" onclick="showToast('Opening assignment view (demo only)')">Assign ↗</button>
       </div>
       ${d.unassigned.map(u => `
         <div class="unassigned-item">
-          <div style="font-size:13px;font-weight:500;color:var(--t0);">
+          <div class="unassigned-item-title">
             ${u.urgency === 'high' ? '🔴 ' : ''}${escapeHtml(u.customer)} — ${escapeHtml(u.service)} — ${escapeHtml(u.location)}
           </div>
-          <div style="font-size:12px;color:var(--t2);margin-top:4px;">
+          <div class="unassigned-item-meta">
             Score: ${escapeHtml(u.score)} · ${escapeHtml(u.value)}${u.urgency === 'high' ? ' · <span class="urgency-high">HIGH PRIORITY</span>' : ''}
           </div>
         </div>
@@ -2165,10 +2237,26 @@ function renderDispatch() {
 
 function filterDispatch(query) {
   const q = query.toLowerCase();
+  let visibleCount = 0;
   document.querySelectorAll('.tech-card').forEach(card => {
     const text = card.textContent.toLowerCase();
-    card.style.display = !q || text.includes(q) ? '' : 'none';
+    const show = !q || text.includes(q);
+    card.style.display = show ? '' : 'none';
+    if (show) visibleCount++;
   });
+  let emptyEl = document.getElementById('dispatchEmptyState');
+  if (visibleCount === 0) {
+    if (!emptyEl) {
+      emptyEl = document.createElement('div');
+      emptyEl.id = 'dispatchEmptyState';
+      emptyEl.className = 'empty-state';
+      emptyEl.textContent = 'No technicians match your search.';
+      document.getElementById('dispatchContent')?.appendChild(emptyEl);
+    }
+    emptyEl.style.display = '';
+  } else if (emptyEl) {
+    emptyEl.style.display = 'none';
+  }
 }
 
 function filterDispatchTech(name) {
@@ -2239,18 +2327,18 @@ function renderCustomers() {
     const ltvStyle = ltvNum(c.ltv) >= 1000 ? 'font-weight:600;color:var(--accent)' : '';
     const langBadge = c.language === 'es' ? ' <span class="lang-badge">ES 🇲🇽</span>' : '';
     return `
-      <tr class="customer-row" id="cust-row-${i}" onclick="toggleCustomerDetail(${i})" title="Click to see details">
-        <td><div style="display:flex;align-items:center;gap:8px;"><span class="expand-chevron" id="cust-chevron-${i}">▸</span><div class="tech-avatar" style="width:28px;height:28px;font-size:11px;">${escapeHtml(c.initials)}</div><span>${escapeHtml(c.name)}${langBadge}</span><span class="expand-hint">click to expand</span></div></td>
+      <tr class="customer-row" id="cust-row-${i}" tabindex="0" role="button" aria-expanded="false" onclick="toggleCustomerDetail(${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleCustomerDetail(${i})}" title="Click to see details">
+        <td><div class="customer-name-cell"><span class="expand-chevron" id="cust-chevron-${i}">▸</span><div class="tech-avatar">${escapeHtml(c.initials)}</div><span>${escapeHtml(c.name)}${langBadge}</span><span class="expand-hint">click to expand</span></div></td>
         <td class="hide-mobile">${escapeHtml(c.location)}</td>
         <td class="hide-mobile">${escapeHtml(c.jobs)}</td>
         <td style="${ltvStyle}">${escapeHtml(c.ltv)}</td>
         <td class="hide-mobile">${escapeHtml(c.lastJob)}</td>
         <td><span class="cust-status ${c.status}">${escapeHtml(c.status.charAt(0).toUpperCase() + c.status.slice(1))}</span></td>
       </tr>
-      <tr><td colspan="6" style="padding:0;"><div class="customer-detail" id="cust-detail-${i}">
+      <tr><td colspan="6" class="detail-cell"><div class="customer-detail" id="cust-detail-${i}">
         <div class="customer-contact">
-          <span>📞 ${escapeHtml(c.phone)}</span>
-          <span>📧 ${escapeHtml(c.email)}</span>
+          <span>📞 <a href="tel:${c.phone.replace(/[^0-9]/g,'')}" style="color:var(--accent);text-decoration:none;">${escapeHtml(c.phone)}</a></span>
+          <span>📧 <a href="mailto:${escapeHtml(c.email)}" style="color:var(--accent);text-decoration:none;">${escapeHtml(c.email)}</a></span>
           <span>📍 ${escapeHtml(c.location)}</span>
           <span>🗣️ ${c.language === 'es' ? 'Spanish' : 'English'}</span>
         </div>
@@ -2271,8 +2359,8 @@ function renderCustomers() {
   }).join('');
 
   const tableHtml = `
-    <div style="background:var(--bg1);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
-      <div style="overflow-x:auto;">
+    <div class="table-card">
+      <div class="scroll-x">
         <table class="customer-table">
           <thead>
             <tr>
@@ -2297,6 +2385,7 @@ function filterCustomers() {
   const status = document.getElementById('custStatusFilter').value;
   const service = document.getElementById('custServiceFilter').value;
   const rows = document.querySelectorAll('.customer-row');
+  let visibleCount = 0;
   rows.forEach((row, i) => {
     const c = DATA.customers.list[i];
     if (!c) return;
@@ -2304,12 +2393,27 @@ function filterCustomers() {
     const matchStatus = status === 'all' || c.status === status;
     const matchService = service === 'all' || c.history.some(h => h.service.toLowerCase().includes(service));
     const show = matchSearch && matchStatus && matchService;
+    if (show) visibleCount++;
     row.style.display = show ? '' : 'none';
     const detail = document.getElementById('cust-detail-' + i);
     if (detail && !show) { detail.classList.remove('show'); row.classList.remove('expanded'); }
     // Also hide the detail <tr>
     if (row.nextElementSibling) row.nextElementSibling.style.display = show ? '' : 'none';
   });
+  // Show/hide empty state
+  let emptyEl = document.getElementById('custEmptyState');
+  if (visibleCount === 0) {
+    if (!emptyEl) {
+      emptyEl = document.createElement('div');
+      emptyEl.id = 'custEmptyState';
+      emptyEl.className = 'empty-state';
+      emptyEl.textContent = 'No customers match your filters.';
+      document.querySelector('.customer-table')?.parentElement?.after(emptyEl);
+    }
+    emptyEl.style.display = '';
+  } else if (emptyEl) {
+    emptyEl.style.display = 'none';
+  }
 }
 
 function toggleCustomerDetail(id) {
@@ -2318,11 +2422,12 @@ function toggleCustomerDetail(id) {
   if (!detail) return;
   const isOpen = detail.classList.contains('show');
   document.querySelectorAll('.customer-detail.show').forEach(d => d.classList.remove('show'));
-  document.querySelectorAll('.customer-row.expanded').forEach(r => r.classList.remove('expanded'));
+  document.querySelectorAll('.customer-row.expanded').forEach(r => { r.classList.remove('expanded'); r.setAttribute('aria-expanded', 'false'); });
   document.querySelectorAll('.expand-chevron').forEach(c => { c.textContent = '▸'; });
   if (!isOpen) {
     detail.classList.add('show');
     row.classList.add('expanded');
+    row.setAttribute('aria-expanded', 'true');
     const chevron = document.getElementById('cust-chevron-' + id);
     if (chevron) chevron.textContent = '▾';
   }
@@ -2341,7 +2446,7 @@ function renderMoney() {
   const summaryHtml = `
     <div class="dispatch-summary summary-5col">
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.mtdRevenue)}</div><div class="dispatch-stat-label">Revenue (MTD)</div></div>
-      <div class="dispatch-stat"><div class="dispatch-stat-value" style="color:var(--green)">${escapeHtml(s.mtdTrend)} ↑</div><div class="dispatch-stat-label">Trend</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value stat-value--positive">${escapeHtml(s.mtdTrend)} ↑</div><div class="dispatch-stat-label">Trend</div></div>
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.outstandingInvoices)}${' <span class="dispatch-stat-dot" style="background:var(--amber)"></span>'}</div><div class="dispatch-stat-label">Outstanding</div></div>
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.avgJobValue)}</div><div class="dispatch-stat-label">Avg Job Value</div></div>
       <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.collectionRate)}</div><div class="dispatch-stat-label">Collection Rate</div></div>
@@ -2398,9 +2503,9 @@ function renderMoney() {
     <div class="invoice-card">
       <div class="invoice-card-header">
         <div class="invoice-card-title">Recent Invoices</div>
-        <button class="invoice-card-btn">+ New Invoice</button>
+        <button class="invoice-card-btn" onclick="showToast('Invoice creation coming soon (demo only)')">+ New Invoice</button>
       </div>
-      <div style="overflow-x:auto;">
+      <div class="scroll-x">
         <table class="invoice-table">
           <thead>
             <tr>
@@ -2461,7 +2566,13 @@ function showOdView(view) {
     const el = document.getElementById('od-' + v);
     if (el) el.style.display = v === view ? 'block' : 'none';
     const nav = document.getElementById('nav-' + v);
-    if (nav) nav.classList.toggle('active', v === view);
+    if (nav) {
+      const isActive = v === view;
+      nav.classList.toggle('active', isActive);
+      nav.setAttribute('aria-selected', isActive);
+      if (isActive) nav.setAttribute('aria-current', 'page');
+      else nav.removeAttribute('aria-current');
+    }
   });
   if (view === 'dispatch') renderDispatch();
   if (view === 'pipeline') renderPipeline();
