@@ -630,6 +630,110 @@ body {
 .customer-view.active, .owner-view.active { display: block; }
 
 /* ═══════════════════════════════════════════
+   DISPATCH BOARD
+═══════════════════════════════════════════ */
+.dispatch-summary { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 20px; }
+.dispatch-stat { background: var(--bg1); border: 1px solid var(--border); border-radius: 12px; padding: 14px; text-align: center; }
+.dispatch-stat-value { font-size: 22px; font-weight: 700; color: var(--t0); }
+.dispatch-stat-label { font-size: 11px; color: var(--t2); margin-top: 2px; }
+.dispatch-stat-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-left: 4px; vertical-align: middle; }
+
+.tech-card { background: var(--bg1); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 16px; overflow: hidden; }
+.tech-card-header { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.tech-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.tech-name { font-weight: 600; font-size: 14px; color: var(--t0); }
+.tech-role { font-size: 12px; color: var(--t2); }
+.tech-status { margin-left: auto; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 99px; }
+.tech-status.on-job { background: var(--greenS); color: var(--green); }
+.tech-status.available { background: var(--accentS); color: var(--accent); }
+
+.job-row { display: grid; grid-template-columns: 80px 1fr auto; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--border); align-items: start; }
+.job-row:last-child { border-bottom: none; }
+.job-row.emergency { background: var(--redS); border-left: 4px solid var(--red); }
+.job-time { font-size: 13px; font-weight: 600; color: var(--t1); padding-top: 1px; }
+.job-service { font-size: 13px; font-weight: 500; color: var(--t0); }
+.job-address { font-size: 12px; color: var(--t2); margin-top: 2px; }
+.job-customer { font-size: 12px; color: var(--t2); margin-top: 2px; }
+.job-value { font-size: 14px; font-weight: 600; color: var(--accent); text-align: right; }
+.job-status-pill { font-size: 10px; font-weight: 600; text-align: right; margin-top: 4px; }
+.job-row.open-slot { border: none; }
+.job-open-label { font-size: 12px; color: var(--t2); font-style: italic; border: 1px dashed var(--border); border-radius: 8px; padding: 8px; text-align: center; grid-column: 1 / -1; }
+
+.unassigned-card { background: var(--amberS); border: 1px solid var(--amberB); border-radius: 14px; padding: 16px; margin-top: 8px; }
+.unassigned-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-weight: 600; color: var(--amber); }
+.unassigned-item { padding: 10px 0; border-top: 1px solid var(--amberB); }
+.unassigned-item:first-of-type { border-top: none; }
+.urgency-high { color: var(--red); font-size: 11px; font-weight: 700; }
+
+/* ═══════════════════════════════════════════
+   CUSTOMERS CRM
+═══════════════════════════════════════════ */
+.customer-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.customer-table th { text-align: left; padding: 10px 12px; font-size: 11px; text-transform: uppercase; color: var(--t2); border-bottom: 1px solid var(--border); letter-spacing: 0.5px; }
+.customer-table td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.customer-row { cursor: pointer; transition: background 0.15s; }
+.customer-row:hover { background: var(--bg2); }
+.customer-row.expanded { background: var(--accentS); }
+
+.customer-detail { padding: 16px 16px 16px 56px; background: var(--bg2); border-bottom: 1px solid var(--border); display: none; }
+.customer-detail.show { display: block; }
+.customer-contact { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--t1); margin-bottom: 12px; }
+.customer-notes { font-size: 12px; font-style: italic; color: var(--t2); margin-bottom: 16px; padding: 8px 12px; background: var(--bg1); border-radius: 8px; border-left: 3px solid var(--amber); }
+.customer-history { margin-top: 8px; }
+.customer-history-title { font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--t2); margin-bottom: 8px; letter-spacing: 0.5px; }
+.history-row { display: grid; grid-template-columns: 110px 1fr auto auto; gap: 8px; padding: 6px 0; font-size: 13px; border-bottom: 1px solid var(--border); }
+.history-row:last-child { border-bottom: none; }
+.history-date { color: var(--t2); }
+.history-service { color: var(--t0); }
+.history-amount { font-weight: 600; color: var(--accent); text-align: right; }
+.history-rating { color: var(--amber); font-size: 12px; }
+
+.cust-status { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 99px; display: inline-block; }
+.cust-status.active { background: var(--greenS); color: var(--green); }
+.cust-status.inactive { background: var(--amberS); color: var(--amber); }
+.cust-status.dormant { background: var(--redS); color: var(--red); }
+.lang-badge { font-size: 10px; padding: 1px 5px; border-radius: 4px; background: var(--bg3); color: var(--t2); margin-left: 4px; }
+
+.customer-next { margin-top: 12px; padding: 8px 12px; background: var(--accentS); border-radius: 8px; font-size: 13px; color: var(--accent); font-weight: 500; }
+
+/* ═══════════════════════════════════════════
+   MONEY / REVENUE
+═══════════════════════════════════════════ */
+.revenue-bars { background: var(--bg1); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+.revenue-bars-title { font-size: 14px; font-weight: 600; color: var(--t0); margin-bottom: 16px; }
+.revenue-bar-row { display: grid; grid-template-columns: 130px 1fr auto; gap: 12px; align-items: center; padding: 6px 0; }
+.revenue-bar-label { font-size: 13px; color: var(--t1); }
+.revenue-bar-track { height: 22px; background: var(--bg2); border-radius: 6px; overflow: hidden; }
+.revenue-bar-fill { height: 100%; border-radius: 6px; transition: width 0.6s ease; }
+.revenue-bar-amount { font-size: 13px; font-weight: 600; color: var(--t0); white-space: nowrap; }
+
+.trend-chart { background: var(--bg1); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+.trend-chart-title { font-size: 14px; font-weight: 600; color: var(--t0); margin-bottom: 16px; }
+.trend-bars { display: flex; align-items: flex-end; gap: 12px; height: 160px; padding-bottom: 4px; }
+.trend-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+.trend-bar { width: 100%; border-radius: 6px 6px 0 0; background: var(--bg3); transition: height 0.6s ease; min-height: 4px; }
+.trend-bar.current { background: var(--accent); }
+.trend-bar-label { font-size: 11px; color: var(--t2); margin-top: 8px; }
+.trend-bar-amount { font-size: 11px; color: var(--t1); font-weight: 500; margin-bottom: 4px; }
+
+.invoice-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.invoice-table th { text-align: left; padding: 10px 12px; font-size: 11px; text-transform: uppercase; color: var(--t2); border-bottom: 1px solid var(--border); letter-spacing: 0.5px; }
+.invoice-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.invoice-id { font-weight: 600; color: var(--t2); font-family: 'DM Sans', monospace; }
+.invoice-status { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 99px; display: inline-block; }
+.invoice-status.paid { background: var(--greenS); color: var(--green); }
+.invoice-status.sent { background: var(--accentS); color: var(--accent); }
+.invoice-status.draft { background: var(--bg3); color: var(--t2); }
+.invoice-status.overdue { background: var(--redS); color: var(--red); }
+.invoice-row.overdue { background: var(--redS); }
+.invoice-amount { font-weight: 600; color: var(--t0); }
+.invoice-pending { font-size: 11px; color: var(--t2); }
+.invoice-card { background: var(--bg1); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.invoice-card-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.invoice-card-title { font-size: 14px; font-weight: 600; color: var(--t0); }
+.invoice-card-btn { font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accentS); border: none; padding: 6px 14px; border-radius: 8px; cursor: pointer; }
+
+/* ═══════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════ */
 @media (max-width: 900px) {
@@ -642,11 +746,21 @@ body {
   .od-sidebar-logo, .od-nav-item span { display: none; }
   .od-nav-item { justify-content: center; padding: 10px; }
   .form-row { grid-template-columns: 1fr; }
+  .dispatch-summary { grid-template-columns: repeat(3, 1fr); }
+  .job-row { grid-template-columns: 70px 1fr; }
+  .job-value { grid-column: 2; text-align: left; }
+  .customer-detail { padding: 12px; }
+  .history-row { grid-template-columns: 1fr 1fr; }
+  .history-date { grid-column: 1 / -1; font-size: 11px; }
+  .customer-table .hide-mobile { display: none; }
+  .revenue-bar-row { grid-template-columns: 100px 1fr auto; }
+  .trend-bars { gap: 6px; height: 120px; }
 }
 @media (max-width: 600px) {
   .metrics-grid { grid-template-columns: 1fr 1fr; }
   .services-grid { grid-template-columns: 1fr; }
   .urgency-btns { grid-template-columns: 1fr; }
+  .dispatch-summary { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -858,24 +972,28 @@ body {
         <div class="od-sidebar-logo-sub">Plumbing</div>
       </div>
       <button class="od-nav-item active" id="nav-dashboard" onclick="showOdView('dashboard')">
-        <span class="nav-icon">📊</span>
-        <span>Dashboard</span>
+        <span class="nav-icon">📊</span><span>Dashboard</span>
+      </button>
+      <button class="od-nav-item" id="nav-dispatch" onclick="showOdView('dispatch')">
+        <span class="nav-icon">🚛</span><span>Dispatch</span>
       </button>
       <button class="od-nav-item" id="nav-pipeline" onclick="showOdView('pipeline')">
-        <span class="nav-icon">🔄</span>
-        <span>Pipeline</span>
+        <span class="nav-icon">📋</span><span>Pipeline</span>
       </button>
-      <button class="od-nav-item" id="nav-geo" onclick="showOdView('geo')">
-        <span class="nav-icon">🌐</span>
-        <span>GEO Score</span>
+      <button class="od-nav-item" id="nav-customers" onclick="showOdView('customers')">
+        <span class="nav-icon">👥</span><span>Customers</span>
       </button>
-      <button class="od-nav-item" id="nav-kb" onclick="showOdView('kb')">
-        <span class="nav-icon">📚</span>
-        <span>Knowledge Base</span>
+      <button class="od-nav-item" id="nav-money" onclick="showOdView('money')">
+        <span class="nav-icon">💰</span><span>Money</span>
       </button>
       <button class="od-nav-item" id="nav-automation" onclick="showOdView('automation')">
-        <span class="nav-icon">📱</span>
-        <span>Automation</span>
+        <span class="nav-icon">⚡</span><span>Automation</span>
+      </button>
+      <button class="od-nav-item" id="nav-geo" onclick="showOdView('geo')">
+        <span class="nav-icon">🎯</span><span>GEO Score</span>
+      </button>
+      <button class="od-nav-item" id="nav-kb" onclick="showOdView('kb')">
+        <span class="nav-icon">📚</span><span>Knowledge</span>
       </button>
     </nav>
 
@@ -888,12 +1006,33 @@ body {
         </div>
         <div id="dashboardContent"></div>
       </div>
+      <div id="od-dispatch" class="od-view" style="display:none;">
+        <div class="od-main-header">
+          <div class="od-main-title">Dispatch Board</div>
+          <div class="od-main-sub">Today's schedule — assign jobs, track your team</div>
+        </div>
+        <div id="dispatchContent"></div>
+      </div>
       <div id="od-pipeline" class="od-view" style="display:none;">
         <div class="od-main-header">
           <div class="od-main-title">Service Pipeline</div>
           <div class="od-main-sub">Active jobs and upcoming appointments</div>
         </div>
         <div id="pipelineContent" class="pipeline-wrap"></div>
+      </div>
+      <div id="od-customers" class="od-view" style="display:none;">
+        <div class="od-main-header">
+          <div class="od-main-title">Customers</div>
+          <div class="od-main-sub">Customer history, lifetime value, and service records</div>
+        </div>
+        <div id="customersContent"></div>
+      </div>
+      <div id="od-money" class="od-view" style="display:none;">
+        <div class="od-main-header">
+          <div class="od-main-title">Money</div>
+          <div class="od-main-sub">Revenue tracking, invoices, and cost comparison</div>
+        </div>
+        <div id="moneyContent"></div>
       </div>
       <div id="od-geo" class="od-view" style="display:none;">
         <div class="od-main-header">
@@ -1063,6 +1202,134 @@ const DATA = {
       { channel: '📱', name: 'Pat R.', type: 'Appt confirm', status: '✅ Sent' },
       { channel: '📧', name: 'Kim L.', type: 'Reactivation #1', status: '📬 Sent' },
       { channel: '📱', name: 'Mark S.', type: 'Missed call', status: '✅ Booked' }
+    ]
+  },
+  dispatch: {
+    date: 'Wednesday, April 7',
+    techs: [
+      {
+        name: 'Jose Martinez', initials: 'JM', role: 'Senior Tech', status: 'on-job',
+        jobs: [
+          { time: '8:00 AM', service: 'Water heater install', address: '1234 Oak St, Richardson', customer: 'Sarah Chen', phone: '(972) 555-1234', value: '$2,200', status: 'in-progress', emergency: false },
+          { time: '11:30 AM', service: 'Drain cleaning', address: '890 Elm Dr, Plano', customer: 'Mike Williams', phone: '(469) 555-5678', value: '$150', status: 'scheduled', emergency: false },
+          { time: '2:00 PM', service: null, address: null, customer: null, phone: null, value: null, status: 'open', emergency: false },
+          { time: '3:30 PM', service: 'Repiping quote', address: '456 Pine Ln, Murphy', customer: 'Priya Nair', phone: '(972) 555-9012', value: '$4,500', status: 'scheduled', emergency: false }
+        ]
+      },
+      {
+        name: 'Mike (Owner)', initials: 'MK', role: 'Owner / Lead Tech', status: 'on-job',
+        jobs: [
+          { time: '9:00 AM', service: 'Emergency — Burst pipe', address: '567 Main St, Plano', customer: 'Tom Baker', phone: '(469) 555-3456', value: '$800', status: 'in-progress', emergency: true },
+          { time: '1:00 PM', service: 'Fixture install', address: '789 Cedar Ave, Garland', customer: 'Ana Rodriguez', phone: '(214) 555-7890', value: '$350', status: 'scheduled', emergency: false },
+          { time: '4:00 PM', service: null, address: null, customer: null, phone: null, value: null, status: 'open', emergency: false }
+        ]
+      },
+      {
+        name: 'Danny Reeves', initials: 'DR', role: 'Apprentice', status: 'available',
+        jobs: [
+          { time: '10:00 AM', service: 'Toilet install', address: '223 Birch Ct, Plano', customer: 'Ray Kim', phone: '(972) 555-4411', value: '$350', status: 'complete', emergency: false },
+          { time: '1:00 PM', service: null, address: null, customer: null, phone: null, value: null, status: 'open', emergency: false },
+          { time: '3:00 PM', service: null, address: null, customer: null, phone: null, value: null, status: 'open', emergency: false }
+        ]
+      }
+    ],
+    unassigned: [
+      { customer: 'Karen Lewis', service: 'Slab leak detection', location: 'Richardson', score: 85, value: '$1,800', urgency: 'high' },
+      { customer: 'David Park', service: 'Sewer camera inspection', location: 'Wylie', score: 75, value: '$250', urgency: 'normal' }
+    ],
+    summary: { totalJobs: 8, assigned: 6, unassigned: 2, emergencies: 1, openSlots: 4, revenue: '$8,600' }
+  },
+  customers: {
+    summary: { total: 142, active: 38, avgLifetimeValue: '$1,240', repeatRate: '34%' },
+    list: [
+      {
+        name: 'Karen Lewis', initials: 'KL', phone: '(972) 555-8801', email: 'karen.lewis@email.com',
+        location: 'Richardson', ltv: '$1,450', jobs: 3, lastJob: 'Sewer camera ($250)',
+        lastDate: 'Mar 30, 2026', nextJob: 'Slab leak detection (scheduled)',
+        status: 'active', notes: 'Prefers morning appointments', language: 'en',
+        history: [
+          { date: 'Mar 30, 2026', service: 'Sewer Camera Inspection', amount: '$250', tech: 'Jose M.', rating: 5 },
+          { date: 'Dec 12, 2025', service: 'Drain Cleaning', amount: '$150', tech: 'Mike K.', rating: 5 },
+          { date: 'Jun 8, 2025', service: 'Water Heater Repair', amount: '$1,050', tech: 'Jose M.', rating: 4 }
+        ]
+      },
+      {
+        name: 'Carlos Rodriguez', initials: 'CR', phone: '(214) 555-3309', email: 'carlos.r@email.com',
+        location: 'Garland', ltv: '$3,800', jobs: 5, lastJob: 'Water heater install ($2,200)',
+        lastDate: 'Feb 15, 2026', nextJob: null,
+        status: 'active', notes: 'Prefers Spanish. Referred by Jennifer M.', language: 'es',
+        history: [
+          { date: 'Feb 15, 2026', service: 'Water Heater Install (Tankless)', amount: '$2,200', tech: 'Jose M.', rating: 5 },
+          { date: 'Oct 3, 2025', service: 'Faucet Installation (3)', amount: '$450', tech: 'Danny R.', rating: 5 },
+          { date: 'Jul 20, 2025', service: 'Drain Cleaning', amount: '$150', tech: 'Mike K.', rating: 4 },
+          { date: 'Mar 5, 2025', service: 'Toilet Replacement', amount: '$550', tech: 'Jose M.', rating: 5 },
+          { date: 'Nov 12, 2024', service: 'Emergency Pipe Repair', amount: '$450', tech: 'Mike K.', rating: 5 }
+        ]
+      },
+      {
+        name: 'Jennifer Martinez', initials: 'JM', phone: '(469) 555-2210', email: 'jmartinez@email.com',
+        location: 'Plano', ltv: '$1,200', jobs: 1, lastJob: 'Emergency pipe repair ($1,200)',
+        lastDate: 'Mar 25, 2026', nextJob: null,
+        status: 'active', notes: 'Mentioned neighbor needs repiping — ask for referral', language: 'en',
+        history: [
+          { date: 'Mar 25, 2026', service: 'Emergency Pipe Repair', amount: '$1,200', tech: 'Mike K.', rating: 5 }
+        ]
+      },
+      {
+        name: 'Robert Kim', initials: 'RK', phone: '(972) 555-6690', email: 'rkim@email.com',
+        location: 'Murphy', ltv: '$2,800', jobs: 2, lastJob: 'Water heater install ($2,800)',
+        lastDate: 'Jan 10, 2026', nextJob: null,
+        status: 'inactive', notes: '6-month check due — offer annual maintenance plan', language: 'en',
+        history: [
+          { date: 'Jan 10, 2026', service: 'Water Heater Install (Tank)', amount: '$1,400', tech: 'Jose M.', rating: 5 },
+          { date: 'Jan 8, 2026', service: 'Water Heater Diagnostic', amount: '$150', tech: 'Danny R.', rating: 4 }
+        ]
+      },
+      {
+        name: 'Maria Gonzalez', initials: 'MG', phone: '(214) 555-7745', email: 'maria.g@email.com',
+        location: 'Garland', ltv: '$540', jobs: 2, lastJob: 'Fixture install ($190)',
+        lastDate: 'Nov 8, 2025', nextJob: null,
+        status: 'dormant', notes: 'Spanish-speaking. Found via chatbot. Hasn\'t returned in 5 months.', language: 'es',
+        history: [
+          { date: 'Nov 8, 2025', service: 'Garbage Disposal Install', amount: '$190', tech: 'Danny R.', rating: 5 },
+          { date: 'Aug 22, 2025', service: 'Drain Cleaning', amount: '$99', tech: 'Mike K.', rating: null }
+        ]
+      },
+      {
+        name: 'Tom Baker', initials: 'TB', phone: '(469) 555-3456', email: 'tombaker@email.com',
+        location: 'Plano', ltv: '$800', jobs: 1, lastJob: 'Emergency — Burst pipe ($800)',
+        lastDate: 'Apr 5, 2026', nextJob: null,
+        status: 'active', notes: 'Current emergency job in progress', language: 'en',
+        history: [
+          { date: 'Apr 5, 2026', service: 'Emergency Burst Pipe Repair', amount: '$800', tech: 'Mike K.', rating: null }
+        ]
+      }
+    ]
+  },
+  money: {
+    summary: { mtdRevenue: '$18,400', mtdTrend: '+22%', outstandingInvoices: '$2,150', avgJobValue: '$680', collectionRate: '94%' },
+    invoices: [
+      { id: '#1047', customer: 'Tom Baker', service: 'Emergency burst pipe repair', amount: '$850', date: 'Apr 5', status: 'paid', tech: 'Mike K.' },
+      { id: '#1046', customer: 'Ana Rodriguez', service: 'Toilet installation', amount: '$350', date: 'Apr 3', status: 'sent', tech: 'Jose M.', daysPending: 2 },
+      { id: '#1045', customer: 'David Park', service: 'Sewer camera inspection', amount: '$250', date: 'Mar 30', status: 'paid', tech: 'Jose M.' },
+      { id: '#1044', customer: 'Karen Lewis', service: 'Slab leak detection', amount: '$1,800', date: 'Apr 6', status: 'draft', tech: 'Pending' },
+      { id: '#1043', customer: 'Ray Kim', service: 'Toilet installation', amount: '$350', date: 'Apr 7', status: 'paid', tech: 'Danny R.' },
+      { id: '#1042', customer: 'Sarah Chen', service: 'Drain cleaning', amount: '$150', date: 'Apr 2', status: 'overdue', tech: 'Jose M.', daysPending: 5 }
+    ],
+    revenueByService: [
+      { service: 'Water Heaters', amount: 6600, pct: 36, color: 'var(--accent)' },
+      { service: 'Emergency', amount: 5100, pct: 28, color: 'var(--red)' },
+      { service: 'Drain Cleaning', amount: 3200, pct: 17, color: 'var(--green)' },
+      { service: 'Repiping', amount: 2500, pct: 14, color: 'var(--amber)' },
+      { service: 'Fixtures', amount: 1000, pct: 5, color: 'var(--blue)' }
+    ],
+    monthlyTrend: [
+      { month: 'Nov', amount: 12400 },
+      { month: 'Dec', amount: 10800 },
+      { month: 'Jan', amount: 14200 },
+      { month: 'Feb', amount: 13600 },
+      { month: 'Mar', amount: 15100 },
+      { month: 'Apr', amount: 18400 }
     ]
   }
 };
@@ -1544,6 +1811,278 @@ async function previewAiContent(btn) {
 }
 
 /* ═══════════════════════════════════════════
+   DISPATCH BOARD RENDER
+═══════════════════════════════════════════ */
+function renderDispatch() {
+  const el = document.getElementById('dispatchContent');
+  if (!el || el.dataset.rendered) return;
+  el.dataset.rendered = '1';
+  const d = DATA.dispatch;
+  const s = d.summary;
+
+  const statusColors = { 'in-progress': 'var(--green)', 'scheduled': 'var(--amber)', 'complete': 'var(--t2)' };
+
+  const summaryHtml = `
+    <div class="dispatch-summary">
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.totalJobs)}</div><div class="dispatch-stat-label">Total Jobs</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.assigned)}</div><div class="dispatch-stat-label">Assigned</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.unassigned)}${s.unassigned > 0 ? ' <span class="dispatch-stat-dot" style="background:var(--amber)"></span>' : ''}</div><div class="dispatch-stat-label">Unassigned</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.emergencies)}${s.emergencies > 0 ? ' <span class="dispatch-stat-dot" style="background:var(--red)"></span>' : ''}</div><div class="dispatch-stat-label">Emergencies</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.openSlots)}</div><div class="dispatch-stat-label">Open Slots</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.revenue)}</div><div class="dispatch-stat-label">Today's Revenue</div></div>
+    </div>`;
+
+  const techsHtml = d.techs.map(tech => {
+    const jobRows = tech.jobs.map(job => {
+      if (job.status === 'open') {
+        return `<div class="job-row open-slot"><div class="job-open-label">— Open Slot · ${escapeHtml(job.time)} —</div></div>`;
+      }
+      const statusLabel = job.status === 'in-progress' ? '● In Progress' : job.status === 'scheduled' ? '○ Scheduled' : '✓ Complete';
+      return `
+        <div class="job-row${job.emergency ? ' emergency' : ''}">
+          <div class="job-time">${escapeHtml(job.time)}</div>
+          <div>
+            <div class="job-service">${escapeHtml(job.service)}</div>
+            <div class="job-address">${escapeHtml(job.address)}</div>
+            <div class="job-customer">${escapeHtml(job.customer)} · ${escapeHtml(job.phone)}</div>
+          </div>
+          <div>
+            <div class="job-value">${escapeHtml(job.value)}</div>
+            <div class="job-status-pill" style="color:${statusColors[job.status] || 'var(--t2)'}">${statusLabel}</div>
+          </div>
+        </div>`;
+    }).join('');
+
+    const statusClass = tech.status === 'on-job' ? 'on-job' : 'available';
+    const statusLabel = tech.status === 'on-job' ? '● On Job' : '● Available';
+    return `
+      <div class="tech-card">
+        <div class="tech-card-header">
+          <div class="tech-avatar">${escapeHtml(tech.initials)}</div>
+          <div>
+            <div class="tech-name">${escapeHtml(tech.name)}</div>
+            <div class="tech-role">${escapeHtml(tech.role)}</div>
+          </div>
+          <span class="tech-status ${statusClass}">${statusLabel}</span>
+        </div>
+        ${jobRows}
+      </div>`;
+  }).join('');
+
+  const unassignedHtml = d.unassigned.length > 0 ? `
+    <div class="unassigned-card">
+      <div class="unassigned-header">
+        <span>⚠️ Unassigned Jobs (${d.unassigned.length})</span>
+        <button style="font-size:12px;font-weight:600;color:var(--accent);background:var(--accentS);border:none;padding:6px 14px;border-radius:8px;cursor:pointer;">Assign ↗</button>
+      </div>
+      ${d.unassigned.map(u => `
+        <div class="unassigned-item">
+          <div style="font-size:13px;font-weight:500;color:var(--t0);">
+            ${u.urgency === 'high' ? '🔴 ' : ''}${escapeHtml(u.customer)} — ${escapeHtml(u.service)} — ${escapeHtml(u.location)}
+          </div>
+          <div style="font-size:12px;color:var(--t2);margin-top:4px;">
+            Score: ${escapeHtml(u.score)} · ${escapeHtml(u.value)}${u.urgency === 'high' ? ' · <span class="urgency-high">HIGH PRIORITY</span>' : ''}
+          </div>
+        </div>
+      `).join('')}
+    </div>` : '';
+
+  el.innerHTML = summaryHtml + techsHtml + unassignedHtml;
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOMERS CRM RENDER
+═══════════════════════════════════════════ */
+function renderCustomers() {
+  const el = document.getElementById('customersContent');
+  if (!el || el.dataset.rendered) return;
+  el.dataset.rendered = '1';
+  const d = DATA.customers;
+  const s = d.summary;
+
+  const summaryHtml = `
+    <div class="dispatch-summary" style="grid-template-columns:repeat(4,1fr);">
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.total)}</div><div class="dispatch-stat-label">Total Customers</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.active)}</div><div class="dispatch-stat-label">Active (30 days)</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.avgLifetimeValue)}</div><div class="dispatch-stat-label">Avg Lifetime Value</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.repeatRate)}</div><div class="dispatch-stat-label">Repeat Rate</div></div>
+    </div>`;
+
+  const ltvNum = v => parseInt(v.replace(/[^0-9]/g, ''), 10);
+
+  const tableRows = d.list.map((c, i) => {
+    const ltvStyle = ltvNum(c.ltv) >= 1000 ? 'font-weight:600;color:var(--accent)' : '';
+    const langBadge = c.language === 'es' ? ' <span class="lang-badge">ES 🇲🇽</span>' : '';
+    return `
+      <tr class="customer-row" id="cust-row-${i}" onclick="toggleCustomerDetail(${i})">
+        <td><div style="display:flex;align-items:center;gap:8px;"><div class="tech-avatar" style="width:28px;height:28px;font-size:11px;">${escapeHtml(c.initials)}</div><span>${escapeHtml(c.name)}${langBadge}</span></div></td>
+        <td class="hide-mobile">${escapeHtml(c.location)}</td>
+        <td class="hide-mobile">${escapeHtml(c.jobs)}</td>
+        <td style="${ltvStyle}">${escapeHtml(c.ltv)}</td>
+        <td class="hide-mobile">${escapeHtml(c.lastJob)}</td>
+        <td><span class="cust-status ${c.status}">${escapeHtml(c.status.charAt(0).toUpperCase() + c.status.slice(1))}</span></td>
+      </tr>
+      <tr><td colspan="6" style="padding:0;"><div class="customer-detail" id="cust-detail-${i}">
+        <div class="customer-contact">
+          <span>📞 ${escapeHtml(c.phone)}</span>
+          <span>📧 ${escapeHtml(c.email)}</span>
+          <span>📍 ${escapeHtml(c.location)}</span>
+          <span>🗣️ ${c.language === 'es' ? 'Spanish' : 'English'}</span>
+        </div>
+        ${c.notes ? `<div class="customer-notes">📝 ${escapeHtml(c.notes)}</div>` : ''}
+        <div class="customer-history">
+          <div class="customer-history-title">Service History</div>
+          ${c.history.map(h => `
+            <div class="history-row">
+              <span class="history-date">${escapeHtml(h.date)}</span>
+              <span class="history-service">${escapeHtml(h.service)}</span>
+              <span class="history-amount">${escapeHtml(h.amount)}</span>
+              <span class="history-rating">${h.rating ? '⭐' + h.rating : '—'}</span>
+            </div>
+          `).join('')}
+        </div>
+        ${c.nextJob ? `<div class="customer-next">📅 Next: ${escapeHtml(c.nextJob)}</div>` : ''}
+      </div></td></tr>`;
+  }).join('');
+
+  const tableHtml = `
+    <div style="background:var(--bg1);border:1px solid var(--border);border-radius:14px;overflow:hidden;">
+      <div style="overflow-x:auto;">
+        <table class="customer-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th class="hide-mobile">Location</th>
+              <th class="hide-mobile">Jobs</th>
+              <th>LTV</th>
+              <th class="hide-mobile">Last Service</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+    </div>`;
+
+  el.innerHTML = summaryHtml + tableHtml;
+}
+
+function toggleCustomerDetail(id) {
+  const detail = document.getElementById('cust-detail-' + id);
+  const row = document.getElementById('cust-row-' + id);
+  if (!detail) return;
+  const isOpen = detail.classList.contains('show');
+  document.querySelectorAll('.customer-detail.show').forEach(d => d.classList.remove('show'));
+  document.querySelectorAll('.customer-row.expanded').forEach(r => r.classList.remove('expanded'));
+  if (!isOpen) {
+    detail.classList.add('show');
+    row.classList.add('expanded');
+  }
+}
+
+/* ═══════════════════════════════════════════
+   MONEY / REVENUE RENDER
+═══════════════════════════════════════════ */
+function renderMoney() {
+  const el = document.getElementById('moneyContent');
+  if (!el || el.dataset.rendered) return;
+  el.dataset.rendered = '1';
+  const d = DATA.money;
+  const s = d.summary;
+
+  const summaryHtml = `
+    <div class="dispatch-summary" style="grid-template-columns:repeat(5,1fr);">
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.mtdRevenue)}</div><div class="dispatch-stat-label">Revenue (MTD)</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value" style="color:var(--green)">${escapeHtml(s.mtdTrend)} ↑</div><div class="dispatch-stat-label">Trend</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.outstandingInvoices)}${' <span class="dispatch-stat-dot" style="background:var(--amber)"></span>'}</div><div class="dispatch-stat-label">Outstanding</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.avgJobValue)}</div><div class="dispatch-stat-label">Avg Job Value</div></div>
+      <div class="dispatch-stat"><div class="dispatch-stat-value">${escapeHtml(s.collectionRate)}</div><div class="dispatch-stat-label">Collection Rate</div></div>
+    </div>`;
+
+  const barsHtml = `
+    <div class="revenue-bars">
+      <div class="revenue-bars-title">Revenue by Service — April 2026</div>
+      ${d.revenueByService.map(r => `
+        <div class="revenue-bar-row">
+          <div class="revenue-bar-label">${escapeHtml(r.service)}</div>
+          <div class="revenue-bar-track"><div class="revenue-bar-fill" style="width:0%;background:${r.color};" data-pct="${r.pct}"></div></div>
+          <div class="revenue-bar-amount">$${r.amount.toLocaleString()} (${r.pct}%)</div>
+        </div>
+      `).join('')}
+    </div>`;
+
+  const maxAmount = Math.max(...d.monthlyTrend.map(m => m.amount));
+  const lastMonth = d.monthlyTrend[d.monthlyTrend.length - 1].month;
+  const trendHtml = `
+    <div class="trend-chart">
+      <div class="trend-chart-title">Monthly Revenue</div>
+      <div class="trend-bars">
+        ${d.monthlyTrend.map(m => {
+          const pct = (m.amount / maxAmount) * 100;
+          const isCurrent = m.month === lastMonth;
+          return `
+            <div class="trend-bar-col">
+              <div class="trend-bar-amount">$${(m.amount / 1000).toFixed(1)}K</div>
+              <div class="trend-bar${isCurrent ? ' current' : ''}" style="height:0%;" data-pct="${pct}"></div>
+              <div class="trend-bar-label">${escapeHtml(m.month)}</div>
+            </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+
+  const statusEmoji = { paid: '✅', sent: '📤', draft: '📝', overdue: '🔴' };
+  const statusLabel = { paid: 'Paid', sent: 'Sent', draft: 'Draft', overdue: 'Overdue' };
+  const invoiceRows = d.invoices.map(inv => `
+    <tr class="invoice-row${inv.status === 'overdue' ? ' overdue' : ''}">
+      <td><span class="invoice-id">${escapeHtml(inv.id)}</span></td>
+      <td>${escapeHtml(inv.customer)}</td>
+      <td class="hide-mobile">${escapeHtml(inv.service)}</td>
+      <td class="invoice-amount">${escapeHtml(inv.amount)}</td>
+      <td class="hide-mobile">${escapeHtml(inv.date)}</td>
+      <td>
+        <span class="invoice-status ${inv.status}">${statusEmoji[inv.status]} ${statusLabel[inv.status]}</span>
+        ${inv.daysPending ? `<div class="invoice-pending">${inv.daysPending}d pending</div>` : ''}
+      </td>
+    </tr>
+  `).join('');
+
+  const invoiceHtml = `
+    <div class="invoice-card">
+      <div class="invoice-card-header">
+        <div class="invoice-card-title">Recent Invoices</div>
+        <button class="invoice-card-btn">+ New Invoice</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="invoice-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Customer</th>
+              <th class="hide-mobile">Service</th>
+              <th>Amount</th>
+              <th class="hide-mobile">Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>${invoiceRows}</tbody>
+        </table>
+      </div>
+    </div>`;
+
+  el.innerHTML = summaryHtml + barsHtml + trendHtml + invoiceHtml;
+
+  // Animate bars after render
+  setTimeout(() => {
+    el.querySelectorAll('.revenue-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.pct + '%';
+    });
+    el.querySelectorAll('.trend-bar').forEach(bar => {
+      bar.style.height = bar.dataset.pct + '%';
+    });
+  }, 100);
+}
+
+/* ═══════════════════════════════════════════
    VIEW SWITCHING
 ═══════════════════════════════════════════ */
 function switchView(view) {
@@ -1559,13 +2098,16 @@ function switchView(view) {
 }
 
 function showOdView(view) {
-  ['dashboard', 'pipeline', 'geo', 'kb', 'automation'].forEach(v => {
+  ['dashboard', 'dispatch', 'pipeline', 'customers', 'money', 'automation', 'geo', 'kb'].forEach(v => {
     const el = document.getElementById('od-' + v);
     if (el) el.style.display = v === view ? 'block' : 'none';
     const nav = document.getElementById('nav-' + v);
     if (nav) nav.classList.toggle('active', v === view);
   });
+  if (view === 'dispatch') renderDispatch();
   if (view === 'pipeline') renderPipeline();
+  if (view === 'customers') renderCustomers();
+  if (view === 'money') renderMoney();
   if (view === 'geo') renderGeo();
   if (view === 'kb') renderKb();
   if (view === 'automation') renderAutomation();
