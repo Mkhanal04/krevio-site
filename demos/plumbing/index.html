@@ -2929,15 +2929,52 @@ function addUserMsg(text) {
 
 function getChatFallback(text) {
   const t = text.toLowerCase();
-  if (t.includes('emergency') || t.includes('burst') || t.includes('flood') || t.includes('leak') || t.includes('backup'))
-    return '🚨 If you have an active emergency, please call (469) 555-0789 immediately. We dispatch 24/7 and aim to arrive within 60 minutes.';
+
+  // Emergency — immediate dispatch offer
+  if (t.includes('burst') || t.includes('flood') || t.includes('sewage') || (t.includes('emergency') && (t.includes('pipe') || t.includes('water') || t.includes('help'))))
+    return '🚨 Emergency detected! I\'m dispatching Mike K. (Senior Tech, 15 years experience) — he can be at your location within 45 minutes. Please shut off your main water valve in the meantime. Emergency dispatch fee is $125, actual repair quoted on-site. Your reference # is EM-2026-048. Can I get your address?';
+
+  if (t.includes('emergency') || t.includes('leak') || t.includes('backup'))
+    return '🚨 That sounds urgent. We dispatch 24/7 and can have a tech on-site within 30-45 minutes. Would you like me to send someone right away, or is this something we can schedule? If it\'s active flooding, please shut off your main water valve and call (469) 555-0789.';
+
+  // Availability / scheduling — the key booking flow
+  if (t.includes('available') || t.includes('tomorrow') || t.includes('schedule') || t.includes('book') || t.includes('appointment') || t.includes('when can') || t.includes('opening')) {
+    if (t.includes('tomorrow'))
+      return 'Let me check tomorrow\'s schedule... We have two openings:\n\n🕐 9:00 AM with Jose Martinez (Senior Tech, 8 years experience)\n🕑 2:00 PM with Jose, or 11:00 AM with Mike K. (Owner, 15 years experience)\n\nWhich time works best for you? I\'ll also need your name and address to confirm the booking.';
+    if (t.includes('wednesday') || t.includes('wed'))
+      return 'Wednesday looks great! Danny Reeves is available all day, and Jose Martinez has a 1:00 PM slot. Danny handles drain cleaning and general maintenance, Jose is our specialist for water heaters and repiping. What time works for you?';
+    if (t.includes('thursday') || t.includes('thu'))
+      return 'Thursday has full team availability in the morning — 9 AM, 10 AM, and 11 AM slots open. I can match you with the right tech based on your job. What service do you need?';
+    return 'We have several openings this week! Here\'s what\'s available:\n\n📅 Tomorrow: 9:00 AM, 11:00 AM, 2:00 PM\n📅 Wednesday: All day + 1:00 PM\n📅 Thursday: Morning slots (9-11 AM)\n📅 Friday: 9:00 AM, 10:00 AM, 2:00 PM\n\nWhen works best for you? I\'ll match you with the right tech.';
+  }
+
+  // Booking confirmation keywords
+  if (t.includes('9 am') || t.includes('9:00') || t.includes('9am') || t.includes('morning') || t.includes('first slot'))
+    return '✅ Booked! Jose Martinez (Senior Tech) will arrive between 9:00–9:30 AM. He\'ll assess the situation and provide an exact quote before starting any work. Your reference # is SVC-2026-127. You\'ll get a text confirmation with Jose\'s ETA. Can I get your name and address?';
+
+  if (t.includes('2 pm') || t.includes('2:00') || t.includes('2pm') || t.includes('afternoon'))
+    return '✅ Booked! Jose Martinez will arrive between 2:00–2:30 PM. He\'ll assess and quote before starting work. Reference # SVC-2026-128. You\'ll get a text with his ETA. Can I get your name and address?';
+
+  if (t.includes('11') && (t.includes('am') || t.includes(':00')))
+    return '✅ Booked! Mike K. (Owner, 15 years experience) will arrive between 11:00–11:30 AM. He\'ll assess and quote before starting. Reference # SVC-2026-129. You\'ll get a text with his ETA. Can I get your name and address?';
+
+  // Service-specific with availability mention
   if (t.includes('water heater') || t.includes('hot water'))
-    return 'We install and repair both tank and tankless water heaters. Tank units start around $800 installed, tankless from $2,000. Want to schedule a free estimate?';
+    return 'We install and repair both tank and tankless water heaters. Tank units start at $800 installed, tankless from $2,000. Jose Martinez is our water heater specialist (8 years experience) — he has openings tomorrow at 9:00 AM and 2:00 PM. Replacements typically take 2-4 hours. Want to book a time?';
+
   if (t.includes('drain') || t.includes('clog'))
-    return 'Drain cleaning starts at $99 with camera inspection included. We handle kitchen, bathroom, and floor drains. When works best for you?';
+    return 'Drain cleaning starts at $99 and includes a free camera inspection. The camera inspection often catches bigger issues early — saved one customer $3,000 last month by finding a root intrusion before it became an emergency. We have openings this week: Wednesday with Danny, Thursday morning, or Friday. Want to pick a time?';
+
+  if (t.includes('repipe') || t.includes('repiping') || t.includes('pipe replacement'))
+    return 'Whole-home repiping starts at $2,500. We offer both PEX and copper options with lifetime warranty on PEX. Jose Martinez is our repiping specialist. He has availability tomorrow at 9:00 AM for a free assessment — should I book that?';
+
   if (t.includes('cost') || t.includes('price') || t.includes('how much'))
-    return 'Pricing depends on the job — drain cleaning from $99, water heaters from $800, repiping from $2,500. We provide free estimates for all major work.';
-  return 'Thanks for reaching out! I can help with drain cleaning, water heaters, repiping, fixture installation, or emergency repairs. What do you need help with?';
+    return 'Here are our pricing ranges:\n\n💧 Drain Cleaning: From $99 (camera inspection included)\n🔥 Water Heaters: Tank $800–$1,500 / Tankless $2,000–$3,500\n🔧 Repiping: From $2,500 (whole home)\n🏠 Fixture Install: From $150\n🚰 Sewer Line: From $200\n\nAll major work comes with a free estimate. Want to schedule one?';
+
+  if (t.includes('yes') || t.includes('please') || t.includes('sounds good') || t.includes('let\'s do it') || t.includes('book it'))
+    return 'Great! I have a few time slots this week:\n\n🕐 Tomorrow 9:00 AM — Jose Martinez (Senior Tech)\n🕑 Tomorrow 2:00 PM — Jose Martinez\n🕚 Tomorrow 11:00 AM — Mike K. (Owner)\n\nWhich works best? I\'ll just need your name, address, and phone to confirm.';
+
+  return 'Thanks for reaching out to Lone Star Plumbing! I can help with drain cleaning, water heaters, repiping, fixture installation, sewer lines, or emergency repairs. I can also check availability and book you a slot with one of our techs. What do you need help with?';
 }
 
 async function sendChat() {
