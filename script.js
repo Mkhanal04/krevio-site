@@ -248,6 +248,11 @@ let chatHistory = [];
 let chatOpen = false;
 let chatWelcomed = false;
 let voiceMode = false;
+let chatSessionId = 'krevio-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+let chatStartTime = null;
+let chatLeadCaptured = false;
+let conversationLogged = false;
+let idleTimer = null;
 
 // Restore session
 try {
@@ -302,8 +307,10 @@ function addMessage(text, type, save = true) {
   chatMessages.appendChild(msg);
   chatMessages.scrollTop = chatMessages.scrollHeight;
   if (save && type === 'user') {
-    chatHistory.push({ role: 'user', content: text });
+    if (!chatStartTime) chatStartTime = Date.now();
+    chatHistory.push({ role: 'user', content: text, timestamp: new Date().toISOString() });
     saveChatSession();
+    resetIdleTimer();
   }
   return msg;
 }
@@ -393,9 +400,10 @@ window.submitChatLead = async function() {
     if (res.ok && json.success) {
       card.classList.add('submitted');
       btn.textContent = '✓ Sent';
+      chatLeadCaptured = true;
       const firstName = name.split(' ')[0];
       addMessage(`Got it, ${firstName}! We'll reach out within 24 hours.`, 'bot');
-      chatHistory.push({ role: 'model', content: `Got it, ${firstName}! We'll reach out within 24 hours.` });
+      chatHistory.push({ role: 'model', content: `Got it, ${firstName}! We'll reach out within 24 hours.`, timestamp: new Date().toISOString() });
       saveChatSession();
     } else {
       btn.disabled = false;
@@ -423,7 +431,7 @@ async function sendMessage(text) {
       body: JSON.stringify({
         message: text,
         history: chatHistory.slice(-20),
-        sessionId: Date.now().toString()
+        sessionId: chatSessionId
       }),
     });
 
@@ -432,8 +440,9 @@ async function sendMessage(text) {
     const reply = json.reply || "Sorry, I couldn't process that. Try again?";
 
     const botMsg = addMessage(reply, 'bot');
-    chatHistory.push({ role: 'model', content: reply });
+    chatHistory.push({ role: 'model', content: reply, timestamp: new Date().toISOString() });
     saveChatSession();
+    resetIdleTimer();
 
     // Handle actions
     if (json.action) {
@@ -561,6 +570,77 @@ voiceToggle.addEventListener('click', () => {
 if (window.speechSynthesis) {
   window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
 }
+
+// ─── Conversation Logging ────────────────────────────────────────────────────
+function extractSignals(messages) {
+  const industries = ['landscaping', 'plumbing', 'hvac', 'real estate', 'painting', 'electrical', 'roofing'];
+  const demos = ['landscaping', 'realestate', 'plumbing', 'hvac'];
+  const fullText = messages.map(m => m.content).join(' ').toLowerCase();
+  return {
+    industryMentioned: industries.find(i => fullText.includes(i)) || null,
+    demoRequested: demos.find(d => fullText.includes(d)) || null
+  };
+}
+
+function chatHasUserMessages() {
+  return chatHistory.some(m => m.role === 'user');
+}
+
+function logConversation() {
+  if (conversationLogged) return;
+  if (!chatHasUserMessages()) return;
+  conversationLogged = true;
+  clearTimeout(idleTimer);
+
+  const signals = extractSignals(chatHistory);
+  const payload = {
+    sessionId: chatSessionId,
+    messages: chatHistory,
+    messageCount: chatHistory.filter(m => m.role === 'user').length,
+    industryMentioned: signals.industryMentioned,
+    demoRequested: signals.demoRequested,
+    leadCaptured: chatLeadCaptured,
+    language: localStorage.getItem('krevio-lang') || 'en',
+    durationSeconds: chatStartTime ? Math.round((Date.now() - chatStartTime) / 1000) : 0
+  };
+
+  // Use sendBeacon with Blob for correct Content-Type
+  const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+  navigator.sendBeacon('/api/log-conversation', blob);
+}
+
+function resetIdleTimer() {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => {
+    if (chatHasUserMessages()) {
+      logConversation();
+    }
+  }, 3 * 60 * 1000); // 3 minutes idle
+}
+
+// Log on chat close
+chatClose.addEventListener('click', () => {
+  if (chatOpen && chatHasUserMessages()) {
+    logConversation();
+  }
+});
+
+// Log on page unload
+window.addEventListener('beforeunload', () => {
+  if (chatHasUserMessages()) {
+    logConversation();
+  }
+});
+
+// Reset logged flag if user sends a new message after logging
+const originalSendMessage = sendMessage;
+sendMessage = async function(text) {
+  if (conversationLogged && text.trim()) {
+    // New message after log — reset for re-logging
+    conversationLogged = false;
+  }
+  return originalSendMessage(text);
+};
 
 // Remove pulse animation after it plays
 chatTrigger.addEventListener('animationend', () => {
