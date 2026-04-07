@@ -3061,15 +3061,46 @@ let voiceMode = false;
 let recognition = null;
 let isRecording = false;
 
+function getBestVoice() {
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  // Priority list: modern natural/neural voices first, then best platform defaults
+  // Each entry: partial name match (case-insensitive)
+  const priority = [
+    // Chrome neural voices (best quality available in browser)
+    'Google UK English Female',
+    'Google US English',
+    // macOS enhanced/premium voices
+    'Samantha',
+    'Karen',
+    'Moira',
+    'Tessa',
+    // Windows neural voices (Windows 11+)
+    'Microsoft Jenny',
+    'Microsoft Aria',
+    'Microsoft Guy',
+    // Android
+    'English United States',
+    'en-us-x-sfg',
+  ];
+  for (const name of priority) {
+    const match = voices.find(v => v.name.includes(name) && v.lang.startsWith('en'));
+    if (match) return match;
+  }
+  // Last resort: any English voice, prefer female (generally clearer for TTS)
+  return voices.find(v => v.lang.startsWith('en-US')) || voices.find(v => v.lang.startsWith('en')) || voices[0];
+}
+
 function speakText(text, msgEl) {
   if (!voiceMode || !window.speechSynthesis) return;
   window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 1.0;
+  // Strip emoji/symbols that TTS reads out literally
+  const cleanText = text.replace(/[\u{1F000}-\u{1FFFF}]/gu, '').replace(/[✓✅🚨⚠↔●○📸📦📅🕐🕑🕚💧🔥🔧🏠🚰★·]/g, '').replace(/\s{2,}/g, ' ').trim();
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  utterance.rate = 1.05;  // Slightly faster feels more natural
   utterance.pitch = 1.0;
-  const voices = speechSynthesis.getVoices();
-  const preferred = voices.find(v => v.name.includes('Google US English')) || voices.find(v => v.lang === 'en-US') || voices[0];
-  if (preferred) utterance.voice = preferred;
+  const voice = getBestVoice();
+  if (voice) utterance.voice = voice;
   if (msgEl) {
     utterance.onstart = () => msgEl.classList.add('speaking');
     utterance.onend = () => msgEl.classList.remove('speaking');
@@ -3186,8 +3217,11 @@ function showToast(msg) {
   renderReviews();
   initScrollReveal();
   initSpeechRecognition();
-  // Preload voices for TTS
-  if (window.speechSynthesis) speechSynthesis.getVoices();
+  // Preload voices for TTS — Chrome loads voices async, so listen for the event
+  if (window.speechSynthesis) {
+    speechSynthesis.getVoices();
+    speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+  }
 })();
 </script>
 </body>
