@@ -1,821 +1,914 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light" data-industry="realestate">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apex Home Solutions — Frisco TX | Renovation, Pools & Property Management</title>
-<meta name="description" content="Frisco's trusted full-service home company. Kitchen & bathroom renovations, custom pool builds, and property management across DFW. Free consultations. 4.8★ from 200+ reviews.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<title>Apex Home Solutions — Frisco TX | Property Management & Real Estate</title>
+<meta name="description" content="Full-service property management, real estate, and remodeling in Frisco, Plano, McKinney & DFW. AI-powered systems, bilingual support, 4.8★ from 124 reviews.">
+<link rel="stylesheet" href="/css/krevio-tokens.css">
+<link rel="stylesheet" href="/css/industry-overrides.css">
 <script defer src="/_vercel/insights/script.js"></script>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [
+  "@type": "RealEstateAgent",
+  "name": "Apex Home Solutions",
+  "telephone": "(469) 555-0192",
+  "url": "https://krevio.net/demos/realestate",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4200 Legacy Dr",
+    "addressLocality": "Frisco",
+    "addressRegion": "TX",
+    "postalCode": "75034",
+    "addressCountry": "US"
+  },
+  "areaServed": ["Frisco", "Plano", "McKinney", "Allen", "Prosper", "Celina"],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "124"
+  },
+  "openingHoursSpecification": [
     {
-      "@type": "HomeAndConstructionBusiness",
-      "name": "Apex Home Solutions",
-      "telephone": "(469) 555-0456",
-      "url": "https://krevio.dev/demos/realestate/",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "3100 Gaylord Pkwy",
-        "addressLocality": "Frisco",
-        "addressRegion": "TX",
-        "postalCode": "75034",
-        "addressCountry": "US"
-      },
-      "geo": { "@type": "GeoCoordinates", "latitude": 33.1507, "longitude": -96.8236 },
-      "areaServed": ["Frisco", "Plano", "McKinney", "Allen", "Prosper"],
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "200" },
-      "priceRange": "$$$",
-      "openingHoursSpecification": [{
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
-        "opens": "08:00", "closes": "18:00"
-      }],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Home Services",
-        "itemListElement": [
-          { "@type": "OfferCatalog", "name": "Renovations & Remodeling" },
-          { "@type": "OfferCatalog", "name": "Outdoor & Pools" },
-          { "@type": "OfferCatalog", "name": "Property Management" }
-        ]
-      }
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "08:00",
+      "closes": "18:00"
     },
     {
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "How long does a kitchen renovation take?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Typically 4-8 weeks depending on scope. Full gut renovations take 8-12 weeks." }},
-        { "@type": "Question", "name": "Do you handle permits?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. We manage all permitting with the City of Frisco, Plano, and Collin County." }},
-        { "@type": "Question", "name": "What areas do you serve?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Frisco, Plano, McKinney, Allen, Prosper, and surrounding DFW communities." }}
-      ]
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday"],
+      "opens": "09:00",
+      "closes": "14:00"
     }
   ]
 }
 </script>
 
 <style>
-/* ═══════════════════════════════════════════
-   RESET
-═══════════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-img { max-width: 100%; display: block; }
-button { font-family: inherit; cursor: pointer; }
-input, textarea, select { font-family: inherit; }
-a { text-decoration: none; color: inherit; }
-
-/* ═══════════════════════════════════════════
-   THEME TOKENS — Navy Blue Accent
-═══════════════════════════════════════════ */
+/* ─── Real estate geometric depth tokens ─── */
 [data-theme="light"] {
-  --bg: #FAFAFA; --bg1: #FFFFFF; --bg2: #F4F4F5; --bg3: #E4E4E7;
-  --border: rgba(0,0,0,0.06); --borderH: rgba(0,0,0,0.12);
-  --t0: #18181B; --t1: #3F3F46; --t2: #71717A; --t3: #D4D4D8;
-  /* Accent — navy blue */
-  --accent: #1E40AF; --accentS: rgba(30,64,175,0.06); --accentB: rgba(30,64,175,0.14);
-  /* Status colors — unchanged */
-  --green: #16A34A; --greenS: rgba(22,163,74,0.06); --greenB: rgba(22,163,74,0.14);
-  --amber: #CA8A04; --amberS: rgba(202,138,4,0.06); --amberB: rgba(202,138,4,0.14);
-  --red: #DC2626; --redS: rgba(220,38,38,0.06);
-  --blue: #2563EB; --blueS: rgba(37,99,235,0.06);
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,0.08);
-  --hero-bg: linear-gradient(135deg, #1E1B4B 0%, #312E81 60%, #3730A3 100%);
-  --table-highlight: rgba(30,64,175,0.06);
-  --sidebar-active: #1E40AF; --sidebar-active-text: #FFFFFF;
+  --re-bg-deep:    #3B0764;
+  --re-bg-mid:     #6D28D9;
+  --re-bg-light:   #9333EA;
+  --re-bg-surface: #F3E8FF;
 }
 [data-theme="dark"] {
-  --bg: #09090B; --bg1: #0F0F12; --bg2: #17171C; --bg3: #1E1E26;
-  --border: rgba(255,255,255,0.06); --borderH: rgba(255,255,255,0.13);
-  --t0: #F4F4F5; --t1: #D4D4D8; --t2: #A1A1AA; --t3: #3F3F46;
-  /* Accent — bright blue */
-  --accent: #3B82F6; --accentS: rgba(59,130,246,0.08); --accentB: rgba(59,130,246,0.18);
-  /* Status colors — unchanged */
-  --green: #22C55E; --greenS: rgba(34,197,94,0.08); --greenB: rgba(34,197,94,0.18);
-  --amber: #EAB308; --amberS: rgba(234,179,8,0.08); --amberB: rgba(234,179,8,0.18);
-  --red: #F87171; --redS: rgba(248,113,113,0.08);
-  --blue: #3B82F6; --blueS: rgba(59,130,246,0.08);
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,0.4);
-  --hero-bg: linear-gradient(135deg, #0C0A3E 0%, #1E1B4B 60%, #312E81 100%);
-  --table-highlight: rgba(59,130,246,0.08);
-  --sidebar-active: #3B82F6; --sidebar-active-text: #09090B;
+  --re-bg-deep:    #1E0A2E;
+  --re-bg-mid:     #5B21B6;
+  --re-bg-light:   #7C3AED;
+  --re-bg-surface: #0D0520;
 }
 
-/* ═══════════════════════════════════════════
-   GLOBAL
-═══════════════════════════════════════════ */
-body {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  background: var(--bg); color: var(--t0);
-  line-height: 1.6; -webkit-font-smoothing: antialiased;
-}
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
-
-/* ═══════════════════════════════════════════
-   DEMO BAR
-═══════════════════════════════════════════ */
+/* ─── Demo bar ─── */
 .demo-bar {
+  position: fixed; top: 0; left: 0; right: 0; height: 44px;
   background: var(--bg1); border-bottom: 1px solid var(--border);
-  padding: 10px 20px; display: flex; align-items: center; gap: 12px;
-  position: sticky; top: 0; z-index: 300; box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; gap: 12px; padding: 0 16px;
+  z-index: var(--z-nav); font-family: var(--font-body);
 }
 .demo-badge {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-  background: var(--accentS); color: var(--accent); border: 1px solid var(--accentB);
-  padding: 3px 8px; border-radius: 4px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; background: var(--accentS); color: var(--accent);
+  border: 1px solid var(--accentB); padding: 2px 8px; border-radius: var(--radius-full);
 }
-.demo-bar-title { font-size: 13px; font-weight: 600; color: var(--t0); }
+.demo-bar-title { font-size: 14px; font-weight: 700; color: var(--t0); }
 .demo-bar-sub { font-size: 11px; color: var(--t2); }
 .demo-bar-spacer { flex: 1; }
-.demo-bar-toggle { display: flex; background: var(--bg2); border-radius: 8px; padding: 3px; gap: 3px; }
+.demo-bar-toggle { display: flex; gap: 4px; background: var(--bg2); padding: 3px; border-radius: var(--radius-md); }
 .demo-bar-btn {
-  padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600;
-  color: var(--t2); background: transparent; border: none;
-  transition: background 0.15s, color 0.15s; white-space: nowrap;
+  padding: 4px 12px; border-radius: 6px; border: none; background: transparent;
+  color: var(--t1); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s;
+  font-family: var(--font-body);
 }
-.demo-bar-btn.active { background: var(--bg1); color: var(--t0); box-shadow: var(--shadow-sm); }
+.demo-bar-btn.active { background: var(--bg1); color: var(--accent); box-shadow: var(--shadow-sm); }
+.lang-toggle {
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-full);
+  padding: 3px 10px; font-size: 12px; font-weight: 600; color: var(--t1);
+  cursor: pointer; font-family: var(--font-body); transition: border-color 0.15s;
+}
+.lang-toggle:hover { border-color: var(--accent); }
+.active-lang { color: var(--accent); }
 .demo-bar-theme {
-  width: 32px; height: 32px; border-radius: 7px; border: 1px solid var(--border);
-  background: var(--bg2); color: var(--t1); font-size: 14px;
-  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  background: none; border: 1px solid var(--border); border-radius: var(--radius-full);
+  width: 30px; height: 30px; font-size: 14px; cursor: pointer; transition: border-color 0.15s;
 }
+.demo-bar-theme:hover { border-color: var(--accent); }
 .demo-bar-back {
-  font-size: 12px; color: var(--accent); font-weight: 500; white-space: nowrap;
+  font-size: 12px; color: var(--t2); text-decoration: none; white-space: nowrap;
 }
-.demo-bar-back:hover { text-decoration: underline; }
-.lang-toggle { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 13px; color: var(--t2); cursor: pointer; font-weight: 500; }
-.lang-toggle .active-lang { color: var(--accent); font-weight: 700; }
-.kb-section-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; }
-.kb-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.kb-section-title { font-weight: 700; color: var(--t0); font-size: 15px; }
-.auto-metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px; }
-.auto-metric-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: center; }
-.auto-metric-icon { font-size: 22px; margin-bottom: 6px; }
-.auto-metric-value { font-size: 22px; font-weight: 700; color: var(--t0); }
-.auto-metric-label { font-size: 12px; color: var(--t2); margin: 2px 0; }
-.auto-metric-trend { font-size: 11px; color: var(--accent); }
-.campaign-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; }
-.campaign-header { margin-bottom: 8px; }
-.campaign-name-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
-.campaign-icon-el { font-size: 18px; }
-.campaign-name { font-weight: 600; color: var(--t0); font-size: 15px; }
-.campaign-status { font-size: 11px; color: var(--accent); font-weight: 600; margin-left: auto; }
-.campaign-desc { font-size: 13px; color: var(--t2); }
-.campaign-stats { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--t2); margin-top: 10px; }
-.campaign-stats strong { color: var(--t0); }
-.missed-call-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-.missed-call-item:last-child { border-bottom: none; }
-.missed-call-date { color: var(--t2); white-space: nowrap; min-width: 40px; }
-.missed-call-name { white-space: nowrap; font-weight: 600; color: var(--t0); min-width: 80px; }
-.missed-call-flow { color: var(--t1); flex: 1; }
-.missed-call-status { white-space: nowrap; }
-.auto-msg-table { width: 100%; font-size: 13px; border-collapse: collapse; }
-.auto-msg-table th { padding: 8px 12px; text-align: left; color: var(--t2); font-size: 11px; text-transform: uppercase; border-bottom: 1px solid var(--border); }
-.auto-msg-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--t1); }
-.auto-msg-table tr:last-child td { border-bottom: none; }
+.demo-bar-back:hover { color: var(--accent); }
 
-/* ═══════════════════════════════════════════
-   CUSTOMER VIEW
-═══════════════════════════════════════════ */
-#customerView { display: block; }
-#ownerView { display: none; }
+/* ─── Customer view layout ─── */
+#customerView { padding-top: 44px; }
+#ownerView { padding-top: 44px; }
 
-/* ── Hero ── */
-.cv-hero {
-  background: var(--hero-bg); padding: 80px 24px 64px;
-  text-align: center; color: white; position: relative; overflow: hidden;
-}
-.cv-hero::before {
-  content: ''; position: absolute; inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-.cv-hero-inner { max-width: 680px; margin: 0 auto; position: relative; }
-.cv-hero h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  line-height: 1.1; margin-bottom: 16px; color: white;
-}
-.cv-hero-sub {
-  font-size: 1.05rem; color: rgba(255,255,255,0.78);
-  margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto;
-}
-.cv-hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-.btn-primary {
-  padding: 12px 28px; background: white; color: #1E1B4B;
-  font-weight: 700; font-size: 14px; border-radius: 8px; border: none;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-  transition: transform 0.15s, box-shadow 0.15s;
-  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
-  text-decoration: none;
-}
-.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,0.2); }
-.btn-outline-white {
-  padding: 12px 28px; background: transparent; color: white;
-  font-weight: 600; font-size: 14px; border-radius: 8px;
-  border: 1.5px solid rgba(255,255,255,0.35);
-  transition: background 0.15s; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
-}
-.btn-outline-white:hover { background: rgba(255,255,255,0.1); }
-.cv-hero-trust { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-.trust-pill {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 20px; padding: 7px 16px; font-size: 12px;
-  color: rgba(255,255,255,0.88); font-weight: 500; backdrop-filter: blur(6px);
-}
-
-/* ── Credentials Bar ── */
-.cv-creds {
-  background: var(--bg1); border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border); padding: 16px 24px;
-}
-.cv-creds-inner {
-  max-width: 900px; margin: 0 auto;
-  display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; align-items: center;
-}
-.cred-item {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 13px; color: var(--t1); font-weight: 500; white-space: nowrap;
-}
-.cred-icon { font-size: 1rem; }
-
-/* ── Section base ── */
-.cv-section { padding: 64px 24px; }
+.cv-section { padding: 72px 24px; }
 .cv-section-inner { max-width: 1100px; margin: 0 auto; }
 .cv-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--accent); margin-bottom: 12px;
 }
 .cv-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  color: var(--t0); margin-bottom: 12px; line-height: 1.2;
+  font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.6rem);
+  color: var(--t0); line-height: 1.2; margin-bottom: 16px;
 }
-.cv-sub { font-size: 0.95rem; color: var(--t2); max-width: 540px; }
+.cv-sub { font-size: 15px; color: var(--t2); line-height: 1.6; max-width: 560px; }
 
-/* ── Service Categories ── */
-.services-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 20px; margin-top: 36px;
+/* ─── HERO (geometric) ─── */
+.cv-hero {
+  background: var(--hero-bg);
+  padding: 80px 24px 64px;
+  position: relative;
+  overflow: hidden;
 }
+.cv-hero::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+.cv-hero::after {
+  content: '';
+  position: absolute; bottom: -80px; left: 10%;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  pointer-events: none;
+  transform: rotate(-15deg);
+}
+.cv-hero-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 400px; gap: 48px; align-items: center;
+  position: relative; z-index: 1;
+}
+.cv-hero-text { }
+.cv-hero-text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--hero-text); line-height: 1.1; margin-bottom: 16px;
+}
+.cv-hero-sub {
+  font-size: 16px; color: var(--hero-text-muted); line-height: 1.6;
+  margin-bottom: 28px; max-width: 480px;
+}
+.cv-hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+.btn-primary {
+  padding: 13px 26px; background: white; color: var(--btn-primary-color, var(--re-bg-deep));
+  font-size: 14px; font-weight: 700; border: none; border-radius: var(--radius-full);
+  cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; font-family: var(--font-body);
+  white-space: nowrap;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+.btn-outline-white {
+  padding: 13px 26px; background: transparent; color: white;
+  font-size: 14px; font-weight: 600; border: 2px solid rgba(255,255,255,0.4);
+  border-radius: var(--radius-full); cursor: pointer; transition: all 0.15s;
+  font-family: var(--font-body); white-space: nowrap;
+}
+.btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
+.cv-hero-trust { display: flex; gap: 10px; flex-wrap: wrap; }
+.trust-pill {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+  color: var(--hero-text); font-size: 12px; font-weight: 600; padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+/* Geometric photo frame — right side of hero */
+.geo-visual {
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.geo-visual::before {
+  content: '';
+  position: absolute;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.12);
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.geo-circle-frame {
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--re-bg-mid) 0%, var(--re-bg-light) 100%);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+  position: relative; z-index: 1;
+  flex-direction: column; gap: 8px;
+}
+.geo-circle-frame .geo-icon { font-size: 4rem; }
+.geo-circle-frame .geo-stat {
+  font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.9);
+  background: rgba(0,0,0,0.2); padding: 4px 12px; border-radius: var(--radius-full);
+}
+
+/* ─── Credentials bar ─── */
+.cv-creds { background: var(--bg1); border-bottom: 1px solid var(--border); padding: 14px 24px; }
+.cv-creds-inner {
+  max-width: 1100px; margin: 0 auto; display: flex; gap: 28px;
+  flex-wrap: wrap; justify-content: center; align-items: center;
+}
+.cred-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--t1); }
+.cred-icon { font-size: 14px; }
+
+/* ─── Problem intro ─── */
+.problem-section { padding: 72px 24px; background: var(--bg); }
+.problem-section .cv-section-inner { max-width: 1100px; margin: 0 auto; }
+.problem-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px;
+}
+.problem-card {
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius-2xl); padding: 28px 24px;
+  box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+}
+.problem-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--re-bg-mid), var(--re-bg-light));
+}
+.problem-card-icon { font-size: 1.8rem; margin-bottom: 14px; }
+.problem-card-pain {
+  font-size: 15px; font-weight: 700; color: var(--t0);
+  margin-bottom: 10px; line-height: 1.4;
+  font-style: italic;
+}
+.problem-card-solution { font-size: 13px; color: var(--t1); line-height: 1.6; }
+
+/* ─── Services grid ─── */
+.services-section { background: var(--bg2); }
+.services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
 .svc-card {
-  background: var(--bg1); border-radius: 16px; padding: 28px 24px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
-  display: flex; flex-direction: column; gap: 14px;
-  transition: box-shadow 0.25s, transform 0.25s;
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius-2xl); padding: 24px 20px;
+  box-shadow: var(--shadow-sm); transition: box-shadow 0.2s, transform 0.2s;
 }
-.svc-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
-.svc-icon { font-size: 2rem; }
-.svc-name {
-  font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--t0);
-}
-.svc-sublist { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.svc-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.svc-icon { font-size: 1.6rem; margin-bottom: 12px; }
+.svc-name { font-size: 14px; font-weight: 700; color: var(--t0); margin-bottom: 8px; }
+.svc-desc { font-size: 12px; color: var(--t2); line-height: 1.5; margin-bottom: 12px; }
+.svc-sublist { list-style: none; margin-bottom: 14px; }
 .svc-sublist li {
-  font-size: 0.83rem; color: var(--t2); display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--t1); padding: 3px 0;
+  padding-left: 14px; position: relative;
 }
-.svc-sublist li::before { content: '▸'; color: var(--accent); font-size: 0.7rem; }
-.svc-price { font-size: 12px; font-weight: 600; color: var(--accent); }
+.svc-sublist li::before {
+  content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 10px;
+}
+.svc-price {
+  font-size: 11px; font-weight: 700; color: var(--accent);
+  background: var(--accentS); border: 1px solid var(--accentB);
+  display: inline-block; padding: 3px 10px; border-radius: var(--radius-full);
+  margin-bottom: 12px;
+}
 .svc-cta {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13px; font-weight: 600; color: var(--accent);
-  background: none; border: none; padding: 0; cursor: pointer;
-  transition: gap 0.15s;
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  background: none; border: none; cursor: pointer; padding: 0;
+  font-family: var(--font-body); transition: opacity 0.15s;
 }
-.svc-cta:hover { gap: 10px; }
+.svc-cta:hover { opacity: 0.7; }
 
-/* ── Portfolio ── */
-.portfolio-bg { background: var(--bg1); }
-.portfolio-filter {
-  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 32px; margin-bottom: 28px;
-  overflow-x: auto; padding-bottom: 4px;
+/* ─── Value prop grid ─── */
+.value-section { background: var(--re-bg-deep); padding: 72px 24px; position: relative; overflow: hidden; }
+.value-section::before {
+  content: '';
+  position: absolute; bottom: -100px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  pointer-events: none;
 }
+.value-section::after {
+  content: '';
+  position: absolute; top: -60px; left: 5%;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  pointer-events: none; transform: rotate(10deg);
+}
+.value-section .cv-label { color: rgba(255,255,255,0.5); }
+.value-section .cv-title { color: white; }
+.value-section .cv-sub { color: rgba(255,255,255,0.6); }
+.value-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px;
+  position: relative; z-index: 1;
+}
+.value-card {
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-2xl); padding: 28px 24px;
+  transition: background 0.2s, transform 0.2s;
+}
+.value-card:hover { background: rgba(255,255,255,0.11); transform: translateY(-2px); }
+.value-card-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); display: flex; align-items: center;
+  justify-content: center; font-size: 1.2rem; margin-bottom: 16px;
+}
+.value-card-title { font-size: 15px; font-weight: 700; color: white; margin-bottom: 8px; }
+.value-card-desc { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+/* ─── How It Works (geometric process section) ─── */
+.process-section { background: var(--bg); padding: 72px 24px; }
+.process-steps {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
+  margin-top: 48px; position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute; top: 40px; left: calc(16.67% + 20px); right: calc(16.67% + 20px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--re-bg-mid), var(--re-bg-light), var(--re-bg-mid));
+  opacity: 0.3;
+}
+.process-step { text-align: center; position: relative; }
+.process-badge-wrap { display: flex; justify-content: center; margin-bottom: 20px; }
+.process-badge {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--re-bg-mid), var(--re-bg-light));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 2.2rem; color: white;
+  box-shadow: 0 8px 28px rgba(109,40,217,0.35);
+  position: relative; z-index: 1;
+}
+.process-step-icon {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--re-bg-surface); border: 2px solid var(--accentB);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; margin: 0 auto 14px;
+}
+.process-step-title {
+  font-size: 16px; font-weight: 700; color: var(--t0); margin-bottom: 8px;
+}
+.process-step-desc { font-size: 13px; color: var(--t2); line-height: 1.6; }
+
+/* ─── Stats row ─── */
+.stats-section {
+  background: var(--bg1); padding: 48px 24px;
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+.stats-inner { max-width: 1100px; margin: 0 auto; }
+.stats-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--t2); text-align: center; margin-bottom: 32px;
+}
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.stat-item { text-align: center; }
+.stat-number {
+  font-family: var(--font-display); font-size: 2.4rem; color: var(--accent);
+  line-height: 1; margin-bottom: 6px;
+}
+.stat-label { font-size: 13px; font-weight: 600; color: var(--t0); margin-bottom: 4px; }
+.stat-context { font-size: 11px; color: var(--t2); line-height: 1.4; }
+
+/* ─── Portfolio ─── */
+.portfolio-bg { background: var(--bg2); }
+.portfolio-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
 .pf-tab {
-  padding: 7px 18px; border-radius: 20px; font-size: 13px; font-weight: 600;
-  border: 1px solid var(--border); background: var(--bg2); color: var(--t2);
-  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  padding: 6px 16px; border-radius: var(--radius-full); border: 1px solid var(--border);
+  background: var(--bg1); color: var(--t1); font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; font-family: var(--font-body);
 }
-.pf-tab.active {
-  background: var(--accent); color: white; border-color: var(--accent);
-}
-.portfolio-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-}
+.pf-tab.active, .pf-tab:hover { background: var(--accent); color: white; border-color: var(--accent); }
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .proj-card {
-  background: var(--bg); border-radius: 14px; border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm); overflow: hidden;
-  transition: box-shadow 0.25s, transform 0.25s; cursor: pointer;
+  background: var(--bg1); border: 1px solid var(--border); border-radius: var(--radius-2xl);
+  overflow: hidden; cursor: pointer; transition: box-shadow 0.2s, transform 0.2s;
 }
 .proj-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.proj-card.expanded { cursor: default; }
-.proj-card.expanded:hover { transform: none; }
 .proj-img {
-  height: 160px;
-  background: linear-gradient(135deg, var(--bg3) 0%, var(--bg2) 100%);
-  display: flex; align-items: center; justify-content: center; font-size: 2.5rem;
-  position: relative; overflow: hidden;
+  height: 100px; background: linear-gradient(135deg, var(--re-bg-deep), var(--re-bg-mid));
+  display: flex; align-items: flex-end; padding: 10px 12px;
 }
 .proj-img-label {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.08em; color: var(--t3); flex-direction: column; gap: 4px;
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(0,0,0,0.35); padding: 4px 10px; border-radius: var(--radius-full);
+  color: white; font-size: 11px; font-weight: 600;
 }
 .proj-body { padding: 16px; }
-.proj-type { font-weight: 700; font-size: 0.95rem; color: var(--t0); margin-bottom: 6px; }
-.proj-meta {
-  display: flex; gap: 12px; font-size: 12px; color: var(--t2); margin-bottom: 12px;
-  flex-wrap: wrap;
-}
+.proj-type { font-size: 14px; font-weight: 700; color: var(--t0); margin-bottom: 6px; }
+.proj-meta { display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; color: var(--t2); margin-bottom: 8px; }
 .proj-expand { display: none; }
 .proj-card.expanded .proj-expand { display: block; }
 .proj-ba {
-  height: 120px; border-radius: 8px; margin-bottom: 12px;
-  background: linear-gradient(90deg, var(--bg3) 0%, var(--accentS) 100%);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; color: var(--t2); font-weight: 500;
-  border: 1px solid var(--border);
+  font-size: 11px; color: var(--accent); font-weight: 600;
+  margin-bottom: 8px; padding: 4px 8px; background: var(--accentS);
+  border-radius: var(--radius-sm); display: inline-block;
 }
-.proj-desc { font-size: 0.83rem; color: var(--t1); line-height: 1.6; margin-bottom: 10px; }
-.proj-quote {
-  font-size: 0.8rem; color: var(--t2); font-style: italic;
-  padding-left: 10px; border-left: 2px solid var(--accentB); margin-bottom: 12px;
-}
+.proj-desc { font-size: 12px; color: var(--t1); line-height: 1.5; margin-bottom: 8px; }
+.proj-quote { font-size: 12px; color: var(--t2); font-style: italic; margin-bottom: 12px; }
 .proj-cta {
-  font-size: 12px; font-weight: 700; color: white;
-  background: var(--accent); border: none; border-radius: 6px;
-  padding: 8px 16px; cursor: pointer; transition: opacity 0.15s;
+  font-size: 12px; font-weight: 700; color: var(--accent);
+  background: var(--accentS); border: 1px solid var(--accentB);
+  padding: 6px 14px; border-radius: var(--radius-full); cursor: pointer;
+  font-family: var(--font-body); transition: opacity 0.15s;
 }
-.proj-cta:hover { opacity: 0.9; }
+.proj-cta:hover { opacity: 0.8; }
 
-/* ── Reviews ── */
-.reviews-bg {
-  background: var(--hero-bg); padding: 64px 24px;
-}
-.reviews-bg .cv-label { color: rgba(255,255,255,0.65); }
+/* ─── Reviews ─── */
+.reviews-bg { background: var(--hero-bg); padding: 72px 24px; }
+.reviews-bg .cv-label { color: rgba(255,255,255,0.5); }
 .reviews-bg .cv-title { color: white; }
-.reviews-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr);
-  gap: 20px; margin-top: 36px;
-}
+.reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 32px; }
 .review-card {
-  background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px); border-radius: 16px; padding: 24px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-2xl); padding: 24px;
+  transition: background 0.2s;
 }
-.review-stars { color: #FCD34D; font-size: 1rem; margin-bottom: 12px; }
-.review-text {
-  font-size: 0.9rem; color: rgba(255,255,255,0.85);
-  line-height: 1.6; margin-bottom: 14px;
-}
+.review-card:hover { background: rgba(255,255,255,0.12); }
+.review-stars { color: var(--star-color); font-size: 14px; margin-bottom: 10px; }
+.review-text { font-size: 14px; color: rgba(255,255,255,0.85); line-height: 1.6; margin-bottom: 14px; }
 .review-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.review-name { font-weight: 700; font-size: 13px; color: white; }
+.review-name { font-size: 13px; font-weight: 700; color: white; }
 .review-type-pill {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
-  background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8);
-  border-radius: 4px; padding: 2px 8px;
+  font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.1); padding: 3px 10px;
+  border-radius: var(--radius-full); border: 1px solid rgba(255,255,255,0.12);
 }
-.review-location { font-size: 11px; color: rgba(255,255,255,0.55); }
+.review-location { font-size: 11px; color: rgba(255,255,255,0.5); }
 
-/* ── Neighborhoods ── */
-.neighborhoods-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 16px; margin-top: 36px;
-}
+/* ─── Neighborhoods ─── */
+.neighborhoods-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
 .nbhd-card {
-  background: var(--bg1); border-radius: 14px; padding: 22px 20px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.25s, transform 0.25s;
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius-2xl); padding: 22px 18px;
+  box-shadow: var(--shadow-sm); transition: box-shadow 0.2s;
 }
-.nbhd-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
-.nbhd-city {
-  font-family: 'DM Serif Display', serif; font-size: 1.2rem;
-  color: var(--t0); margin-bottom: 4px;
-}
-.nbhd-count { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 12px; }
-.nbhd-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
-.nbhd-list li { font-size: 11px; color: var(--t2); }
+.nbhd-card:hover { box-shadow: var(--shadow-md); }
+.nbhd-city { font-size: 18px; font-weight: 800; color: var(--t0); margin-bottom: 4px; }
+.nbhd-count { font-size: 12px; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
+.nbhd-list { list-style: none; }
+.nbhd-list li { font-size: 12px; color: var(--t2); padding: 3px 0; }
 
-/* ── Booking Form ── */
+/* ─── Booking form ─── */
 .booking-bg { background: var(--bg2); }
 .booking-card {
   background: var(--bg1); border: 1px solid var(--border);
-  border-radius: 16px; padding: 32px; margin-top: 36px;
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-2xl); padding: 32px; box-shadow: var(--shadow-md);
+  max-width: 720px; margin: 32px auto 0;
 }
-.booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.form-group { display: flex; flex-direction: column; gap: 5px; }
+.booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-group.full { grid-column: 1 / -1; }
 .form-label { font-size: 12px; font-weight: 600; color: var(--t1); }
 .form-input, .form-select, .form-textarea {
-  padding: 10px 14px; border-radius: 8px;
-  border: 1px solid var(--border); background: var(--bg2); color: var(--t0);
-  font-size: 13px; transition: border-color 0.15s;
+  padding: 10px 13px; border-radius: var(--radius-md); border: 1px solid var(--border);
+  background: var(--bg2); color: var(--t0); font-size: 14px; font-family: var(--font-body);
+  transition: border-color 0.15s;
 }
 .form-input:focus, .form-select:focus, .form-textarea:focus {
-  border-color: var(--accent); outline: none; background: var(--bg1);
+  outline: none; border-color: var(--accent);
 }
-.form-textarea { resize: vertical; min-height: 80px; }
-.form-select { appearance: none; -webkit-appearance: none; }
-.conditional-fields { display: none; }
-.conditional-fields.show { display: contents; }
-.checkbox-group { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
-.checkbox-label {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 13px; color: var(--t1); cursor: pointer;
-  padding: 6px 8px; border-radius: 6px; transition: background 0.12s;
-}
-.checkbox-label:hover { background: var(--bg2); }
-.checkbox-label input[type="checkbox"] { display: none; }
+.form-textarea { min-height: 90px; resize: vertical; }
+.form-radio-row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.radio-label { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--t1); cursor: pointer; }
+.checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; }
+.checkbox-label { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--t1); cursor: pointer; }
 .checkbox-box {
-  width: 17px; height: 17px; border-radius: 4px; flex-shrink: 0;
-  border: 1.5px solid var(--border); background: var(--bg2);
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s, border-color 0.15s;
+  width: 16px; height: 16px; border: 2px solid var(--border);
+  border-radius: 4px; display: inline-block; transition: all 0.15s; flex-shrink: 0;
 }
-.checkbox-label input:checked + .checkbox-box {
-  background: var(--accent); border-color: var(--accent);
-}
-.checkbox-label input:checked + .checkbox-box::after {
-  content: '✓'; color: white; font-size: 10px; font-weight: 700;
-}
-.form-radio-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
-.radio-label {
-  display: flex; align-items: center; gap: 7px;
-  font-size: 13px; color: var(--t1); cursor: pointer;
-}
-.radio-label input[type="radio"] { accent-color: var(--accent); }
+input[type="checkbox"]:checked + .checkbox-box { background: var(--accent); border-color: var(--accent); }
+input[type="checkbox"] { display: none; }
+.conditional-fields { display: none; }
+.conditional-fields.show { display: flex; flex-direction: column; gap: 6px; }
 .btn-submit {
-  width: 100%; padding: 14px; background: var(--accent); color: white;
-  font-weight: 700; font-size: 14px; border-radius: 8px; border: none;
-  transition: opacity 0.15s, transform 0.15s; margin-top: 8px; cursor: pointer;
+  margin-top: 20px; padding: 14px 32px; background: var(--accent); color: white;
+  font-size: 15px; font-weight: 700; border: none; border-radius: var(--radius-full);
+  cursor: pointer; transition: opacity 0.15s, transform 0.15s; font-family: var(--font-body);
+  width: 100%;
 }
-.btn-submit:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
-.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-.form-success {
-  display: none; text-align: center; padding: 40px 24px;
-}
-.form-success-icon { font-size: 3rem; margin-bottom: 16px; }
-.form-success h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
-.form-success p { font-size: 0.9rem; color: var(--t2); }
+.btn-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.form-success { display: none; text-align: center; padding: 32px 20px; }
+.form-success-icon { font-size: 3rem; margin-bottom: 12px; }
+.form-success h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--t0); margin-bottom: 8px; }
+.form-success p { font-size: 14px; color: var(--t2); }
 
-/* ── Footer ── */
+/* ─── Geometric CTA / closing section ─── */
+.geo-cta-section {
+  background: var(--re-bg-deep);
+  padding: 80px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.geo-cta-section::before {
+  content: '';
+  position: absolute; top: -120px; right: -100px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+.geo-cta-section::after {
+  content: '';
+  position: absolute; bottom: -80px; left: -60px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  pointer-events: none;
+  transform: rotate(-8deg);
+}
+.geo-cta-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+.geo-cta-section .cv-label { color: rgba(255,255,255,0.45); text-align: center; }
+.geo-cta-title {
+  font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 2.8rem);
+  color: white; line-height: 1.15; margin-bottom: 16px;
+}
+.geo-cta-sub { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 32px; }
+.geo-cta-btn {
+  display: inline-block; padding: 15px 36px;
+  background: white; color: var(--re-bg-deep);
+  font-size: 15px; font-weight: 800; border: none; border-radius: var(--radius-full);
+  cursor: pointer; font-family: var(--font-body);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.geo-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+/* ─── Footer ─── */
 .cv-footer {
   background: var(--bg1); border-top: 1px solid var(--border);
-  padding: 40px 24px; text-align: center;
+  padding: 32px 24px; text-align: center;
 }
-.cv-footer-logo {
-  font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--t0); margin-bottom: 6px;
-}
-.cv-footer-tagline { font-size: 13px; color: var(--t1); margin-bottom: 18px; }
+.cv-footer-logo { font-size: 1.1rem; font-weight: 800; color: var(--t0); margin-bottom: 6px; }
+.cv-footer-tagline { font-size: 13px; color: var(--t2); margin-bottom: 14px; }
 .cv-footer-info {
   display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
-  font-size: 13px; color: var(--t1); margin-bottom: 16px;
+  font-size: 13px; color: var(--t1); margin-bottom: 14px;
 }
-.cv-footer-info span { display: flex; align-items: center; gap: 6px; }
-.cv-footer-credit { font-size: 11px; color: var(--t2); padding-top: 14px; border-top: 1px solid var(--border); }
-.cv-footer-credit a { color: var(--accent); font-weight: 600; }
-.cv-footer-credit a:hover { text-decoration: underline; }
-.cv-footer-referral { font-size: 13px; color: var(--t2); margin-top: 10px; }
-.cv-footer-referral a { color: var(--accent); }
-.cv-footer-referral a:hover { text-decoration: underline; }
+.cv-footer-credit { font-size: 12px; color: var(--t3); margin-bottom: 6px; }
+.cv-footer-credit a { color: var(--accent); text-decoration: none; }
+.cv-footer-referral { font-size: 12px; color: var(--t2); }
+.cv-footer-referral a { color: var(--accent); text-decoration: none; }
 
-/* ═══════════════════════════════════════════
-   OWNER DASHBOARD
-═══════════════════════════════════════════ */
-.owner-layout {
-  display: flex; min-height: calc(100vh - 48px);
-}
+/* ─── Owner Dashboard layout ─── */
+.owner-layout { display: flex; min-height: calc(100vh - 44px); }
 .owner-sidebar {
-  width: 220px; background: var(--bg1); border-right: 1px solid var(--border);
-  padding: 20px 12px; display: flex; flex-direction: column; gap: 4px;
-  flex-shrink: 0; position: sticky; top: 48px; height: calc(100vh - 48px);
-  overflow-y: auto;
+  width: 220px; flex-shrink: 0; background: var(--bg1);
+  border-right: 1px solid var(--border); padding: 20px 12px;
+  display: flex; flex-direction: column; gap: 4px;
+  position: sticky; top: 44px; height: calc(100vh - 44px); overflow-y: auto;
 }
 .sidebar-label {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--t3); padding: 6px 8px; margin-top: 10px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--t3); padding: 8px 10px 4px; margin-top: 8px;
 }
 .sidebar-label:first-child { margin-top: 0; }
 .sidebar-btn {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 10px; border-radius: 8px; font-size: 13px; font-weight: 500;
-  color: var(--t1); background: none; border: none; width: 100%; text-align: left;
-  transition: background 0.15s, color 0.15s; cursor: pointer;
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px;
+  border-radius: var(--radius-lg); border: none; background: transparent;
+  color: var(--t1); font-size: 13px; font-weight: 600; cursor: pointer;
+  text-align: left; width: 100%; transition: all 0.15s; font-family: var(--font-body);
 }
 .sidebar-btn:hover { background: var(--bg2); color: var(--t0); }
-.sidebar-btn.active { background: var(--sidebar-active); color: var(--sidebar-active-text); font-weight: 700; }
-.sidebar-icon { font-size: 1rem; width: 20px; text-align: center; }
+.sidebar-btn.active { background: var(--accentS); color: var(--accent); }
+.sidebar-icon { font-size: 15px; flex-shrink: 0; }
 
-.owner-main { flex: 1; padding: 28px; overflow-y: auto; min-width: 0; }
+.owner-main { flex: 1; padding: 28px; overflow-y: auto; background: var(--bg); }
 .owner-view { display: none; }
 .owner-view.active { display: block; }
+.od-title { font-size: 1.1rem; font-weight: 700; color: var(--t0); margin-bottom: 4px; }
+.od-sub { font-size: 13px; color: var(--t2); margin-bottom: 24px; }
 
-/* Dashboard metrics */
-.metrics-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;
-}
+/* ─── Metrics grid ─── */
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
 .metric-card {
-  background: var(--bg1); border-radius: 14px; padding: 20px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius-xl); padding: 20px 18px;
+  box-shadow: var(--shadow-sm);
+  border-left: 3px solid var(--accent);
 }
-.metric-value {
-  font-family: 'DM Serif Display', serif; font-size: 1.8rem;
-  color: var(--accent); line-height: 1; margin-bottom: 2px;
-}
-.metric-label { font-size: 12px; font-weight: 600; color: var(--t0); margin-bottom: 3px; }
-.metric-trend { font-size: 11px; color: var(--green); }
+.metric-value { font-family: var(--font-display); font-size: 1.8rem; color: var(--t0); line-height: 1; margin-bottom: 4px; }
+.metric-label { font-size: 12px; font-weight: 600; color: var(--t1); margin-bottom: 4px; }
+.metric-trend { font-size: 11px; color: var(--green); font-weight: 600; }
+.metric-trend.down { color: var(--red); }
 .metric-sub { font-size: 11px; color: var(--t2); }
 
-/* Platform comparison */
-.thumb-card {
-  background: var(--bg1); border-radius: 16px; padding: 24px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 24px;
+/* ─── Dashboard cards ─── */
+.dash-card {
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius-2xl); padding: 24px;
+  box-shadow: var(--shadow-sm); margin-bottom: 20px;
 }
-.thumb-header {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  margin-bottom: 20px; flex-wrap: wrap; gap: 8px;
+.dash-card h3 { font-size: 14px; font-weight: 700; color: var(--t0); margin-bottom: 16px; }
+.dash-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.dash-card-header h3 { margin-bottom: 0; }
+.dash-badge {
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: var(--radius-full);
 }
-.thumb-header h3 { font-size: 1rem; font-weight: 700; color: var(--t0); }
-.thumb-savings { font-size: 12px; font-weight: 700; color: var(--green); }
-.thumb-rows { display: flex; flex-direction: column; gap: 10px; }
-.thumb-row {
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 13px; padding: 10px 12px; border-radius: 8px; background: var(--bg2);
-}
-.thumb-old { color: var(--red); font-weight: 600; }
-.thumb-new { color: var(--green); font-weight: 600; }
-.thumb-bar-wrap { margin-top: 16px; }
-.thumb-bar-label { font-size: 11px; color: var(--t2); margin-bottom: 6px; }
-.thumb-bar-bg { height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
-.thumb-bar-fill { height: 100%; border-radius: 3px; background: var(--green); width: 0; transition: width 1s ease 0.3s; }
+.dash-badge.green { background: var(--greenS); color: var(--green); }
+.dash-badge.amber { background: var(--amberS); color: var(--amber); }
 
-/* AI summary */
-.ai-summary-card {
-  background: var(--bg1); border-radius: 16px; padding: 24px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 24px;
+.savings-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--t1); }
+.savings-row:last-child { border-bottom: none; }
+.savings-old { color: var(--red); text-decoration: line-through; font-weight: 600; }
+.savings-new { color: var(--green); font-weight: 700; }
+.savings-total {
+  font-size: 16px; font-weight: 800; color: var(--green);
+  background: var(--greenS); border: 1px solid var(--greenB);
+  padding: 6px 14px; border-radius: var(--radius-full); display: inline-block; margin-top: 8px;
 }
-.ai-summary-header {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
-}
+
 .ai-badge {
   font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
-  background: var(--accentS); color: var(--accent); border: 1px solid var(--accentB);
-  padding: 3px 8px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--re-bg-mid), var(--re-bg-light));
+  color: white; padding: 3px 10px; border-radius: var(--radius-full);
 }
-.ai-summary-text { font-size: 0.88rem; color: var(--t1); line-height: 1.7; }
+.ai-summary-text { font-size: 13px; color: var(--t1); line-height: 1.7; white-space: pre-wrap; }
 
-/* Follow-up suggestions */
-.followup-card {
-  background: var(--bg1); border-radius: 16px; padding: 24px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 24px;
-}
-.followup-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--t0); margin-bottom: 16px; }
-.followup-list { display: flex; flex-direction: column; gap: 10px; }
+.followup-list { display: flex; flex-direction: column; gap: 12px; }
 .followup-item {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  padding: 12px; background: var(--bg2); border-radius: 10px; gap: 12px;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+  padding: 12px; background: var(--bg2); border-radius: var(--radius-lg);
 }
-.followup-info { flex: 1; min-width: 0; }
 .followup-name { font-size: 13px; font-weight: 700; color: var(--t0); margin-bottom: 2px; }
 .followup-detail { font-size: 11px; color: var(--t2); margin-bottom: 4px; }
-.followup-suggestion { font-size: 12px; color: var(--accent); }
-.followup-value { font-size: 13px; font-weight: 700; color: var(--green); white-space: nowrap; }
+.followup-suggestion { font-size: 12px; color: var(--t1); font-style: italic; }
+.followup-value { font-size: 14px; font-weight: 800; color: var(--green); white-space: nowrap; }
 .followup-actions { display: flex; gap: 6px; }
 .followup-btn {
-  font-size: 11px; font-weight: 600; padding: 5px 10px; border-radius: 6px;
-  border: none; cursor: pointer; transition: opacity 0.15s;
+  font-size: 12px; font-weight: 600; padding: 5px 12px;
+  border-radius: var(--radius-full); border: none; cursor: pointer; font-family: var(--font-body);
 }
 .followup-btn.primary { background: var(--accent); color: white; }
 .followup-btn.secondary { background: var(--bg3); color: var(--t1); }
-.followup-btn:hover { opacity: 0.85; }
 
-/* Premium teasers */
-.teasers-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
-.teaser-card {
-  background: var(--bg2); border: 1.5px dashed var(--border);
-  border-radius: 14px; padding: 20px; text-align: center; cursor: pointer;
-  transition: box-shadow 0.2s;
-}
-.teaser-card:hover { box-shadow: var(--shadow-sm); }
-.teaser-icon { font-size: 1.8rem; margin-bottom: 10px; opacity: 0.6; }
-.teaser-title { font-size: 13px; font-weight: 700; color: var(--t1); margin-bottom: 6px; }
-.teaser-desc { font-size: 11px; color: var(--t2); line-height: 1.5; margin-bottom: 10px; }
-.teaser-badge {
-  display: inline-block; font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.06em;
-  background: var(--amberS); color: var(--amber); border: 1px solid var(--amberB);
-  padding: 3px 8px; border-radius: 4px;
-}
-
-/* Leads table */
-.leads-table-card {
-  background: var(--bg1); border-radius: 16px; padding: 0;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
-  margin-bottom: 24px; overflow: hidden;
-}
-.leads-table-header {
-  padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 1px solid var(--border);
-}
-.leads-table-header h3 { font-size: 0.95rem; font-weight: 700; color: var(--t0); }
-.leads-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.leads-table th {
-  padding: 10px 16px; text-align: left; font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.06em; color: var(--t2);
-  background: var(--bg2); border-bottom: 1px solid var(--border);
-}
-.leads-table td {
-  padding: 11px 16px; color: var(--t1); border-bottom: 1px solid var(--border);
-}
+/* ─── Leads table ─── */
+.leads-table-card { background: var(--bg1); border: 1px solid var(--border); border-radius: var(--radius-2xl); overflow: hidden; box-shadow: var(--shadow-sm); margin-bottom: 20px; }
+.leads-table-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--border); }
+.leads-table-header h3 { font-size: 14px; font-weight: 700; color: var(--t0); }
+.leads-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.leads-table th { padding: 10px 14px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--t2); border-bottom: 1px solid var(--border); }
+.leads-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--t1); }
 .leads-table tr:last-child td { border-bottom: none; }
-.leads-table tr:hover td { background: var(--bg2); }
-.score-badge {
-  display: inline-block; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 11px;
-}
+.status-pill { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: var(--radius-full); }
+.score-badge { font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: var(--radius-full); }
 .score-high { background: var(--greenS); color: var(--green); }
 .score-mid { background: var(--amberS); color: var(--amber); }
 .score-low { background: var(--redS); color: var(--red); }
-.status-pill {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.04em;
-}
 
-/* Pipeline (Kanban) */
-.pipeline-wrap { overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; }
-.pipeline {
-  display: flex; gap: 16px; min-width: max-content; padding: 4px;
+/* ─── Teasers ─── */
+.teasers-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.teaser-card {
+  background: var(--bg1); border: 1px dashed var(--border);
+  border-radius: var(--radius-2xl); padding: 20px 18px; cursor: pointer;
+  transition: border-color 0.15s; text-align: center;
 }
-.pipeline-col {
-  width: 220px; flex-shrink: 0; scroll-snap-align: start;
-}
-.pipeline-col-header {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 12px; border-radius: 8px 8px 0 0;
-  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-  border: 1px solid var(--border); border-bottom: none;
-  background: var(--bg1);
-}
-.pipeline-col-dot { width: 8px; height: 8px; border-radius: 50%; }
-.pipeline-col-count {
-  margin-left: auto; font-size: 11px; font-weight: 700;
-  background: var(--bg2); border-radius: 4px; padding: 1px 6px; color: var(--t2);
-}
-.pipeline-cards {
-  border: 1px solid var(--border); border-radius: 0 0 8px 8px;
-  background: var(--bg2); padding: 10px; display: flex; flex-direction: column; gap: 8px;
-  min-height: 120px;
-}
-.kanban-card {
-  background: var(--bg1); border-radius: 8px; padding: 12px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
-}
+.teaser-card:hover { border-color: var(--accent); }
+.teaser-icon { font-size: 1.6rem; margin-bottom: 8px; }
+.teaser-title { font-size: 13px; font-weight: 700; color: var(--t0); margin-bottom: 4px; }
+.teaser-desc { font-size: 12px; color: var(--t2); margin-bottom: 10px; }
+.teaser-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; background: var(--accentS); color: var(--accent); padding: 3px 8px; border-radius: var(--radius-full); }
+
+/* ─── Pipeline (Kanban) ─── */
+.pipeline-wrap { overflow-x: auto; }
+.pipeline { display: flex; gap: 16px; min-width: 700px; }
+.pipeline-col { flex: 1; min-width: 160px; }
+.pipeline-col-header { display: flex; align-items: center; gap: 6px; padding: 0 0 12px; font-size: 12px; font-weight: 700; color: var(--t1); }
+.pipeline-col-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.pipeline-col-count { margin-left: auto; background: var(--bg3); color: var(--t2); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: var(--radius-full); }
+.pipeline-cards { display: flex; flex-direction: column; gap: 8px; }
+.kanban-card { background: var(--bg1); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 12px 14px; box-shadow: var(--shadow-sm); }
 .kanban-card-name { font-size: 13px; font-weight: 700; color: var(--t0); margin-bottom: 3px; }
-.kanban-card-service { font-size: 11px; color: var(--t2); margin-bottom: 6px; }
-.kanban-card-meta {
-  display: flex; justify-content: space-between; align-items: center;
-}
-.kanban-card-value { font-size: 11px; font-weight: 600; color: var(--green); }
-.kanban-card-score {
-  font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;
-}
+.kanban-card-service { font-size: 11px; color: var(--t2); margin-bottom: 8px; }
+.kanban-card-meta { display: flex; justify-content: space-between; align-items: center; }
+.kanban-card-value { font-size: 12px; font-weight: 700; color: var(--green); }
+.kanban-card-score { font-size: 11px; font-weight: 800; padding: 2px 6px; border-radius: var(--radius-full); }
 
-/* GEO Score */
+/* ─── Properties tab ─── */
+.properties-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+.prop-card {
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius-2xl); overflow: hidden;
+  box-shadow: var(--shadow-sm); transition: box-shadow 0.2s, transform 0.2s;
+}
+.prop-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.prop-card-img {
+  height: 80px;
+  background: linear-gradient(135deg, var(--re-bg-deep) 0%, var(--re-bg-mid) 100%);
+  display: flex; align-items: center; justify-content: center; font-size: 2rem;
+  position: relative;
+}
+.prop-status-badge {
+  position: absolute; top: 8px; right: 8px;
+  font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: var(--radius-full);
+}
+.prop-status-badge.occupied { background: rgba(22,163,74,0.2); color: #4ade80; border: 1px solid rgba(22,163,74,0.3); }
+.prop-status-badge.vacant { background: rgba(234,179,8,0.2); color: #fbbf24; border: 1px solid rgba(234,179,8,0.3); }
+.prop-status-badge.showing { background: rgba(147,51,234,0.2); color: #c084fc; border: 1px solid rgba(147,51,234,0.3); }
+.prop-status-badge.listing { background: rgba(37,99,235,0.2); color: #93c5fd; border: 1px solid rgba(37,99,235,0.3); }
+.prop-body { padding: 16px; }
+.prop-address { font-size: 13px; font-weight: 700; color: var(--t0); margin-bottom: 4px; }
+.prop-city { font-size: 11px; color: var(--t2); margin-bottom: 12px; }
+.prop-stats { display: flex; flex-direction: column; gap: 6px; }
+.prop-stat-row { display: flex; justify-content: space-between; font-size: 12px; }
+.prop-stat-label { color: var(--t2); }
+.prop-stat-value { font-weight: 700; color: var(--t0); }
+.prop-stat-value.alert { color: var(--amber); }
+.prop-action-row { display: flex; gap: 8px; margin-top: 14px; }
+.prop-btn {
+  flex: 1; font-size: 11px; font-weight: 700; padding: 7px 10px;
+  border-radius: var(--radius-full); border: none; cursor: pointer;
+  font-family: var(--font-body); transition: opacity 0.15s;
+}
+.prop-btn.primary { background: var(--accent); color: white; }
+.prop-btn.secondary { background: var(--accentS); color: var(--accent); }
+.prop-btn:hover { opacity: 0.85; }
+
+/* ─── GEO Score ─── */
 .geo-score-card {
-  background: var(--bg1); border-radius: 16px; padding: 28px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 24px;
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius-2xl); padding: 24px; box-shadow: var(--shadow-sm); margin-bottom: 20px;
 }
-.geo-score-header {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
-}
-.geo-score-header h3 { font-size: 1rem; font-weight: 700; color: var(--t0); }
-.geo-overall {
-  display: flex; align-items: baseline; gap: 4px;
-}
-.geo-overall-num {
-  font-family: 'DM Serif Display', serif; font-size: 3rem;
-  color: var(--amber); line-height: 1;
-}
+.geo-score-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+.geo-score-header h3 { font-size: 14px; font-weight: 700; color: var(--t0); }
+.geo-overall { display: flex; align-items: baseline; gap: 4px; }
+.geo-overall-num { font-family: var(--font-display); font-size: 3rem; color: var(--amber); line-height: 1; }
 .geo-overall-den { font-size: 1.2rem; color: var(--t2); }
 .geo-cats { display: flex; flex-direction: column; gap: 14px; }
-.geo-cat { }
 .geo-cat-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
 .geo-cat-name { font-size: 12px; font-weight: 600; color: var(--t0); display: flex; gap: 6px; }
 .geo-cat-score { font-size: 12px; font-weight: 700; color: var(--t1); }
 .geo-cat-desc { font-size: 11px; color: var(--t2); margin-bottom: 5px; }
 .geo-bar-bg { height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
 .geo-bar-fill { height: 100%; border-radius: 3px; width: 0; transition: width 1s ease 0.3s; }
-
-.geo-recs-card {
-  background: var(--bg1); border-radius: 16px; padding: 24px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 24px;
-}
-.geo-recs-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--t0); margin-bottom: 16px; }
-.geo-rec {
-  display: flex; gap: 12px; align-items: flex-start;
-  padding: 10px 0; border-bottom: 1px solid var(--border);
-}
+.geo-recs-card { background: var(--bg1); border-radius: var(--radius-2xl); padding: 24px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 20px; }
+.geo-recs-card h3 { font-size: 14px; font-weight: 700; color: var(--t0); margin-bottom: 16px; }
+.geo-rec { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .geo-rec:last-child { border-bottom: none; }
-.geo-rec-pri {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
-  padding: 2px 6px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px;
-}
+.geo-rec-pri { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
 .geo-rec.p1 .geo-rec-pri { background: var(--redS); color: var(--red); }
 .geo-rec.p2 .geo-rec-pri { background: var(--amberS); color: var(--amber); }
 .geo-rec.p3 .geo-rec-pri { background: var(--accentS); color: var(--accent); }
 .geo-rec-text { font-size: 13px; color: var(--t1); line-height: 1.5; }
 
-/* Content Preview */
-.content-preview-card {
-  background: var(--bg1); border-radius: 16px; padding: 24px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
-}
-.content-preview-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--t0); margin-bottom: 8px; }
+/* ─── Content preview ─── */
+.content-preview-card { background: var(--bg1); border-radius: var(--radius-2xl); padding: 24px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.content-preview-card h3 { font-size: 14px; font-weight: 700; color: var(--t0); margin-bottom: 8px; }
 .content-preview-card p { font-size: 12px; color: var(--t2); margin-bottom: 16px; }
 .content-titles { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-.content-title-item {
-  padding: 8px 12px; background: var(--bg2); border-radius: 6px;
-  font-size: 13px; color: var(--t0); border: 1px solid var(--border);
-}
-.content-gen-btn {
-  padding: 9px 20px; background: var(--accent); color: white;
-  font-size: 13px; font-weight: 600; border: none; border-radius: 8px;
-  cursor: pointer; transition: opacity 0.15s;
-}
+.content-title-item { padding: 8px 12px; background: var(--bg2); border-radius: var(--radius-md); font-size: 13px; color: var(--t0); border: 1px solid var(--border); }
+.content-gen-btn { padding: 9px 20px; background: var(--accent); color: white; font-size: 13px; font-weight: 600; border: none; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-body); transition: opacity 0.15s; }
 .content-gen-btn:hover { opacity: 0.9; }
 .content-gen-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-.generated-post {
-  display: none; margin-top: 16px; background: var(--bg2);
-  border: 1px solid var(--border); border-radius: 10px; padding: 16px;
-  font-size: 13px; color: var(--t1); line-height: 1.7;
-  white-space: pre-wrap;
-}
+.generated-post { display: none; margin-top: 16px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; font-size: 13px; color: var(--t1); line-height: 1.7; white-space: pre-wrap; }
 
-/* Knowledge Base */
+/* ─── Knowledge Base ─── */
 .kb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.kb-card {
-  background: var(--bg1); border-radius: 16px; padding: 24px;
-  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
-}
-.kb-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--t0); margin-bottom: 16px; }
+.kb-card { background: var(--bg1); border-radius: var(--radius-2xl); padding: 24px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.kb-card h3 { font-size: 14px; font-weight: 700; color: var(--t0); margin-bottom: 16px; }
 .kb-faq { display: flex; flex-direction: column; gap: 12px; }
 .kb-faq-item { border-bottom: 1px solid var(--border); padding-bottom: 12px; }
 .kb-faq-item:last-child { border-bottom: none; padding-bottom: 0; }
-.kb-faq-q {
-  font-size: 13px; font-weight: 600; color: var(--t0); margin-bottom: 4px; cursor: pointer;
-}
+.kb-faq-q { font-size: 13px; font-weight: 600; color: var(--t0); margin-bottom: 4px; cursor: pointer; }
 .kb-faq-q:hover { color: var(--accent); }
 .kb-faq-a { font-size: 12px; color: var(--t2); line-height: 1.5; }
 .kb-svc-list { display: flex; flex-direction: column; gap: 8px; }
-.kb-svc-item { padding: 10px; background: var(--bg2); border-radius: 8px; }
+.kb-svc-item { padding: 10px; background: var(--bg2); border-radius: var(--radius-md); }
 .kb-svc-name { font-size: 13px; font-weight: 600; color: var(--t0); margin-bottom: 2px; }
 .kb-svc-desc { font-size: 11px; color: var(--t2); }
 
-/* Scroll reveal */
+/* ─── Automation ─── */
+.auto-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+.auto-metric-card { background: var(--bg1); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 16px; text-align: center; box-shadow: var(--shadow-sm); }
+.auto-metric-icon { font-size: 1.4rem; margin-bottom: 6px; }
+.auto-metric-value { font-family: var(--font-display); font-size: 1.5rem; color: var(--t0); margin-bottom: 2px; }
+.auto-metric-label { font-size: 12px; font-weight: 600; color: var(--t1); margin-bottom: 2px; }
+.auto-metric-trend { font-size: 11px; color: var(--t2); }
+.kb-section-card { background: var(--bg1); border: 1px solid var(--border); border-radius: var(--radius-2xl); overflow: hidden; margin-bottom: 16px; }
+.kb-section-header { padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.kb-section-title { font-size: 13px; font-weight: 700; color: var(--t0); }
+.campaign-card { padding: 16px 18px; border-bottom: 1px solid var(--border); }
+.campaign-card:last-child { border-bottom: none; }
+.campaign-header { margin-bottom: 10px; }
+.campaign-name-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.campaign-icon-el { font-size: 1rem; }
+.campaign-name { font-size: 13px; font-weight: 700; color: var(--t0); }
+.campaign-status { font-size: 11px; font-weight: 700; color: var(--green); margin-left: auto; }
+.campaign-desc { font-size: 12px; color: var(--t2); }
+.campaign-stats { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--t1); }
+.campaign-stats strong { color: var(--t0); }
+.missed-call-item { display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-bottom: 1px solid var(--border); font-size: 12px; }
+.missed-call-item:last-child { border-bottom: none; }
+.missed-call-date { color: var(--t2); white-space: nowrap; min-width: 50px; }
+.missed-call-name { font-weight: 700; color: var(--t0); min-width: 80px; }
+.missed-call-flow { flex: 1; color: var(--t1); }
+.missed-call-status { white-space: nowrap; }
+.auto-msg-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.auto-msg-table th { padding: 8px 14px; text-align: left; font-size: 11px; text-transform: uppercase; color: var(--t2); border-bottom: 1px solid var(--border); }
+.auto-msg-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--t1); }
+.auto-msg-table tr:last-child td { border-bottom: none; }
+
+/* ─── Chatbot ─── */
+.chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: var(--z-chat); }
+.chat-panel {
+  display: none; width: 340px;
+  background: var(--bg1); border: 1px solid var(--border);
+  border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg);
+  overflow: hidden; flex-direction: column; max-height: 520px;
+  margin-bottom: 12px;
+}
+.chat-panel.open { display: flex; }
+.chat-header {
+  background: var(--hero-bg); padding: 14px 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.chat-header-icon { font-size: 1.4rem; }
+.chat-header-info { flex: 1; }
+.chat-header-name { font-size: 14px; font-weight: 700; color: white; }
+.chat-header-status { font-size: 11px; color: rgba(255,255,255,0.65); }
+.chat-voice-toggle {
+  background: none; border: 1px solid rgba(255,255,255,0.3); border-radius: var(--radius-md);
+  color: rgba(255,255,255,0.7); cursor: pointer; padding: 4px 8px; font-size: 14px;
+  min-width: 32px; min-height: 32px; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.chat-voice-toggle:hover, .chat-voice-toggle.active { border-color: white; color: white; background: rgba(255,255,255,0.1); }
+.chat-close-btn { background: rgba(255,255,255,0.15); border: none; border-radius: var(--radius-md); padding: 4px 8px; color: white; cursor: pointer; font-size: 12px; }
+.chat-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; max-height: 300px; }
+.chat-voice-label { font-size: 11px; color: var(--t2); text-align: center; padding: 0 12px 4px; display: none; }
+.chat-input-row { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; }
+.chat-input {
+  flex: 1; padding: 8px 12px; border-radius: var(--radius-full);
+  border: 1px solid var(--border); background: var(--bg2); color: var(--t0);
+  font-size: 13px; font-family: var(--font-body);
+}
+.chat-input:focus { outline: none; border-color: var(--accent); }
+.chat-mic {
+  display: none; background: none; border: 1px solid var(--border);
+  border-radius: 50%; width: 34px; height: 34px; font-size: 14px; cursor: pointer;
+  color: var(--t2); transition: all 0.15s; flex-shrink: 0;
+}
+.chat-mic:hover, .chat-mic.recording { border-color: var(--accent); color: var(--accent); background: var(--accentS); }
+.chat-send-btn {
+  padding: 8px 14px; background: var(--accent); color: white; border: none;
+  border-radius: var(--radius-full); font-size: 13px; font-weight: 700;
+  cursor: pointer; font-family: var(--font-body); transition: opacity 0.15s;
+}
+.chat-send-btn:hover { opacity: 0.9; }
+.chat-bubble-btn {
+  width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: white;
+  font-size: 1.4rem; border: none; box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  cursor: pointer; transition: transform 0.15s;
+}
+.chat-bubble-btn:hover { transform: scale(1.05); }
+.msg-bubble {
+  max-width: 80%; padding: 10px 13px; font-size: 13px; line-height: 1.5;
+}
+.msg-bot { align-self: flex-start; background: var(--bg2); color: var(--t0); border-radius: 4px 12px 12px 12px; }
+.msg-user { align-self: flex-end; background: var(--accent); color: white; border-radius: 12px 4px 12px 12px; }
+.msg-thinking { font-size: 12px; color: var(--t2); padding: 4px 0; }
+
+/* ─── Scroll reveal ─── */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .reveal.revealed { opacity: 1; transform: translateY(0); }
 
-/* Toast */
+/* ─── Toast ─── */
 .toast {
-  position: fixed; bottom: 24px; left: 24px; z-index: 9999;
+  position: fixed; bottom: 24px; left: 24px; z-index: var(--z-toast);
   background: var(--t0); color: var(--bg); padding: 10px 18px;
-  border-radius: 8px; font-size: 13px; font-weight: 500;
-  box-shadow: var(--shadow-lg); transition: all 0.25s; pointer-events: none;
+  border-radius: var(--radius-md); font-size: 13px; font-weight: 500;
+  box-shadow: var(--shadow-lg); opacity: 0; transform: translateY(8px);
+  transition: opacity 0.25s, transform 0.25s; pointer-events: none;
 }
-.toast.hide { opacity: 0; transform: translateY(8px); }
+.toast.show { opacity: 1; transform: translateY(0); }
 
-/* Responsive */
+/* ─── Responsive ─── */
 @media (max-width: 1023px) {
   .owner-sidebar { width: 180px; }
-  .services-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
   .neighborhoods-grid { grid-template-columns: repeat(2, 1fr); }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .reviews-grid { grid-template-columns: 1fr; }
   .kb-grid { grid-template-columns: 1fr; }
   .teasers-row { grid-template-columns: 1fr; }
+  .properties-grid { grid-template-columns: repeat(2, 1fr); }
+  .value-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-steps { grid-template-columns: 1fr; }
+  .process-steps::before { display: none; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+  .cv-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+  .cv-hero-text h1 { font-size: 1.8rem; }
+  .cv-hero-ctas { flex-direction: column; }
+  .btn-primary, .btn-outline-white { text-align: center; }
+  .geo-visual::before { display: none; }
+  .geo-circle-frame { width: 200px; height: 200px; margin: 0 auto; }
+  .geo-circle-frame .geo-icon { font-size: 3rem; }
   .cv-section { padding: 48px 16px; }
-  .cv-hero { padding: 56px 20px 44px; }
-  .cv-hero-ctas { flex-direction: column; align-items: center; }
-  .cv-creds-inner { gap: 16px; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .value-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
   .portfolio-grid { grid-template-columns: 1fr; }
   .neighborhoods-grid { grid-template-columns: 1fr; }
-  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .booking-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .properties-grid { grid-template-columns: 1fr; }
   .owner-layout { flex-direction: column; }
   .owner-sidebar {
     width: 100%; height: auto; position: static;
@@ -829,6 +922,17 @@ body {
   .pipeline { min-width: 700px; }
   .cv-footer-info { flex-direction: column; gap: 10px; align-items: center; }
   .demo-bar-sub { display: none; }
+  .auto-metrics { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .geo-cta-title { font-size: 1.6rem; }
+  .geo-cta-btn { width: 100%; text-align: center; display: block; box-sizing: border-box; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .geo-circle-frame { width: 160px; height: 160px; }
+  .cv-hero-text h1 { font-size: 1.6rem; }
+  .geo-cta-title { font-size: 1.4rem; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
@@ -838,98 +942,200 @@ body {
 <div class="demo-bar">
   <span class="demo-badge">Demo</span>
   <div>
-    <div class="demo-bar-title">Apex Home Solutions</div>
-    <div class="demo-bar-sub">Real Estate & Home Services — AI-Powered System</div>
+    <div class="demo-bar-title" id="barTitle">Apex Home Solutions</div>
+    <div class="demo-bar-sub">Property Management & Real Estate — AI-Powered System</div>
   </div>
   <div class="demo-bar-spacer"></div>
   <div class="demo-bar-toggle">
     <button class="demo-bar-btn active" id="btnCustomer" onclick="switchMode('customer')">Customer View</button>
     <button class="demo-bar-btn" id="btnOwner" onclick="switchMode('owner')">Owner Dashboard</button>
   </div>
-  <button class="lang-toggle" id="langToggle" onclick="toggleLang()" style="display:none;" aria-label="Toggle language"><span id="langEN" class="active-lang">EN</span> | <span id="langES">ES</span></button>
-  <button class="demo-bar-theme" onclick="toggleTheme()" aria-label="Toggle theme">
-    <span id="themeIcon">☀</span>
+  <button class="lang-toggle" id="langToggle" style="display:none;" onclick="toggleLang()" aria-label="Toggle language">
+    <span id="langEN" class="active-lang">EN</span> | <span id="langES">ES</span>
   </button>
+  <button class="demo-bar-theme" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">☀️</button>
   <a class="demo-bar-back" href="/demos/">← All Demos</a>
 </div>
 
 <!-- ═══════════════════ CUSTOMER VIEW ═══════════════════ -->
 <div id="customerView">
 
-  <!-- Hero -->
+  <!-- Hero (geometric) -->
   <section class="cv-hero">
     <div class="cv-hero-inner">
-      <h1 data-en="Your Home.<br>Our Expertise." data-es="Tu Hogar, Tu Inversión">Your Home.<br>Our Expertise.</h1>
-      <p class="cv-hero-sub" data-en="Full-service renovation, pools, and property management across Frisco, Plano, McKinney &amp; beyond." data-es="Remodelación, construcción y mantenimiento del hogar con diseño personalizado y resultados garantizados.">Full-service renovation, pools, and property management across Frisco, Plano, McKinney &amp; beyond.</p>
-      <div class="cv-hero-ctas">
-        <button class="btn-primary" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})" data-en="View Our Projects ↓" data-es="Ver Nuestros Proyectos ↓">View Our Projects ↓</button>
-        <button class="btn-outline-white" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" data-en="Request Consultation →" data-es="Solicitar Consulta →">Request Consultation →</button>
+      <div class="cv-hero-text">
+        <h1 data-en="See What Your Business<br>Could Look Like" data-es="Así Podría Verse<br>Tu Negocio">See What Your Business<br>Could Look Like</h1>
+        <p class="cv-hero-sub" data-en="Full-service property management, real estate & remodeling — powered by AI. Your leads. Your data. You own it all." data-es="Gestión integral de propiedades, bienes raíces y remodelación — impulsado por IA. Tus contactos. Tus datos. Todo tuyo.">Full-service property management, real estate & remodeling — powered by AI. Your leads. Your data. You own it all.</p>
+        <div class="cv-hero-ctas">
+          <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" data-en="Get Your Custom System Built →" data-es="Construye Tu Sistema Personalizado →">Get Your Custom System Built →</button>
+          <button class="btn-outline-white" onclick="switchMode('owner')" data-en="See the Owner Dashboard" data-es="Ver el Panel de Propietario">See the Owner Dashboard</button>
+        </div>
+        <div class="cv-hero-trust">
+          <div class="trust-pill">🔑 Licensed &amp; Insured</div>
+          <div class="trust-pill">⭐ 4.8 · 124 Reviews</div>
+          <div class="trust-pill">📍 DFW Metroplex</div>
+          <div class="trust-pill">🌐 Bilingual EN / ES</div>
+        </div>
       </div>
-      <div class="cv-hero-trust">
-        <div class="trust-pill">🔑 Licensed &amp; Insured</div>
-        <div class="trust-pill">⭐ 4.8 · 200+ Projects</div>
-        <div class="trust-pill">📅 12 Years in DFW</div>
+      <div class="geo-visual">
+        <div class="geo-circle-frame">
+          <span class="geo-icon">🏠</span>
+          <span class="geo-stat">500+ Properties</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Credentials Bar -->
+  <!-- Credentials bar -->
   <div class="cv-creds">
     <div class="cv-creds-inner">
       <div class="cred-item"><span class="cred-icon">🏛️</span> Licensed Contractor</div>
       <div class="cred-item"><span class="cred-icon">🛡️</span> Bonded &amp; Insured</div>
-      <div class="cred-item"><span class="cred-icon">⭐</span> 4.8 · 200+ Reviews</div>
+      <div class="cred-item"><span class="cred-icon">⭐</span> 4.8 · 124 Reviews</div>
       <div class="cred-item"><span class="cred-icon">📅</span> Est. 2013</div>
-      <div class="cred-item"><span class="cred-icon">🏠</span> 500+ Projects</div>
-      <div class="cred-item"><span class="cred-icon">📍</span> DFW Metro Area</div>
+      <div class="cred-item"><span class="cred-icon">🏘️</span> 500+ Units Managed</div>
+      <div class="cred-item"><span class="cred-icon">📍</span> Frisco, TX</div>
     </div>
   </div>
 
-  <!-- Services -->
-  <section class="cv-section">
+  <!-- Problem-led intro -->
+  <section class="problem-section">
     <div class="cv-section-inner">
-      <div class="cv-label" data-en="Our Services" data-es="Nuestros Servicios">Our Services</div>
-      <h2 class="cv-title" data-en="Everything your home needs, under one roof" data-es="Todo lo que tu hogar necesita">Everything your home needs, under one roof</h2>
-      <div class="services-grid">
-        <div class="svc-card reveal">
-          <div class="svc-icon">🏠</div>
-          <div class="svc-name">Renovations &amp; Remodeling</div>
-          <ul class="svc-sublist">
-            <li>Kitchen Renovations</li>
-            <li>Bathroom Remodels</li>
-            <li>Full Home Renovations</li>
-            <li>ADU / Garage Conversions</li>
-          </ul>
-          <div class="svc-price">Starting from $15,000</div>
-          <button class="svc-cta" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">View Projects →</button>
+      <div class="cv-label" data-en="Sound Familiar?" data-es="¿Te Suena Familiar?">Sound Familiar?</div>
+      <h2 class="cv-title" data-en="The problems your competitors haven't solved yet" data-es="Los problemas que tus competidores aún no han resuelto">The problems your competitors haven't solved yet</h2>
+      <div class="problem-grid">
+        <div class="problem-card reveal">
+          <div class="problem-card-icon">📞</div>
+          <div class="problem-card-pain">"Tenants can't reach me after hours"</div>
+          <div class="problem-card-solution">Your AI assistant handles maintenance requests, showing inquiries, and tenant questions 24/7 — in English and Spanish. No more missed calls at midnight.</div>
         </div>
-        <div class="svc-card reveal">
-          <div class="svc-icon">🏊</div>
-          <div class="svc-name">Outdoor &amp; Pools</div>
-          <ul class="svc-sublist">
-            <li>Custom Pool Builds</li>
-            <li>Pool Remodels</li>
-            <li>Patio &amp; Pergola</li>
-            <li>Outdoor Kitchen</li>
-          </ul>
-          <div class="svc-price">Starting from $25,000</div>
-          <button class="svc-cta" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">View Projects →</button>
+        <div class="problem-card reveal">
+          <div class="problem-card-icon">📱</div>
+          <div class="problem-card-pain">"I'm juggling listings, tenants, and contractors from my phone"</div>
+          <div class="problem-card-solution">One dashboard shows your pipeline, active properties, maintenance queue, and upcoming showings. Everything in one place, always updated.</div>
         </div>
-        <div class="svc-card reveal">
-          <div class="svc-icon">🏢</div>
-          <div class="svc-name">Property Management</div>
-          <ul class="svc-sublist">
-            <li>Rental Management</li>
-            <li>Tenant Screening</li>
-            <li>Maintenance Coordination</li>
-            <li>Vacancy Marketing</li>
-          </ul>
-          <div class="svc-price">Starting from 8% monthly rent</div>
-          <button class="svc-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Get Started →</button>
+        <div class="problem-card reveal">
+          <div class="problem-card-icon">💸</div>
+          <div class="problem-card-pain">"I spend $300/mo on leads I share with 5 other agents"</div>
+          <div class="problem-card-solution">Your website captures leads directly. You own every contact. No shared leads, no platform fees — just yours.</div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Services -->
+  <section class="cv-section services-section" id="services">
+    <div class="cv-section-inner">
+      <div class="cv-label" data-en="Our Services" data-es="Nuestros Servicios">Our Services</div>
+      <h2 class="cv-title" data-en="Everything you need, under one roof" data-es="Todo lo que necesitas, bajo un mismo techo">Everything you need, under one roof</h2>
+      <div class="services-grid" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <!-- Value prop grid -->
+  <section class="value-section">
+    <div class="cv-section-inner" style="position:relative;z-index:1;">
+      <div class="cv-label">What Makes This Different</div>
+      <h2 class="cv-title">Built for how you actually work</h2>
+      <p class="cv-sub">Not a template. Not a SaaS you'll outgrow. A system built around your business — that you own outright.</p>
+      <div class="value-grid">
+        <div class="value-card reveal">
+          <div class="value-card-icon">🤖</div>
+          <div class="value-card-title">AI Chatbot, 24/7</div>
+          <div class="value-card-desc">Answers questions, schedules showings, captures leads — even at 2am. Bilingual by default.</div>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-card-icon">📊</div>
+          <div class="value-card-title">Owner Dashboard</div>
+          <div class="value-card-desc">Pipeline, properties, tenants, maintenance — one screen. Stop juggling apps and spreadsheets.</div>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-card-icon">🌐</div>
+          <div class="value-card-title">Bilingual by Default</div>
+          <div class="value-card-desc">English and Spanish, automatic. Your DFW market expects it. Your competitors aren't ready.</div>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-card-icon">🔑</div>
+          <div class="value-card-title">You Own Everything</div>
+          <div class="value-card-desc">Your website, your leads, your data. Cancel anytime and keep everything. No platform lock-in.</div>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-card-icon">🎨</div>
+          <div class="value-card-title">Built for Your Business</div>
+          <div class="value-card-desc">Not a template anyone can buy. Built for YOUR services, YOUR area, YOUR brand.</div>
+        </div>
+        <div class="value-card reveal">
+          <div class="value-card-icon">🔍</div>
+          <div class="value-card-title">AI Market Intelligence</div>
+          <div class="value-card-desc">Know when new permits are filed, when competitors raise prices, when your area is trending.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works (geometric process section) -->
+  <section class="process-section">
+    <div class="cv-section-inner">
+      <div class="cv-label">How It Works</div>
+      <h2 class="cv-title">From prospect to managed property — in minutes, not days</h2>
+      <p class="cv-sub">Your AI system handles the repetitive work so you can focus on relationships and deals.</p>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="process-badge-wrap">
+            <div class="process-badge">1</div>
+          </div>
+          <div class="process-step-icon">🏠</div>
+          <div class="process-step-title">Lead Comes In</div>
+          <div class="process-step-desc">A tenant or buyer finds you online. Your AI chatbot greets them, answers their questions in English or Spanish, and captures their name, phone, and what they're looking for — even at 2am.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-badge-wrap">
+            <div class="process-badge">2</div>
+          </div>
+          <div class="process-step-icon">📊</div>
+          <div class="process-step-title">You See It Instantly</div>
+          <div class="process-step-desc">The lead appears on your dashboard with a score, contact info, and suggested next step. You get a notification. One click to call, text, or schedule — right from the app.</div>
+        </div>
+        <div class="process-step reveal">
+          <div class="process-badge-wrap">
+            <div class="process-badge">3</div>
+          </div>
+          <div class="process-step-icon">✅</div>
+          <div class="process-step-title">You Close the Deal</div>
+          <div class="process-step-desc">From consultation to signed lease or contract. The system tracks every step, follows up automatically with undecided leads, and helps you re-engage past clients when the timing is right.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats row -->
+  <div class="stats-section">
+    <div class="stats-inner">
+      <div class="stats-label">The numbers your competitors don't want you to see</div>
+      <div class="stats-grid">
+        <div class="stat-item reveal">
+          <div class="stat-number">$183</div>
+          <div class="stat-label">Avg cost per lead on Zillow</div>
+          <div class="stat-context">Your site captures leads for $0/mo in platform fees</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number">50%</div>
+          <div class="stat-label">Shared leads go to the first responder</div>
+          <div class="stat-context">Your AI responds in seconds — not hours</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number">90%</div>
+          <div class="stat-label">Of renovating homeowners hire professionals</div>
+          <div class="stat-context">Capture them before they find someone else</div>
+        </div>
+        <div class="stat-item reveal">
+          <div class="stat-number">2-4hr</div>
+          <div class="stat-label">Manual remodeling estimate</div>
+          <div class="stat-context">AI Good/Better/Best estimate in minutes</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Portfolio -->
   <div class="portfolio-bg">
@@ -940,9 +1146,9 @@ body {
         <p class="cv-sub">Click any project to see more details.</p>
         <div class="portfolio-filter">
           <button class="pf-tab active" onclick="filterProjects('all',this)">All</button>
-          <button class="pf-tab" onclick="filterProjects('renovations',this)">Renovations</button>
-          <button class="pf-tab" onclick="filterProjects('pools',this)">Outdoor &amp; Pools</button>
           <button class="pf-tab" onclick="filterProjects('management',this)">Property Mgmt</button>
+          <button class="pf-tab" onclick="filterProjects('realestate',this)">Real Estate</button>
+          <button class="pf-tab" onclick="filterProjects('remodeling',this)">Remodeling</button>
         </div>
         <div class="portfolio-grid" id="portfolioGrid"></div>
       </div>
@@ -950,10 +1156,10 @@ body {
   </div>
 
   <!-- Reviews -->
-  <div class="reviews-bg">
+  <div class="reviews-bg" id="reviews">
     <div class="cv-section-inner">
       <div class="cv-label">Client Stories</div>
-      <h2 class="cv-title">What our clients say</h2>
+      <h2 class="cv-title" style="color:white;">What our clients say</h2>
       <div class="reviews-grid" id="reviewsGrid"></div>
     </div>
   </div>
@@ -963,209 +1169,134 @@ body {
     <div class="cv-section-inner">
       <div class="cv-label">Where We Work</div>
       <h2 class="cv-title">Deep roots in DFW</h2>
-      <p class="cv-sub">500+ projects across the Collin County and DFW metro area.</p>
+      <p class="cv-sub">500+ properties and projects across Collin County and the DFW metro area.</p>
       <div class="neighborhoods-grid">
         <div class="nbhd-card reveal">
           <div class="nbhd-city">Frisco</div>
-          <div class="nbhd-count">78 projects</div>
+          <div class="nbhd-count">142 properties managed</div>
           <ul class="nbhd-list">
-            <li>Craig Ranch</li>
-            <li>Stonebriar</li>
-            <li>Phillips Creek</li>
+            <li>Craig Ranch</li><li>Stonebriar</li><li>Phillips Creek</li>
           </ul>
         </div>
         <div class="nbhd-card reveal">
           <div class="nbhd-city">Plano</div>
-          <div class="nbhd-count">65 projects</div>
+          <div class="nbhd-count">98 properties managed</div>
           <ul class="nbhd-list">
-            <li>Legacy West</li>
-            <li>Willow Bend</li>
-            <li>Deerfield</li>
+            <li>Legacy West</li><li>Willow Bend</li><li>Deerfield</li>
           </ul>
         </div>
         <div class="nbhd-card reveal">
           <div class="nbhd-city">McKinney</div>
-          <div class="nbhd-count">42 projects</div>
+          <div class="nbhd-count">74 properties managed</div>
           <ul class="nbhd-list">
-            <li>Stonebridge Ranch</li>
-            <li>Tucker Hill</li>
-            <li>Adriatica</li>
+            <li>Stonebridge Ranch</li><li>Tucker Hill</li><li>Adriatica</li>
           </ul>
         </div>
         <div class="nbhd-card reveal">
-          <div class="nbhd-city">Prosper</div>
-          <div class="nbhd-count">28 projects</div>
+          <div class="nbhd-city">Prosper &amp; Celina</div>
+          <div class="nbhd-count">61 properties managed</div>
           <ul class="nbhd-list">
-            <li>Star Trail</li>
-            <li>Windsong Ranch</li>
-            <li>Lakes of Prosper</li>
+            <li>Star Trail</li><li>Windsong Ranch</li><li>Light Farms</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Booking Form -->
+  <!-- Booking form -->
   <div class="booking-bg">
     <section class="cv-section" id="booking">
       <div class="cv-section-inner">
         <div class="cv-label" data-en="Get Started" data-es="Empieza Ya">Get Started</div>
-        <h2 class="cv-title" data-en="Request a free consultation" data-es="Solicita una consulta gratis">Request a free consultation</h2>
-        <p class="cv-sub" data-en="Tell us about your project and we'll reach out within 24 hours." data-es="Cuéntanos sobre tu proyecto y te contactaremos en menos de 24 horas.">Tell us about your project and we'll reach out within 24 hours.</p>
+        <h2 class="cv-title" data-en="This is your dashboard. Ready to see it with your data?" data-es="¿Listo para verlo con tus datos?">This is your dashboard. Ready to see it with your data?</h2>
+        <p class="cv-sub" data-en="Tell us about your business and we'll show you what your system could look like — in under 48 hours." data-es="Cuéntanos sobre tu negocio y te mostraremos cómo podría verse tu sistema.">Tell us about your business and we'll show you what your system could look like — in under 48 hours.</p>
         <div class="booking-card">
           <form id="bookingForm" onsubmit="submitBooking(event)" novalidate>
             <div class="booking-grid">
               <div class="form-group">
-                <label class="form-label" for="bfName" data-en="Your Name *" data-es="Tu nombre">Your Name *</label>
+                <label class="form-label" for="bfName" data-en="Your Name *" data-es="Tu nombre *">Your Name *</label>
                 <input class="form-input" id="bfName" type="text" placeholder="Sarah Mitchell" data-ph-en="Sarah Mitchell" data-ph-es="María García" required>
               </div>
               <div class="form-group">
-                <label class="form-label" for="bfPhone" data-en="Phone *" data-es="Teléfono">Phone *</label>
-                <input class="form-input" id="bfPhone" type="tel" placeholder="(214) 555-0000" data-ph-en="(214) 555-0000" data-ph-es="(214) 555-0000" required>
+                <label class="form-label" for="bfPhone" data-en="Phone *" data-es="Teléfono *">Phone *</label>
+                <input class="form-input" id="bfPhone" type="tel" placeholder="(469) 555-0000" data-ph-en="(469) 555-0000" data-ph-es="(469) 555-0000" required>
               </div>
               <div class="form-group">
-                <label class="form-label" for="bfEmail" data-en="Email *" data-es="Correo electrónico">Email *</label>
+                <label class="form-label" for="bfEmail" data-en="Email *" data-es="Correo electrónico *">Email *</label>
                 <input class="form-input" id="bfEmail" type="email" placeholder="sarah@example.com" data-ph-en="sarah@example.com" data-ph-es="maria@ejemplo.com" required>
               </div>
               <div class="form-group">
-                <label class="form-label">Preferred Contact</label>
-                <div class="form-radio-row">
-                  <label class="radio-label"><input type="radio" name="contactMethod" value="call" checked> Call</label>
-                  <label class="radio-label"><input type="radio" name="contactMethod" value="text"> Text</label>
-                  <label class="radio-label"><input type="radio" name="contactMethod" value="email"> Email</label>
-                </div>
-              </div>
-
-              <div class="form-group full">
-                <label class="form-label" for="bfCategory">Service Category *</label>
-                <select class="form-select" id="bfCategory" onchange="updateConditionalFields()" required>
-                  <option value="">Select a service...</option>
-                  <option value="renovations">Renovations &amp; Remodeling</option>
-                  <option value="pools">Outdoor &amp; Pools</option>
-                  <option value="management">Property Management</option>
-                  <option value="notsure">Not sure yet</option>
-                </select>
-              </div>
-
-              <!-- Renovations -->
-              <div class="form-group full conditional-fields" id="cf-renovations">
-                <div class="form-label" style="margin-bottom:8px;">Which rooms? (check all that apply)</div>
-                <div class="checkbox-group">
-                  <label class="checkbox-label"><input type="checkbox" name="rooms" value="Kitchen"><span class="checkbox-box"></span>Kitchen</label>
-                  <label class="checkbox-label"><input type="checkbox" name="rooms" value="Bathroom"><span class="checkbox-box"></span>Bathroom</label>
-                  <label class="checkbox-label"><input type="checkbox" name="rooms" value="Full Home"><span class="checkbox-box"></span>Full Home</label>
-                  <label class="checkbox-label"><input type="checkbox" name="rooms" value="ADU / Garage"><span class="checkbox-box"></span>ADU / Garage Conversion</label>
-                  <label class="checkbox-label"><input type="checkbox" name="rooms" value="Other"><span class="checkbox-box"></span>Other</label>
-                </div>
-              </div>
-              <div class="form-group conditional-fields" id="cf-renovations-budget">
-                <label class="form-label" for="bfBudget">Budget Range</label>
-                <select class="form-select" id="bfBudget">
-                  <option value="">Select budget...</option>
-                  <option>Under $25K</option>
-                  <option>$25K–$50K</option>
-                  <option>$50K–$100K</option>
-                  <option>$100K+</option>
-                  <option>Not sure</option>
-                </select>
-              </div>
-              <div class="form-group conditional-fields" id="cf-renovations-timeline">
-                <label class="form-label" for="bfTimeline">Timeline</label>
-                <select class="form-select" id="bfTimeline">
-                  <option value="">Select timeline...</option>
-                  <option>ASAP</option>
-                  <option>1–3 months</option>
-                  <option>3–6 months</option>
-                  <option>Just exploring</option>
-                </select>
-              </div>
-
-              <!-- Pools -->
-              <div class="form-group conditional-fields" id="cf-pools-type">
-                <label class="form-label" for="bfPoolType">Project Type</label>
-                <select class="form-select" id="bfPoolType">
+                <label class="form-label">Business Type</label>
+                <select class="form-select" id="bfBizType" required>
                   <option value="">Select type...</option>
-                  <option>New Pool Build</option>
-                  <option>Pool Remodel</option>
-                  <option>Patio &amp; Pergola</option>
-                  <option>Outdoor Kitchen</option>
-                  <option>Multiple</option>
+                  <option>Property Management</option>
+                  <option>Real Estate Agent / Broker</option>
+                  <option>Remodeling / Contractor</option>
+                  <option>All Three</option>
+                  <option>Other Home Services</option>
                 </select>
               </div>
-              <div class="form-group conditional-fields" id="cf-pools-hoa">
-                <label class="form-label">HOA?</label>
-                <div class="form-radio-row">
-                  <label class="radio-label"><input type="radio" name="hoa" value="yes"> Yes</label>
-                  <label class="radio-label"><input type="radio" name="hoa" value="no"> No</label>
-                  <label class="radio-label"><input type="radio" name="hoa" value="notsure"> Not sure</label>
-                </div>
-              </div>
-
-              <!-- Property Management -->
-              <div class="form-group conditional-fields" id="cf-mgmt-count">
-                <label class="form-label" for="bfPropCount">Number of Properties</label>
-                <select class="form-select" id="bfPropCount">
+              <div class="form-group">
+                <label class="form-label" for="bfUnits">Properties / Units Managed</label>
+                <select class="form-select" id="bfUnits">
                   <option value="">Select...</option>
-                  <option>1</option>
-                  <option>2–5</option>
-                  <option>6–10</option>
-                  <option>10+</option>
+                  <option>1-5</option>
+                  <option>6-20</option>
+                  <option>21-50</option>
+                  <option>50+</option>
+                  <option>Just starting</option>
                 </select>
               </div>
-              <div class="form-group conditional-fields" id="cf-mgmt-vacant">
-                <label class="form-label">Currently Vacant?</label>
-                <div class="form-radio-row">
-                  <label class="radio-label"><input type="radio" name="vacant" value="yes"> Yes</label>
-                  <label class="radio-label"><input type="radio" name="vacant" value="no"> No</label>
-                  <label class="radio-label"><input type="radio" name="vacant" value="partial"> Partially</label>
-                </div>
-              </div>
-
-              <!-- Not sure -->
-              <div class="form-group full conditional-fields" id="cf-notsure">
-                <label class="form-label" for="bfNotSure">Tell us what you're thinking</label>
-                <textarea class="form-textarea" id="bfNotSure" placeholder="Describe your project or situation..."></textarea>
-              </div>
-
-              <!-- Always visible -->
-              <div class="form-group full">
-                <label class="form-label" for="bfAddress">Property Address or Neighborhood (optional)</label>
-                <input class="form-input" id="bfAddress" type="text" placeholder="Craig Ranch, Frisco TX">
+              <div class="form-group">
+                <label class="form-label">Biggest Pain Point</label>
+                <select class="form-select" id="bfPain">
+                  <option value="">Select...</option>
+                  <option>After-hours tenant calls</option>
+                  <option>Chasing leads / no-shows</option>
+                  <option>Expensive lead platforms</option>
+                  <option>Too much admin work</option>
+                  <option>No visibility into my pipeline</option>
+                </select>
               </div>
               <div class="form-group full">
                 <label class="form-label" for="bfNotes" data-en="Anything else we should know? (optional)" data-es="¿Algo más que debamos saber? (opcional)">Anything else we should know? (optional)</label>
-                <textarea class="form-textarea" id="bfNotes" placeholder="Special requirements, HOA restrictions, timeline urgency..." data-ph-en="Special requirements, HOA restrictions, timeline urgency..." data-ph-es="Requisitos especiales, restricciones HOA, urgencia..."></textarea>
+                <textarea class="form-textarea" id="bfNotes" placeholder="Your city, current tools, specific challenges..." data-ph-en="Your city, current tools, specific challenges..." data-ph-es="Tu ciudad, herramientas actuales, desafíos específicos..."></textarea>
               </div>
             </div>
-            <button class="btn-submit" id="bookingSubmitBtn" type="submit" data-en="Request Consultation →" data-es="Solicitar Consulta →">Request Consultation →</button>
+            <button class="btn-submit" id="bookingSubmitBtn" type="submit" data-en="Let's Talk — 15 Minutes, No Pressure →" data-es="Hablemos →">Let's Talk — 15 Minutes, No Pressure →</button>
           </form>
           <div class="form-success" id="bookingSuccess">
             <div class="form-success-icon">🏠</div>
             <h3 id="bookingSuccessName">Thanks!</h3>
-            <p>We'll reach out within 24 hours to schedule your free consultation.</p>
+            <p>We'll reach out within 24 hours to show you what your system could look like.</p>
           </div>
         </div>
       </div>
     </section>
   </div>
 
+  <!-- Geometric CTA / closing section -->
+  <div class="geo-cta-section">
+    <div class="geo-cta-inner">
+      <div class="cv-label">Ready When You Are</div>
+      <h2 class="geo-cta-title">Let's talk. 15 minutes,<br>no pressure.</h2>
+      <p class="geo-cta-sub">We'll show you a prototype of your business built in our system — before you commit to anything. If it doesn't feel right, no harm done.</p>
+      <button class="geo-cta-btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">See What Your Business Could Look Like →</button>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="cv-footer">
-    <div class="cv-footer-logo">🏠 Apex Home Solutions</div>
-    <div class="cv-footer-tagline" data-en="Full-service renovation, pools &amp; property management in DFW" data-es="Sirviendo a Frisco, McKinney, Plano y todas las comunidades del norte de DFW">Full-service renovation, pools &amp; property management in DFW</div>
+    <div class="cv-footer-logo" id="footerLogo">🏠 Apex Home Solutions</div>
+    <div class="cv-footer-tagline" id="footerTagline" data-en="Full-Service Property Management, Real Estate & Remodeling in the DFW Metroplex" data-es="Gestión de propiedades, bienes raíces y remodelación en DFW">Full-Service Property Management, Real Estate & Remodeling in the DFW Metroplex</div>
     <div class="cv-footer-info">
-      <span>📞 (469) 555-0456</span>
+      <span id="footerPhone">📞 (469) 555-0192</span>
       <span>📍 Frisco, TX 75034</span>
-      <span>⭐ 4.8 from 200+ reviews</span>
-      <span>🕐 Mon–Sat 8am–6pm</span>
+      <span>⭐ 4.8 from 124+ reviews</span>
+      <span>🕐 Mon–Fri 8am–6pm, Sat 9am–2pm</span>
     </div>
-    <div class="cv-footer-credit">
-      Powered by AI — Built by <a href="/" rel="noopener">Krevio</a>
-    </div>
-    <div class="cv-footer-referral">
-      Know a business owner who needs this?
-      <a href="/demos/#referral">Learn about our referral program →</a>
-    </div>
+    <div class="cv-footer-credit">Powered by AI — Built by <a href="/" rel="noopener">Krevio</a></div>
+    <div class="cv-footer-referral">Know a business owner who needs this? <a href="/demos/#referral">Learn about our referral program →</a></div>
   </footer>
 
 </div><!-- /customerView -->
@@ -1173,14 +1304,15 @@ body {
 <!-- ═══════════════════ OWNER DASHBOARD ═══════════════════ -->
 <div id="ownerView">
   <div class="owner-layout">
-
-    <!-- Sidebar -->
     <nav class="owner-sidebar">
       <div class="sidebar-label">Dashboard</div>
       <button class="sidebar-btn active" onclick="switchView('view-dashboard',this)">
         <span class="sidebar-icon">📊</span> Dashboard
       </button>
-      <button class="sidebar-btn" onclick="switchView('view-leads',this)">
+      <button class="sidebar-btn" onclick="switchView('view-properties',this)">
+        <span class="sidebar-icon">🏘️</span> Properties
+      </button>
+      <button class="sidebar-btn" onclick="switchView('view-pipeline',this)">
         <span class="sidebar-icon">🔄</span> Pipeline
       </button>
       <button class="sidebar-btn" onclick="switchView('view-geo',this)">
@@ -1190,26 +1322,36 @@ body {
         <span class="sidebar-icon">📚</span> Knowledge Base
       </button>
       <button class="sidebar-btn" onclick="switchView('view-automation',this)">
-        <span class="sidebar-icon">📱</span> Automation
+        <span class="sidebar-icon">⚡</span> Automation
       </button>
     </nav>
 
-    <!-- Main area -->
     <main class="owner-main">
 
       <!-- Dashboard -->
       <div class="owner-view active" id="view-dashboard">
+        <div class="od-title" id="dashTitle">Apex Home Solutions — Overview</div>
+        <div class="od-sub">Updated just now · Frisco, TX</div>
         <div id="metricsGrid"></div>
-        <div id="platformComparison"></div>
+        <div id="todaySnapshot"></div>
+        <div id="savingsCard"></div>
         <div id="aiSummary"></div>
         <div id="followUpSuggestions"></div>
         <div id="leadsTable"></div>
         <div id="premiumTeasers"></div>
       </div>
 
+      <!-- Properties -->
+      <div class="owner-view" id="view-properties">
+        <div class="od-title">Properties &amp; Listings</div>
+        <div class="od-sub">Active managed properties, vacancies, and maintenance queue</div>
+        <div id="propertiesGrid"></div>
+      </div>
+
       <!-- Pipeline -->
-      <div class="owner-view" id="view-leads">
-        <h2 style="font-size:1.1rem;font-weight:700;color:var(--t0);margin-bottom:20px;">Project Pipeline</h2>
+      <div class="owner-view" id="view-pipeline">
+        <div class="od-title">Project Pipeline</div>
+        <div class="od-sub">From new inquiry to signed lease or contract</div>
         <div class="pipeline-wrap">
           <div class="pipeline" id="pipelineBoard"></div>
         </div>
@@ -1217,7 +1359,8 @@ body {
 
       <!-- Market Score -->
       <div class="owner-view" id="view-geo">
-        <h2 style="font-size:1.1rem;font-weight:700;color:var(--t0);margin-bottom:20px;">AI Visibility Score</h2>
+        <div class="od-title">AI Visibility Score</div>
+        <div class="od-sub">How visible is Apex Home Solutions to AI search engines?</div>
         <div id="geoScoreCard"></div>
         <div id="geoRecsCard"></div>
         <div id="contentPreviewCard"></div>
@@ -1225,14 +1368,15 @@ body {
 
       <!-- Knowledge Base -->
       <div class="owner-view" id="view-kb">
-        <h2 style="font-size:1.1rem;font-weight:700;color:var(--t0);margin-bottom:20px;">Knowledge Base</h2>
+        <div class="od-title">Knowledge Base</div>
+        <div class="od-sub">What your AI assistant knows about your business</div>
         <div class="kb-grid" id="kbGrid"></div>
       </div>
 
       <!-- Automation -->
       <div class="owner-view" id="view-automation">
-        <h2 style="font-size:1.1rem;font-weight:700;color:var(--t0);margin-bottom:4px;">Communication Automation</h2>
-        <p style="font-size:13px;color:var(--t2);margin-bottom:20px;">Automated campaigns, missed call recovery, and message tracking</p>
+        <div class="od-title">Communication Automation</div>
+        <div class="od-sub">Automated campaigns, missed call recovery, and message tracking</div>
         <div id="automationPanel"></div>
       </div>
 
@@ -1240,163 +1384,204 @@ body {
   </div>
 </div>
 
-<!-- Chatbot Widget -->
-<div id="chatWidget" style="position:fixed;bottom:24px;right:24px;z-index:500;">
-  <div id="chatPanel" style="display:none;width:340px;background:var(--bg1);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-lg);overflow:hidden;flex-direction:column;max-height:500px;">
-    <div style="background:var(--hero-bg);padding:16px 18px;display:flex;align-items:center;gap:12px;">
-      <div style="font-size:1.5rem;">🏠</div>
-      <div>
-        <div style="font-size:14px;font-weight:700;color:white;">Apex Home Solutions</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.7);">Your AI Assistant · Online</div>
+<!-- ═══════════════════ CHATBOT WIDGET ═══════════════════ -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-icon">🏠</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name" id="chatHeaderName">Apex Home Solutions</div>
+        <div class="chat-header-status">● Online 24/7 — AI Assistant</div>
       </div>
-      <button onclick="toggleChat()" style="margin-left:auto;background:rgba(255,255,255,0.15);border:none;border-radius:6px;padding:4px 8px;color:white;cursor:pointer;font-size:12px;">✕</button>
+      <button class="chat-voice-toggle" id="voiceToggle" onclick="toggleVoiceMode()" title="Toggle voice responses" aria-label="Toggle voice">🔊</button>
+      <button class="chat-close-btn" onclick="toggleChat()">✕</button>
     </div>
-    <div id="chatMessages" style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;max-height:300px;"></div>
-    <div style="padding:12px;border-top:1px solid var(--border);display:flex;gap:8px;">
-      <input id="chatInput" type="text" placeholder="Ask about our services..." style="flex:1;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--t0);font-size:13px;font-family:inherit;" onkeydown="if(event.key==='Enter')sendMessage()">
-      <button onclick="sendMessage()" style="padding:8px 14px;background:var(--accent);color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">→</button>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-voice-label" id="chatVoiceLabel"></div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Ask about our services..." data-ph-en="Ask about our services..." data-ph-es="Pregunta sobre nuestros servicios..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="chat-mic" id="chatMic" onclick="toggleMic()" title="Voice input" aria-label="Voice input">🎤</button>
+      <button class="chat-send-btn" onclick="sendChat()">→</button>
     </div>
   </div>
-  <button id="chatToggleBtn" onclick="toggleChat()" style="width:52px;height:52px;border-radius:50%;background:var(--accent);color:white;font-size:1.4rem;border:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);cursor:pointer;transition:transform 0.15s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🏠</button>
+  <button class="chat-bubble-btn" onclick="toggleChat()" aria-label="Open chat">🏠</button>
 </div>
 
-<div class="toast hide" id="toast"></div>
-
-<!-- PHASE 2: Tour/Welcome carousel placeholder -->
-<!-- <div id="tourCarousel" class="hidden"> ... </div> -->
+<div class="toast" id="toast"></div>
 
 <script>
+/* ═══════════════════════════════════════════
+   CONFIG
+═══════════════════════════════════════════ */
+const CONFIG = {
+  businessName:      "Apex Home Solutions",
+  businessNameShort: "Apex",
+  businessType:      "realestate",
+  schemaType:        "RealEstateAgent",
+  emoji:             "🏠",
+  tagline:           "Full-Service Property Management, Real Estate & Remodeling in the DFW Metroplex",
+  phone:             "(469) 555-0192",
+  address:           "4200 Legacy Dr",
+  city:              "Frisco",
+  state:             "TX",
+  zip:               "75034",
+  areasServed:       ["Frisco", "Plano", "McKinney", "Allen", "Prosper", "Celina"],
+  rating:            4.8,
+  reviewCount:       124,
+  hours:             "Mon-Fri 8am-6pm, Sat 9am-2pm",
+
+  hasEmergencyBooking: false,
+  hasDispatch:         false,
+  hasCustomerCRM:      true,
+  hasMoney:            true,
+  hasReceipts:         false,
+  hasGallery:          true,
+  hasLanguageToggle:   true,
+  hasVoice:            true
+};
+
 /* ═══════════════════════════════════════════
    MOCK DATA
 ═══════════════════════════════════════════ */
 const MOCK = {
-  business: { name: 'Apex Home Solutions', phone: '(469) 555-0456', city: 'Frisco', state: 'TX' },
   metrics: [
-    { value: '8', label: 'Active Projects', trend: '+2 this month', sub: 'In progress' },
-    { value: '$340K', label: 'Pipeline Value', trend: '+$85K this month', sub: 'Proposals + signed' },
-    { value: '42%', label: 'Avg Close Rate', trend: '+5% vs last quarter', sub: 'Consultation → signed' },
-    { value: '68%', label: 'Repeat Clients', trend: 'Steady', sub: 'Clients with 2+ projects' }
+    { value: '47', label: 'Active Properties', trend: '+3 this month', sub: 'Under management' },
+    { value: '$285K', label: 'Pipeline Value', trend: '+$62K this month', sub: 'Deals + proposals' },
+    { value: '12%', label: 'Avg Vacancy Rate', trend: '−4% vs last quarter', sub: 'Industry avg: 18%' },
+    { value: '94%', label: 'Rent Collection Rate', trend: 'Steady', sub: 'On-time payments' }
+  ],
+  todaySnapshot: [
+    { time: '9:00 AM', client: 'Patel Family', type: 'Property Showing', address: 'Craig Ranch, Frisco', status: 'confirmed' },
+    { time: '11:30 AM', client: 'Maria Chen', type: 'Lease Renewal', address: 'Legacy West, Plano', status: 'confirmed' },
+    { time: '2:00 PM', client: 'Robert Kim', type: 'Maintenance Walk', address: 'Stonebridge, McKinney', status: 'pending' },
+    { time: '4:30 PM', client: 'New Lead (AI Chat)', type: 'Discovery Call', address: 'Windsong Ranch', status: 'ai' }
   ],
   platformComparison: {
-    platforms: 'Zillow / Houzz / Angi',
+    platforms: 'Zillow / Realtor.com / Angi',
     monthlyLeadCost: 390,
     monthlySubscription: 200,
     monthlyLeads: 6,
-    ourLeads: 10,
-    ourCostPerLead: 0,
+    ourLeads: 11,
     annualSavings: 7080,
     breakEvenMonths: 2
   },
-  aiSummary: '8 active projects on track. Pipeline value up 33% vs last month. 3 consultations scheduled this week — 2 renovation, 1 pool.\n\nRecommend: Follow up with Patel family on kitchen proposal (sent 5 days ago, no response). Craig Ranch is showing high renovation demand — consider a targeted neighborhood outreach campaign.',
+  aiSummary: '47 active properties, 4 vacancies. Rent collection rate up 2% vs last month — strong performance.\n\nRecommend: The Patel Family showing today is your highest-scored lead this week (score: 88). They\'ve asked twice about pet policy — have that ready. Three units in Craig Ranch have maintenance requests open 7+ days — flag for contractor.',
   followUps: [
-    { name: 'Patel Family', lastService: 'Mar 2026', serviceType: 'Kitchen renovation proposal', value: 42000, suggestion: 'Proposal sent 5 days ago — schedule follow-up call', daysAgo: 5 },
-    { name: 'Mike & Lisa Torres', lastService: 'Nov 2025', serviceType: 'Bathroom remodel', value: 18000, suggestion: 'Project complete — ask for Google review + referral', daysAgo: 140 },
-    { name: 'Kevin O\'Brien', lastService: 'Jan 2026', serviceType: 'Pool consultation', value: 55000, suggestion: 'Spring is here — re-engage on pool build before summer rush', daysAgo: 75 }
+    { name: 'Patel Family', lastContact: '3 days ago', serviceType: 'Property showing scheduled', value: 1650, suggestion: 'High-score lead — confirm showing time, ask about pet policy', daysAgo: 3 },
+    { name: 'Kevin O\'Brien', lastContact: '6 weeks ago', serviceType: 'Investment property inquiry', value: 45000, suggestion: 'Spring market is hot — re-engage on that 4-plex discussion', daysAgo: 42 },
+    { name: 'Williams Duplex', lastContact: '2 weeks ago', serviceType: 'Property management inquiry', value: 4800, suggestion: 'Sent management proposal — follow up before they sign with a competitor', daysAgo: 14 }
   ],
-  dormantCustomers: 12,
+  dormantClients: 9,
   leads: [
-    { id: 1, name: 'Patel Family', service: 'Kitchen Renovation', status: 'proposal', location: 'Craig Ranch', score: 82, date: 'Apr 1', value: '$42K' },
-    { id: 2, name: 'Anderson Residence', service: 'New Pool Build', status: 'consultation', location: 'Phillips Creek', score: 70, date: 'Apr 3', value: '$60K' },
-    { id: 3, name: 'Chen Properties', service: 'Rental Mgmt (3 units)', status: 'signed', location: 'Legacy West', score: 90, date: 'Mar 28', value: '$3.6K/yr' },
-    { id: 4, name: 'Sarah Mitchell', service: 'Bathroom Remodel', status: 'inquiry', location: 'Stonebriar', score: 55, date: 'Apr 5', value: '$22K' },
-    { id: 5, name: 'Robert Kim', service: 'Outdoor Kitchen', status: 'consultation', location: 'Windsong', score: 65, date: 'Apr 4', value: '$35K' },
-    { id: 6, name: 'Maria Garcia', service: 'Full Home Reno', status: 'signed', location: 'Tucker Hill', score: 88, date: 'Mar 20', value: '$95K' },
-    { id: 7, name: 'Thompson Family', service: 'Pool Remodel', status: 'complete', location: 'Star Trail', score: 75, date: 'Feb 15', value: '$28K' },
-    { id: 8, name: 'Williams Duplex', service: 'Rental Mgmt (2 units)', status: 'inquiry', location: 'Deerfield', score: 45, date: 'Apr 5', value: '$2.4K/yr' }
+    { id: 1, name: 'Patel Family', service: 'Property Showing', status: 'consultation', location: 'Craig Ranch', score: 88, date: 'Apr 6', value: '$1,650/mo' },
+    { id: 2, name: 'Anderson Residence', service: 'Investment Analysis', status: 'proposal', location: 'Plano', score: 74, date: 'Apr 4', value: '$320K' },
+    { id: 3, name: 'Chen Properties', service: 'Property Mgmt (3 units)', status: 'signed', location: 'Legacy West', score: 92, date: 'Mar 28', value: '$4.2K/yr' },
+    { id: 4, name: 'Sarah Mitchell', service: 'Home Purchase', status: 'inquiry', location: 'Stonebriar', score: 55, date: 'Apr 7', value: '$480K' },
+    { id: 5, name: 'Robert Kim', service: 'Remodeling Estimate', status: 'consultation', location: 'Windsong', score: 67, date: 'Apr 5', value: '$38K' },
+    { id: 6, name: 'Maria Garcia', service: 'Lease Renewal', status: 'signed', location: 'Tucker Hill', score: 90, date: 'Mar 20', value: '$1,850/mo' },
+    { id: 7, name: 'Thompson Family', service: 'Home Sale', status: 'complete', location: 'Star Trail', score: 78, date: 'Feb 15', value: '$575K' },
+    { id: 8, name: 'Williams Duplex', service: 'Property Mgmt (2 units)', status: 'inquiry', location: 'Deerfield', score: 45, date: 'Apr 7', value: '$2.8K/yr' }
+  ],
+  properties: [
+    { id: 1, emoji: '🏡', address: '4521 Ridgecrest Dr', city: 'Frisco, TX', status: 'occupied', rent: '$2,450/mo', tenant: 'Garcia Family', maintenance: 0, lease: 'Expires Aug 2026' },
+    { id: 2, emoji: '🏠', address: '2819 Stonegate Blvd', city: 'Plano, TX', status: 'vacant', rent: '$1,850/mo', tenant: '—', maintenance: 0, lease: 'Listed — 12 days' },
+    { id: 3, emoji: '🏘️', address: '6103 Legacy Oaks', city: 'Frisco, TX', status: 'showing', rent: '$2,100/mo', tenant: '—', maintenance: 1, lease: '3 showings scheduled' },
+    { id: 4, emoji: '🏡', address: '932 Tucker Creek Ct', city: 'McKinney, TX', status: 'occupied', rent: '$1,975/mo', tenant: 'Kim Family', maintenance: 2, lease: 'Expires Dec 2025' },
+    { id: 5, emoji: '🏠', address: '7744 Windsong Ranch Pkwy', city: 'Prosper, TX', status: 'listing', rent: '$3,200/mo', tenant: '—', maintenance: 0, lease: 'New listing — active' },
+    { id: 6, emoji: '🏘️', address: '1456 Stonebridge Ct', city: 'McKinney, TX', status: 'occupied', rent: '$2,250/mo', tenant: 'Patel Family', maintenance: 1, lease: 'Renewing in 60 days' }
   ],
   geoScore: {
-    overall: 58,
+    overall: 61,
     categories: [
-      { name: 'Schema Markup', score: 72, icon: '🏷️', desc: 'Structured data for AI search engines' },
-      { name: 'NAP Consistency', score: 40, icon: '📍', desc: 'Business info across Zillow, Houzz, Google, Yelp' },
-      { name: 'Review Signals', score: 82, icon: '⭐', desc: 'Review volume, recency, response rate' },
-      { name: 'Content Authority', score: 28, icon: '📝', desc: 'Project case studies, neighborhood expertise' },
-      { name: 'Platform Coverage', score: 65, icon: '🌐', desc: 'Zillow, Houzz, Angi, BBB, Google Business' }
+      { name: 'Schema Markup', score: 75, icon: '🏷️', desc: 'Structured data for AI search engines' },
+      { name: 'NAP Consistency', score: 44, icon: '📍', desc: 'Business info across Zillow, Google, Yelp' },
+      { name: 'Review Signals', score: 84, icon: '⭐', desc: 'Review volume, recency, response rate' },
+      { name: 'Content Authority', score: 31, icon: '📝', desc: 'Property guides, neighborhood expertise' },
+      { name: 'Platform Coverage', score: 68, icon: '🌐', desc: 'Zillow, Realtor.com, Google Business, BBB' }
     ],
     recommendations: [
-      { priority: 'p1', text: 'Fix NAP: listed as "Apex Home Solutions LLC" on Houzz but "Apex Home Solutions" on Google. Inconsistency hurts AI entity recognition.' },
-      { priority: 'p1', text: 'Content gap: no project case studies published. AI assistants can\'t recommend you for specific renovation types without content proof.' },
-      { priority: 'p2', text: 'Add neighborhood pages: "Kitchen Renovations in Craig Ranch" type content would boost hyperlocal AI visibility.' },
-      { priority: 'p2', text: 'Respond to 8 unresponded Google reviews. AI models weigh review engagement in recommendations.' },
-      { priority: 'p3', text: 'Add HowTo schema to project galleries. Helps AI assistants understand your renovation process.' }
+      { priority: 'p1', text: 'Fix NAP inconsistency: listed as "Apex Home Solutions LLC" on Zillow but "Apex Home Solutions" on Google. Hurts AI entity matching.' },
+      { priority: 'p1', text: 'No neighborhood guides published. AI assistants can\'t recommend you for Frisco or Prosper without local content proof.' },
+      { priority: 'p2', text: 'Add neighborhood pages: "Property Management in Craig Ranch" type content boosts hyperlocal AI visibility.' },
+      { priority: 'p2', text: 'Respond to 11 unresponded Google reviews. AI models weigh owner engagement in recommendations.' },
+      { priority: 'p3', text: 'Add FAQ schema to property listings. Helps AI assistants surface your answers to common tenant questions.' }
     ]
   },
   contentTitles: [
-    'Top Kitchen Renovation Trends in Frisco 2026',
-    'Pool Building Timeline: What DFW Homeowners Should Expect',
-    'Is Your Rental Property AI-Optimized?'
+    'What Frisco Property Owners Need to Know About the 2026 Rental Market',
+    'Tenant Screening in DFW: The Checklist We Use on Every Applicant',
+    'Investment Property Analysis: Is Prosper Still Worth It in 2026?'
   ],
   reviews: [
-    { name: 'Sarah & James K.', rating: 5, projectType: 'Kitchen Renovation', neighborhood: 'Craig Ranch',
-      text: 'Completely transformed our kitchen. Apex came in on budget and finished a week early. The craftmanship is outstanding — every detail exactly as we discussed.' },
-    { name: 'Raj Patel', rating: 5, projectType: 'Pool Build', neighborhood: 'Phillips Creek',
-      text: 'The team handled everything from permits to final inspection. Pool was ready by Memorial Day. Best contractor experience we\'ve had in DFW.' },
-    { name: 'David Chen', rating: 5, projectType: 'Rental Management', neighborhood: 'Legacy West',
-      text: 'Three properties, zero headaches. Vacancy rate dropped from 2 months to 2 weeks. Monthly statements are clear and the maintenance response time is excellent.' },
-    { name: 'Priya Sharma', rating: 5, projectType: 'Bathroom Remodel', neighborhood: 'Starwood',
-      text: 'Beautiful work. They even caught a plumbing issue the previous contractor missed. Honest, on-time, and fair pricing. Would hire them again without hesitation.' }
+    { name: 'Marcus T.', rating: 5, type: 'Tenant — Maintenance Request', location: 'Frisco',
+      text: 'It was 11:45 PM and my AC stopped working. I messaged the chatbot expecting nothing until morning. By midnight it had logged my request, texted me a confirmation, and had a tech at my door by 9 AM. That\'s unheard of.' },
+    { name: 'David & Lynn Chen', rating: 5, type: 'Property Owner — 3 Units', location: 'Legacy West, Plano',
+      text: 'Our vacancy rate went from averaging 6 weeks between tenants to under 10 days. The AI handles inquiries while we sleep. We\'ve had exactly zero headaches this year.' },
+    { name: 'Priya Sharma', rating: 5, type: 'Home Seller — Above Asking', location: 'Star Trail, Frisco',
+      text: 'Our listing got 8 showings in the first 4 days and went under contract above asking. The AI-powered listing description and pricing analysis made us the most visible home in the neighborhood.' },
+    { name: 'James O\'Brien', rating: 5, type: 'Remodeling Client', location: 'Windsong Ranch, Prosper',
+      text: 'I submitted my kitchen remodel request at 7 AM on a Sunday. By 10 AM I had a Good/Better/Best estimate in my inbox. Signed with them that afternoon. Every other contractor took 2 weeks just to call back.' }
   ],
   projects: [
-    { id: 1, type: 'Kitchen Renovation', category: 'renovations', icon: '🍳', neighborhood: 'Craig Ranch', budget: '$35K–$45K', rating: '5.0',
-      desc: 'Full gut renovation of a 400 sq ft kitchen. Custom cabinets, quartz countertops, SubZero appliances, and a new island layout. Completed in 5 weeks.',
-      quote: '"They redesigned the layout and it completely changed how we use the space." — Sarah K.' },
-    { id: 2, type: 'New Pool Build', category: 'pools', icon: '🏊', neighborhood: 'Stonebriar', budget: '$55K–$70K', rating: '4.9',
-      desc: 'Custom resort-style pool with tanning ledge, spa, and travertine decking. Fully permitted with the City of Frisco. Ready in 10 weeks.',
-      quote: '"Ready before Memorial Day, just like they promised." — Raj P.' },
-    { id: 3, type: 'Full Home Renovation', category: 'renovations', icon: '🏠', neighborhood: 'Star Trail', budget: '$80K–$100K', rating: '5.0',
-      desc: 'Comprehensive renovation of a 3,200 sq ft home. New flooring throughout, kitchen, 2 bathrooms, and exterior refresh. Project ran 14 weeks.',
-      quote: '"It\'s essentially a new home at a fraction of the cost." — Thompson Family' },
-    { id: 4, type: 'Outdoor Kitchen', category: 'pools', icon: '🍖', neighborhood: 'Windsong', budget: '$28K–$35K', rating: '4.9',
-      desc: 'Complete outdoor entertaining space — built-in grill, mini fridge, sink, granite countertops, and pergola cover. Permitted and inspected.',
-      quote: '"Our backyard is our favorite room in the house now." — Robert K.' },
-    { id: 5, type: 'Rental Management', category: 'management', icon: '🏢', neighborhood: 'Legacy West', budget: '8% monthly', rating: '5.0',
-      desc: 'Full management of 3 residential properties. Tenant screening, lease management, maintenance coordination, and monthly owner reporting.',
+    { id: 1, type: 'Property Management', category: 'management', icon: '🏢', neighborhood: 'Legacy West', budget: '8% monthly', rating: '5.0',
+      desc: 'Full management of 3 residential properties. Tenant screening, lease management, maintenance coordination, and monthly owner reporting. Vacancy rate reduced from 9 weeks to 8 days.',
       quote: '"Three properties, zero headaches." — David C.' },
-    { id: 6, type: 'Bathroom Remodel', category: 'renovations', icon: '🚿', neighborhood: 'Starwood', budget: '$18K–$24K', rating: '5.0',
-      desc: 'Primary bathroom transformation — freestanding tub, walk-in shower with frameless glass, heated floors, and custom vanity. 3 weeks from start to finish.',
-      quote: '"They even caught a plumbing issue the previous contractor missed." — Priya S.' }
+    { id: 2, type: 'Home Sale — Above Asking', category: 'realestate', icon: '🔑', neighborhood: 'Star Trail', budget: '$575K closed', rating: '5.0',
+      desc: 'AI-powered listing strategy with hyper-local pricing analysis and automated showing follow-ups. 8 showings in 4 days, accepted above-asking offer on day 5.',
+      quote: '"Most visible home in the neighborhood." — Priya S.' },
+    { id: 3, type: 'Kitchen Remodel', category: 'remodeling', icon: '🍳', neighborhood: 'Craig Ranch', budget: '$42K', rating: '4.9',
+      desc: 'Full kitchen gut renovation — custom cabinets, quartz countertops, new layout. Estimate delivered same-day through AI chatbot. Project completed in 5 weeks.',
+      quote: '"Every other contractor took 2 weeks to call back." — James O.' },
+    { id: 4, type: 'Investment Analysis', category: 'realestate', icon: '📊', neighborhood: 'Prosper', budget: '$320K 4-plex', rating: '5.0',
+      desc: 'Full ROI analysis, rental rate comps, and cash flow projection for a 4-unit investment property. Delivered in 48 hours with comparable sales data and 5-year projection model.',
+      quote: '"The data gave us confidence to move fast." — Anderson Residence' },
+    { id: 5, type: 'Tenant Management', category: 'management', icon: '🏘️', neighborhood: 'Windsong Ranch', budget: '8% + maint', rating: '5.0',
+      desc: 'End-to-end management for a 5-unit property portfolio. AI chatbot handles all tenant communications 24/7. Owner receives weekly dashboard summary.',
+      quote: '"I stopped checking email at night." — K. Williams' },
+    { id: 6, type: 'Bathroom Remodel', category: 'remodeling', icon: '🚿', neighborhood: 'Tucker Hill', budget: '$28K', rating: '4.9',
+      desc: 'Primary bath upgrade — frameless glass shower, freestanding tub, heated floors. Matched an existing permit timeline for minimal disruption to tenant.',
+      quote: '"On time, on budget, and caught a plumbing issue we didn\'t know about." — M. Garcia' }
   ],
   faqs: [
-    { q: 'How long does a kitchen renovation take?', a: 'Typically 4-8 weeks depending on scope. Full gut renovations take 8-12 weeks.' },
-    { q: 'Do you handle permits?', a: 'Yes. We manage all permitting with the City of Frisco, Plano, and Collin County.' },
-    { q: 'What\'s included in property management?', a: 'Tenant screening, lease management, maintenance coordination, rent collection, and monthly owner statements.' },
-    { q: 'Do you offer financing?', a: 'We partner with GreenSky and Mosaic for renovation financing. Pool builds can be financed through Lyon Financial.' },
-    { q: 'What areas do you serve?', a: 'Frisco, Plano, McKinney, Allen, Prosper, and surrounding DFW communities.' }
+    { q: 'What does property management include?', a: 'Tenant screening, lease management, rent collection, maintenance coordination, 24/7 AI communication, and monthly owner statements. All for 8% of monthly rent.' },
+    { q: 'How fast do you fill vacancies?', a: 'Average 8-12 days vs. industry average of 6 weeks. Our AI handles inquiries 24/7 and pre-qualifies applicants before you spend any time.' },
+    { q: 'Can you handle remodeling projects?', a: 'Yes — we coordinate remodeling as part of property turnovers or separate projects. We provide Good/Better/Best estimates within 24 hours.' },
+    { q: 'Do you handle both English and Spanish speaking tenants?', a: 'Yes. Our AI chatbot and all communications are fully bilingual. DFW market is 30%+ Spanish-speaking and we\'re ready for it.' },
+    { q: 'What areas do you serve?', a: 'Frisco, Plano, McKinney, Allen, Prosper, Celina, and surrounding DFW communities. Active in Collin County and north Dallas suburbs.' }
   ],
   services: [
-    { name: 'Kitchen Renovations', desc: 'Custom cabinetry, countertops, appliances, layout. Starting $15K.' },
-    { name: 'Bathroom Remodels', desc: 'Walk-in showers, freestanding tubs, heated floors, vanities. Starting $8K.' },
-    { name: 'Full Home Renovation', desc: 'Comprehensive interior and exterior refresh. Starting $50K.' },
-    { name: 'ADU / Garage Conversion', desc: 'Turn existing space into a livable unit. Starting $30K.' },
-    { name: 'Custom Pool Builds', desc: 'Resort-style pools, spas, and water features. Starting $35K.' },
-    { name: 'Pool Remodels', desc: 'Resurface, retile, replumb, and refresh existing pools. Starting $15K.' },
-    { name: 'Patio & Pergola', desc: 'Covered outdoor living spaces with electrical and fans. Starting $10K.' },
-    { name: 'Outdoor Kitchens', desc: 'Built-in grills, countertops, refrigeration, and plumbing. Starting $20K.' },
-    { name: 'Property Management', desc: 'Full-service rental management at 8% of monthly rent.' }
+    { name: 'Property Management', desc: 'Tenant screening, rent collection, maintenance — all for 8% of monthly rent.' },
+    { name: 'Real Estate Sales', desc: 'AI-powered buying and selling. Hyper-local pricing, automated follow-ups.' },
+    { name: 'Remodeling & Renovations', desc: 'Kitchen, bath, whole-home. Same-day estimates through the AI chatbot.' },
+    { name: 'Investment Property Analysis', desc: 'ROI, market comps, cash flow projections. Data in 48 hours.' },
+    { name: 'Tenant Communication', desc: '24/7 AI chat for maintenance requests, lease inquiries, EN + ES.' },
+    { name: 'Maintenance Coordination', desc: 'Vendor dispatch, work order tracking, cost reporting.' },
+    { name: 'Lease Management', desc: 'Renewals, rent adjustments, legal compliance support.' },
+    { name: 'Market Reports', desc: 'Monthly area trends, comparable sales, rental rate analysis.' }
   ],
   automation: {
     metrics: [
-      { label: 'Messages Sent', value: '87', trend: 'This month', icon: '✉️' },
-      { label: 'Open Rate', value: '65%', trend: '+3% vs last month', icon: '📬' },
-      { label: 'Replies', value: '19', trend: '22% reply rate', icon: '💬' },
-      { label: 'Booked from Auto', value: '4', trend: '$8,400 revenue', icon: '📅' }
+      { label: 'Messages Sent', value: '103', trend: 'This month', icon: '✉️' },
+      { label: 'Open Rate', value: '71%', trend: '+5% vs last month', icon: '📬' },
+      { label: 'Replies', value: '24', trend: '23% reply rate', icon: '💬' },
+      { label: 'Booked from Auto', value: '6', trend: '$11,200 revenue', icon: '📅' }
     ],
     campaigns: [
-      { icon: '🏠', name: 'Spring Renovation Outreach', status: 'ACTIVE', sent: 42, desc: 'Sent to homeowners who inquired but didn\'t book in the last 90 days', opens: '68%', replies: 9, booked: 3 },
-      { icon: '⭐', name: 'Review Request (Post-Project)', status: 'ACTIVE', sent: 18, desc: 'Auto-sent 24 hours after project completion', opens: '89%', reviews: 9, avgRating: '4.9★' },
-      { icon: '🔄', name: 'Past Client Reactivation', status: 'ACTIVE', sent: 14, desc: '3-touch sequence for clients with no new projects in 6+ months', opens: '51%', replies: 5, reactivated: 2 }
+      { icon: '🏘️', name: 'Vacancy Alert — New Inquiry Follow-up', status: 'ACTIVE', sent: 38, desc: 'Sent to inquiries that didn\'t book a showing within 48 hours', opens: '74%', replies: 11, booked: 4 },
+      { icon: '⭐', name: 'Review Request (Post Move-in)', status: 'ACTIVE', sent: 22, desc: 'Auto-sent 30 days after tenant move-in', opens: '88%', reviews: 11, avgRating: '4.8★' },
+      { icon: '🔄', name: 'Lease Renewal Outreach (60 days prior)', status: 'ACTIVE', sent: 16, desc: 'Automated sequence starting 60 days before lease expiry', opens: '62%', replies: 8, reactivated: 5 }
     ],
     missedCalls: [
-      { date: 'Apr 5', name: 'Priya S.', flow: 'Missed → Auto-text → Booked kitchen consult ($450)', status: '✅' },
-      { date: 'Apr 3', name: 'Unknown', flow: 'Missed → Auto-text → No reply → Follow-up #2 scheduled', status: '⏳' },
-      { date: 'Apr 1', name: 'James O.', flow: 'Missed → Auto-text → Called back → Booked pool quote ($250)', status: '✅' }
+      { date: 'Apr 6', name: 'Rohan K.', flow: 'Missed → Auto-text → Booked showing ($1,650/mo unit)', status: '✅' },
+      { date: 'Apr 4', name: 'Unknown', flow: 'Missed → Auto-text → No reply → Follow-up #2 scheduled', status: '⏳' },
+      { date: 'Apr 2', name: 'Lisa M.', flow: 'Missed → Auto-text → Called back → Signed lease', status: '✅' }
     ],
     recentMessages: [
-      { channel: '📱', name: 'Rohan K.', type: 'Review request', status: '✅ Opened' },
-      { channel: '📧', name: 'Lisa M.', type: 'Renovation outreach', status: '✅ Replied' },
-      { channel: '📱', name: 'David L.', type: 'Project milestone', status: '✅ Sent' },
-      { channel: '📧', name: 'Anita S.', type: 'Reactivation #1', status: '📬 Sent' },
-      { channel: '📱', name: 'Tom R.', type: 'Missed call', status: '✅ Booked' }
+      { channel: '📱', name: 'Garcia Family', type: 'Lease renewal reminder', status: '✅ Opened' },
+      { channel: '📧', name: 'New Lead', type: 'Vacancy outreach', status: '✅ Replied' },
+      { channel: '📱', name: 'Kim Family', type: 'Maintenance update', status: '✅ Sent' },
+      { channel: '📧', name: 'Patel Inquiry', type: 'Showing confirmation', status: '📬 Sent' },
+      { channel: '📱', name: 'Tom R.', type: 'Missed call recovery', status: '✅ Booked' }
     ]
   }
 };
@@ -1405,31 +1590,37 @@ const MOCK = {
    TRANSLATIONS (ES)
 ═══════════════════════════════════════════ */
 const TRANS_ES = {
-  heroHeadline: 'Tu Hogar, Tu Inversión',
-  heroSub: 'Remodelación, construcción y mantenimiento del hogar con diseño personalizado y resultados garantizados.',
-  services: [
-    { name: 'Remodelación de Interiores', desc: 'Cocinas, baños y espacios de vida' },
-    { name: 'Construcción Exterior', desc: 'Cubiertas, patios y cercas' },
-    { name: 'Mejoras de Energía', desc: 'Eficiencia energética e instalaciones eléctricas' },
-    { name: 'Gestión de Propiedades', desc: 'Mantenimiento integral para propietarios' }
-  ],
-  chatGreeting: '¡Hola! Soy el asistente de DFW Premier Home Services. ¿En qué proyecto podemos ayudarte hoy?',
+  chatGreeting: `¡Hola! Soy el asistente de ${CONFIG.businessName}. 🏠 ¿Estás interesado en una propiedad, gestión de propiedades o una remodelación? Cuéntame en qué puedo ayudarte.`,
   chatPlaceholder: 'Pregunta sobre nuestros servicios...'
 };
 
 let currentLang = 'en';
 
 /* ═══════════════════════════════════════════
+   APPLY CONFIG
+═══════════════════════════════════════════ */
+function applyConfig() {
+  const el = (id) => document.getElementById(id);
+  if (el('barTitle'))       el('barTitle').textContent      = CONFIG.businessName;
+  if (el('dashTitle'))      el('dashTitle').textContent     = CONFIG.businessName + ' — Overview';
+  if (el('chatHeaderName')) el('chatHeaderName').textContent = CONFIG.businessName;
+  if (el('footerLogo'))     el('footerLogo').textContent    = CONFIG.emoji + ' ' + CONFIG.businessName;
+  if (el('footerPhone'))    el('footerPhone').textContent   = '📞 ' + CONFIG.phone;
+  if (el('langToggle'))     el('langToggle').style.display  = CONFIG.hasLanguageToggle ? '' : 'none';
+  document.title = `${CONFIG.businessName} — ${CONFIG.city} ${CONFIG.state} | Property Management & Real Estate`;
+}
+
+/* ═══════════════════════════════════════════
    MODE SWITCH
 ═══════════════════════════════════════════ */
 function switchMode(mode) {
   document.getElementById('customerView').style.display = mode === 'customer' ? 'block' : 'none';
-  document.getElementById('ownerView').style.display = mode === 'owner' ? 'block' : 'none';
-  document.getElementById('chatWidget').style.display = mode === 'customer' ? 'block' : 'none';
+  document.getElementById('ownerView').style.display    = mode === 'owner'    ? 'block' : 'none';
+  document.getElementById('chatWidget').style.display   = mode === 'customer' ? 'block' : 'none';
   document.getElementById('btnCustomer').classList.toggle('active', mode === 'customer');
   document.getElementById('btnOwner').classList.toggle('active', mode === 'owner');
   const langToggle = document.getElementById('langToggle');
-  if (langToggle) langToggle.style.display = mode === 'customer' ? '' : 'none';
+  if (langToggle) langToggle.style.display = (mode === 'customer' && CONFIG.hasLanguageToggle) ? '' : 'none';
   if (mode === 'owner') initDashboard();
 }
 
@@ -1438,9 +1629,10 @@ function switchView(viewId, btn) {
   document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(viewId).classList.add('active');
   btn.classList.add('active');
-  if (viewId === 'view-geo') initGeoScore();
-  if (viewId === 'view-kb') initKb();
+  if (viewId === 'view-geo')        initGeoScore();
+  if (viewId === 'view-kb')         initKb();
   if (viewId === 'view-automation') renderAutomation();
+  if (viewId === 'view-properties') renderProperties();
 }
 
 /* ═══════════════════════════════════════════
@@ -1451,7 +1643,8 @@ function initDashboard() {
   if (dashboardInitialized) return;
   dashboardInitialized = true;
   renderMetrics();
-  renderPlatformComparison();
+  renderTodaySnapshot();
+  renderSavingsCard();
   renderAISummary();
   renderFollowUps();
   renderLeadsTable();
@@ -1471,50 +1664,53 @@ function renderMetrics() {
     </div>`).join('');
 }
 
-function renderPlatformComparison() {
+function renderTodaySnapshot() {
+  const el = document.getElementById('todaySnapshot');
+  const statusColors = { confirmed: 'var(--green)', pending: 'var(--amber)', ai: 'var(--accent)' };
+  const statusLabels = { confirmed: 'Confirmed', pending: 'Pending', ai: 'AI Lead' };
+  el.innerHTML = `
+    <div class="dash-card" style="margin-bottom:20px;">
+      <div class="dash-card-header">
+        <h3>Today's Schedule</h3>
+        <span class="dash-badge green">${MOCK.todaySnapshot.length} items today</span>
+      </div>
+      ${MOCK.todaySnapshot.map(item => `
+        <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+          <div style="min-width:72px;font-size:12px;font-weight:700;color:var(--t2);">${escapeHtml(item.time)}</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:var(--t0);">${escapeHtml(item.client)}</div>
+            <div style="font-size:11px;color:var(--t2);">${escapeHtml(item.type)} · ${escapeHtml(item.address)}</div>
+          </div>
+          <span style="font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:${statusColors[item.status]}18;color:${statusColors[item.status]}">${statusLabels[item.status]}</span>
+        </div>`).join('')}
+      <div style="border-bottom:none;"></div>
+    </div>`;
+}
+
+function renderSavingsCard() {
   const pc = MOCK.platformComparison;
-  const el = document.getElementById('platformComparison');
   const monthlyTotal = pc.monthlyLeadCost + pc.monthlySubscription;
   const annualTotal = monthlyTotal * 12;
+  const el = document.getElementById('savingsCard');
   el.innerHTML = `
-    <div class="thumb-card">
-      <div class="thumb-header">
-        <h3>Your Savings vs Lead Platforms</h3>
-        <div class="thumb-savings">Saves $${annualTotal.toLocaleString()}/yr</div>
+    <div class="dash-card" style="margin-bottom:20px;">
+      <div class="dash-card-header">
+        <h3>Savings vs Lead Platforms</h3>
+        <span class="savings-total">Saves $${annualTotal.toLocaleString()}/yr</span>
       </div>
-      <div class="thumb-rows">
-        <div class="thumb-row">
-          <span>${escapeHtml(pc.platforms)}: lead costs</span>
-          <span class="thumb-old">$${pc.monthlyLeadCost}/mo</span>
-        </div>
-        <div class="thumb-row">
-          <span>${escapeHtml(pc.platforms)}: subscriptions</span>
-          <span class="thumb-old">$${pc.monthlySubscription}/mo</span>
-        </div>
-        <div class="thumb-row">
-          <span>Total monthly spend</span>
-          <span class="thumb-old">$${monthlyTotal}/mo</span>
-        </div>
-        <div class="thumb-row">
-          <span>This system: ${pc.ourLeads} leads × $0</span>
-          <span class="thumb-new">$0/mo</span>
-        </div>
-      </div>
-      <div class="thumb-bar-wrap">
-        <div class="thumb-bar-label">Break-even: ${pc.breakEvenMonths} months. After that, pure savings.</div>
-        <div class="thumb-bar-bg">
-          <div class="thumb-bar-fill" id="thumbBar" style="width:0%"></div>
-        </div>
-      </div>
+      <div class="savings-row"><span>${escapeHtml(pc.platforms)}: lead costs</span><span class="savings-old">$${pc.monthlyLeadCost}/mo</span></div>
+      <div class="savings-row"><span>${escapeHtml(pc.platforms)}: subscriptions</span><span class="savings-old">$${pc.monthlySubscription}/mo</span></div>
+      <div class="savings-row"><span>Total monthly spend</span><span class="savings-old">$${monthlyTotal}/mo</span></div>
+      <div class="savings-row"><span>This system: ${pc.ourLeads} leads × $0</span><span class="savings-new">$0/mo</span></div>
+      <div style="margin-top:12px;font-size:12px;color:var(--t2);">Break-even: ${pc.breakEvenMonths} months. After that, pure savings.</div>
     </div>`;
-  setTimeout(() => { const b = document.getElementById('thumbBar'); if(b) b.style.width='72%'; }, 100);
 }
 
 function renderAISummary() {
   const el = document.getElementById('aiSummary');
   el.innerHTML = `
-    <div class="ai-summary-card">
-      <div class="ai-summary-header">
+    <div class="dash-card" style="margin-bottom:20px;">
+      <div class="dash-card-header">
         <span class="ai-badge">AI Insights</span>
         <span style="font-size:12px;color:var(--t2);">Updated just now</span>
       </div>
@@ -1525,8 +1721,8 @@ function renderAISummary() {
 function renderFollowUps() {
   const el = document.getElementById('followUpSuggestions');
   el.innerHTML = `
-    <div class="followup-card">
-      <h3>Smart Follow-Ups <span style="font-size:12px;font-weight:400;color:var(--t2);">${MOCK.dormantCustomers} clients need attention</span></h3>
+    <div class="dash-card" style="margin-bottom:20px;">
+      <h3>Smart Follow-Ups <span style="font-size:12px;font-weight:400;color:var(--t2);">${MOCK.dormantClients} clients need attention</span></h3>
       <div class="followup-list">
         ${MOCK.followUps.map((f, i) => `
           <div class="followup-item">
@@ -1535,22 +1731,16 @@ function renderFollowUps() {
               <div class="followup-detail">${escapeHtml(f.serviceType)} · ${f.daysAgo}d ago</div>
               <div class="followup-suggestion">${escapeHtml(f.suggestion)}</div>
             </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
-              <div class="followup-value">$${f.value.toLocaleString()}</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;">
+              <div class="followup-value">$${typeof f.value === 'number' ? f.value.toLocaleString() : f.value}</div>
               <div class="followup-actions">
-                <button class="followup-btn primary" onclick="followUpAction(${i},'call')">Call</button>
-                <button class="followup-btn secondary" onclick="followUpAction(${i},'dismiss')">Skip</button>
+                <button class="followup-btn primary" onclick="showToast('Calling ${escapeHtml(f.name)}…')">Call</button>
+                <button class="followup-btn secondary" onclick="showToast('Skipped')">Skip</button>
               </div>
             </div>
           </div>`).join('')}
       </div>
     </div>`;
-}
-
-function followUpAction(idx, action) {
-  const f = MOCK.followUps[idx];
-  if (action === 'call') showToast(`Calling ${f.name}…`);
-  else showToast(`Skipped — ${f.name} moved to later`);
 }
 
 function renderLeadsTable() {
@@ -1564,9 +1754,7 @@ function renderLeadsTable() {
       </div>
       <div style="overflow-x:auto;">
         <table class="leads-table">
-          <thead>
-            <tr><th>Name</th><th>Service</th><th>Status</th><th>Score</th><th>Date</th><th>Value</th></tr>
-          </thead>
+          <thead><tr><th>Name</th><th>Service</th><th>Status</th><th>Score</th><th>Date</th><th>Value</th></tr></thead>
           <tbody>
             ${MOCK.leads.map(l => `
               <tr>
@@ -1586,15 +1774,15 @@ function renderLeadsTable() {
 function renderPremiumTeasers() {
   const el = document.getElementById('premiumTeasers');
   const teasers = [
-    { icon: '🏠', title: 'Rental Dashboard', desc: 'Track tenants, leases, and maintenance requests in one place.' },
-    { icon: '👤', title: 'Client Portal', desc: 'Progress photos, timelines, and documents for homeowners.' },
-    { icon: '🔧', title: 'Vendor Management', desc: 'Sub-contractor directory, ratings, and availability tracker.' }
+    { icon: '👥', title: 'Tenant Portal', desc: 'Online payments, maintenance requests, lease docs.' },
+    { icon: '🔧', title: 'Vendor Management', desc: 'Contractor directory, ratings, and work order tracking.' },
+    { icon: '💰', title: 'Financial Reports', desc: 'P&L by property, expense tracking, owner disbursements.' }
   ];
   el.innerHTML = `
-    <h3 style="font-size:0.9rem;font-weight:700;color:var(--t2);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.06em;">Premium Features</h3>
+    <h3 style="font-size:0.85rem;font-weight:700;color:var(--t2);margin:8px 0 12px;text-transform:uppercase;letter-spacing:0.06em;">Premium Features</h3>
     <div class="teasers-row">
       ${teasers.map(t => `
-        <div class="teaser-card" onclick="showToast('Available in production — ask about our premium features')">
+        <div class="teaser-card" onclick="showToast('Available in production — ask about premium features')">
           <div class="teaser-icon">${t.icon}</div>
           <div class="teaser-title">${t.title}</div>
           <div class="teaser-desc">${t.desc}</div>
@@ -1618,7 +1806,7 @@ function initPipeline() {
       <div class="pipeline-col">
         <div class="pipeline-col-header">
           <div class="pipeline-col-dot" style="background:${col.color}"></div>
-          <span style="color:var(--t0);">${col.label}</span>
+          <span>${col.label}</span>
           <span class="pipeline-col-count">${leads.length}</span>
         </div>
         <div class="pipeline-cards">
@@ -1641,6 +1829,65 @@ function initPipeline() {
 }
 
 /* ═══════════════════════════════════════════
+   PROPERTIES TAB
+═══════════════════════════════════════════ */
+let propertiesInitialized = false;
+function renderProperties() {
+  if (propertiesInitialized) return;
+  propertiesInitialized = true;
+  const el = document.getElementById('propertiesGrid');
+  const statusLabel = { occupied: 'Occupied', vacant: 'Vacant', showing: 'Showing', listing: 'For Rent' };
+  el.innerHTML = `
+    <div class="properties-grid">
+      ${MOCK.properties.map(p => `
+        <div class="prop-card">
+          <div class="prop-card-img">
+            <span style="font-size:2.5rem;">${p.emoji}</span>
+            <span class="prop-status-badge ${p.status}">${statusLabel[p.status]}</span>
+          </div>
+          <div class="prop-body">
+            <div class="prop-address">${escapeHtml(p.address)}</div>
+            <div class="prop-city">${escapeHtml(p.city)}</div>
+            <div class="prop-stats">
+              <div class="prop-stat-row">
+                <span class="prop-stat-label">Rent / Price</span>
+                <span class="prop-stat-value">${escapeHtml(p.rent)}</span>
+              </div>
+              <div class="prop-stat-row">
+                <span class="prop-stat-label">Tenant</span>
+                <span class="prop-stat-value">${escapeHtml(p.tenant)}</span>
+              </div>
+              <div class="prop-stat-row">
+                <span class="prop-stat-label">Maintenance</span>
+                <span class="prop-stat-value ${p.maintenance > 0 ? 'alert' : ''}">${p.maintenance > 0 ? p.maintenance + ' open' : 'None'}</span>
+              </div>
+              <div class="prop-stat-row">
+                <span class="prop-stat-label">Lease</span>
+                <span class="prop-stat-value" style="font-size:11px;">${escapeHtml(p.lease)}</span>
+              </div>
+            </div>
+            <div class="prop-action-row">
+              <button class="prop-btn primary" onclick="showToast('Opening property details…')">Details</button>
+              <button class="prop-btn secondary" onclick="showToast('${p.maintenance > 0 ? 'Opening maintenance requests…' : 'No open requests'}')">Maintenance ${p.maintenance > 0 ? '(' + p.maintenance + ')' : ''}</button>
+            </div>
+          </div>
+        </div>`).join('')}
+    </div>
+    <div class="dash-card" style="margin-top:0;">
+      <div class="dash-card-header">
+        <h3>Portfolio Summary</h3>
+        <span class="dash-badge amber">4 need attention</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center;">
+        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--t0);">47</div><div style="font-size:12px;color:var(--t2);">Total Units</div></div>
+        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--green);">43</div><div style="font-size:12px;color:var(--t2);">Occupied</div></div>
+        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--amber);">4</div><div style="font-size:12px;color:var(--t2);">Vacant / Showing</div></div>
+        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--accent);">6</div><div style="font-size:12px;color:var(--t2);">Maintenance Open</div></div>
+      </div>
+    </div>`;
+}
+
+/* ═══════════════════════════════════════════
    GEO SCORE
 ═══════════════════════════════════════════ */
 function initGeoScore() {
@@ -1651,10 +1898,7 @@ function initGeoScore() {
     <div class="geo-score-card">
       <div class="geo-score-header">
         <h3>AI Visibility Score</h3>
-        <div class="geo-overall">
-          <span class="geo-overall-num" style="color:${scoreColor}">${gs.overall}</span>
-          <span class="geo-overall-den">/100</span>
-        </div>
+        <div class="geo-overall"><span class="geo-overall-num" style="color:${scoreColor}">${gs.overall}</span><span class="geo-overall-den">/100</span></div>
       </div>
       <div class="geo-cats">
         ${gs.categories.map(c => {
@@ -1666,21 +1910,16 @@ function initGeoScore() {
                 <span class="geo-cat-score" style="color:${col}">${c.score}/100</span>
               </div>
               <div class="geo-cat-desc">${escapeHtml(c.desc)}</div>
-              <div class="geo-bar-bg">
-                <div class="geo-bar-fill" style="background:${col}" data-width="${c.score}"></div>
-              </div>
+              <div class="geo-bar-bg"><div class="geo-bar-fill" style="background:${col}" data-width="${c.score}"></div></div>
             </div>`;
         }).join('')}
       </div>
     </div>`;
   setTimeout(() => {
-    document.querySelectorAll('.geo-bar-fill[data-width]').forEach(el => {
-      el.style.width = el.dataset.width + '%';
-    });
+    document.querySelectorAll('.geo-bar-fill[data-width]').forEach(el => { el.style.width = el.dataset.width + '%'; });
   }, 100);
 
-  const recs = document.getElementById('geoRecsCard');
-  recs.innerHTML = `
+  document.getElementById('geoRecsCard').innerHTML = `
     <div class="geo-recs-card">
       <h3>AI Recommendations</h3>
       ${gs.recommendations.map(r => `
@@ -1690,11 +1929,10 @@ function initGeoScore() {
         </div>`).join('')}
     </div>`;
 
-  const cp = document.getElementById('contentPreviewCard');
-  cp.innerHTML = `
+  document.getElementById('contentPreviewCard').innerHTML = `
     <div class="content-preview-card">
       <h3>AI Content Preview</h3>
-      <p>Generate a sample blog post to boost your AI search visibility.</p>
+      <p>Generate a sample article to boost your AI search visibility.</p>
       <div class="content-titles">
         ${MOCK.contentTitles.map(t => `<div class="content-title-item">${escapeHtml(t)}</div>`).join('')}
       </div>
@@ -1706,32 +1944,19 @@ function initGeoScore() {
 async function generatePost() {
   const btn = document.getElementById('genBtn');
   const post = document.getElementById('generatedPost');
-  btn.disabled = true;
-  btn.textContent = 'Generating…';
-  post.style.display = 'none';
-
-  const fallback = `# Top Kitchen Renovation Trends in Frisco 2026\n\nFrisco homeowners are investing in their kitchens like never before. Here's what our project data shows:\n\n**Open layouts dominate.** 78% of our kitchen renovations in 2025 removed at least one wall to open the floor plan. The kitchen-to-living-room flow is now the most requested change.\n\n**Quartz over granite.** Quartz countertops now appear in 85% of our kitchen projects — lower maintenance, more consistent patterns, and longer warranties.\n\n**Smart appliances.** Integration with home automation is increasingly requested, especially in Craig Ranch and Stonebriar where tech-forward homeowners are upgrading older appliances alongside their renovations.\n\n**Budget reality check.** Average kitchen renovation in Frisco runs $35K–$55K for a full gut. Cosmetic refreshes (new fronts, counters, backsplash) typically run $12K–$20K.\n\nInterested in a free estimate? We serve Frisco, Plano, McKinney, Allen, and Prosper.`;
-
+  btn.disabled = true; btn.textContent = 'Generating…'; post.style.display = 'none';
+  const fallback = `# What Frisco Property Owners Need to Know About the 2026 Rental Market\n\nFrisco's rental market has changed significantly in the last 18 months. Here's what the data shows:\n\n**Vacancy rates are tightening.** Average days on market for a Frisco rental dropped from 34 days in early 2025 to 18 days in Q1 2026. Well-managed properties are leasing in under 10 days.\n\n**AI-driven leasing is becoming the expectation.** Tenants — especially in the 25-40 age range — now expect to inquire, tour, and receive application decisions digitally and quickly. Properties that respond within 1 hour have a 3x higher show-to-application conversion.\n\n**Maintenance responsiveness drives renewals.** Our data shows tenants who receive a maintenance response within 4 hours are 78% more likely to renew their lease. Every delayed response is a retention risk.\n\n**What this means for owners:** Speed and responsiveness are now competitive advantages. AI-powered property management handles inquiries 24/7, auto-schedules showings, and logs maintenance requests the moment they come in — whether it's 9 AM or 11 PM.\n\nContact ${CONFIG.businessName} to see how we manage properties in Frisco, Plano, McKinney, and surrounding DFW communities.`;
   try {
     const res = await fetch('/api/demos/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        businessType: 'realestate',
-        message: 'Write a short, practical blog post (250 words) titled "Top Kitchen Renovation Trends in Frisco 2026" for Apex Home Solutions. Include specific data points and local DFW context. Respond with plain text, no JSON wrapper.',
-        history: []
-      }),
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ businessType: CONFIG.businessType, message: `Write a 250-word blog post titled "What ${CONFIG.city} Property Owners Need to Know About the 2026 Rental Market" for ${CONFIG.businessName}. Include market data and local context. Plain text only.`, history: [] }),
       signal: AbortSignal.timeout(15000)
     });
     const data = await res.json();
     const text = data.reply || data.text || (typeof data === 'string' ? data : null);
     post.textContent = text || fallback;
-  } catch {
-    post.textContent = fallback;
-  }
-  post.style.display = 'block';
-  btn.disabled = false;
-  btn.textContent = 'Generate Sample Post';
+  } catch { post.textContent = fallback; }
+  post.style.display = 'block'; btn.disabled = false; btn.textContent = 'Generate Sample Post';
 }
 
 /* ═══════════════════════════════════════════
@@ -1779,10 +2004,7 @@ function renderPortfolio() {
   grid.innerHTML = filtered.map(p => `
     <div class="proj-card" id="proj-${p.id}" onclick="toggleProject(${p.id})">
       <div class="proj-img">
-        <div class="proj-img-label">
-          <span>${p.icon}</span>
-          <span style="font-size:9px">${escapeHtml(p.type)}</span>
-        </div>
+        <div class="proj-img-label"><span>${p.icon}</span><span style="font-size:9px">${escapeHtml(p.type)}</span></div>
       </div>
       <div class="proj-body">
         <div class="proj-type">${escapeHtml(p.type)}</div>
@@ -1792,10 +2014,10 @@ function renderPortfolio() {
           <span>⭐ ${escapeHtml(p.rating)}</span>
         </div>
         <div class="proj-expand">
-          <div class="proj-ba">Before / After — Slide to compare</div>
+          <div class="proj-ba">Before / After — Click to compare</div>
           <div class="proj-desc">${escapeHtml(p.desc)}</div>
           <div class="proj-quote">${escapeHtml(p.quote)}</div>
-          <button class="proj-cta" onclick="event.stopPropagation();document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Request Similar Project →</button>
+          <button class="proj-cta" onclick="event.stopPropagation();document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Request Similar →</button>
         </div>
       </div>
     </div>`).join('');
@@ -1804,9 +2026,9 @@ function renderPortfolio() {
 function toggleProject(id) {
   const card = document.getElementById('proj-' + id);
   if (!card) return;
-  const isExpanded = card.classList.contains('expanded');
+  const expanded = card.classList.contains('expanded');
   document.querySelectorAll('.proj-card').forEach(c => c.classList.remove('expanded'));
-  if (!isExpanded) card.classList.add('expanded');
+  if (!expanded) card.classList.add('expanded');
 }
 
 /* ═══════════════════════════════════════════
@@ -1820,208 +2042,42 @@ function renderReviews() {
       <div class="review-text">"${escapeHtml(r.text)}"</div>
       <div class="review-meta">
         <span class="review-name">${escapeHtml(r.name)}</span>
-        <span class="review-type-pill">${escapeHtml(r.projectType)}</span>
-        <span class="review-location">📍 ${escapeHtml(r.neighborhood)}</span>
+        <span class="review-type-pill">${escapeHtml(r.type)}</span>
+        <span class="review-location">📍 ${escapeHtml(r.location)}</span>
       </div>
     </div>`).join('');
 }
 
 /* ═══════════════════════════════════════════
-   CONDITIONAL FORM
+   SERVICES GRID
 ═══════════════════════════════════════════ */
-function updateConditionalFields() {
-  const cat = document.getElementById('bfCategory').value;
-  const all = ['cf-renovations','cf-renovations-budget','cf-renovations-timeline',
-                'cf-pools-type','cf-pools-hoa','cf-mgmt-count','cf-mgmt-vacant','cf-notsure'];
-  all.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.classList.remove('show');
-  });
-  if (cat === 'renovations') {
-    ['cf-renovations','cf-renovations-budget','cf-renovations-timeline'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.classList.add('show');
-    });
-  } else if (cat === 'pools') {
-    ['cf-pools-type','cf-pools-hoa'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.classList.add('show');
-    });
-  } else if (cat === 'management') {
-    ['cf-mgmt-count','cf-mgmt-vacant'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.classList.add('show');
-    });
-  } else if (cat === 'notsure') {
-    const el = document.getElementById('cf-notsure');
-    if (el) el.classList.add('show');
-  }
+function renderServices() {
+  const icons = ['🏢','🔑','🏗️','📊','💬','🔧','📋','📈'];
+  const grid = document.getElementById('servicesGrid');
+  if (!grid) return;
+  grid.innerHTML = MOCK.services.map((s, i) => `
+    <div class="svc-card reveal">
+      <div class="svc-icon">${icons[i] || '🏠'}</div>
+      <div class="svc-name">${escapeHtml(s.name)}</div>
+      <div class="svc-desc">${escapeHtml(s.desc)}</div>
+      <button class="svc-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Get Started →</button>
+    </div>`).join('');
 }
 
+/* ═══════════════════════════════════════════
+   BOOKING FORM
+═══════════════════════════════════════════ */
 async function submitBooking(e) {
   e.preventDefault();
   const name = document.getElementById('bfName').value.trim();
   const btn = document.getElementById('bookingSubmitBtn');
-  btn.disabled = true;
-  btn.textContent = 'Sending…';
-  // Mock delay — no real API call
+  btn.disabled = true; btn.textContent = 'Sending…';
   await new Promise(r => setTimeout(r, 1200));
   document.getElementById('bookingForm').style.display = 'none';
   const successEl = document.getElementById('bookingSuccess');
   const nameEl = document.getElementById('bookingSuccessName');
   if (nameEl) nameEl.textContent = 'Thanks, ' + escapeHtml(name.split(' ')[0]) + '!';
   successEl.style.display = 'block';
-}
-
-/* ═══════════════════════════════════════════
-   CHATBOT
-═══════════════════════════════════════════ */
-let chatOpen = false;
-let chatHistory = [];
-let chatInitialized = false;
-
-function toggleChat() {
-  chatOpen = !chatOpen;
-  const panel = document.getElementById('chatPanel');
-  panel.style.display = chatOpen ? 'flex' : 'none';
-  if (chatOpen && !chatInitialized) {
-    chatInitialized = true;
-    addChatMessage('bot', 'Hi! I\'m here to help with renovations, pools, or property management questions. What project are you thinking about?');
-  }
-  if (chatOpen) setTimeout(() => document.getElementById('chatInput')?.focus(), 50);
-}
-
-function addChatMessage(role, text) {
-  const msgs = document.getElementById('chatMessages');
-  const isBot = role === 'bot';
-  const div = document.createElement('div');
-  div.style.cssText = `display:flex;justify-content:${isBot?'flex-start':'flex-end'};`;
-  div.innerHTML = `<div style="max-width:80%;padding:10px 13px;border-radius:${isBot?'4px 12px 12px 12px':'12px 4px 12px 12px'};background:${isBot?'var(--bg2)':'var(--accent)'};color:${isBot?'var(--t0)':'white'};font-size:13px;line-height:1.5;">${escapeHtml(text)}</div>`;
-  msgs.appendChild(div);
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function getChatFallback(text) {
-  const t = text.toLowerCase();
-  if (t.includes('kitchen') || t.includes('bathroom') || t.includes('renovat'))
-    return 'We specialize in kitchen and bathroom renovations across DFW. Most projects run 4-12 weeks. Would you like to schedule a free consultation?';
-  if (t.includes('pool'))
-    return 'We build custom pools and handle remodels. The best time to start is now for a summer-ready pool. Can I help you plan your project?';
-  if (t.includes('rent') || t.includes('property') || t.includes('tenant'))
-    return 'Our property management covers tenant screening, maintenance, rent collection, and monthly reporting. How many properties are you looking to manage?';
-  if (t.includes('cost') || t.includes('price') || t.includes('how much'))
-    return 'Pricing depends on scope — kitchens start around $15K, pools around $25K, and property management at 8% of monthly rent. A free consultation gives you an exact estimate.';
-  return 'Thanks for reaching out! I can help with renovations, pools, or property management. What project are you thinking about?';
-}
-
-async function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-  input.value = '';
-  addChatMessage('user', text);
-
-  chatHistory.push({ role: 'user', text });
-  const thinkingDiv = document.createElement('div');
-  thinkingDiv.style.cssText = 'font-size:12px;color:var(--t2);padding:4px 0;';
-  thinkingDiv.textContent = '…';
-  thinkingDiv.id = 'chatThinking';
-  document.getElementById('chatMessages').appendChild(thinkingDiv);
-
-  try {
-    const res = await fetch('/api/demos/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text, history: chatHistory.slice(-6), businessType: 'realestate' }),
-      signal: AbortSignal.timeout(9000)
-    });
-    const data = await res.json();
-    thinkingDiv.remove();
-    const reply = data.fallback ? getChatFallback(text) : (data.reply || getChatFallback(text));
-    addChatMessage('bot', reply);
-    chatHistory.push({ role: 'model', text: reply });
-  } catch {
-    thinkingDiv.remove();
-    addChatMessage('bot', getChatFallback(text));
-  }
-}
-
-/* ═══════════════════════════════════════════
-   THEME
-═══════════════════════════════════════════ */
-function toggleTheme() {
-  const html = document.documentElement;
-  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-  html.setAttribute('data-theme', next);
-  localStorage.setItem('apex-theme', next);
-  document.getElementById('themeIcon').textContent = next === 'dark' ? '☽' : '☀';
-}
-
-/* ═══════════════════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════════════════ */
-function initScrollReveal() {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-}
-
-/* ═══════════════════════════════════════════
-   UTILITIES
-═══════════════════════════════════════════ */
-function escapeHtml(str) {
-  const d = document.createElement('div');
-  d.textContent = String(str);
-  return d.innerHTML;
-}
-
-let toastTimer = null;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.remove('hide');
-  if (toastTimer) clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.add('hide'), 2500);
-}
-
-/* ═══════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════ */
-/* ═══════════════════════════════════════════
-   LANGUAGE TOGGLE
-═══════════════════════════════════════════ */
-function toggleLang() {
-  currentLang = currentLang === 'en' ? 'es' : 'en';
-  localStorage.setItem('apex-lang', currentLang);
-  applyLang(currentLang);
-}
-
-function applyLang(lang) {
-  currentLang = lang;
-  document.documentElement.setAttribute('data-lang', lang);
-  document.querySelectorAll('[data-en]').forEach(el => {
-    el.innerHTML = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
-  });
-  document.querySelectorAll('[data-ph-en]').forEach(el => {
-    el.placeholder = el.getAttribute('data-ph-' + lang) || el.getAttribute('data-ph-en');
-  });
-  updateLangToggle(lang);
-}
-
-function updateLangToggle(lang) {
-  const enEl = document.getElementById('langEN');
-  const esEl = document.getElementById('langES');
-  if (!enEl || !esEl) return;
-  if (lang === 'es') {
-    enEl.classList.remove('active-lang');
-    esEl.classList.add('active-lang');
-  } else {
-    enEl.classList.add('active-lang');
-    esEl.classList.remove('active-lang');
-  }
 }
 
 /* ═══════════════════════════════════════════
@@ -2039,10 +2095,9 @@ function renderAutomation() {
           <div class="auto-metric-value">${m.value}</div>
           <div class="auto-metric-label">${m.label}</div>
           <div class="auto-metric-trend">${m.trend}</div>
-        </div>
-      `).join('')}
+        </div>`).join('')}
     </div>
-    <div class="kb-section-card" style="margin-bottom:20px;">
+    <div class="kb-section-card" style="margin-bottom:16px;">
       <div class="kb-section-header"><div class="kb-section-title">Active Campaigns</div></div>
       ${d.campaigns.map(c => `
         <div class="campaign-card">
@@ -2061,12 +2116,11 @@ function renderAutomation() {
             ${c.booked !== undefined ? `<span>Booked: <strong>${c.booked}</strong></span>` : ''}
             ${c.reviews !== undefined ? `<span>Reviews: <strong>${c.reviews}</strong></span>` : ''}
             ${c.avgRating !== undefined ? `<span>Avg: <strong>${c.avgRating}</strong></span>` : ''}
-            ${c.reactivated !== undefined ? `<span>Reactivated: <strong>${c.reactivated}</strong></span>` : ''}
+            ${c.reactivated !== undefined ? `<span>Renewed: <strong>${c.reactivated}</strong></span>` : ''}
           </div>
-        </div>
-      `).join('')}
+        </div>`).join('')}
     </div>
-    <div class="kb-section-card" style="margin-bottom:20px;">
+    <div class="kb-section-card" style="margin-bottom:16px;">
       <div class="kb-section-header"><div class="kb-section-title">Missed Call Recovery</div></div>
       ${d.missedCalls.map(mc => `
         <div class="missed-call-item">
@@ -2074,32 +2128,292 @@ function renderAutomation() {
           <span class="missed-call-name">${mc.name}</span>
           <span class="missed-call-flow">${mc.flow}</span>
           <span class="missed-call-status">${mc.status}</span>
-        </div>
-      `).join('')}
+        </div>`).join('')}
     </div>
     <div class="kb-section-card">
       <div class="kb-section-header"><div class="kb-section-title">Recent Automated Messages</div></div>
       <table class="auto-msg-table">
         <thead><tr><th>Ch</th><th>Customer</th><th>Type</th><th>Status</th></tr></thead>
         <tbody>
-          ${d.recentMessages.map(m => `
-            <tr><td>${m.channel}</td><td>${m.name}</td><td>${m.type}</td><td>${m.status}</td></tr>
-          `).join('')}
+          ${d.recentMessages.map(m => `<tr><td>${m.channel}</td><td>${m.name}</td><td>${m.type}</td><td>${m.status}</td></tr>`).join('')}
         </tbody>
       </table>
-    </div>
-  `;
+    </div>`;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  const saved = localStorage.getItem('apex-theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', saved);
-  document.getElementById('themeIcon').textContent = saved === 'dark' ? '☽' : '☀';
+/* ═══════════════════════════════════════════
+   CHATBOT — GEMINI API + VOICE
+═══════════════════════════════════════════ */
+let chatOpen = false;
+let chatHistory = [];
+let chatInitialized = false;
 
-  // Restore language
-  const savedLang = localStorage.getItem('apex-lang') || 'en';
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const panel = document.getElementById('chatPanel');
+  panel.classList.toggle('open', chatOpen);
+  if (chatOpen && !chatInitialized) {
+    chatInitialized = true;
+    const greeting = currentLang === 'es'
+      ? TRANS_ES.chatGreeting
+      : `Hi! I'm the AI assistant for ${CONFIG.businessName}. 🏠 I can help with property management questions, scheduling a showing, remodeling estimates, or anything else. What can I help you with?`;
+    addChatMessage('bot', greeting);
+    initSpeechRecognition();
+  }
+  if (chatOpen) setTimeout(() => document.getElementById('chatInput')?.focus(), 50);
+}
+
+function addChatMessage(role, text) {
+  const msgs = document.getElementById('chatMessages');
+  const isBot = role === 'bot';
+  const div = document.createElement('div');
+  div.style.cssText = `display:flex;justify-content:${isBot?'flex-start':'flex-end'};`;
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble ' + (isBot ? 'msg-bot' : 'msg-user');
+  bubble.textContent = text;
+  div.appendChild(bubble);
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  if (isBot && voiceMode) speakText(text, bubble);
+  return bubble;
+}
+
+function getChatFallback(text) {
+  const t = text.toLowerCase();
+  if (t.includes('maintenance') || t.includes('repair') || t.includes('fix') || t.includes('broken'))
+    return 'Maintenance requests can be submitted right here. I\'ll log it immediately and notify a coordinator. What needs attention?';
+  if (t.includes('showing') || t.includes('tour') || t.includes('see') || t.includes('visit'))
+    return `We have several properties available for showings this week. Can you share your preferred neighborhood and bedroom count? I'll check availability right now.`;
+  if (t.includes('rent') || t.includes('lease') || t.includes('tenant') || t.includes('apply'))
+    return 'We have vacancies in Frisco, Plano, and McKinney. Rents range from $1,650–$3,200/mo. Would you like to see current listings or schedule a showing?';
+  if (t.includes('property management') || t.includes('manage') || t.includes('owner'))
+    return `${CONFIG.businessName} manages 47+ properties across DFW at 8% of monthly rent. That includes tenant screening, maintenance, rent collection, and 24/7 AI communication. How many properties do you own?`;
+  if (t.includes('remodel') || t.includes('kitchen') || t.includes('bathroom') || t.includes('estimate'))
+    return 'We provide same-day Good/Better/Best estimates for remodeling projects. Kitchen renovations start around $15K, bathrooms from $8K. Want to submit a project request?';
+  if (t.includes('cost') || t.includes('price') || t.includes('how much') || t.includes('cuánto'))
+    return 'Property management is 8% of monthly rent. Remodeling estimates are free and delivered same-day. Real estate services are commission-based. What specifically can I quote for you?';
+  if (t.includes('español') || t.includes('spanish') || t.includes('habla'))
+    return '¡Sí! Atendemos en español. ¿En qué puedo ayudarte hoy con tu propiedad o proyecto?';
+  return `I can help with property showings, maintenance requests, remodeling estimates, and property management questions. What are you looking for?`;
+}
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addChatMessage('user', text);
+  chatHistory.push({ role: 'user', text });
+
+  const thinkingDiv = document.createElement('div');
+  thinkingDiv.className = 'msg-thinking';
+  thinkingDiv.textContent = '…';
+  document.getElementById('chatMessages').appendChild(thinkingDiv);
+
+  try {
+    const res = await fetch('/api/demos/chat', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text, history: chatHistory.slice(-6), businessType: CONFIG.businessType }),
+      signal: AbortSignal.timeout(9000)
+    });
+    const data = await res.json();
+    thinkingDiv.remove();
+    const reply = data.fallback ? getChatFallback(text) : (data.reply || getChatFallback(text));
+    addChatMessage('bot', reply);
+    chatHistory.push({ role: 'model', text: reply });
+  } catch {
+    thinkingDiv.remove();
+    addChatMessage('bot', getChatFallback(text));
+  }
+}
+
+/* ═══════════════════════════════════════════
+   VOICE — TTS + STT
+═══════════════════════════════════════════ */
+let voiceMode = false;
+let recognition = null;
+let isRecording = false;
+let micSendTimer = null;
+
+function getBestVoice() {
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  const priority = [
+    'Google UK English Female', 'Google US English',
+    'Samantha', 'Karen', 'Moira', 'Tessa',
+    'Microsoft Jenny', 'Microsoft Aria', 'Microsoft Guy',
+    'English United States'
+  ];
+  for (const name of priority) {
+    const match = voices.find(v => v.name.includes(name) && v.lang.startsWith('en'));
+    if (match) return match;
+  }
+  return voices.find(v => v.lang.startsWith('en-US')) || voices.find(v => v.lang.startsWith('en')) || voices[0];
+}
+
+function speakText(text, msgEl) {
+  if (!voiceMode || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const cleanText = text.replace(/[\u{1F000}-\u{1FFFF}]/gu, '').replace(/[✓✅⚠↔●○🏠🔑📊★·]/g, '').replace(/\s{2,}/g, ' ').trim();
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  utterance.rate = 1.05; utterance.pitch = 1.0;
+  const voice = getBestVoice();
+  if (voice) utterance.voice = voice;
+  speechSynthesis.speak(utterance);
+}
+
+function toggleVoiceMode() {
+  voiceMode = !voiceMode;
+  const btn = document.getElementById('voiceToggle');
+  btn.classList.toggle('active', voiceMode);
+  btn.textContent = voiceMode ? '🔊' : '🔇';
+  if (!voiceMode) window.speechSynthesis?.cancel();
+  showToast(voiceMode ? 'Voice responses ON' : 'Voice responses OFF');
+}
+
+function initSpeechRecognition() {
+  if (!CONFIG.hasVoice) return;
+  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRec) return;
+  const micBtn = document.getElementById('chatMic');
+  if (micBtn) micBtn.style.display = '';
+  recognition = new SpeechRec();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.lang = currentLang === 'es' ? 'es-US' : 'en-US';
+  recognition.onresult = (event) => {
+    let transcript = '';
+    for (let i = 0; i < event.results.length; i++) transcript += event.results[i][0].transcript;
+    document.getElementById('chatInput').value = transcript;
+    clearTimeout(micSendTimer);
+    const lastResult = event.results[event.results.length - 1];
+    if (lastResult.isFinal) {
+      micSendTimer = setTimeout(() => {
+        if (isRecording && document.getElementById('chatInput').value.trim()) { stopMic(); sendChat(); }
+      }, 2000);
+    }
+  };
+  recognition.onerror = (e) => { if (e.error !== 'no-speech') stopMic(); };
+  recognition.onend = () => {
+    if (isRecording) {
+      const input = document.getElementById('chatInput').value.trim();
+      if (input) { clearTimeout(micSendTimer); micSendTimer = setTimeout(() => { if (isRecording) { stopMic(); sendChat(); } }, 1500); }
+      else stopMic();
+    }
+  };
+}
+
+function toggleMic() {
+  if (isRecording) { stopMic(); return; }
+  if (!recognition) return;
+  isRecording = true;
+  const micBtn = document.getElementById('chatMic');
+  const label = document.getElementById('chatVoiceLabel');
+  micBtn.classList.add('recording');
+  if (label) { label.textContent = 'Listening...'; label.style.display = ''; }
+  try { recognition.start(); } catch(e) { stopMic(); }
+}
+
+function stopMic() {
+  isRecording = false;
+  clearTimeout(micSendTimer);
+  const micBtn = document.getElementById('chatMic');
+  const label = document.getElementById('chatVoiceLabel');
+  if (micBtn) micBtn.classList.remove('recording');
+  if (label) label.style.display = 'none';
+  try { recognition?.stop(); } catch(e) {}
+}
+
+/* ═══════════════════════════════════════════
+   THEME
+═══════════════════════════════════════════ */
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('krevio-theme', next);
+  updateThemeBtn(next);
+}
+function updateThemeBtn(theme) {
+  const btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = theme === 'dark' ? '🌙' : '☀️';
+}
+
+/* ═══════════════════════════════════════════
+   LANGUAGE
+═══════════════════════════════════════════ */
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  localStorage.setItem('krevio-realestate-lang', currentLang);
+  applyLang(currentLang);
+  if (recognition) { recognition.lang = currentLang === 'es' ? 'es-US' : 'en-US'; }
+}
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.innerHTML = el.getAttribute('data-' + lang) || el.getAttribute('data-en');
+  });
+  document.querySelectorAll('[data-ph-en]').forEach(el => {
+    el.placeholder = el.getAttribute('data-ph-' + lang) || el.getAttribute('data-ph-en');
+  });
+  updateLangToggle(lang);
+}
+
+function updateLangToggle(lang) {
+  const enEl = document.getElementById('langEN');
+  const esEl = document.getElementById('langES');
+  if (!enEl || !esEl) return;
+  enEl.classList.toggle('active-lang', lang === 'en');
+  esEl.classList.toggle('active-lang', lang === 'es');
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+function initScrollReveal() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.reveal:not(.revealed)').forEach(el => observer.observe(el));
+}
+
+/* ═══════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════ */
+function escapeHtml(str) {
+  const d = document.createElement('div');
+  d.textContent = String(str);
+  return d.innerHTML;
+}
+
+let toastTimer = null;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function() {
+  applyConfig();
+
+  // Theme — use shared krevio-theme key, default to light
+  const savedTheme = localStorage.getItem('krevio-theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  updateThemeBtn(savedTheme);
+
+  // Language
+  const savedLang = localStorage.getItem('krevio-realestate-lang') || 'en';
   if (savedLang === 'es') applyLang('es');
 
+  // Render customer view content
+  renderServices();
   renderPortfolio();
   renderReviews();
   initScrollReveal();
