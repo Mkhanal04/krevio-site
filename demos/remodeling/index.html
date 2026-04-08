@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<!--
+  ┌────────────────────────────────────────────────────────────────┐
+  │  KREVIO DEMO TEMPLATE — Tier 1 Base                           │
+  │                                                                │
+  │  HOW TO SPIN UP A NEW DEMO (~20 min)                          │
+  │  1. Copy this file to demos/[industry]/index.html             │
+  │  2. Fill in CONFIG (identity, contact, theme flags)  ~5 min   │
+  │  3. Fill in DATA (services, reviews, mock ops data)  ~10 min  │
+  │  4. Update TRANS_ES (Spanish translations)           ~3 min   │
+  │  5. Add system prompt in api/demos/chat.js           ~2 min   │
+  │  6. Test in browser — done.                                    │
+  │                                                                │
+  │  SEARCH FOR ALL_CAPS PLACEHOLDER STRINGS:                     │
+  │  INDUSTRY_SLUG, BUSINESS_NAME, etc.                           │
+  │                                                                │
+  │  Reference: _Workspace/krevio-site/specs/                     │
+  │             template-extraction-analysis.md                   │
+  └────────────────────────────────────────────────────────────────┘
+-->
+<html lang="en" data-theme="light" data-industry="remodeling">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crestview Remodeling — Celina TX | AI-Powered Business System</title>
+<meta name="description" content="Crestview Remodeling in Celina, TX. Kitchen, bathroom, and outdoor living remodels. AI-powered scheduling and customer management. Powered by Krevio.">
+
+<!-- Krevio shared design tokens + industry color overrides -->
+<link rel="stylesheet" href="/css/krevio-tokens.css">
+<link rel="stylesheet" href="/css/industry-overrides.css">
+
+<!-- Vercel analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENT & LAYOUT STYLES
+   Tokens come from /css/krevio-tokens.css (imported above).
+   Only structural/component rules live here.
+   When adding a new component, reference CSS vars — never hardcode colors.
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Demo Bar ── */
+.demo-bar {
+  position: fixed; top: 0; left: 0; right: 0; height: 40px; z-index: var(--z-nav);
+  background: var(--bg1); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px; padding: 0 14px;
+  font-family: var(--font-body); font-size: var(--text-sm);
+}
+.demo-bar-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--accent); border: 1px solid var(--accentB);
+  background: var(--accentS); border-radius: 4px; padding: 2px 7px;
+}
+.demo-bar-title {
+  font-weight: 600; font-size: var(--text-sm); color: var(--t0);
+  display: flex; align-items: center; gap: 6px; white-space: nowrap;
+}
+.demo-bar-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.demo-bar-spacer { flex: 1; }
+.demo-bar-toggle { display: flex; gap: 2px; background: var(--bg2); border-radius: 6px; padding: 2px; }
+.demo-bar-btn {
+  font-size: 11px; font-weight: 600; padding: 4px 10px; border: none;
+  border-radius: 4px; cursor: pointer; background: transparent; color: var(--t2);
+  font-family: var(--font-body); transition: all .15s;
+}
+.demo-bar-btn.active { background: var(--bg1); color: var(--t0); box-shadow: var(--shadow-sm); }
+.lang-toggle {
+  font-size: 11px; font-weight: 600; background: none; border: none; cursor: pointer;
+  color: var(--t2); padding: 4px 6px; border-radius: 4px; font-family: var(--font-body);
+}
+.active-lang { color: var(--accent); }
+.demo-bar-theme {
+  font-size: 14px; background: none; border: none; cursor: pointer;
+  padding: 4px 6px; border-radius: 4px; line-height: 1;
+}
+.demo-bar-back {
+  font-size: 11px; color: var(--t2); text-decoration: none; white-space: nowrap;
+}
+.demo-bar-back:hover { color: var(--t0); text-decoration: none; }
+
+/* ── View switcher ── */
+.customer-view, .owner-view { display: none; }
+.customer-view.active, .owner-view.active { display: block; }
+
+/* ═══════════════════════════════════════════════════════════════
+   CUSTOMER VIEW
+═══════════════════════════════════════════════════════════════ */
+
+/* Hero */
+.cv-hero {
+  background: var(--hero-bg); padding: 72px 24px 64px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.cv-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, rgba(255,255,255,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cv-hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--hero-card); border: 1px solid var(--hero-border);
+  border-radius: var(--radius-full); padding: 6px 16px; margin-bottom: 20px;
+  font-size: var(--text-sm); color: var(--hero-text-muted);
+}
+.cv-hero-badge .stars { color: var(--star-color); font-size: 12px; }
+.cv-hero h1 {
+  font-family: var(--font-display); font-size: var(--text-3xl); color: var(--hero-text);
+  line-height: 1.15; max-width: 700px; margin: 0 auto 16px;
+}
+.cv-hero-sub {
+  font-size: var(--text-md); color: var(--hero-text-muted);
+  max-width: 560px; margin: 0 auto 24px; line-height: 1.6;
+}
+.cv-hero-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 28px; }
+.cv-hero-pill {
+  font-size: var(--text-sm); font-weight: 600; color: var(--hero-text);
+  background: var(--hero-card); border: 1px solid var(--hero-border);
+  border-radius: var(--radius-full); padding: 6px 14px;
+}
+.cv-hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 36px; }
+.btn-primary {
+  font-size: var(--text-md); font-weight: 700; padding: 13px 28px;
+  border-radius: var(--radius-md); border: none; cursor: pointer;
+  background: var(--hero-text); color: var(--btn-primary-color, #134E4A);
+  font-family: var(--font-body); transition: opacity .15s;
+}
+.btn-primary:hover { opacity: .9; }
+.btn-outline {
+  font-size: var(--text-md); font-weight: 600; padding: 13px 28px;
+  border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-body);
+  background: var(--hero-card); color: var(--hero-text);
+  border: 1px solid var(--hero-border); transition: background .15s;
+}
+.btn-outline:hover { background: rgba(255,255,255,.12); }
+.cv-hero-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; }
+.cv-hero-stat { text-align: center; }
+.cv-hero-stat-num { font-size: 1.5rem; font-weight: 700; color: var(--hero-text); }
+.cv-hero-stat-label { font-size: var(--text-xs); color: var(--hero-text-muted); text-transform: uppercase; letter-spacing: .05em; }
+
+/* Services */
+.cv-services-bg { background: var(--bg); padding: 64px 24px; }
+.section-label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); margin-bottom: 8px; }
+.section-title { font-family: var(--font-display); font-size: var(--text-2xl); color: var(--t0); margin-bottom: 8px; }
+.section-sub { font-size: var(--text-md); color: var(--t2); margin-bottom: 36px; max-width: 540px; }
+.section-header { text-align: center; }
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 1000px; margin: 0 auto; }
+.service-card {
+  background: var(--bg1); border-radius: var(--radius-2xl); padding: 24px;
+  border: 1px solid var(--border); transition: box-shadow .2s, transform .2s;
+}
+.service-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.service-icon { font-size: 28px; margin-bottom: 12px; }
+.service-name { font-weight: 700; font-size: var(--text-md); color: var(--t0); margin-bottom: 4px; }
+.service-price { font-size: var(--text-xs); font-weight: 700; color: var(--accent); background: var(--accentS); border: 1px solid var(--accentB); border-radius: var(--radius-full); padding: 2px 10px; display: inline-block; margin-bottom: 8px; }
+.service-desc { font-size: var(--text-sm); color: var(--t2); line-height: 1.5; margin-bottom: 12px; }
+.service-features { list-style: none; }
+.service-features li { font-size: var(--text-sm); color: var(--t1); padding: 3px 0; display: flex; gap: 6px; }
+.service-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+/* Gallery */
+.cv-gallery-bg { background: var(--bg2); padding: 64px 24px; }
+.gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 1000px; margin: 0 auto; }
+.gallery-item { border-radius: var(--radius-2xl); overflow: hidden; }
+.gallery-before, .gallery-after { padding: 28px 20px; text-align: center; }
+.gallery-before { background: var(--redS); border: 1px solid var(--redB); border-radius: var(--radius-2xl) var(--radius-2xl) 0 0; }
+.gallery-after { background: var(--accentS); border: 1px solid var(--accentB); border-radius: 0 0 var(--radius-2xl) var(--radius-2xl); }
+.gallery-emoji { font-size: 32px; margin-bottom: 8px; }
+.gallery-label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+.gallery-desc { font-size: var(--text-sm); color: var(--t1); }
+.gallery-meta { text-align: center; margin-top: 10px; }
+.gallery-job { font-weight: 600; font-size: var(--text-sm); color: var(--t0); }
+.gallery-location { font-size: var(--text-xs); color: var(--t2); }
+
+/* Reviews */
+.cv-reviews-bg { background: var(--hero-bg); padding: 64px 24px; }
+.reviews-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; max-width: 900px; margin: 0 auto; }
+.review-card {
+  background: var(--hero-card); border: 1px solid var(--hero-border);
+  border-radius: var(--radius-2xl); padding: 24px;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.review-stars { color: var(--star-color); font-size: 14px; margin-bottom: 10px; }
+.review-text { font-size: var(--text-md); color: var(--hero-text); line-height: 1.6; margin-bottom: 12px; font-style: italic; }
+.review-author { font-size: var(--text-sm); font-weight: 600; color: var(--hero-text-muted); }
+
+/* Booking form */
+.cv-booking-bg { background: var(--bg); padding: 64px 24px; }
+.booking-card {
+  background: var(--bg1); border-radius: var(--radius-2xl); padding: 32px;
+  max-width: 560px; margin: 0 auto; border: 1px solid var(--border); box-shadow: var(--shadow-md);
+}
+.urgency-toggle { display: flex; gap: 8px; margin-bottom: 24px; }
+.urgency-btn {
+  flex: 1; padding: 10px; border-radius: var(--radius-md); border: 1px solid var(--border);
+  background: var(--bg2); color: var(--t1); font-size: var(--text-sm); font-weight: 600;
+  cursor: pointer; font-family: var(--font-body); transition: all .15s;
+}
+.urgency-btn.active { background: var(--accentS); border-color: var(--accentB); color: var(--accent); }
+.booking-form { display: none; }
+.booking-form.active { display: block; }
+.form-group { margin-bottom: 14px; }
+.form-label { font-size: var(--text-sm); font-weight: 600; color: var(--t1); margin-bottom: 5px; display: block; }
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 10px 12px; border-radius: var(--radius-md);
+  border: 1px solid var(--border); background: var(--bg2);
+  color: var(--t0); font-size: var(--text-md); font-family: var(--font-body);
+  transition: border-color .15s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none; border-color: var(--accent);
+}
+.form-textarea { resize: vertical; min-height: 80px; }
+.btn-accent {
+  width: 100%; padding: 13px; border-radius: var(--radius-md); border: none;
+  background: var(--accent); color: var(--bg1); font-size: var(--text-md);
+  font-weight: 700; cursor: pointer; font-family: var(--font-body); transition: opacity .15s;
+}
+.btn-accent:hover { opacity: .88; }
+.emergency-alert {
+  background: var(--redS); border: 1px solid var(--redB); border-radius: var(--radius-md);
+  padding: 12px 14px; margin-bottom: 16px; font-size: var(--text-sm); color: var(--red); line-height: 1.5;
+}
+
+/* Footer */
+.cv-footer { background: var(--bg2); padding: 48px 24px; border-top: 1px solid var(--border); }
+.cv-footer-inner { max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between; align-items: flex-start; }
+.cv-footer-name { font-family: var(--font-display); font-size: 1.5rem; color: var(--t0); margin-bottom: 8px; }
+.cv-footer-tagline { font-size: var(--text-sm); color: var(--t2); max-width: 280px; line-height: 1.5; }
+.cv-footer-items { display: flex; flex-direction: column; gap: 8px; }
+.cv-footer-item { font-size: var(--text-sm); color: var(--t1); display: flex; gap: 8px; align-items: center; }
+.cv-footer-item a { color: var(--t1); }
+.cv-footer-credit { width: 100%; text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); }
+.cv-footer-credit a { font-size: var(--text-xs); color: var(--t3); }
+.cv-footer-credit a:hover { color: var(--t2); }
+
+/* ═══════════════════════════════════════════════════════════════
+   OWNER DASHBOARD
+═══════════════════════════════════════════════════════════════ */
+.owner-view { background: var(--bg); min-height: calc(100vh - 40px); }
+.od-layout { display: flex; min-height: calc(100vh - 40px); }
+
+/* Sidebar */
+.od-sidebar {
+  width: 220px; flex-shrink: 0; background: var(--bg1);
+  border-right: 1px solid var(--border); padding: 16px 8px;
+  display: flex; flex-direction: column; position: sticky; top: 40px;
+  height: calc(100vh - 40px); overflow-y: auto;
+}
+.od-sidebar-logo { padding: 0 8px; margin-bottom: 20px; }
+.od-sidebar-logo-name { font-weight: 700; font-size: var(--text-base); color: var(--t0); }
+.od-sidebar-logo-sub { font-size: var(--text-xs); color: var(--t2); }
+.od-nav-item {
+  display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+  border-radius: var(--radius-md); border: none; background: transparent;
+  color: var(--t1); font-size: var(--text-sm); font-weight: 500;
+  cursor: pointer; font-family: var(--font-body); width: 100%;
+  text-align: left; transition: all .15s; margin-bottom: 2px;
+}
+.od-nav-item:hover { background: var(--bg2); color: var(--t0); }
+.od-nav-item.active, .od-nav-item[aria-selected="true"] {
+  background: var(--sidebar-active); color: var(--sidebar-active-text);
+}
+.od-nav-icon { width: 18px; text-align: center; flex-shrink: 0; }
+
+/* Main content area */
+.od-main { flex: 1; padding: 24px; overflow-x: hidden; }
+.od-view { display: none; }
+.od-view.active { display: block; }
+.od-header { margin-bottom: 20px; }
+.od-header-title { font-size: var(--text-2xl); font-weight: 700; color: var(--t0); margin-bottom: 4px; }
+.od-header-sub { font-size: var(--text-sm); color: var(--t2); }
+
+/* Metrics grid */
+.metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+.metric-card {
+  background: var(--bg1); border-radius: var(--radius-lg); padding: 14px;
+  border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+}
+.metric-label { font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--t2); margin-bottom: 6px; }
+.metric-value { font-size: var(--text-xl); font-weight: 700; color: var(--t0); margin-bottom: 4px; }
+.metric-trend { font-size: var(--text-xs); color: var(--t2); }
+.metric-trend.up { color: var(--green); }
+.metric-trend.down { color: var(--red); }
+
+/* Dashboard card */
+.card-dashboard {
+  background: var(--bg1); border-radius: var(--radius-xl); padding: 22px 24px;
+  border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 16px;
+}
+.card-title { font-size: var(--text-md); font-weight: 700; color: var(--t0); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.card-highlight {
+  background: var(--accentS); border: 1px solid var(--accentB);
+  border-radius: var(--radius-xl); padding: 16px 20px; margin-bottom: 16px;
+}
+
+/* AI Summary */
+.ai-summary-label { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.ai-summary-text { font-size: var(--text-base); color: var(--t0); line-height: 1.65; }
+
+/* Today's Schedule */
+.today-schedule { width: 100%; border-collapse: collapse; }
+.today-schedule th { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--t2); padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: left; }
+.today-job td { padding: 10px 8px; border-bottom: 1px solid var(--border); font-size: var(--text-base); vertical-align: middle; }
+.today-time { font-weight: 700; color: var(--accent); font-size: var(--text-sm); white-space: nowrap; }
+.today-customer { font-weight: 600; color: var(--t0); font-size: var(--text-sm); }
+.today-service { font-size: var(--text-xs); color: var(--t2); }
+.today-tech { background: var(--bg2); border-radius: var(--radius-full); padding: 3px 10px; font-size: var(--text-xs); font-weight: 600; color: var(--t1); white-space: nowrap; }
+.today-value { font-weight: 700; color: var(--t0); white-space: nowrap; }
+.today-status-confirmed { background: var(--greenS); color: var(--green); border: 1px solid var(--greenB); border-radius: var(--radius-full); padding: 3px 10px; font-size: var(--text-xs); font-weight: 600; white-space: nowrap; }
+.today-status-pending { background: var(--amberS); color: var(--amber); border: 1px solid var(--amberB); border-radius: var(--radius-full); padding: 3px 10px; font-size: var(--text-xs); font-weight: 600; white-space: nowrap; }
+
+/* Badge system */
+.badge { font-size: var(--text-xs); font-weight: 600; padding: 3px 10px; border-radius: var(--radius-full); display: inline-flex; align-items: center; }
+.badge--accent { background: var(--accentS); color: var(--accent); }
+.badge--green { background: var(--greenS); color: var(--green); }
+.badge--amber { background: var(--amberS); color: var(--amber); }
+.badge--red { background: var(--redS); color: var(--red); }
+.badge--muted { background: var(--bg2); color: var(--t2); }
+
+/* Data table */
+.data-table { width: 100%; border-collapse: collapse; font-size: var(--text-base); }
+.data-table th { padding: 10px 12px; font-size: var(--text-xs); text-transform: uppercase; color: var(--t2); border-bottom: 1px solid var(--border); text-align: left; letter-spacing: .04em; font-weight: 700; }
+.data-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--t0); }
+.scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* Filter bar */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+.filter-search { padding: 7px 10px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--bg2); color: var(--t0); font-size: var(--text-sm); font-family: var(--font-body); width: 180px; }
+.filter-select { padding: 7px 10px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--bg2); color: var(--t0); font-size: var(--text-sm); font-family: var(--font-body); }
+.filter-pill { padding: 5px 12px; border-radius: var(--radius-full); border: 1px solid var(--border); background: var(--bg2); color: var(--t1); font-size: var(--text-xs); font-weight: 600; cursor: pointer; font-family: var(--font-body); }
+.filter-pill.active { background: var(--accentS); border-color: var(--accentB); color: var(--accent); }
+
+/* Pipeline/Kanban */
+.pipeline-board { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+.pipeline-col { flex: 0 0 240px; background: var(--bg2); border-radius: var(--radius-xl); padding: 12px; }
+.pipeline-col-header { font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.pipeline-col-count { background: var(--bg3); border-radius: var(--radius-full); padding: 1px 7px; font-size: 10px; color: var(--t2); }
+.pipeline-card { background: var(--bg1); border-radius: var(--radius-md); padding: 10px 12px; margin-bottom: 8px; border: 1px solid var(--border); }
+.pipeline-card-name { font-weight: 600; font-size: var(--text-sm); color: var(--t0); margin-bottom: 3px; }
+.pipeline-card-service { font-size: var(--text-xs); color: var(--t2); margin-bottom: 6px; }
+.pipeline-card-meta { display: flex; align-items: center; justify-content: space-between; }
+.score-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.score-high { background: var(--green); }
+.score-mid { background: var(--amber); }
+.score-low { background: var(--bg3); }
+
+/* GEO Score */
+.geo-gauge-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 24px; }
+.geo-gauge {
+  width: 140px; height: 140px; border-radius: 50%;
+  background: conic-gradient(var(--accent) 0%, var(--accent) calc(var(--pct) * 1%), var(--bg3) calc(var(--pct) * 1%));
+  display: flex; align-items: center; justify-content: center;
+  position: relative; box-shadow: var(--shadow-md);
+}
+.geo-gauge-inner {
+  width: 108px; height: 108px; border-radius: 50%; background: var(--bg1);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.geo-gauge-score { font-size: 28px; font-weight: 700; color: var(--t0); line-height: 1; }
+.geo-gauge-label { font-size: var(--text-xs); color: var(--t2); }
+.geo-category-bar { margin-bottom: 10px; }
+.geo-cat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.geo-cat-name { font-size: var(--text-sm); font-weight: 500; color: var(--t0); }
+.geo-cat-score { font-size: var(--text-sm); font-weight: 700; color: var(--t0); }
+.geo-bar-track { height: 6px; background: var(--bg3); border-radius: var(--radius-full); overflow: hidden; }
+.geo-bar-fill { height: 100%; border-radius: var(--radius-full); background: var(--accent); }
+
+/* Knowledge base */
+.kb-faq { border-bottom: 1px solid var(--border); }
+.kb-faq-q {
+  width: 100%; padding: 14px 0; background: none; border: none;
+  color: var(--t0); font-size: var(--text-md); font-weight: 600;
+  cursor: pointer; text-align: left; display: flex; justify-content: space-between;
+  align-items: center; font-family: var(--font-body);
+}
+.kb-faq-q .arrow { font-size: 12px; color: var(--t2); transition: transform .2s; }
+.kb-faq.open .kb-faq-q .arrow { transform: rotate(180deg); }
+.kb-faq-a { display: none; padding: 0 0 14px; font-size: var(--text-base); color: var(--t1); line-height: 1.65; }
+.kb-faq.open .kb-faq-a { display: block; }
+
+/* Automation */
+.automation-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+.automation-stat { background: var(--bg1); border-radius: var(--radius-lg); padding: 14px; border: 1px solid var(--border); text-align: center; }
+.automation-stat-icon { font-size: 20px; margin-bottom: 6px; }
+.automation-stat-val { font-size: var(--text-xl); font-weight: 700; color: var(--t0); }
+.automation-stat-label { font-size: var(--text-xs); color: var(--t2); }
+.campaign-card { background: var(--bg1); border-radius: var(--radius-xl); padding: 18px; border: 1px solid var(--border); margin-bottom: 10px; }
+.campaign-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.campaign-icon { font-size: 20px; }
+.campaign-name { font-weight: 700; font-size: var(--text-md); color: var(--t0); }
+.campaign-desc { font-size: var(--text-sm); color: var(--t2); line-height: 1.5; }
+
+/* ── Empty state ── */
+.empty-state { text-align: center; padding: 32px; color: var(--t2); font-size: var(--text-base); }
+
+/* ── Mobile hamburger (hidden on desktop) ── */
+.od-hamburger { display: none; }
+
+/* ── Chatbot ── */
+.chat-bubble {
+  position: fixed; bottom: 24px; right: 24px; z-index: var(--z-chat);
+  width: 52px; height: 52px; border-radius: var(--radius-round);
+  background: var(--accent); border: none; cursor: pointer; font-size: 22px;
+  display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg);
+  transition: transform .15s, opacity .15s;
+}
+.chat-bubble:hover { transform: scale(1.05); }
+.chat-window {
+  position: fixed; bottom: 88px; right: 24px; z-index: var(--z-chat);
+  width: 340px; height: 480px; background: var(--bg1);
+  border-radius: var(--radius-2xl); border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg); display: flex; flex-direction: column; overflow: hidden;
+}
+.chat-window.hidden { display: none; }
+.chat-header {
+  padding: 14px 16px; background: var(--accent); display: flex;
+  align-items: center; gap: 10px; flex-shrink: 0;
+}
+.chat-header-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+.chat-header-name { font-size: var(--text-base); font-weight: 700; color: var(--bg); flex: 1; }
+.chat-header-status { font-size: 10px; color: rgba(255,255,255,.75); }
+.chat-header-btns { display: flex; gap: 4px; }
+.chat-voice-btn, .chat-close {
+  background: rgba(255,255,255,.15); border: none; color: #fff;
+  border-radius: var(--radius-sm); padding: 4px 7px; cursor: pointer; font-size: 13px;
+}
+.chat-voice-btn.active { background: rgba(255,255,255,.3); }
+.chat-messages { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.chat-msg { display: flex; }
+.chat-msg-bot { justify-content: flex-start; }
+.chat-msg-user { justify-content: flex-end; }
+.chat-bubble-msg {
+  max-width: 78%; padding: 9px 13px; border-radius: 16px; font-size: var(--text-sm); line-height: 1.5;
+}
+.chat-msg-bot .chat-bubble-msg { background: var(--bg2); color: var(--t0); border-bottom-left-radius: 4px; }
+.chat-msg-user .chat-bubble-msg { background: var(--accent); color: var(--bg); border-bottom-right-radius: 4px; }
+.chat-voice-label { padding: 4px 12px; font-size: var(--text-xs); color: var(--accent); font-weight: 600; }
+.chat-input-row { display: flex; gap: 6px; padding: 10px 12px; border-top: 1px solid var(--border); flex-shrink: 0; }
+.chat-input {
+  flex: 1; padding: 8px 10px; border-radius: var(--radius-md); border: 1px solid var(--border);
+  background: var(--bg2); color: var(--t0); font-size: var(--text-sm); font-family: var(--font-body);
+}
+.chat-input:focus { outline: none; border-color: var(--accent); }
+.chat-mic { padding: 8px 10px; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--bg2); cursor: pointer; font-size: 14px; }
+.chat-mic.listening { background: var(--redS); border-color: var(--redB); }
+.chat-send {
+  padding: 8px 14px; border-radius: var(--radius-md); border: none;
+  background: var(--accent); color: var(--bg); font-size: var(--text-sm);
+  font-weight: 600; cursor: pointer; font-family: var(--font-body);
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--t0); color: var(--bg); padding: 10px 20px; border-radius: var(--radius-full);
+  font-size: var(--text-sm); font-weight: 500; z-index: var(--z-toast); opacity: 0;
+  transition: transform .25s, opacity .25s; pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* ── Reveal animation ── */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.revealed { opacity: 1; transform: none; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .od-sidebar {
+    position: fixed; top: 40px; left: -220px; z-index: var(--z-nav);
+    height: calc(100vh - 40px); transition: left .25s;
+  }
+  .od-sidebar.open { left: 0; }
+  .od-sidebar-overlay {
+    display: none; position: fixed; inset: 40px 0 0;
+    background: var(--overlay); z-index: calc(var(--z-nav) - 1);
+  }
+  .od-sidebar.open ~ .od-sidebar-overlay { display: block; }
+  .od-hamburger {
+    display: flex; position: fixed; top: 46px; left: 10px;
+    z-index: var(--z-hamburger); background: var(--bg1); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 5px 8px; cursor: pointer; font-size: 16px;
+  }
+  .od-main { padding: 14px 14px 14px 46px; }
+  .metrics-grid { grid-template-columns: repeat(2,1fr); }
+  .automation-grid { grid-template-columns: repeat(2,1fr); }
+  .services-grid { grid-template-columns: repeat(2,1fr); }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .demo-bar-back { display: none; }
+  .cv-hero { padding: 48px 16px 40px; }
+  .cv-hero-stats { gap: 20px; }
+  .cv-services-bg, .cv-gallery-bg, .cv-reviews-bg, .cv-booking-bg, .cv-footer { padding: 40px 16px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: repeat(2,1fr); }
+  .automation-grid { grid-template-columns: repeat(2,1fr); }
+  .chat-window { width: calc(100vw - 24px); right: 12px; bottom: 80px; }
+  .pipeline-col { flex: 0 0 200px; }
+  .filter-search { width: 100%; }
+  .hide-mobile { display: none; }
+}
+@media (max-width: 375px) {
+  .cv-hero h1 { font-size: 1.7rem; }
+  .demo-bar { padding: 0 8px; gap: 6px; }
+  .chat-window { height: 380px; }
+}
+</style>
+</head>
+<body>
+
+<!-- DEMO BAR — Krevio chrome, same on every demo -->
+<div class="demo-bar">
+  <span class="demo-bar-label">Demo</span>
+  <div class="demo-bar-title">
+    <span class="dot"></span>
+    <span id="demoBarName">BUSINESS_NAME</span>
+  </div>
+  <div class="demo-bar-spacer"></div>
+  <div class="demo-bar-toggle">
+    <button class="demo-bar-btn active" id="btnCustomer" onclick="switchView('customer')">Customer View</button>
+    <button class="demo-bar-btn" id="btnOwner" onclick="switchView('owner')">Owner Dashboard</button>
+  </div>
+  <button class="lang-toggle" id="langToggle" onclick="toggleLang()" aria-label="Toggle language">
+    <span id="langEN" class="active-lang">EN</span> | <span id="langES">ES</span>
+  </button>
+  <button class="demo-bar-theme" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+  <a href="/demos/" class="demo-bar-back">← All Demos</a>
+</div>
+
+<div style="margin-top:40px;">
+
+<!-- ═══════════════════════════════════════════
+     CUSTOMER VIEW
+═══════════════════════════════════════════ -->
+<div class="customer-view active" id="customerView">
+
+  <!-- Hero -->
+  <section class="cv-hero">
+    <div class="cv-hero-badge">
+      <span class="stars">★★★★★</span>
+      <span data-en="4.8★ from 62+ reviews · Celina, TX" data-es="4.8★ de 62+ reseñas · Celina, TX">4.8★ from 62+ reviews · Celina, TX</span>
+    </div>
+    <h1 data-en="Remodeling Done Right — Celina's Trusted Contractor" data-es="Remodelación de Calidad en el Norte de DFW">Remodeling Done Right — Celina's Trusted Contractor</h1>
+    <p class="cv-hero-sub" data-en="Kitchen, bathroom & outdoor living remodels in Celina, Frisco & Prosper. Free estimates. Licensed & insured." data-es="Cocinas, baños y espacios exteriores — Celina, Frisco y Prosper. Cotizaciones gratis.">Kitchen, bathroom & outdoor living remodels in Celina, Frisco & Prosper. Free estimates. Licensed & insured.</p>
+    <div class="cv-hero-pills" id="heroPills"><!-- rendered by JS --></div>
+    <div class="cv-hero-ctas">
+      <button class="btn-primary" onclick="switchBooking('emergency')" data-en="Get Free Estimate" data-es="Cotización Gratis">Get Free Estimate</button>
+      <button class="btn-outline" onclick="document.querySelector('.cv-services-bg').scrollIntoView({behavior:'smooth'})" data-en="Our Services" data-es="Nuestros Servicios">Our Services</button>
+    </div>
+    <div class="cv-hero-stats" id="heroStats"><!-- rendered by JS --></div>
+  </section>
+
+  <!-- Services -->
+  <section class="cv-services-bg">
+    <div class="section-header reveal">
+      <div class="section-label" data-en="What We Build" data-es="Lo Que Construimos">What We Build</div>
+      <h2 class="section-title" data-en="Full-Service Remodeling" data-es="Remodelación Integral">Full-Service Remodeling</h2>
+      <p class="section-sub" data-en="From kitchen transformations to outdoor living spaces — honest pricing, clean crews, on-time delivery." data-es="De cocinas a espacios exteriores — precios honestos, resultados de calidad.">From kitchen transformations to outdoor living spaces — honest pricing, clean crews, on-time delivery.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </section>
+
+  <!-- Gallery (feature-flagged) -->
+  <section class="cv-gallery-bg" id="gallerySection">
+    <div class="section-header reveal">
+      <div class="section-label">Recent Work</div>
+      <h2 class="section-title" data-en="Before &amp; After" data-es="Antes y Después">Before &amp; After</h2>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="cv-reviews-bg">
+    <div class="section-header reveal" style="margin-bottom:32px;">
+      <div class="section-label" style="color:var(--star-color);">Customer Reviews</div>
+      <h2 class="section-title" style="color:var(--hero-text);" data-en="What Our Customers Say" data-es="Lo Que Dicen Nuestros Clientes">What Our Customers Say</h2>
+    </div>
+    <div class="reviews-grid" id="reviewsGrid"></div>
+  </section>
+
+  <!-- Booking form -->
+  <section class="cv-booking-bg" id="bookingSection">
+    <div class="booking-card reveal">
+      <h2 class="section-title" style="margin-bottom:20px;" data-en="Request a Free Estimate" data-es="Solicitar Cotización Gratis">Request a Free Estimate</h2>
+      <!-- Urgency toggle (hidden when CONFIG.hasEmergencyBooking = false) -->
+      <div class="urgency-toggle" id="urgencyToggle">
+        <button class="urgency-btn active" id="btnEmergency" onclick="switchBooking('emergency')" data-en="🚨 Emergency" data-es="🚨 Emergencia">🚨 Emergency</button>
+        <button class="urgency-btn" id="btnSchedule" onclick="switchBooking('schedule')" data-en="📅 Schedule" data-es="📅 Agendar">📅 Schedule</button>
+      </div>
+      <!-- Emergency form -->
+      <div class="booking-form active" id="emergencyForm">
+        <div class="emergency-alert" data-en="⚡ For immediate emergencies call: PHONE" data-es="⚡ Para emergencias inmediatas llame: PHONE">⚡ For immediate emergencies call: <strong>PHONE</strong></div>
+        <div class="form-group">
+          <label class="form-label" data-en="Your Name" data-es="Tu Nombre">Your Name</label>
+          <input class="form-input" type="text" placeholder="John Smith" data-ph-en="John Smith" data-ph-es="Juan García" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Phone Number" data-es="Teléfono">Phone Number</label>
+          <input class="form-input" type="tel" placeholder="(469) 555-0000" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Describe the problem" data-es="Describe el problema">Describe the problem</label>
+          <textarea class="form-textarea" rows="3" placeholder="e.g. Pipe burst in kitchen..." data-ph-en="e.g. Pipe burst in kitchen..." data-ph-es="p.ej. Tubería rota en la cocina..."></textarea>
+        </div>
+        <button class="btn-accent" onclick="submitBooking('emergency')" data-en="Call Me Now" data-es="Llámame Ahora">Call Me Now</button>
+      </div>
+      <!-- Schedule form -->
+      <div class="booking-form" id="scheduleForm">
+        <div class="form-group">
+          <label class="form-label" data-en="Your Name" data-es="Tu Nombre">Your Name</label>
+          <input class="form-input" type="text" placeholder="John Smith" data-ph-en="John Smith" data-ph-es="Juan García" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Phone" data-es="Teléfono">Phone</label>
+          <input class="form-input" type="tel" placeholder="(469) 555-0000" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Email" data-es="Correo">Email</label>
+          <input class="form-input" type="email" placeholder="you@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Service Needed" data-es="Servicio">Service Needed</label>
+          <select class="form-select" id="serviceDropdown">
+            <!-- Rendered by JS from DATA.services -->
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-en="Preferred Date" data-es="Fecha Preferida">Preferred Date</label>
+          <input class="form-input" type="date">
+        </div>
+        <button class="btn-accent" onclick="submitBooking('schedule')" data-en="Request Free Estimate" data-es="Solicitar Cotización Gratis">Request Free Estimate</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="cv-footer">
+    <div class="cv-footer-inner">
+      <div>
+        <div class="cv-footer-name"><span id="footerEmoji">🏢</span> <span id="footerName">BUSINESS_NAME</span></div>
+        <p class="cv-footer-tagline" id="footerTagline">TAGLINE</p>
+      </div>
+      <div class="cv-footer-items">
+        <div class="cv-footer-item">📞 <a href="tel:PHONE_RAW" id="footerPhone">PHONE</a></div>
+        <div class="cv-footer-item">📍 <span id="footerAddress">ADDRESS, CITY STATE</span></div>
+        <div class="cv-footer-item">⭐ <span id="footerRating">RATING</span> stars · <span id="footerReviewCount">REVIEW_COUNT</span> reviews</div>
+        <div class="cv-footer-item">🕐 <span id="footerHours">HOURS</span></div>
+      </div>
+    </div>
+    <div class="cv-footer-credit"><a href="https://krevio.ai">Powered by Krevio</a></div>
+  </footer>
+
+</div><!-- /customer-view -->
+
+<!-- ═══════════════════════════════════════════
+     OWNER DASHBOARD
+═══════════════════════════════════════════ -->
+<div class="owner-view" id="ownerView">
+  <button class="od-hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
+
+  <div class="od-layout">
+    <!-- Sidebar nav -->
+    <nav class="od-sidebar" id="odSidebar" role="tablist">
+      <div class="od-sidebar-logo">
+        <div class="od-sidebar-logo-name" id="sidebarLogoName">BUSINESS</div>
+        <div class="od-sidebar-logo-sub" id="sidebarLogoSub">Dashboard</div>
+      </div>
+      <button class="od-nav-item active" id="nav-dashboard" role="tab" aria-selected="true"  onclick="showOdView('dashboard')"><span class="od-nav-icon">📊</span> Dashboard</button>
+      <button class="od-nav-item"        id="nav-pipeline"  role="tab" aria-selected="false" onclick="showOdView('pipeline')"><span class="od-nav-icon">📋</span> Pipeline</button>
+      <button class="od-nav-item"        id="nav-automation"role="tab" aria-selected="false" onclick="showOdView('automation')"><span class="od-nav-icon">⚡</span> Automation</button>
+      <button class="od-nav-item"        id="nav-geo"       role="tab" aria-selected="false" onclick="showOdView('geo')"><span class="od-nav-icon">🎯</span> GEO Score</button>
+      <button class="od-nav-item"        id="nav-kb"        role="tab" aria-selected="false" onclick="showOdView('kb')"><span class="od-nav-icon">📚</span> Knowledge</button>
+      <!-- Tier 2/3 tabs — hidden by feature flags, unhide in CONFIG -->
+      <button class="od-nav-item" id="nav-dispatch"  role="tab" aria-selected="false" onclick="showOdView('dispatch')"  style="display:none;"><span class="od-nav-icon">🚛</span> Dispatch</button>
+      <button class="od-nav-item" id="nav-customers" role="tab" aria-selected="false" onclick="showOdView('customers')" style="display:none;"><span class="od-nav-icon">👥</span> Customers</button>
+      <button class="od-nav-item" id="nav-money"     role="tab" aria-selected="false" onclick="showOdView('money')"     style="display:none;"><span class="od-nav-icon">💰</span> Money</button>
+      <button class="od-nav-item" id="nav-receipts"  role="tab" aria-selected="false" onclick="showOdView('receipts')"  style="display:none;"><span class="od-nav-icon">🧾</span> Receipts</button>
+    </nav>
+    <div class="od-sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Main content -->
+    <main class="od-main" role="main">
+
+      <!-- Dashboard tab -->
+      <div class="od-view active" id="od-dashboard" role="tabpanel">
+        <div class="od-header">
+          <div class="od-header-title">Dashboard</div>
+          <div class="od-header-sub" id="dashboardDate">Today's overview</div>
+        </div>
+        <div class="metrics-grid" id="metricsGrid"></div>
+        <div class="card-dashboard">
+          <div class="card-title">📅 Today's Schedule</div>
+          <div class="scroll-x">
+            <table class="today-schedule">
+              <thead><tr>
+                <th>Time</th><th>Customer &amp; Service</th>
+                <th class="hide-mobile">Value</th><th>Status</th>
+              </tr></thead>
+              <tbody id="scheduleBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-highlight">
+          <div class="ai-summary-label">🤖 AI Summary</div>
+          <div class="ai-summary-text" id="aiSummary">Active pipeline is strong — 2 high-value Celina leads ($22K + $45K) came in today. Martinez kitchen reveal scheduled this morning; send Google review request immediately after. 4 outstanding invoices total $28,500 — Thompson and Davis are 14+ days overdue. Jennifer Walsh ($45K full reno) responded to estimate follow-up; high close probability this week.</div>
+        </div>
+        <div class="card-dashboard">
+          <div class="card-title">📈 Recent Leads</div>
+          <div class="scroll-x">
+            <table class="data-table" id="leadsTable">
+              <thead><tr>
+                <th>Customer</th><th>Location</th>
+                <th class="hide-mobile">Score</th>
+                <th>Status</th><th>Value</th>
+              </tr></thead>
+              <tbody id="leadsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pipeline tab -->
+      <div class="od-view" id="od-pipeline" role="tabpanel">
+        <div class="od-header">
+          <div class="od-header-title">Pipeline</div>
+          <div class="od-header-sub">Track leads from inquiry to completion</div>
+        </div>
+        <div class="filter-bar">
+          <input class="filter-search" type="text" placeholder="Search..." oninput="filterPipeline(this.value)">
+          <select class="filter-select" id="pipelineServiceFilter" onchange="filterPipeline()">
+            <option value="">All Services</option>
+            <!-- populated by JS -->
+          </select>
+        </div>
+        <div class="pipeline-board" id="pipelineBoard"></div>
+      </div>
+
+      <!-- Automation tab -->
+      <div class="od-view" id="od-automation" role="tabpanel">
+        <div class="od-header">
+          <div class="od-header-title">Automation</div>
+          <div class="od-header-sub">Active campaigns and message flows</div>
+        </div>
+        <div class="automation-grid" id="automationMetrics"></div>
+        <div id="campaignsList"></div>
+      </div>
+
+      <!-- GEO Score tab -->
+      <div class="od-view" id="od-geo" role="tabpanel">
+        <div class="od-header">
+          <div class="od-header-title">GEO Score</div>
+          <div class="od-header-sub">AI Search Readiness — how AI assistants find and recommend you</div>
+        </div>
+        <div class="card-dashboard">
+          <div class="geo-gauge-wrap" id="geoGaugeWrap"></div>
+          <div id="geoCategories"></div>
+        </div>
+        <div class="card-dashboard">
+          <div class="card-title">📌 Recommendations</div>
+          <div id="geoRecommendations"></div>
+        </div>
+      </div>
+
+      <!-- Knowledge Base tab -->
+      <div class="od-view" id="od-kb" role="tabpanel">
+        <div class="od-header">
+          <div class="od-header-title">Knowledge Base</div>
+          <div class="od-header-sub">FAQs that train your AI chatbot</div>
+        </div>
+        <div class="card-dashboard">
+          <div id="kbFaqs"></div>
+        </div>
+      </div>
+
+      <!-- Dispatch tab (Tier 2 — hidden by default) -->
+      <div class="od-view" id="od-dispatch" role="tabpanel">
+        <div class="od-header"><div class="od-header-title">Dispatch</div></div>
+        <div class="empty-state">Dispatch view — add your DATA.dispatch object to populate.</div>
+      </div>
+
+      <!-- Customers tab (Tier 2 — hidden by default) -->
+      <div class="od-view" id="od-customers" role="tabpanel">
+        <div class="od-header"><div class="od-header-title">Customers</div></div>
+        <div class="empty-state">Customers CRM — add your DATA.customers object to populate.</div>
+      </div>
+
+      <!-- Money tab (Tier 2 — hidden by default) -->
+      <div class="od-view" id="od-money" role="tabpanel">
+        <div class="od-header"><div class="od-header-title">Money</div></div>
+        <div class="empty-state">Money & Invoices — add your DATA.money object to populate.</div>
+      </div>
+
+      <!-- Receipts tab (Tier 2 — hidden by default) -->
+      <div class="od-view" id="od-receipts" role="tabpanel">
+        <div class="od-header"><div class="od-header-title">Receipts</div></div>
+        <div class="empty-state">Receipts & Expenses — add your DATA.receipts object to populate.</div>
+      </div>
+
+    </main><!-- /od-main -->
+  </div><!-- /od-layout -->
+</div><!-- /owner-view -->
+
+</div><!-- /margin-top wrapper -->
+
+<!-- Chatbot -->
+<button class="chat-bubble" onclick="toggleChat()" aria-label="Open chat">💬</button>
+<div class="chat-window hidden" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-header-dot"></div>
+    <div>
+      <div class="chat-header-name" id="chatHeaderName">BUSINESS_NAME</div>
+      <div class="chat-header-status">● Online 24/7</div>
+    </div>
+    <div class="chat-header-btns">
+      <button class="chat-close" onclick="toggleChat()">×</button>
+    </div>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-voice-label" id="chatVoiceLabel" style="display:none;"></div>
+  <div class="chat-input-row">
+    <input class="chat-input" id="chatInput"
+      placeholder="Ask about our services..."
+      data-ph-en="Ask about our services..."
+      data-ph-es="Pregunta sobre nuestros servicios..."
+      onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()" data-en="Send" data-es="Enviar">Send</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════════ -->
+<script>
+/* ═══════════════════════════════════════════
+   CONFIG ← FILL IN THIS BLOCK FIRST
+   All hardcoded business values live here.
+   After filling CONFIG, fill DATA below.
+═══════════════════════════════════════════ */
+const CONFIG = {
+  // ── Identity ──────────────────────────────
+  businessName:      'Crestview Remodeling',
+  businessNameShort: 'Crestview',
+  businessNameSub:   'Remodeling',
+  businessType:      'remodeling',
+  schemaType:        'HomeAndConstructionBusiness',
+  emoji:             '🏗️',
+  tagline:           'Kitchen, bathroom & outdoor living remodels — Celina, Frisco & North DFW',
+
+  // ── Contact ───────────────────────────────
+  phone:       '(469) 555-0412',
+  phoneRaw:    '4695550412',
+  address:     '2901 Doe Run Dr',
+  city:        'Celina',
+  state:       'TX',
+  zip:         '75009',
+  areasServed: ['Celina', 'Frisco', 'Prosper', 'McKinney', 'Allen'],
+  hours:       'Mon–Sat 8AM–5PM',
+  priceRange:  '$$',
+
+  // ── Trust signals ─────────────────────────
+  rating:      '4.8',
+  reviewCount: '62+',
+
+  // ── Feature flags ─────────────────────────
+  hasEmergencyBooking: false,
+  hasDispatch:         false,
+  hasCustomerCRM:      false,
+  hasMoney:            true,
+  hasReceipts:         false,
+  hasGallery:          true,
+  hasLanguageToggle:   false,
+};
+
+/* ═══════════════════════════════════════════
+   DATA ← FILL IN THIS BLOCK SECOND
+   All industry-specific mock content.
+   See template-extraction-analysis.md for
+   full field-by-field guide.
+═══════════════════════════════════════════ */
+const DATA = {
+
+  /* ── Customer View ── */
+  services: [
+    { icon: '🍳', name: 'Kitchen Remodel', price: 'From $18,000',
+      desc: 'Full custom kitchen renovations from layout redesign to final finish. We handle demo, plumbing rough-in, electrical, cabinets, countertops, and tile.',
+      features: ['Custom cabinet design', 'Quartz or granite countertops', 'Tile backsplash & flooring', 'Appliance installation'] },
+    { icon: '🚿', name: 'Bathroom Remodel', price: 'From $8,500',
+      desc: 'Master baths, guest baths, and en-suites transformed top to bottom. Walk-in showers, soaking tubs, double vanities — we do it all.',
+      features: ['Walk-in shower conversions', 'Vanity & fixture upgrades', 'Heated tile flooring', 'Custom tile work'] },
+    { icon: '🌿', name: 'Outdoor Living', price: 'From $12,000',
+      desc: 'Covered patios, pergolas, outdoor kitchens, and fire pit areas that extend your living space into the Texas backyard.',
+      features: ['Covered patio structures', 'Outdoor kitchens & grills', 'Concrete & pavers', 'Lighting & fans'] },
+    { icon: '🪵', name: 'Flooring', price: 'From $3,500',
+      desc: 'Hardwood, engineered wood, luxury vinyl plank, and tile installed by our in-house crew. Full subfloor prep included.',
+      features: ['Hardwood & engineered wood', 'Luxury vinyl plank', 'Porcelain & ceramic tile', 'Subfloor repair & leveling'] },
+    { icon: '🎨', name: 'Interior Painting', price: 'From $1,200',
+      desc: 'Full interior prep and premium paint application. Walls, ceilings, trim, and cabinetry refinishing.',
+      features: ['Drywall repair & prep', 'Premium Sherwin-Williams paint', 'Cabinet repainting', 'Trim & door painting'] },
+    { icon: '🏠', name: 'Room Additions', price: 'Custom Quote',
+      desc: 'Expand your home with a sunroom, guest suite, or bonus room. Permitted, engineered, and built to last.',
+      features: ['Structural engineering', 'City permit management', 'Insulation & HVAC tie-in', 'Matching exterior finish'] },
+  ],
+
+  gallery: [
+    { job: 'Kitchen Remodel', location: 'White Oak Estates, Celina',
+      beforeEmoji: '😬', afterEmoji: '✨',
+      beforeDesc: 'Outdated oak cabinets, laminate counters, broken tile backsplash', afterDesc: 'Custom white shaker cabinets, quartz countertops, subway tile backsplash' },
+    { job: 'Master Bathroom', location: 'Preserve at Doe Run, Prosper',
+      beforeEmoji: '⚠️', afterEmoji: '✅',
+      beforeDesc: 'Original builder-grade fiberglass tub-shower combo from 2006', afterDesc: 'Floor-to-ceiling tile walk-in shower, freestanding soaking tub, double vanity' },
+    { job: 'Outdoor Kitchen & Patio', location: 'Frisco Lakes, Frisco',
+      beforeEmoji: '🔴', afterEmoji: '🌟',
+      beforeDesc: 'Bare concrete slab, no shade, no features', afterDesc: 'Covered cedar pergola, built-in grill station, string lights, stamped concrete' },
+  ],
+
+  reviews: [
+    { name: 'Jessica M.', rating: 5, text: 'Crestview completely transformed our kitchen. Carlos and his team were on time every single day and the quality of their tile work is exceptional. Our neighbors keep asking who did it.' },
+    { name: 'Robert & Lisa K.', rating: 5, text: 'We did a full master bath remodel and it looks like something out of a magazine. The project came in exactly on budget and they finished 3 days early. Highly recommend.' },
+    { name: 'Daniel P.', rating: 5, text: 'The outdoor kitchen they built for us is incredible. Best investment we\'ve made in this house. Miguel was our lead and he communicated every step of the way.' },
+    { name: 'Tricia W.', rating: 5, text: 'From the free estimate to the final walkthrough, I never felt surprised by anything. Honest pricing, clean crew, great results. Already planning a bathroom remodel with them next year.' },
+  ],
+
+  /* ── Owner Dashboard ── */
+  metrics: [
+    { label: 'Revenue (MTD)',    value: '$84,200', trend: '↑ 12% vs last month', up: true },
+    { label: 'Active Projects',  value: '6',       trend: '2 completing this week', up: true },
+    { label: 'Outstanding',      value: '$28,500', trend: '4 invoices pending', down: true },
+    { label: 'Avg Lead Response', value: '3.2 hrs', trend: 'Last 30 days', up: true },
+  ],
+
+  todaySchedule: [
+    { time: '9:00 AM',  customer: 'Martinez Residence', service: 'Kitchen Reveal Walkthrough', tech: 'Carlos', location: 'Celina',  value: '$24,500', status: 'confirmed' },
+    { time: '1:30 PM',  customer: 'Thompson Residence', service: 'Bathroom Tile — Day 3',      tech: 'Miguel', location: 'Prosper', value: '$11,200', status: 'confirmed' },
+    { time: '3:00 PM',  customer: 'Davis Residence',    service: 'Free Estimate — Kitchen',    tech: 'Carlos', location: 'Frisco',  value: 'TBD',     status: 'pending' },
+  ],
+
+  leads: [
+    { id: 1, name: 'Sarah Johnson',   service: 'Kitchen Remodel',      status: 'new',         location: 'Celina',   score: 88, date: 'Apr 8', value: '$22,000' },
+    { id: 2, name: 'Robert Kim',      service: 'Master Bathroom',       status: 'scheduled',   location: 'Frisco',   score: 75, date: 'Apr 7', value: '$14,500' },
+    { id: 3, name: 'Maria Gonzalez',  service: 'Outdoor Living',        status: 'in-progress', location: 'Prosper',  score: 62, date: 'Apr 5', value: '$18,000' },
+    { id: 4, name: 'Tom Bradley',     service: 'Flooring',              status: 'complete',    location: 'McKinney', score: 90, date: 'Apr 3', value: '$6,200'  },
+    { id: 5, name: 'Jennifer Walsh',  service: 'Kitchen + 2 Bathrooms', status: 'new',         location: 'Celina',   score: 81, date: 'Apr 8', value: '$45,000' },
+    { id: 6, name: 'David Chen',      service: 'Room Addition',         status: 'scheduled',   location: 'Frisco',   score: 55, date: 'Apr 6', value: '$35,000' },
+  ],
+
+  pipelineCols: [
+    { key: 'new',         label: 'New Leads',   color: '--accentS', textColor: '--accent' },
+    { key: 'scheduled',   label: 'Estimate Set', color: '--amberS',  textColor: '--amber' },
+    { key: 'in-progress', label: 'Active Job',  color: '--blueS',   textColor: '--blue' },
+    { key: 'complete',    label: 'Complete',    color: '--greenS',  textColor: '--green' },
+  ],
+
+  geo: {
+    overall: 58,
+    categories: [
+      { name: 'AI Search Readiness',    score: 62, icon: '🤖', desc: 'How well AI assistants surface your business for remodeling searches' },
+      { name: 'Business Info Accuracy', score: 75, icon: '📍', desc: 'Consistent name, address, phone across the web' },
+      { name: 'Review Strength',        score: 52, icon: '⭐', desc: 'Volume, recency, and sentiment of reviews on Google & Houzz' },
+      { name: 'Website Content Depth',  score: 45, icon: '📝', desc: 'Project pages, before/after photos, local keywords' },
+      { name: 'Online Presence',        score: 56, icon: '🌐', desc: 'Google Business, Houzz, Angi, BBB listings' },
+    ],
+    recommendations: [
+      { priority: 'p1', text: 'Add dedicated project pages for "Celina TX kitchen remodel" and "Prosper bathroom renovation" with before/after galleries — AI assistants are pulling from competitor project pages for these exact queries' },
+      { priority: 'p1', text: 'Respond to the 3 unanswered Google reviews from Q1 — unanswered reviews (even positive ones) depress your review authority score in AI ranking algorithms' },
+      { priority: 'p2', text: 'Create a Houzz profile with consistent NAP and 10+ project photos — Houzz is the #1 cited source when AI assistants answer "best remodeler near me" in DFW' },
+      { priority: 'p3', text: 'Add project timeline estimates to your service pages ("4–6 weeks for a full kitchen remodel") — this exact phrasing earns featured snippets and AI citations' },
+    ],
+  },
+
+  faqs: [
+    { q: 'How long does a kitchen remodel take?', a: 'A full kitchen remodel typically takes 4–8 weeks depending on scope. A cosmetic refresh (countertops, backsplash, paint) is usually 1–2 weeks. We\'ll give you a detailed timeline in your free estimate.' },
+    { q: 'Do you offer free estimates?', a: 'Yes. We offer free in-home estimates for all projects. Carlos or Miguel will visit your home, measure the space, discuss your vision, and provide a written Good/Better/Best estimate within 48 hours.' },
+    { q: 'Are you licensed and insured in Texas?', a: 'Yes. Crestview Remodeling holds a Texas General Contractor license and carries $2M general liability insurance plus workers\' comp. We pull all required permits and work with city inspectors on your behalf.' },
+    { q: 'What areas do you serve?', a: 'We primarily serve Celina, Frisco, Prosper, McKinney, and Allen. We also take select projects in Gunter, Anna, and Sherman for larger renovations. Call us to confirm availability in your area.' },
+    { q: 'Do you offer payment plans or financing?', a: 'Yes. We offer 12-month same-as-cash financing through GreenSky for projects over $5,000. We also accept milestone billing — typically 10% at signing, 40% at demo completion, 40% at install, 10% at final walkthrough.' },
+  ],
+
+  automation: {
+    metrics: [
+      { icon: '📨', label: 'Messages Sent', value: '284', trend: 'This month' },
+      { icon: '📬', label: 'Open Rate',     value: '47%', trend: 'Avg' },
+      { icon: '💬', label: 'Replies',       value: '38',  trend: 'This month' },
+      { icon: '📅', label: 'Estimates Set', value: '11',  trend: 'From automation' },
+    ],
+    campaigns: [
+      { icon: '🔄', name: 'Estimate Follow-Up', status: 'active',
+        sent: '96', desc: 'Reaches out to estimate leads who haven\'t responded in 5 days. Includes a before/after photo from a similar project.',
+        opens: '52%', booked: '9' },
+      { icon: '⭐', name: 'Review Request', status: 'active',
+        sent: '58', desc: 'Sent 48 hours after project completion with a direct Google review link. Average 4.8 stars from automation-generated reviews.',
+        opens: '61%', reviews: '34' },
+      { icon: '🤝', name: 'Referral Ask', status: 'active',
+        sent: '42', desc: 'Sent 30 days after project completion asking for referrals. Offers a $200 Visa gift card for each completed referral.',
+        opens: '44%', referrals: '6' },
+    ],
+  },
+};
+
+/* ═══════════════════════════════════════════
+   TRANSLATIONS ← Update for Spanish markets
+   Replace "BUSINESS_NAME" with CONFIG.businessName
+═══════════════════════════════════════════ */
+const TRANS_ES = {
+  heroHeadline:    'Remodelación de Calidad en el Norte de DFW',
+  heroSub:         'Cocinas, baños y espacios exteriores — Celina, Frisco y Prosper',
+  services: DATA.services.map(s => ({ name: s.name, desc: s.desc })),
+  chatGreeting:    `¡Hola! Soy el asistente de ${CONFIG.businessName}. ¿Estás buscando una cotización para remodelar tu cocina o baño?`,
+  chatPlaceholder: 'Pregunta sobre nuestros servicios de remodelación...',
+};
+
+/* ═══════════════════════════════════════════
+   applyConfig — runs once on init
+═══════════════════════════════════════════ */
+function applyConfig() {
+  const html = document.documentElement;
+  html.setAttribute('data-industry', CONFIG.businessType);
+  document.title = `${CONFIG.businessName} — ${CONFIG.city} ${CONFIG.state} | AI-Powered Business System`;
+
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('demoBarName',     CONFIG.businessName);
+  set('footerEmoji',     CONFIG.emoji);
+  set('footerName',      CONFIG.businessName);
+  set('footerTagline',   CONFIG.tagline);
+  set('footerPhone',     CONFIG.phone);
+  set('footerAddress',   `${CONFIG.address}, ${CONFIG.city} ${CONFIG.state}`);
+  set('footerRating',    CONFIG.rating);
+  set('footerReviewCount', CONFIG.reviewCount);
+  set('footerHours',     CONFIG.hours);
+  set('sidebarLogoName', CONFIG.businessNameShort);
+  set('sidebarLogoSub',  CONFIG.businessNameSub);
+  set('chatHeaderName',  CONFIG.businessName);
+
+  // Update phone link
+  const phoneLink = document.querySelector('[href^="tel:"]');
+  if (phoneLink) { phoneLink.href = `tel:${CONFIG.phoneRaw}`; phoneLink.textContent = CONFIG.phone; }
+
+  // Feature flags
+  const langToggle = document.getElementById('langToggle');
+  if (langToggle) langToggle.style.display = CONFIG.hasLanguageToggle ? '' : 'none';
+
+  const urgencyToggle = document.getElementById('urgencyToggle');
+  if (urgencyToggle && !CONFIG.hasEmergencyBooking) {
+    urgencyToggle.style.display = 'none';
+    document.getElementById('emergencyForm').classList.remove('active');
+    document.getElementById('scheduleForm').classList.add('active');
+  }
+
+  const gallerySection = document.getElementById('gallerySection');
+  if (gallerySection) gallerySection.style.display = CONFIG.hasGallery ? '' : 'none';
+
+  // Tier 2/3 tabs
+  ['dispatch','customers','money','receipts'].forEach(key => {
+    const flagMap = { dispatch: CONFIG.hasDispatch, customers: CONFIG.hasCustomerCRM,
+                      money: CONFIG.hasMoney, receipts: CONFIG.hasReceipts };
+    const el = document.getElementById(`nav-${key}`);
+    if (el) el.style.display = flagMap[key] ? '' : 'none';
+  });
+}
+
+/* ═══════════════════════════════════════════
+   RENDER — CUSTOMER VIEW
+═══════════════════════════════════════════ */
+function escapeHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function renderHeroPills() {
+  const pills = [
+    CONFIG.hasEmergencyBooking ? '🚨 24/7 Emergency' : null,
+    '✅ Licensed & Insured',
+    `⚡ ${CONFIG.hours}`,
+  ].filter(Boolean);
+  const el = document.getElementById('heroPills');
+  if (el) el.innerHTML = pills.map(p => `<span class="cv-hero-pill">${escapeHtml(p)}</span>`).join('');
+}
+
+function renderHeroStats() {
+  const stats = [
+    { num: CONFIG.rating + '★', label: 'Customer Rating' },
+    { num: CONFIG.reviewCount, label: 'Reviews' },
+    { num: CONFIG.areasServed.length + '+', label: 'Cities Served' },
+    { num: CONFIG.hours, label: 'Availability' },
+  ];
+  const el = document.getElementById('heroStats');
+  if (el) el.innerHTML = stats.map(s =>
+    `<div class="cv-hero-stat"><div class="cv-hero-stat-num">${escapeHtml(s.num)}</div><div class="cv-hero-stat-label">${escapeHtml(s.label)}</div></div>`
+  ).join('');
+}
+
+function renderServices() {
+  const el = document.getElementById('servicesGrid');
+  if (!el) return;
+  el.innerHTML = DATA.services.map(s => `
+    <div class="service-card reveal">
+      <div class="service-icon">${s.icon}</div>
+      <div class="service-name">${escapeHtml(s.name)}</div>
+      <span class="service-price">${escapeHtml(s.price)}</span>
+      <p class="service-desc">${escapeHtml(s.desc)}</p>
+      <ul class="service-features">${s.features.map(f => `<li>${escapeHtml(f)}</li>`).join('')}</ul>
+    </div>`).join('');
+
+  const dd = document.getElementById('serviceDropdown');
+  if (dd) dd.innerHTML = DATA.services.map(s => `<option>${escapeHtml(s.name)}</option>`).join('');
+}
+
+function renderGallery() {
+  if (!CONFIG.hasGallery) return;
+  const el = document.getElementById('galleryGrid');
+  if (!el) return;
+  el.innerHTML = DATA.gallery.map(g => `
+    <div class="gallery-item reveal">
+      <div class="gallery-before"><div class="gallery-emoji">${g.beforeEmoji}</div>
+        <div class="gallery-label" style="color:var(--red)">Before</div>
+        <div class="gallery-desc">${escapeHtml(g.beforeDesc)}</div></div>
+      <div class="gallery-after"><div class="gallery-emoji">${g.afterEmoji}</div>
+        <div class="gallery-label" style="color:var(--accent)">After</div>
+        <div class="gallery-desc">${escapeHtml(g.afterDesc)}</div></div>
+      <div class="gallery-meta"><div class="gallery-job">${escapeHtml(g.job)}</div>
+        <div class="gallery-location">${escapeHtml(g.location)}</div></div>
+    </div>`).join('');
+}
+
+function renderReviews() {
+  const el = document.getElementById('reviewsGrid');
+  if (!el) return;
+  el.innerHTML = DATA.reviews.map(r => `
+    <div class="review-card reveal">
+      <div class="review-stars">${'★'.repeat(r.rating)}</div>
+      <p class="review-text">"${escapeHtml(r.text)}"</p>
+      <div class="review-author">— ${escapeHtml(r.name)}</div>
+    </div>`).join('');
+}
+
+/* ═══════════════════════════════════════════
+   RENDER — OWNER DASHBOARD
+═══════════════════════════════════════════ */
+function renderMetrics() {
+  const el = document.getElementById('metricsGrid');
+  if (!el) return;
+  el.innerHTML = DATA.metrics.map(m => `
+    <div class="metric-card">
+      <div class="metric-label">${escapeHtml(m.label)}</div>
+      <div class="metric-value">${escapeHtml(m.value)}</div>
+      <div class="metric-trend ${m.up ? 'up' : m.down ? 'down' : ''}">${escapeHtml(m.trend)}</div>
+    </div>`).join('');
+}
+
+function renderSchedule() {
+  const el = document.getElementById('scheduleBody');
+  if (!el) return;
+  el.innerHTML = DATA.todaySchedule.map(j => `
+    <tr class="today-job">
+      <td><span class="today-time">${escapeHtml(j.time)}</span></td>
+      <td><div class="today-customer">${escapeHtml(j.customer)}</div>
+          <div class="today-service">${escapeHtml(j.service)} · ${escapeHtml(j.location)}</div></td>
+      <td class="hide-mobile"><strong>${escapeHtml(j.value)}</strong></td>
+      <td><span class="today-status-${j.status}">${j.status === 'confirmed' ? '✓ Confirmed' : '○ Pending'}</span></td>
+    </tr>`).join('');
+}
+
+function renderLeadsTable() {
+  const el = document.getElementById('leadsBody');
+  if (!el) return;
+  const statusColors = { new: 'accent', scheduled: 'amber', 'in-progress': 'blue', complete: 'green' };
+  el.innerHTML = DATA.leads.map(l => `
+    <tr>
+      <td><div style="font-weight:600">${escapeHtml(l.name)}</div>
+          <div style="font-size:11px;color:var(--t2)">${escapeHtml(l.service)}</div></td>
+      <td>${escapeHtml(l.location)}</td>
+      <td class="hide-mobile">
+        <span class="badge badge--${l.score >= 75 ? 'green' : l.score >= 55 ? 'amber' : 'muted'}">${l.score}</span>
+      </td>
+      <td><span class="badge badge--${statusColors[l.status] || 'muted'}">${escapeHtml(l.status)}</span></td>
+      <td><strong>${escapeHtml(l.value)}</strong></td>
+    </tr>`).join('');
+}
+
+function renderPipeline() {
+  const board = document.getElementById('pipelineBoard');
+  if (!board) return;
+  const filter = document.getElementById('pipelineServiceFilter');
+  if (filter) {
+    const services = [...new Set(DATA.leads.map(l => l.service))];
+    filter.innerHTML = '<option value="">All Services</option>' +
+      services.map(s => `<option>${escapeHtml(s)}</option>`).join('');
+  }
+  board.innerHTML = DATA.pipelineCols.map(col => {
+    const cards = DATA.leads.filter(l => l.status === col.key);
+    return `
+      <div class="pipeline-col">
+        <div class="pipeline-col-header" style="color:var(${col.textColor})">
+          ${escapeHtml(col.label)} <span class="pipeline-col-count">${cards.length}</span>
+        </div>
+        ${cards.map(l => `
+          <div class="pipeline-card">
+            <div class="pipeline-card-name">${escapeHtml(l.name)}</div>
+            <div class="pipeline-card-service">${escapeHtml(l.service)}</div>
+            <div class="pipeline-card-meta">
+              <span class="badge badge--muted">${escapeHtml(l.location)}</span>
+              <strong style="font-size:12px">${escapeHtml(l.value)}</strong>
+            </div>
+          </div>`).join('')}
+      </div>`;
+  }).join('');
+}
+
+function filterPipeline(query) { renderPipeline(); } // simple re-render; extend as needed
+
+function renderAutomation() {
+  const mEl = document.getElementById('automationMetrics');
+  if (mEl) mEl.innerHTML = DATA.automation.metrics.map(m => `
+    <div class="automation-stat">
+      <div class="automation-stat-icon">${m.icon}</div>
+      <div class="automation-stat-val">${escapeHtml(m.value)}</div>
+      <div class="automation-stat-label">${escapeHtml(m.label)}</div>
+    </div>`).join('');
+
+  const cEl = document.getElementById('campaignsList');
+  if (cEl) cEl.innerHTML = DATA.automation.campaigns.map(c => `
+    <div class="campaign-card">
+      <div class="campaign-header">
+        <span class="campaign-icon">${c.icon}</span>
+        <span class="campaign-name">${escapeHtml(c.name)}</span>
+        <span class="badge badge--green" style="margin-left:auto">${escapeHtml(c.status)}</span>
+      </div>
+      <div class="campaign-desc">${escapeHtml(c.desc)}</div>
+    </div>`).join('');
+}
+
+function renderGeo() {
+  const g = DATA.geo;
+  const pct = g.overall;
+  const gw = document.getElementById('geoGaugeWrap');
+  if (gw) gw.innerHTML = `
+    <div class="geo-gauge" style="--pct:${pct}">
+      <div class="geo-gauge-inner">
+        <div class="geo-gauge-score">${pct}</div>
+        <div class="geo-gauge-label">/ 100</div>
+      </div>
+    </div>
+    <p style="margin-top:12px;font-size:13px;color:var(--t2)">AI Search Readiness Score</p>`;
+
+  const gc = document.getElementById('geoCategories');
+  if (gc) gc.innerHTML = g.categories.map(c => `
+    <div class="geo-category-bar">
+      <div class="geo-cat-header">
+        <span class="geo-cat-name">${c.icon} ${escapeHtml(c.name)}</span>
+        <span class="geo-cat-score">${c.score}</span>
+      </div>
+      <div class="geo-bar-track"><div class="geo-bar-fill" style="width:${c.score}%"></div></div>
+    </div>`).join('');
+
+  const gr = document.getElementById('geoRecommendations');
+  if (gr) gr.innerHTML = g.recommendations.map(r => `
+    <div style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border)">
+      <span class="badge badge--${r.priority === 'p1' ? 'red' : r.priority === 'p2' ? 'amber' : 'muted'}">${r.priority.toUpperCase()}</span>
+      <span style="font-size:13px;color:var(--t0)">${escapeHtml(r.text)}</span>
+    </div>`).join('');
+}
+
+function renderKb() {
+  const el = document.getElementById('kbFaqs');
+  if (!el) return;
+  el.innerHTML = DATA.faqs.map((f, i) => `
+    <div class="kb-faq" id="faq-${i}">
+      <button class="kb-faq-q" onclick="toggleFaq(${i})" aria-expanded="false">
+        ${escapeHtml(f.q)} <span class="arrow">▾</span>
+      </button>
+      <div class="kb-faq-a">${escapeHtml(f.a)}</div>
+    </div>`).join('');
+}
+
+function toggleFaq(i) {
+  const el = document.getElementById(`faq-${i}`);
+  if (!el) return;
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.kb-faq.open').forEach(f => f.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+/* ═══════════════════════════════════════════
+   VIEW SWITCHING
+═══════════════════════════════════════════ */
+function switchView(v) {
+  document.getElementById('customerView').classList.toggle('active', v === 'customer');
+  document.getElementById('ownerView').classList.toggle('active', v === 'owner');
+  document.getElementById('btnCustomer').classList.toggle('active', v === 'customer');
+  document.getElementById('btnOwner').classList.toggle('active', v === 'owner');
+  if (v === 'owner') window.scrollTo(0, 0);
+}
+
+function showOdView(id) {
+  document.querySelectorAll('.od-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.od-nav-item').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+  const view = document.getElementById(`od-${id}`);
+  const btn  = document.getElementById(`nav-${id}`);
+  if (view) view.classList.add('active');
+  if (btn)  { btn.classList.add('active'); btn.setAttribute('aria-selected','true'); }
+  // Close mobile sidebar
+  document.getElementById('odSidebar').classList.remove('open');
+}
+
+function switchBooking(type) {
+  document.getElementById('btnEmergency').classList.toggle('active', type === 'emergency');
+  document.getElementById('btnSchedule').classList.toggle('active', type === 'schedule');
+  document.getElementById('emergencyForm').classList.toggle('active', type === 'emergency');
+  document.getElementById('scheduleForm').classList.toggle('active', type === 'schedule');
+}
+
+function submitBooking(type) {
+  showToast(`Thanks! We've received your estimate request. Carlos or Miguel will call you within 2 hours to schedule your free in-home visit.`);
+}
+
+function toggleSidebar() {
+  document.getElementById('odSidebar').classList.toggle('open');
+}
+
+/* ═══════════════════════════════════════════
+   CHATBOT
+═══════════════════════════════════════════ */
+let chatOpen = false;
+let chatInitialized = false;
+let chatHistory = [];
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const win = document.getElementById('chatWindow');
+  win.classList.toggle('hidden', !chatOpen);
+  if (chatOpen && !chatInitialized) {
+    chatInitialized = true;
+    const greeting = currentLang === 'es'
+      ? TRANS_ES.chatGreeting
+      : `Hi! I'm the ${CONFIG.businessName} assistant. How can I help you today?`;
+    addBotMsg(greeting);
+  }
+}
+
+function addBotMsg(text) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg chat-msg-bot';
+  div.innerHTML = `<div class="chat-bubble-msg">${escapeHtml(text)}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addUserMsg(text) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg chat-msg-user';
+  div.innerHTML = `<div class="chat-bubble-msg">${escapeHtml(text)}</div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addUserMsg(text);
+  chatHistory.push({ role: 'user', text });
+
+  const thinking = document.createElement('div');
+  thinking.className = 'chat-msg chat-msg-bot';
+  thinking.innerHTML = '<div class="chat-bubble-msg" style="color:var(--t2);">...</div>';
+  document.getElementById('chatMessages').appendChild(thinking);
+
+  try {
+    const resp = await fetch('/api/demos/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ businessType: CONFIG.businessType, message: text, history: chatHistory.slice(-8) }),
+      signal: AbortSignal.timeout(8000)
+    });
+    const data = await resp.json();
+    thinking.remove();
+    const reply = data.fallback ? getChatFallback(text) : (data.reply || getChatFallback(text));
+    addBotMsg(reply);
+    chatHistory.push({ role: 'model', text: reply });
+  } catch {
+    thinking.remove();
+    addBotMsg(getChatFallback(text));
+  }
+}
+
+/* ── Keyword fallback — replace with industry-specific responses ── */
+function getChatFallback(text) {
+  const t = text.toLowerCase();
+
+  // Service-specific responses — ADD YOUR INDUSTRY KEYWORDS HERE
+  for (const s of DATA.services) {
+    if (t.includes(s.name.toLowerCase().split(' ')[0])) {
+      return `Great! We offer ${s.name} starting ${s.price}. ${s.desc} Would you like to schedule?`;
+    }
+  }
+
+  // Scheduling intent
+  if (/schedul|book|appointment|availab|when can/.test(t)) {
+    return `I'd be happy to schedule a service for you! You can use the booking form on this page, or call us at ${CONFIG.phone}. What service do you need?`;
+  }
+
+  // Pricing intent
+  if (/cost|price|how much|quote|estimate/.test(t)) {
+    const priceList = DATA.services.map(s => `${s.name}: ${s.price}`).join(', ');
+    return `Here's a quick overview of our pricing: ${priceList}. For an exact quote, I'd recommend calling us at ${CONFIG.phone}.`;
+  }
+
+  // Service area
+  if (/area|serv|location|near|city/.test(t)) {
+    return `We serve ${CONFIG.areasServed.join(', ')} and surrounding areas. Call us at ${CONFIG.phone} to confirm we cover your location.`;
+  }
+
+  // Default
+  return `Thanks for reaching out to ${CONFIG.businessName}! I can help with service questions, scheduling, and pricing. What can I help you with?`;
+}
+
+/* ═══════════════════════════════════════════
+   LANGUAGE TOGGLE
+═══════════════════════════════════════════ */
+let currentLang = 'en';
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  localStorage.setItem('krevio-lang', currentLang);
+  applyLang(currentLang);
+}
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = lang === 'es' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+  });
+  document.querySelectorAll('[data-ph-en]').forEach(el => {
+    el.placeholder = lang === 'es' ? el.getAttribute('data-ph-es') : el.getAttribute('data-ph-en');
+  });
+  const chatInput = document.getElementById('chatInput');
+  if (chatInput) chatInput.placeholder = lang === 'es' ? TRANS_ES.chatPlaceholder : 'Ask about our services...';
+  document.getElementById('langEN').classList.toggle('active-lang', lang === 'en');
+  document.getElementById('langES').classList.toggle('active-lang', lang === 'es');
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+function initScrollReveal() {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+
+/* ═══════════════════════════════════════════
+   THEME
+═══════════════════════════════════════════ */
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('krevio-theme', next);
+  updateThemeBtn(next);
+}
+function updateThemeBtn(theme) {
+  const btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = theme === 'dark' ? '🌙' : '☀️';
+}
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+(function init() {
+  applyConfig();
+
+  const saved = localStorage.getItem('krevio-theme');
+  if (saved) { document.documentElement.setAttribute('data-theme', saved); updateThemeBtn(saved); }
+  else { updateThemeBtn('light'); }
+
+  const savedLang = localStorage.getItem('krevio-lang') || 'en';
+  if (savedLang === 'es') applyLang('es');
+
+  // Set today's date
+  const dateEl = document.getElementById('dashboardDate');
+  if (dateEl) dateEl.textContent = new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+
+  // Render all sections
+  renderHeroPills();
+  renderHeroStats();
+  renderServices();
+  renderGallery();
+  renderReviews();
+  renderMetrics();
+  renderSchedule();
+  renderLeadsTable();
+  renderPipeline();
+  renderAutomation();
+  renderGeo();
+  renderKb();
+  initScrollReveal();
+})();
+</script>
+</body>
+</html>
