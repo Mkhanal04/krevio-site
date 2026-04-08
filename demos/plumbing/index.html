@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="light" data-industry="plumbing">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1140,7 +1140,7 @@ body {
   <span class="demo-bar-label">Demo</span>
   <div class="demo-bar-title">
     <span class="dot"></span>
-    Lone Star Plumbing
+    <span id="demoBarName">Lone Star Plumbing</span>
   </div>
   <div class="demo-bar-spacer"></div>
   <div class="demo-bar-toggle">
@@ -1316,7 +1316,7 @@ body {
 
   <!-- FOOTER -->
   <footer class="cv-footer">
-    <div class="cv-footer-name">🚰 Lone Star Plumbing</div>
+    <div class="cv-footer-name"><span id="footerEmoji">🚰</span> <span id="footerName">Lone Star Plumbing</span></div>
     <p class="cv-footer-tagline" data-en="Licensed plumbers serving Plano, Richardson &amp; East DFW — 24/7 emergency service" data-es="Sirviendo a Plano, Allen, McKinney y Richardson — disponibles 24/7">Licensed plumbers serving Plano, Richardson & East DFW — 24/7 emergency service</p>
     <div class="cv-footer-contact">
       <div class="cv-footer-contact-item">📞 <a href="tel:4695550789" style="color:inherit;text-decoration:none;"><strong>(469) 555-0789</strong></a></div>
@@ -1340,8 +1340,8 @@ body {
     <!-- Sidebar -->
     <nav class="od-sidebar" id="odSidebar" role="tablist" aria-label="Dashboard navigation">
       <div class="od-sidebar-logo">
-        <div class="od-sidebar-logo-name">Lone Star</div>
-        <div class="od-sidebar-logo-sub">Plumbing</div>
+        <div class="od-sidebar-logo-name" id="sidebarLogoName">Lone Star</div>
+        <div class="od-sidebar-logo-sub" id="sidebarLogoSub">Plumbing</div>
       </div>
       <button class="od-nav-item active" id="nav-dashboard" role="tab" aria-selected="true" aria-current="page" onclick="showOdView('dashboard')">
         <span class="nav-icon">📊</span><span>Dashboard</span>
@@ -1450,7 +1450,7 @@ body {
   <div class="chat-header">
     <div class="chat-header-dot"></div>
     <div>
-      <div class="chat-header-name">Lone Star Plumbing</div>
+      <div class="chat-header-name" id="chatHeaderName">Lone Star Plumbing</div>
       <div class="chat-header-status">● Online 24/7</div>
     </div>
     <div class="chat-header-right">
@@ -1471,6 +1471,84 @@ body {
 <div class="toast" id="toast"></div>
 
 <script>
+/* ═══════════════════════════════════════════
+   CONFIG — Edit this block to spin up a new demo.
+   Every hardcoded business value lives here.
+   DATA below holds the industry-specific mock content.
+═══════════════════════════════════════════ */
+const CONFIG = {
+  // ── Identity ──────────────────────────────
+  businessName:      'Lone Star Plumbing',
+  businessNameShort: 'Lone Star',      // sidebar logo line 1
+  businessNameSub:   'Plumbing',       // sidebar logo line 2
+  businessType:      'plumbing',       // API param + data-industry CSS class
+  schemaType:        'Plumber',        // schema.org @type
+  emoji:             '🚰',
+  tagline:           'Licensed plumbers serving Plano, Richardson & East DFW',
+
+  // ── Contact ───────────────────────────────
+  phone:       '(469) 555-0789',
+  phoneRaw:    '4695550789',
+  address:     '3200 W Parker Rd',
+  city:        'Plano',
+  state:       'TX',
+  zip:         '75074',
+  areasServed: ['Plano', 'Richardson', 'Murphy', 'Wylie', 'Garland'],
+  hours:       '24/7 Emergency',
+  priceRange:  '$$',
+
+  // ── Trust signals ─────────────────────────
+  rating:      '4.9',
+  reviewCount: '150+',
+
+  // ── Feature flags ─────────────────────────
+  // Set false to hide tabs / sections for this industry
+  hasEmergencyBooking: true,  // urgency toggle (emergency vs schedule) in booking form
+  hasDispatch:         true,  // Dispatch tab in owner dashboard
+  hasCustomerCRM:      true,  // Customers tab
+  hasMoney:            true,  // Money / Invoices tab
+  hasReceipts:         true,  // Receipts & Expenses tab
+  hasGallery:          true,  // Before/After gallery in customer view
+  hasLanguageToggle:   true,  // EN/ES language toggle in demo bar
+};
+
+/* Apply CONFIG values to the DOM and set the industry CSS attribute.
+   Called once during init() after the DOM is ready. */
+function applyConfig() {
+  const html = document.documentElement;
+
+  // Industry color overrides (drives css/industry-overrides.css)
+  html.setAttribute('data-industry', CONFIG.businessType);
+
+  // Document title
+  document.title = `${CONFIG.businessName} — ${CONFIG.city} ${CONFIG.state} | AI-Powered Business System`;
+
+  // Named slots in HTML that applyConfig() owns
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('demoBarName',    CONFIG.businessName);
+  set('footerEmoji',    CONFIG.emoji);
+  set('footerName',     CONFIG.businessName);
+  set('sidebarLogoName', CONFIG.businessNameShort);
+  set('sidebarLogoSub',  CONFIG.businessNameSub);
+  set('chatHeaderName',  CONFIG.businessName);
+
+  // Language toggle visibility
+  const langToggle = document.getElementById('langToggle');
+  if (langToggle) langToggle.style.display = CONFIG.hasLanguageToggle ? '' : 'none';
+
+  // Feature-flag: hide tabs that don't apply to this business type
+  const tabMap = {
+    'nav-dispatch':  CONFIG.hasDispatch,
+    'nav-customers': CONFIG.hasCustomerCRM,
+    'nav-money':     CONFIG.hasMoney,
+    'nav-receipts':  CONFIG.hasReceipts,
+  };
+  Object.entries(tabMap).forEach(([id, show]) => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = show ? '' : 'none';
+  });
+}
+
 /* ═══════════════════════════════════════════
    MOCK DATA
 ═══════════════════════════════════════════ */
@@ -1746,7 +1824,7 @@ const TRANS_ES = {
     { name: 'Reemplazo de Tuberías', desc: 'Tuberías nuevas para hogares y negocios' },
     { name: 'Inspecciones de Plomería', desc: 'Revisión completa para prevenir problemas futuros' }
   ],
-  chatGreeting: '¡Hola! Soy el asistente de Lone Star Plumbing. ¿Tienes una emergencia o quieres agendar un servicio?',
+  chatGreeting: `¡Hola! Soy el asistente de ${CONFIG.businessName}. ¿Tienes una emergencia o quieres agendar un servicio?`,
   chatPlaceholder: 'Pregunta sobre nuestros servicios...'
 };
 
@@ -1789,7 +1867,7 @@ function renderServices() {
 ═══════════════════════════════════════════ */
 function toggleLang() {
   currentLang = currentLang === 'en' ? 'es' : 'en';
-  localStorage.setItem('ls-lang', currentLang);
+  localStorage.setItem('krevio-lang', currentLang);
   applyLang(currentLang);
 }
 
@@ -2215,7 +2293,7 @@ async function previewAiContent(btn) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        businessType: 'plumbing',
+        businessType: CONFIG.businessType,
         message: 'Generate 3 short blog post titles for a plumbing business in Plano TX. Focus on emergency plumbing, drain cleaning, and water heater topics that homeowners search for.',
         history: []
       })
@@ -2946,7 +3024,7 @@ function toggleChat() {
     chatInitialized = true;
     const greeting = currentLang === 'es'
       ? TRANS_ES.chatGreeting
-      : 'Hi! I\'m here for Lone Star Plumbing. 🔧 Do you have a plumbing emergency, or are you looking to schedule a service?';
+      : `Hi! I'm here for ${CONFIG.businessName}. 🔧 Do you have a plumbing emergency, or are you looking to schedule a service?`;
     addBotMsg(greeting);
   }
 }
@@ -3017,7 +3095,7 @@ function getChatFallback(text) {
   if (t.includes('yes') || t.includes('please') || t.includes('sounds good') || t.includes('let\'s do it') || t.includes('book it'))
     return 'Great! I have a few time slots this week:\n\n🕐 Tomorrow 9:00 AM — Jose Martinez (Senior Tech)\n🕑 Tomorrow 2:00 PM — Jose Martinez\n🕚 Tomorrow 11:00 AM — Mike K. (Owner)\n\nWhich works best? I\'ll just need your name, address, and phone to confirm.';
 
-  return 'Thanks for reaching out to Lone Star Plumbing! I can help with drain cleaning, water heaters, repiping, fixture installation, sewer lines, or emergency repairs. I can also check availability and book you a slot with one of our techs. What do you need help with?';
+  return `Thanks for reaching out to ${CONFIG.businessName}! I can help with drain cleaning, water heaters, repiping, fixture installation, sewer lines, or emergency repairs. I can also check availability and book you a slot with one of our techs. What do you need help with?`;
 }
 
 async function sendChat() {
@@ -3037,7 +3115,7 @@ async function sendChat() {
     const resp = await fetch('/api/demos/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ businessType: 'plumbing', message: text, history: chatHistory.slice(-8) }),
+      body: JSON.stringify({ businessType: CONFIG.businessType, message: text, history: chatHistory.slice(-8) }),
       signal: AbortSignal.timeout(8000)
     });
     const data = await resp.json();
@@ -3207,7 +3285,7 @@ function toggleTheme() {
   const html = document.documentElement;
   const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   html.setAttribute('data-theme', next);
-  localStorage.setItem('lsp-theme', next);
+  localStorage.setItem('krevio-theme', next);
   updateThemeBtn(next);
 }
 function updateThemeBtn(theme) {
@@ -3229,7 +3307,9 @@ function showToast(msg) {
    INIT
 ═══════════════════════════════════════════ */
 (function init() {
-  const saved = localStorage.getItem('lsp-theme');
+  applyConfig();
+
+  const saved = localStorage.getItem('krevio-theme');
   if (saved) {
     document.documentElement.setAttribute('data-theme', saved);
     updateThemeBtn(saved);
@@ -3238,7 +3318,7 @@ function showToast(msg) {
   }
 
   // Restore language
-  const savedLang = localStorage.getItem('ls-lang') || 'en';
+  const savedLang = localStorage.getItem('krevio-lang') || 'en';
   if (savedLang === 'es') applyLang('es');
 
   renderServices();

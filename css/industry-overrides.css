@@ -1,0 +1,183 @@
+/**
+ * industry-overrides.css
+ * Per-industry accent + hero color overrides.
+ *
+ * Only the tokens that CHANGE per industry are defined here.
+ * Everything else (backgrounds, text, status, shadows) comes from krevio-tokens.css.
+ *
+ * Usage: set data-industry="[slug]" on <html>
+ *
+ * Canonical industry slugs:
+ *   plumbing | landscaping | hvac | realestate | remodeling
+ *
+ * To add a new industry:
+ *   1. Choose a hue family (must contrast with cyan chatbot widget)
+ *   2. Add [data-industry="slug"] blocks below (light + dark)
+ *   3. Update CONFIG.businessType in the demo file
+ *   4. Add a system prompt entry in api/demos/chat.js
+ */
+
+/* ─────────────────────────────────────────────
+   PLUMBING — Teal
+   Water, clean, trustworthy.
+   ───────────────────────────────────────────── */
+[data-industry="plumbing"][data-theme="light"] {
+  --accent:          #0891B2;
+  --accentS:         rgba(8,145,178,0.06);
+  --accentB:         rgba(8,145,178,0.14);
+  --hero-bg:         linear-gradient(135deg, #134E4A 0%, #115E59 60%, #0F766E 100%);
+  --sidebar-active:      #0891B2;
+  --sidebar-active-text: #FFFFFF;
+  --btn-primary-color:   #134E4A;
+}
+[data-industry="plumbing"][data-theme="dark"] {
+  --accent:          #22D3EE;
+  --accentS:         rgba(34,211,238,0.08);
+  --accentB:         rgba(34,211,238,0.18);
+  --hero-bg:         linear-gradient(135deg, #042F2E 0%, #134E4A 60%, #115E59 100%);
+  --sidebar-active:      #22D3EE;
+  --sidebar-active-text: #09090B;
+  --btn-primary-color:   #042F2E;
+}
+
+/* ─────────────────────────────────────────────
+   LANDSCAPING — Forest Green
+   Nature, growth, outdoors.
+   ───────────────────────────────────────────── */
+[data-industry="landscaping"][data-theme="light"] {
+  --accent:          #16A34A;
+  --accentS:         rgba(22,163,74,0.06);
+  --accentB:         rgba(22,163,74,0.14);
+  --hero-bg:         linear-gradient(135deg, #14532D 0%, #166534 60%, #15803D 100%);
+  --sidebar-active:      #16A34A;
+  --sidebar-active-text: #FFFFFF;
+  --btn-primary-color:   #14532D;
+}
+[data-industry="landscaping"][data-theme="dark"] {
+  --accent:          #22C55E;
+  --accentS:         rgba(34,197,94,0.08);
+  --accentB:         rgba(34,197,94,0.18);
+  --hero-bg:         linear-gradient(135deg, #052E16 0%, #064E3B 60%, #065F46 100%);
+  --sidebar-active:      #22C55E;
+  --sidebar-active-text: #09090B;
+  --btn-primary-color:   #052E16;
+}
+
+/* ─────────────────────────────────────────────
+   HVAC — Blue
+   Cool air, reliability, technical precision.
+   (Note: current live HVAC demo uses orange —
+   this is the North Star decision; update demo
+   during HVAC rebuild.)
+   ───────────────────────────────────────────── */
+[data-industry="hvac"][data-theme="light"] {
+  --accent:          #2563EB;
+  --accentS:         rgba(37,99,235,0.06);
+  --accentB:         rgba(37,99,235,0.14);
+  --hero-bg:         linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 60%, #2563EB 100%);
+  --sidebar-active:      #2563EB;
+  --sidebar-active-text: #FFFFFF;
+  --btn-primary-color:   #1E3A8A;
+}
+[data-industry="hvac"][data-theme="dark"] {
+  --accent:          #3B82F6;
+  --accentS:         rgba(59,130,246,0.08);
+  --accentB:         rgba(59,130,246,0.18);
+  --hero-bg:         linear-gradient(135deg, #0F172A 0%, #1E3A8A 60%, #1D4ED8 100%);
+  --sidebar-active:      #3B82F6;
+  --sidebar-active-text: #09090B;
+  --btn-primary-color:   #0F172A;
+}
+
+/* ─────────────────────────────────────────────
+   REAL ESTATE — Purple
+   Premium, investment, trust.
+   ───────────────────────────────────────────── */
+[data-industry="realestate"][data-theme="light"] {
+  --accent:          #9333EA;
+  --accentS:         rgba(147,51,234,0.06);
+  --accentB:         rgba(147,51,234,0.14);
+  --hero-bg:         linear-gradient(135deg, #3B0764 0%, #6D28D9 60%, #7C3AED 100%);
+  --sidebar-active:      #9333EA;
+  --sidebar-active-text: #FFFFFF;
+  --btn-primary-color:   #3B0764;
+}
+[data-industry="realestate"][data-theme="dark"] {
+  --accent:          #A855F7;
+  --accentS:         rgba(168,85,247,0.08);
+  --accentB:         rgba(168,85,247,0.18);
+  --hero-bg:         linear-gradient(135deg, #1E0A2E 0%, #3B0764 60%, #5B21B6 100%);
+  --sidebar-active:      #A855F7;
+  --sidebar-active-text: #09090B;
+  --btn-primary-color:   #1E0A2E;
+}
+
+/* ─────────────────────────────────────────────
+   REMODELING — Amber / Walnut
+   Craftsmanship, warmth, transformation.
+   ───────────────────────────────────────────── */
+[data-industry="remodeling"][data-theme="light"] {
+  --accent:          #CA8A04;
+  --accentS:         rgba(202,138,4,0.06);
+  --accentB:         rgba(202,138,4,0.14);
+  --hero-bg:         linear-gradient(135deg, #78350F 0%, #92400E 60%, #B45309 100%);
+  --sidebar-active:      #CA8A04;
+  --sidebar-active-text: #FFFFFF;
+  --btn-primary-color:   #78350F;
+}
+[data-industry="remodeling"][data-theme="dark"] {
+  --accent:          #EAB308;
+  --accentS:         rgba(234,179,8,0.08);
+  --accentB:         rgba(234,179,8,0.18);
+  --hero-bg:         linear-gradient(135deg, #451A03 0%, #78350F 60%, #92400E 100%);
+  --sidebar-active:      #EAB308;
+  --sidebar-active-text: #09090B;
+  --btn-primary-color:   #451A03;
+}
+
+/* ─────────────────────────────────────────────
+   KREVIO LANDING PAGE
+   The brand itself. Yellow accent, no industry context.
+   ───────────────────────────────────────────── */
+[data-industry="krevio"][data-theme="light"],
+[data-industry="krevio"][data-theme="dark"] {
+  --accent:    var(--krevio-brand);
+  --accentS:   var(--krevio-brand-subtle);
+  --accentB:   var(--krevio-brand-border);
+}
+[data-industry="krevio"][data-theme="light"] {
+  --hero-bg:   linear-gradient(135deg, #1C1C2E 0%, #2D2D44 60%, #3D3D5C 100%);
+  --sidebar-active:      var(--krevio-brand);
+  --sidebar-active-text: #1C1C2E;
+  --btn-primary-color:   #1C1C2E;
+}
+[data-industry="krevio"][data-theme="dark"] {
+  --hero-bg:   linear-gradient(135deg, #0D0D1A 0%, #1C1C2E 60%, #2D2D44 100%);
+  --sidebar-active:      var(--krevio-brand);
+  --sidebar-active-text: #0D0D1A;
+  --btn-primary-color:   #0D0D1A;
+}
+
+/* ─────────────────────────────────────────────
+   FALLBACK — no industry set
+   Falls back to plumbing (teal) so pages don't
+   render with missing accent color.
+   ───────────────────────────────────────────── */
+[data-theme="light"]:not([data-industry]) {
+  --accent:          #0891B2;
+  --accentS:         rgba(8,145,178,0.06);
+  --accentB:         rgba(8,145,178,0.14);
+  --hero-bg:         linear-gradient(135deg, #134E4A 0%, #115E59 60%, #0F766E 100%);
+  --sidebar-active:      #0891B2;
+  --sidebar-active-text: #FFFFFF;
+  --btn-primary-color:   #134E4A;
+}
+[data-theme="dark"]:not([data-industry]) {
+  --accent:          #22D3EE;
+  --accentS:         rgba(34,211,238,0.08);
+  --accentB:         rgba(34,211,238,0.18);
+  --hero-bg:         linear-gradient(135deg, #042F2E 0%, #134E4A 60%, #115E59 100%);
+  --sidebar-active:      #22D3EE;
+  --sidebar-active-text: #09090B;
+  --btn-primary-color:   #042F2E;
+}

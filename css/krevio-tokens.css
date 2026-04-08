@@ -1,0 +1,241 @@
+/**
+ * krevio-tokens.css
+ * Single source of truth for all Krevio design tokens.
+ *
+ * - Base tokens (backgrounds, text, borders, status, shadows, typography,
+ *   spacing, radius, z-index) are defined here and are IDENTICAL across every
+ *   page: landing, demos, and future client sites.
+ * - Industry-specific accent/hero overrides live in industry-overrides.css.
+ * - Krevio brand tokens (yellow, nav bg) also live here.
+ *
+ * Usage:
+ *   <link rel="stylesheet" href="/css/krevio-tokens.css">
+ *   <link rel="stylesheet" href="/css/industry-overrides.css">
+ *   <html data-theme="light" data-industry="plumbing">
+ *
+ * Theme switching:  toggle data-theme="light|dark" on <html>
+ * Industry:        set data-industry="plumbing|landscaping|hvac|realestate|remodeling"
+ */
+
+/* ─────────────────────────────────────────────
+   GOOGLE FONTS
+   Load once here so individual pages don't
+   need their own <link> tags.
+   ───────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap');
+
+/* ─────────────────────────────────────────────
+   KREVIO BRAND LAYER
+   Chrome elements (nav, footer, chatbot widget,
+   landing page CTAs). Never overridden per industry.
+   ───────────────────────────────────────────── */
+:root {
+  --krevio-brand:         #FFB800;
+  --krevio-brand-subtle:  rgba(255, 184, 0, 0.08);
+  --krevio-brand-border:  rgba(255, 184, 0, 0.18);
+  --krevio-brand-dark:    #E6A600;   /* pressed/hover state */
+}
+
+/* ─────────────────────────────────────────────
+   BASE TOKENS — LIGHT THEME (default)
+   ───────────────────────────────────────────── */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg:   #FAFAFA;   /* page background */
+  --bg1:  #FFFFFF;   /* card / surface */
+  --bg2:  #F4F4F5;   /* hover / input */
+  --bg3:  #E4E4E7;   /* disabled / track */
+
+  /* Text */
+  --t0:   #18181B;   /* primary */
+  --t1:   #3F3F46;   /* secondary */
+  --t2:   #71717A;   /* muted */
+  --t3:   #D4D4D8;   /* disabled / decorative */
+
+  /* Borders */
+  --border:   rgba(0,0,0,0.06);
+  --borderH:  rgba(0,0,0,0.12);
+  --overlay:  rgba(0,0,0,0.4);
+
+  /* Status — Red */
+  --red:   #DC2626;
+  --redS:  rgba(220,38,38,0.06);
+  --redB:  rgba(220,38,38,0.14);
+
+  /* Status — Amber */
+  --amber:   #CA8A04;
+  --amberS:  rgba(202,138,4,0.06);
+  --amberB:  rgba(202,138,4,0.14);
+
+  /* Status — Green */
+  --green:   #16A34A;
+  --greenS:  rgba(22,163,74,0.06);
+  --greenB:  rgba(22,163,74,0.14);
+
+  /* Status — Blue */
+  --blue:   #2563EB;
+  --blueS:  rgba(37,99,235,0.06);
+  --blueB:  rgba(37,99,235,0.14);
+
+  /* Shadows */
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg:  0 12px 32px rgba(0,0,0,0.08);
+
+  /* Hero section */
+  --hero-text:        #FFFFFF;
+  --hero-text-muted:  rgba(255,255,255,0.65);
+  --hero-card:        rgba(255,255,255,0.08);
+  --hero-border:      rgba(255,255,255,0.12);
+  --star-color:       #FCD34D;
+
+  /* Krevio nav / footer chrome */
+  --krevio-nav-bg:    #FFFFFF;
+  --krevio-footer-bg: #F4F4F5;
+}
+
+/* ─────────────────────────────────────────────
+   BASE TOKENS — DARK THEME
+   ───────────────────────────────────────────── */
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg:   #09090B;
+  --bg1:  #0F0F12;
+  --bg2:  #17171C;
+  --bg3:  #1E1E26;
+
+  /* Text */
+  --t0:   #F4F4F5;
+  --t1:   #D4D4D8;
+  --t2:   #A1A1AA;
+  --t3:   #3F3F46;
+
+  /* Borders */
+  --border:   rgba(255,255,255,0.06);
+  --borderH:  rgba(255,255,255,0.13);
+  --overlay:  rgba(0,0,0,0.5);
+
+  /* Status — Red */
+  --red:   #F87171;
+  --redS:  rgba(248,113,113,0.08);
+  --redB:  rgba(248,113,113,0.18);
+
+  /* Status — Amber */
+  --amber:   #EAB308;
+  --amberS:  rgba(234,179,8,0.08);
+  --amberB:  rgba(234,179,8,0.18);
+
+  /* Status — Green */
+  --green:   #22C55E;
+  --greenS:  rgba(34,197,94,0.08);
+  --greenB:  rgba(34,197,94,0.18);
+
+  /* Status — Blue */
+  --blue:   #3B82F6;
+  --blueS:  rgba(59,130,246,0.08);
+  --blueB:  rgba(59,130,246,0.18);
+
+  /* Shadows */
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.20);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.30);
+  --shadow-lg:  0 12px 32px rgba(0,0,0,0.40);
+
+  /* Hero section */
+  --hero-text:        #FFFFFF;
+  --hero-text-muted:  rgba(255,255,255,0.65);
+  --hero-card:        rgba(255,255,255,0.06);
+  --hero-border:      rgba(255,255,255,0.10);
+  --star-color:       #FCD34D;
+
+  /* Krevio nav / footer chrome */
+  --krevio-nav-bg:    #0F0F12;
+  --krevio-footer-bg: #09090B;
+}
+
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY TOKENS
+   Font-size scale, weights, and families.
+   These do NOT change per theme or industry.
+   ───────────────────────────────────────────── */
+:root {
+  /* Font families */
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-display: 'DM Serif Display', serif;
+
+  /* Font size scale */
+  --text-xs:   11px;
+  --text-sm:   12px;
+  --text-base: 13px;
+  --text-md:   14px;
+  --text-lg:   16px;
+  --text-xl:   22px;
+  --text-2xl:  clamp(1.3rem, 3vw, 1.6rem);
+  --text-3xl:  clamp(1.7rem, 5vw, 3.4rem);
+
+  /* ─── Spacing ─── */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  12px;
+  --space-lg:  16px;
+  --space-xl:  20px;
+  --space-2xl: 24px;
+  --space-3xl: 40px;
+
+  /* ─── Border Radius ─── */
+  --radius-sm:    4px;
+  --radius-md:    8px;
+  --radius-lg:    12px;
+  --radius-xl:    14px;
+  --radius-2xl:   16px;
+  --radius-full:  99px;
+  --radius-round: 50%;
+
+  /* ─── Z-Index Scale ─── */
+  --z-content:  0;
+  --z-sticky:   100;
+  --z-overlay:  199;    /* sidebar backdrop */
+  --z-nav:      200;    /* demo bar / header */
+  --z-hamburger:201;
+  --z-chat:     300;
+  --z-toast:    400;
+}
+
+/* ─────────────────────────────────────────────
+   BASE RESET & GLOBAL STYLES
+   Minimal reset applied once here so every page
+   inherits consistent defaults.
+   ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--t0);
+  background: var(--bg);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Focus ring — never suppress, replace with accent */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Links */
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ─────────────────────────────────────────────
+   SHARED COMPONENT TOKENS
+   Used by both landing and demo pages.
+   ───────────────────────────────────────────── */
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: var(--radius-sm); }
+::-webkit-scrollbar-thumb:hover { background: var(--t3); }
