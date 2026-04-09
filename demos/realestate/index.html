@@ -62,13 +62,34 @@
   --re-bg-surface: #0D0520;
 }
 
+/* ─── Context banner ─── */
+.context-banner {
+  position: fixed; top: 0; left: 0; right: 0; z-index: calc(var(--z-nav) + 1);
+  background: var(--re-bg-surface); border-bottom: 1px solid var(--accentB);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 5px 16px; font-size: 12px; color: var(--t1); font-family: var(--font-body);
+  transition: transform 0.25s ease;
+}
+[data-theme="dark"] .context-banner { background: rgba(147,51,234,0.08); }
+.context-banner.hidden { transform: translateY(-100%); }
+.context-banner a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.context-banner a:hover { text-decoration: underline; }
+.context-banner-dismiss {
+  position: absolute; right: 12px; background: none; border: none;
+  color: var(--t2); cursor: pointer; font-size: 16px; line-height: 1;
+  padding: 4px; font-family: var(--font-body);
+}
+.context-banner-dismiss:hover { color: var(--t0); }
+
 /* ─── Demo bar ─── */
 .demo-bar {
-  position: fixed; top: 0; left: 0; right: 0; height: 44px;
+  position: fixed; top: 30px; left: 0; right: 0; height: 44px;
   background: var(--bg1); border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 12px; padding: 0 16px;
   z-index: var(--z-nav); font-family: var(--font-body);
+  transition: top 0.25s ease;
 }
+.demo-bar.banner-hidden { top: 0; }
 .demo-badge {
   font-size: 10px; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.08em; background: var(--accentS); color: var(--accent);
@@ -102,8 +123,80 @@
 .demo-bar-back:hover { color: var(--accent); }
 
 /* ─── Customer view layout ─── */
-#customerView { padding-top: 44px; }
-#ownerView { padding-top: 44px; }
+#customerView { padding-top: 74px; }
+#ownerView { padding-top: 74px; }
+
+/* ─── Audience pathways ─── */
+.pathway-section {
+  padding: 48px 24px; background: var(--bg1);
+  border-bottom: 1px solid var(--border);
+}
+.pathway-section .cv-section-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+.pathway-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--t2); margin-bottom: 8px;
+}
+.pathway-heading { font-size: 1.2rem; font-weight: 700; color: var(--t0); margin-bottom: 28px; }
+.pathway-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+}
+.pathway-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-2xl); padding: 24px 16px;
+  cursor: pointer; transition: all 0.2s; text-align: center;
+}
+.pathway-card:hover { border-color: var(--accent); background: var(--accentS); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.pathway-card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+.pathway-card-label { font-size: 13px; font-weight: 700; color: var(--t0); margin-bottom: 4px; }
+.pathway-card-desc { font-size: 11px; color: var(--t2); line-height: 1.5; }
+
+/* ─── Section transition labels ─── */
+.section-transition {
+  padding: 20px 24px; text-align: center;
+  border-top: 1px solid var(--border);
+}
+.section-transition-eyebrow {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--t2); margin-bottom: 4px;
+}
+.section-transition-headline { font-size: 14px; font-weight: 700; color: var(--t0); margin-bottom: 10px; }
+.section-transition-sub { font-size: 13px; color: var(--t2); margin-bottom: 14px; }
+.btn-transition {
+  display: inline-block; padding: 10px 22px; background: var(--accent); color: white;
+  font-size: 13px; font-weight: 700; border: none; border-radius: var(--radius-full);
+  cursor: pointer; font-family: var(--font-body); transition: opacity 0.15s;
+}
+.btn-transition:hover { opacity: 0.9; }
+.btn-transition-subtle {
+  display: inline-block; padding: 10px 22px; background: var(--accentS); color: var(--accent);
+  font-size: 13px; font-weight: 700; border: 1px solid var(--accentB); border-radius: var(--radius-full);
+  cursor: pointer; font-family: var(--font-body); transition: opacity 0.15s;
+}
+.btn-transition-subtle:hover { opacity: 0.85; }
+
+/* ─── Dashboard bottom CTA ─── */
+.dash-bottom-cta {
+  margin-top: 24px; padding: 24px; background: var(--re-bg-deep);
+  border-radius: var(--radius-2xl); text-align: center;
+}
+.dash-bottom-cta h3 { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 6px; }
+.dash-bottom-cta p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 16px; }
+.dash-cta-btn {
+  display: inline-block; padding: 11px 28px; background: white; color: var(--re-bg-deep);
+  font-size: 13px; font-weight: 800; border: none; border-radius: var(--radius-full);
+  cursor: pointer; font-family: var(--font-body); text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.dash-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+/* ─── Chatbot quick replies ─── */
+.chat-quick-replies { display: flex; flex-direction: column; gap: 6px; padding: 4px 0 8px; }
+.chat-qr-btn {
+  text-align: left; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); font-size: 12px; font-weight: 600; color: var(--t0);
+  cursor: pointer; font-family: var(--font-body); transition: all 0.15s;
+}
+.chat-qr-btn:hover { border-color: var(--accent); background: var(--accentS); color: var(--accent); }
 
 .cv-section { padding: 72px 24px; }
 .cv-section-inner { max-width: 1100px; margin: 0 auto; }
@@ -879,6 +972,7 @@ input[type="checkbox"] { display: none; }
 
 /* ─── Responsive ─── */
 @media (max-width: 1023px) {
+  .pathway-grid { grid-template-columns: repeat(2, 1fr); }
   .owner-sidebar { width: 180px; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .neighborhoods-grid { grid-template-columns: repeat(2, 1fr); }
@@ -893,6 +987,8 @@ input[type="checkbox"] { display: none; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
+  #customerView, #ownerView { padding-top: 100px; }
+  .pathway-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .cv-hero-inner { grid-template-columns: 1fr; gap: 32px; }
   .cv-hero-text h1 { font-size: 1.8rem; }
   .cv-hero-ctas { flex-direction: column; }
@@ -938,8 +1034,15 @@ input[type="checkbox"] { display: none; }
 </head>
 <body>
 
+<!-- ═══════════════════ CONTEXT BANNER ═══════════════════ -->
+<div class="context-banner" id="contextBanner">
+  <span>✦ This is a preview built for <strong>Apex Home Solutions</strong> by Krevio</span>
+  <a href="https://krevio.net" target="_blank" rel="noopener">— Learn what Krevio does →</a>
+  <button class="context-banner-dismiss" onclick="dismissBanner()" aria-label="Dismiss">×</button>
+</div>
+
 <!-- ═══════════════════ DEMO BAR ═══════════════════ -->
-<div class="demo-bar">
+<div class="demo-bar" id="demoBar">
   <span class="demo-badge">Demo</span>
   <div>
     <div class="demo-bar-title" id="barTitle">Apex Home Solutions</div>
@@ -947,8 +1050,8 @@ input[type="checkbox"] { display: none; }
   </div>
   <div class="demo-bar-spacer"></div>
   <div class="demo-bar-toggle">
-    <button class="demo-bar-btn active" id="btnCustomer" onclick="switchMode('customer')">Customer View</button>
-    <button class="demo-bar-btn" id="btnOwner" onclick="switchMode('owner')">Owner Dashboard</button>
+    <button class="demo-bar-btn active" id="btnCustomer" onclick="switchMode('customer')">Your Website</button>
+    <button class="demo-bar-btn" id="btnOwner" onclick="switchMode('owner')">Your Dashboard</button>
   </div>
   <button class="lang-toggle" id="langToggle" style="display:none;" onclick="toggleLang()" aria-label="Toggle language">
     <span id="langEN" class="active-lang">EN</span> | <span id="langES">ES</span>
@@ -959,6 +1062,12 @@ input[type="checkbox"] { display: none; }
 
 <!-- ═══════════════════ CUSTOMER VIEW ═══════════════════ -->
 <div id="customerView">
+
+  <!-- Section transition: what visitors see -->
+  <div class="section-transition" style="border-top:none;padding-top:0;padding-bottom:12px;background:var(--bg2);">
+    <div class="section-transition-eyebrow">What your visitors see</div>
+    <div style="font-size:12px;color:var(--t2);">This is your website — AI chatbot, instant answers, professional presence.</div>
+  </div>
 
   <!-- Hero (geometric) -->
   <section class="cv-hero">
@@ -997,6 +1106,36 @@ input[type="checkbox"] { display: none; }
       <div class="cred-item"><span class="cred-icon">📍</span> Frisco, TX</div>
     </div>
   </div>
+
+  <!-- Audience pathways -->
+  <section class="pathway-section">
+    <div class="cv-section-inner">
+      <div class="pathway-label">How can we help you?</div>
+      <div class="pathway-heading">What brings you here today?</div>
+      <div class="pathway-grid">
+        <div class="pathway-card" onclick="pathwaySelect('renter')">
+          <div class="pathway-card-icon">🏠</div>
+          <div class="pathway-card-label">I'm Looking to Rent</div>
+          <div class="pathway-card-desc">Browse available properties, schedule a showing</div>
+        </div>
+        <div class="pathway-card" onclick="pathwaySelect('tenant')">
+          <div class="pathway-card-icon">🔧</div>
+          <div class="pathway-card-label">I'm a Current Tenant</div>
+          <div class="pathway-card-desc">Maintenance requests, lease questions, rent info</div>
+        </div>
+        <div class="pathway-card" onclick="pathwaySelect('owner')">
+          <div class="pathway-card-icon">📊</div>
+          <div class="pathway-card-label">I'm a Property Owner</div>
+          <div class="pathway-card-desc">Management services, fees, performance track record</div>
+        </div>
+        <div class="pathway-card" onclick="pathwaySelect('buyer')">
+          <div class="pathway-card-icon">🏡</div>
+          <div class="pathway-card-label">I'm Buying or Selling</div>
+          <div class="pathway-card-desc">Listings, market reports, home valuation</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Problem-led intro -->
   <section class="problem-section">
@@ -1285,6 +1424,14 @@ input[type="checkbox"] { display: none; }
     </div>
   </div>
 
+  <!-- Transition to dashboard -->
+  <div class="section-transition">
+    <div class="section-transition-eyebrow">Now here's what you see</div>
+    <div class="section-transition-headline">One dashboard. Your pipeline, properties, analytics, and automation.</div>
+    <div class="section-transition-sub">Like what you see? Flip to the owner side.</div>
+    <button class="btn-transition" onclick="switchMode('owner')">Open Your Dashboard →</button>
+  </div>
+
   <!-- Footer -->
   <footer class="cv-footer">
     <div class="cv-footer-logo" id="footerLogo">🏠 Apex Home Solutions</div>
@@ -1380,6 +1527,13 @@ input[type="checkbox"] { display: none; }
         <div id="automationPanel"></div>
       </div>
 
+      <!-- Dashboard bottom CTA -->
+      <div class="dash-bottom-cta" id="dashBottomCta">
+        <h3 id="dashCtaTitle">This was built for Apex Home Solutions.</h3>
+        <p>Want the real thing for your business? Let's talk — 15 minutes, no pressure.</p>
+        <a class="dash-cta-btn" href="mailto:krevio@krevio.net?subject=I want to see this for my business">Let's Talk →</a>
+      </div>
+
     </main>
   </div>
 </div>
@@ -1397,6 +1551,7 @@ input[type="checkbox"] { display: none; }
       <button class="chat-close-btn" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies" id="chatQuickReplies" style="display:none;padding:0 12px 8px;"></div>
     <div class="chat-voice-label" id="chatVoiceLabel"></div>
     <div class="chat-input-row">
       <input class="chat-input" id="chatInput" type="text" placeholder="Ask about our services..." data-ph-en="Ask about our services..." data-ph-es="Pregunta sobre nuestros servicios..." onkeydown="if(event.key==='Enter')sendChat()">
@@ -1601,14 +1756,57 @@ let currentLang = 'en';
 ═══════════════════════════════════════════ */
 function applyConfig() {
   const el = (id) => document.getElementById(id);
-  if (el('barTitle'))       el('barTitle').textContent      = CONFIG.businessName;
-  if (el('dashTitle'))      el('dashTitle').textContent     = CONFIG.businessName + ' — Overview';
-  if (el('chatHeaderName')) el('chatHeaderName').textContent = CONFIG.businessName;
-  if (el('footerLogo'))     el('footerLogo').textContent    = CONFIG.emoji + ' ' + CONFIG.businessName;
-  if (el('footerPhone'))    el('footerPhone').textContent   = '📞 ' + CONFIG.phone;
-  if (el('langToggle'))     el('langToggle').style.display  = CONFIG.hasLanguageToggle ? '' : 'none';
+  if (el('barTitle'))        el('barTitle').textContent       = CONFIG.businessName;
+  if (el('dashTitle'))       el('dashTitle').textContent      = CONFIG.businessName + ' — Overview';
+  if (el('chatHeaderName'))  el('chatHeaderName').textContent = CONFIG.businessName;
+  if (el('footerLogo'))      el('footerLogo').textContent     = CONFIG.emoji + ' ' + CONFIG.businessName;
+  if (el('footerPhone'))     el('footerPhone').textContent    = '📞 ' + CONFIG.phone;
+  if (el('dashCtaTitle'))    el('dashCtaTitle').textContent   = 'This was built for ' + CONFIG.businessName + '.';
+  if (el('langToggle'))      el('langToggle').style.display   = CONFIG.hasLanguageToggle ? '' : 'none';
+  // Context banner business name
+  const banner = el('contextBanner');
+  if (banner) banner.innerHTML = banner.innerHTML.replace('Apex Home Solutions', CONFIG.businessName);
   document.title = `${CONFIG.businessName} — ${CONFIG.city} ${CONFIG.state} | Property Management & Real Estate`;
 }
+
+/* ═══════════════════════════════════════════
+   CONTEXT BANNER
+═══════════════════════════════════════════ */
+function dismissBanner() {
+  const banner = document.getElementById('contextBanner');
+  const bar    = document.getElementById('demoBar');
+  if (banner) banner.classList.add('hidden');
+  if (bar)    bar.classList.add('banner-hidden');
+  // Adjust view padding
+  ['customerView','ownerView'].forEach(id => {
+    const v = document.getElementById(id);
+    if (v) v.style.paddingTop = '44px';
+  });
+  localStorage.setItem('krevio-re-banner', 'dismissed');
+}
+
+/* ═══════════════════════════════════════════
+   AUDIENCE PATHWAY SELECT
+═══════════════════════════════════════════ */
+function pathwaySelect(audience) {
+  // Smooth scroll to relevant section
+  const targets = { renter: 'portfolio', tenant: 'booking', owner: 'services', buyer: 'portfolio' };
+  const target = document.getElementById(targets[audience] || 'services');
+  if (target) target.scrollIntoView({ behavior: 'smooth' });
+  // Open chatbot with context pre-set
+  if (!chatOpen) toggleChat();
+  chatContext = audience;
+  // If chatbot is freshly initialized, replace quick replies with context-specific ones
+  setTimeout(() => setChatContext(audience), chatInitialized ? 0 : 400);
+}
+
+let chatContext = null;
+const AUDIENCE_GREETINGS = {
+  renter:  { label: "I'm looking for a rental", reply: "Great! I can help you find available properties and schedule showings. What area and size are you looking for in DFW?" },
+  tenant:  { label: "I'm a current tenant", reply: "Hi! For maintenance requests, please describe the issue and I'll log it right away. You can also ask about your lease or rent payment." },
+  owner:   { label: "I'm a property owner", reply: "Welcome! I can tell you about our property management services, fees, and track record in DFW. What would you like to know?" },
+  buyer:   { label: "I'm buying or selling a home", reply: "Happy to help! I can show you active listings, discuss market conditions, or schedule a home valuation. What are you looking for?" }
+};
 
 /* ═══════════════════════════════════════════
    MODE SWITCH
@@ -2156,11 +2354,51 @@ function toggleChat() {
     chatInitialized = true;
     const greeting = currentLang === 'es'
       ? TRANS_ES.chatGreeting
-      : `Hi! I'm the AI assistant for ${CONFIG.businessName}. 🏠 I can help with property management questions, scheduling a showing, remodeling estimates, or anything else. What can I help you with?`;
+      : `Hi! I'm the AI assistant for ${CONFIG.businessName}. How can I help you today?`;
     addChatMessage('bot', greeting);
+    // Show audience quick replies
+    if (!chatContext) showQuickReplies();
     initSpeechRecognition();
   }
   if (chatOpen) setTimeout(() => document.getElementById('chatInput')?.focus(), 50);
+}
+
+function showQuickReplies() {
+  const qrEl = document.getElementById('chatQuickReplies');
+  if (!qrEl) return;
+  const options = [
+    { emoji: '🏠', label: "I'm looking for a rental",  audience: 'renter' },
+    { emoji: '🔧', label: "I'm a current tenant",       audience: 'tenant' },
+    { emoji: '📊', label: "I'm a property owner",       audience: 'owner'  },
+    { emoji: '🏡', label: "I'm buying or selling",      audience: 'buyer'  }
+  ];
+  qrEl.innerHTML = options.map(o =>
+    `<button class="chat-qr-btn" onclick="selectQuickReply('${o.audience}')">${o.emoji} ${o.label}</button>`
+  ).join('');
+  qrEl.style.display = 'flex';
+  qrEl.style.flexDirection = 'column';
+  qrEl.style.gap = '6px';
+}
+
+function selectQuickReply(audience) {
+  const qrEl = document.getElementById('chatQuickReplies');
+  if (qrEl) qrEl.style.display = 'none';
+  chatContext = audience;
+  const info = AUDIENCE_GREETINGS[audience];
+  if (!info) return;
+  addChatMessage('user', info.label);
+  chatHistory.push({ role: 'user', text: info.label });
+  // Use the pre-set contextual reply immediately, then follow up with API
+  addChatMessage('bot', info.reply);
+  chatHistory.push({ role: 'model', text: info.reply });
+}
+
+function setChatContext(audience) {
+  const qrEl = document.getElementById('chatQuickReplies');
+  if (qrEl) qrEl.style.display = 'none';
+  if (!chatHistory.length) {
+    selectQuickReply(audience);
+  }
 }
 
 function addChatMessage(role, text) {
@@ -2411,6 +2649,22 @@ document.addEventListener('DOMContentLoaded', function() {
   // Language
   const savedLang = localStorage.getItem('krevio-realestate-lang') || 'en';
   if (savedLang === 'es') applyLang('es');
+
+  // Context banner — restore dismissed state
+  if (localStorage.getItem('krevio-re-banner') === 'dismissed') {
+    const banner = document.getElementById('contextBanner');
+    const bar    = document.getElementById('demoBar');
+    if (banner) banner.classList.add('hidden');
+    if (bar)    bar.classList.add('banner-hidden');
+    ['customerView','ownerView'].forEach(id => {
+      const v = document.getElementById(id);
+      if (v) v.style.paddingTop = '44px';
+    });
+  }
+
+  // Show lang toggle on customer view
+  const langToggle = document.getElementById('langToggle');
+  if (langToggle && CONFIG.hasLanguageToggle) langToggle.style.display = '';
 
   // Render customer view content
   renderServices();

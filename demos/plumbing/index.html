@@ -611,6 +611,9 @@ body {
 }
 .chat-msg-bot .chat-bubble-msg { background: var(--bg2); color: var(--t0); border-radius: 4px 14px 14px 14px; }
 .chat-msg-user .chat-bubble-msg { background: var(--accent); color: var(--bg); border-radius: 14px 14px 4px 14px; }
+.chat-quick-replies { display: flex; flex-direction: column; gap: 6px; padding: 0 14px 10px; }
+.chat-qr-btn { text-align: left; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; font-size: 12px; font-weight: 600; color: var(--t0); cursor: pointer; font-family: var(--font-body); transition: all 0.15s; }
+.chat-qr-btn:hover { border-color: var(--accent); background: var(--accentS); color: var(--accent); }
 .chat-lead-score { display: flex; justify-content: center; margin: 6px 0; }
 .chat-score-bar { height: 3px; background: var(--bg3); border-radius: 2px; flex: 1; overflow: hidden; }
 .chat-score-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.5s; }
@@ -1144,8 +1147,8 @@ body {
   </div>
   <div class="demo-bar-spacer"></div>
   <div class="demo-bar-toggle">
-    <button class="demo-bar-btn active" id="btnCustomer" onclick="switchView('customer')">Customer View</button>
-    <button class="demo-bar-btn" id="btnOwner" onclick="switchView('owner')">Owner Dashboard</button>
+    <button class="demo-bar-btn active" id="btnCustomer" onclick="switchView('customer')">Your Website</button>
+    <button class="demo-bar-btn" id="btnOwner" onclick="switchView('owner')">Your Dashboard</button>
   </div>
   <button class="lang-toggle" id="langToggle" onclick="toggleLang()" aria-label="Toggle language"><span id="langEN" class="active-lang">EN</span> | <span id="langES">ES</span></button>
   <button class="demo-bar-theme" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
@@ -1459,6 +1462,7 @@ body {
     </div>
   </div>
   <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-quick-replies" id="chatQuickReplies" style="display:none;"></div>
   <div class="chat-voice-label" id="chatVoiceLabel" style="display:none;"></div>
   <div class="chat-input-row">
     <input class="chat-input" id="chatInput" placeholder="Ask about a service or emergency..." onkeydown="if(event.key==='Enter')sendChat()">
@@ -3024,9 +3028,43 @@ function toggleChat() {
     chatInitialized = true;
     const greeting = currentLang === 'es'
       ? TRANS_ES.chatGreeting
-      : `Hi! I'm here for ${CONFIG.businessName}. 🔧 Do you have a plumbing emergency, or are you looking to schedule a service?`;
+      : `Hi! I'm the AI assistant for ${CONFIG.businessName}. How can I help you?`;
     addBotMsg(greeting);
+    showPlumbingQuickReplies();
   }
+}
+
+function showPlumbingQuickReplies() {
+  const qrEl = document.getElementById('chatQuickReplies');
+  if (!qrEl) return;
+  qrEl.innerHTML = [
+    { emoji: '🚨', label: "It's an emergency — I need help now", key: 'emergency' },
+    { emoji: '📅', label: "I need to schedule a service",         key: 'schedule'  },
+    { emoji: '💰', label: "I need a price estimate",              key: 'estimate'  },
+    { emoji: '❓', label: "I have a question",                    key: 'question'  }
+  ].map(o =>
+    `<button class="chat-qr-btn" onclick="selectPlumbingReply('${o.key}')">${o.emoji} ${o.label}</button>`
+  ).join('');
+  qrEl.style.display = 'flex';
+}
+
+function selectPlumbingReply(key) {
+  const qrEl = document.getElementById('chatQuickReplies');
+  if (qrEl) qrEl.style.display = 'none';
+  const responses = {
+    emergency: { user: "🚨 It's an emergency", bot: "Understood — this is our top priority. Call us now at " + CONFIG.phone + " for immediate dispatch. If you prefer to type, describe the issue and I'll alert our on-call tech right away." },
+    schedule:  { user: "📅 I need to schedule a service", bot: "Happy to help schedule! What type of service do you need — drain cleaning, water heater, leak repair, or something else? And what area are you in?" },
+    estimate:  { user: "💰 I need a price estimate", bot: "Sure! Estimates depend on the job. Most drain cleanings run $120–$200, water heater replacements $800–$1,400. What's the issue — I can give you a ballpark." },
+    question:  { user: "❓ I have a question", bot: "Of course — what's on your mind? I can help with service areas, availability, pricing, licensing, or anything else." }
+  };
+  const r = responses[key];
+  if (!r) return;
+  addUserMsg(r.user);
+  chatHistory.push({ role: 'user', text: r.user });
+  setTimeout(() => {
+    addBotMsg(r.bot);
+    chatHistory.push({ role: 'model', text: r.bot });
+  }, 300);
 }
 
 function addBotMsg(text) {
