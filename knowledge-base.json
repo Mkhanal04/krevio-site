@@ -4,7 +4,7 @@
     "tagline": "We build complete online systems for local service businesses",
     "location": "Dallas-Fort Worth, Texas",
     "founder": "Milan Khanal",
-    "website": "krevio.dev"
+    "website": "krevio.net"
   },
   "services": {
     "core_build": {
@@ -49,19 +49,18 @@
   ],
   "industries_served": [
     "Landscaping",
-    "Real Estate",
+    "Real Estate / Property Management",
     "Plumbing",
     "HVAC",
-    "Painting",
-    "Electrical",
-    "Roofing",
+    "Remodeling / General Contractor",
     "Any local service business"
   ],
   "demos_available": {
     "landscaping": { "url": "/demos/landscaping/", "highlights": "Booking, seasonal follow-ups, before/after gallery" },
     "realestate": { "url": "/demos/realestate/", "highlights": "Project portfolios, multi-service booking" },
     "plumbing": { "url": "/demos/plumbing/", "highlights": "Emergency routing, 24/7 service, priority booking" },
-    "hvac": { "url": "/demos/hvac/", "highlights": "System tracking, maintenance plans, seasonal campaigns" }
+    "hvac": { "url": "/demos/hvac/", "highlights": "System tracking, maintenance plans, seasonal campaigns" },
+    "remodeling": { "url": "/demos/remodeling/", "highlights": "Project portfolio, estimate requests, before/after gallery" }
   },
   "differentiators": [
     "vs Thumbtack/Angi: You pay $500-$2,000/mo for shared leads with 10-20% close rates. With Krevio, you own your leads exclusively through your own website.",

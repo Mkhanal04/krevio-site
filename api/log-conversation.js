@@ -1,6 +1,6 @@
 const ALLOWED_ORIGINS = [
-  'https://krevio.dev',
-  'https://www.krevio.dev',
+  'https://krevio.net',
+  'https://www.krevio.net',
   'https://krevio-site.vercel.app',
   'http://localhost:3000',
   'http://localhost:5500',
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
     lead_captured: Boolean(leadCaptured),
     language: sanitize(language || 'en', 10),
     duration_seconds: Math.min(Math.max(Number(durationSeconds) || 0, 0), 86400),
-    source: 'krevio.dev',
+    source: 'krevio.net',
     user_agent: (req.headers['user-agent'] || '').slice(0, 500),
     created_at: new Date().toISOString()
   };

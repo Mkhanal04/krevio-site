@@ -250,8 +250,8 @@ Only include fields in qualificationData that you have collected so far. Set unk
 export default async function handler(req, res) {
   // CORS headers — restrict to known origins
   const ALLOWED_ORIGINS = [
-    'https://krevio.dev',
-    'https://www.krevio.dev',
+    'https://krevio.net',
+    'https://www.krevio.net',
     'https://krevio-site.vercel.app',
     'http://localhost:3000',
     'http://localhost:5500',

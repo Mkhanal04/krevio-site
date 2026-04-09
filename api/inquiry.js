@@ -1,6 +1,6 @@
 const ALLOWED_ORIGINS = [
-  'https://krevio.dev',
-  'https://www.krevio.dev',
+  'https://krevio.net',
+  'https://www.krevio.net',
   'https://krevio-site.vercel.app',
   'http://localhost:3000',
   'http://localhost:5500',
@@ -47,7 +47,7 @@ export default async function handler(req, res) {
     business_name: sanitize(body.businessName || ''),
     industry: sanitize(industry),
     additional_notes: sanitize(body.additionalNotes || ''),
-    source: ['krevio.dev', 'krevio-chatbot', 'krevio-quote-flow'].includes(body.source) ? body.source : 'krevio.dev',
+    source: ['krevio.net', 'krevio-chatbot', 'krevio-quote-flow'].includes(body.source) ? body.source : 'krevio.net',
     created_at: new Date().toISOString()
   };
 
@@ -86,7 +86,7 @@ export default async function handler(req, res) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          content: `🔔 **New Krevio Inquiry${inquiry.source !== 'krevio.dev' ? ` (via ${inquiry.source === 'krevio-chatbot' ? 'Chatbot' : 'Quote Flow'})` : ''}**\n**Name:** ${inquiry.name}\n**Email:** ${inquiry.email}\n**Industry:** ${inquiry.industry}\n**Business:** ${inquiry.business_name || 'N/A'}\n**Phone:** ${inquiry.phone || 'N/A'}\n**Source:** ${inquiry.source}`
+          content: `🔔 **New Krevio Inquiry${inquiry.source !== 'krevio.net' ? ` (via ${inquiry.source === 'krevio-chatbot' ? 'Chatbot' : 'Quote Flow'})` : ''}**\n**Name:** ${inquiry.name}\n**Email:** ${inquiry.email}\n**Industry:** ${inquiry.industry}\n**Business:** ${inquiry.business_name || 'N/A'}\n**Phone:** ${inquiry.phone || 'N/A'}\n**Source:** ${inquiry.source}`
         }),
         signal: AbortSignal.timeout(3000)
       });

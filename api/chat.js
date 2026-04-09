@@ -2,8 +2,8 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 
 const ALLOWED_ORIGINS = [
-  'https://krevio.dev',
-  'https://www.krevio.dev',
+  'https://krevio.net',
+  'https://www.krevio.net',
   'https://krevio-site.vercel.app',
   'http://localhost:3000',
   'http://localhost:5500',
@@ -30,7 +30,7 @@ function checkRateLimit(ip) {
 let systemPrompt = '';
 try {
   const kb = JSON.parse(readFileSync(join(process.cwd(), 'knowledge-base.json'), 'utf-8'));
-  systemPrompt = `You are Krevio's AI assistant on krevio.dev. You help prospects understand what Krevio builds and guide them toward getting a custom quote.
+  systemPrompt = `You are Krevio's AI assistant on krevio.net. You help prospects understand what Krevio builds and guide them toward getting a custom quote.
 
 PERSONALITY:
 - Friendly, confident, concise. Like a knowledgeable sales rep, not a corporate FAQ bot.
