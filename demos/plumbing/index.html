@@ -3,11 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lone Star Plumbing — Plano TX | 24/7 Emergency Plumber</title>
-<meta name="description" content="Plano's trusted 24/7 plumber. Emergency repairs, drain cleaning, water heaters, repiping, and more. 4.9★ from 150+ reviews. Licensed & insured.">
+<title>Lone Star Plumbing — Celina TX | 24/7 Emergency Plumber</title>
+<meta name="description" content="Celina's trusted 24/7 plumber. Emergency repairs, drain cleaning, water heaters, repiping, and more. 4.9★ from 150+ reviews. Licensed & insured.">
+<link rel="stylesheet" href="/css/krevio-tokens.css">
+<link rel="stylesheet" href="/css/industry-overrides.css">
+<link rel="stylesheet" href="/css/chat-widget.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script src="/js/chat-widget.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 
 <!-- Schema markup injected dynamically from CONFIG — see generateAndInjectSchema() below -->
@@ -508,61 +512,12 @@ body {
 /* ═══════════════════════════════════════════
    CHATBOT
 ═══════════════════════════════════════════ */
-.chat-bubble {
-  position: fixed; bottom: 24px; right: 24px; z-index: 300;
-  width: 52px; height: 52px; border-radius: 50%;
-  background: var(--accent); color: var(--bg);
-  border: none; font-size: 24px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-  cursor: pointer; transition: transform 0.15s;
-  display: flex; align-items: center; justify-content: center;
-}
-.chat-bubble:hover { transform: scale(1.08); }
-.chat-window {
-  position: fixed; bottom: 88px; right: 24px; z-index: 300;
-  width: 340px; height: 480px;
-  background: var(--bg1); border: 1px solid var(--border);
-  border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  display: flex; flex-direction: column;
-  transition: opacity 0.2s, transform 0.2s;
-}
-.chat-window.hidden { opacity: 0; pointer-events: none; transform: translateY(10px) scale(0.97); }
-.chat-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-.chat-header-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-.chat-header-name { font-size: 13px; font-weight: 700; color: var(--t0); }
-.chat-header-status { font-size: 11px; color: var(--accent); }
-.chat-close { background: none; border: none; color: var(--t2); font-size: 18px; cursor: pointer; padding: 8px; min-width: 36px; min-height: 36px; display: flex; align-items: center; justify-content: center; }
-.chat-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-.chat-msg { max-width: 82%; }
-.chat-msg-bot { align-self: flex-start; }
-.chat-msg-user { align-self: flex-end; }
-.chat-bubble-msg {
-  padding: 10px 14px; border-radius: 14px; font-size: 13px; line-height: 1.5;
-}
-.chat-msg-bot .chat-bubble-msg { background: var(--bg2); color: var(--t0); border-radius: 4px 14px 14px 14px; }
-.chat-msg-user .chat-bubble-msg { background: var(--accent); color: var(--bg); border-radius: 14px 14px 4px 14px; }
-.chat-quick-replies { display: flex; flex-direction: column; gap: 6px; padding: 0 14px 10px; }
-.chat-qr-btn { text-align: left; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; font-size: 12px; font-weight: 600; color: var(--t0); cursor: pointer; font-family: var(--font-body); transition: all 0.15s; }
-.chat-qr-btn:hover { border-color: var(--accent); background: var(--accentS); color: var(--accent); }
+/* Chat widget styles now in /css/chat-widget.css */
 .chat-lead-score { display: flex; justify-content: center; margin: 6px 0; }
 .chat-score-bar { height: 3px; background: var(--bg3); border-radius: 2px; flex: 1; overflow: hidden; }
 .chat-score-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.5s; }
 .chat-score-label { font-size: 10px; color: var(--t2); }
-.chat-input-row { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
-.chat-input { flex: 1; padding: 9px 12px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; color: var(--t0); font-size: 13px; }
-.chat-input:focus { outline: none; border-color: var(--accent); }
-.chat-send { padding: 9px 14px; background: var(--accent); color: var(--bg); border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
-.chat-mic { padding: 9px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; color: var(--t2); cursor: pointer; display: flex; align-items: center; justify-content: center; min-width: 36px; min-height: 36px; transition: all 0.15s; }
-.chat-mic:hover { border-color: var(--accent); color: var(--accent); }
-.chat-mic.recording { border-color: var(--red); color: var(--red); animation: micPulse 1.5s infinite; }
-@keyframes micPulse { 0%, 100% { box-shadow: none; } 50% { box-shadow: 0 0 0 4px var(--redS); } }
-.chat-voice-toggle { background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--t2); cursor: pointer; padding: 4px 8px; font-size: 14px; min-width: 32px; min-height: 32px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
-.chat-voice-toggle:hover { border-color: var(--accent); color: var(--accent); }
-.chat-voice-toggle.active { border-color: var(--accent); color: var(--accent); background: var(--accentS); }
-.chat-header-right { display: flex; gap: 6px; align-items: center; margin-left: auto; }
-.chat-msg-bot.speaking { animation: speakPulse 1.5s ease-in-out infinite; }
-@keyframes speakPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.85; } }
-.chat-voice-label { font-size: 11px; color: var(--t2); text-align: center; padding: 0 12px 4px; }
+/* Voice/mic styles now in /css/chat-widget.css */
 
 /* ═══════════════════════════════════════════
    SCROLL REVEAL
@@ -878,8 +833,8 @@ body {
   .receipt-ai-insight { padding: 12px 14px; }
 
   /* --- Chatbot: wider on tablet --- */
-  .chat-window { width: 320px; right: 12px; bottom: 80px; }
-  .chat-bubble { bottom: 16px; right: 16px; }
+  .chat-panel { width: 320px; }
+  .chat-widget { right: 12px; bottom: 16px; }
 }
 
 /* ═══════════════════════════════════════════
@@ -1031,8 +986,9 @@ body {
   .kb-a { font-size: 12px; }
 
   /* --- Chatbot: full-width on phone --- */
-  .chat-window { width: calc(100vw - 24px); right: 12px; bottom: 72px; height: 420px; }
-  .chat-bubble { width: 46px; height: 46px; font-size: 20px; bottom: 12px; right: 12px; }
+  .chat-panel { width: calc(100vw - 24px); max-height: 420px; }
+  .chat-widget { right: 12px; bottom: 12px; }
+  .chat-bubble-btn { width: 46px; height: 46px; font-size: 20px; }
 
   /* --- AI summary --- */
   .ai-summary-card { padding: 16px; }
@@ -1062,7 +1018,7 @@ body {
   .dispatch-stat { padding: 8px; }
   .dispatch-stat-value { font-size: 16px; }
   .booking-card { padding: 18px 14px; }
-  .chat-window { height: 380px; }
+  .chat-panel { max-height: 380px; }
 }
 </style>
 </head>
@@ -1377,28 +1333,38 @@ body {
 
 </div><!-- /views wrapper -->
 
-<!-- CHATBOT -->
-<button class="chat-bubble" id="chatBubble" onclick="toggleChat()" aria-label="Open chat">💬</button>
-<div class="chat-window hidden" id="chatWindow">
-  <div class="chat-header">
-    <div class="chat-header-dot"></div>
-    <div>
-      <div class="chat-header-name" id="chatHeaderName">Lone Star Plumbing</div>
-      <div class="chat-header-status">● Online 24/7</div>
+<!-- CHATBOT (UI managed by /js/chat-widget.js) -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-icon">🚰</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name" id="chatHeaderName">Lone Star Plumbing</div>
+        <div class="chat-header-status">
+          <span class="chat-header-status-text">● Online 24/7</span>
+          <div class="chat-eq-bars"><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div></div>
+        </div>
+      </div>
+      <button class="chat-voice-toggle" id="voiceToggle" onclick="toggleVoiceMode()" title="Toggle voice" aria-label="Toggle voice">🔇</button>
+      <button class="chat-close-btn" onclick="toggleChat()">✕</button>
     </div>
-    <div class="chat-header-right">
-      <button class="chat-voice-toggle" id="voiceToggle" onclick="toggleVoiceMode()" title="Toggle voice responses" aria-label="Toggle voice responses">🔊</button>
-      <button class="chat-close" onclick="toggleChat()">×</button>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies" id="chatQuickReplies" style="display:none;"></div>
+    <div class="chat-voice-label" id="chatVoiceLabel"></div>
+    <div class="chat-input-row">
+      <div class="voice-active-panel">
+        <button class="stop-btn" onclick="stopVoicePlayback()">STOP LISTENING</button>
+      </div>
+      <div class="chat-input-wrapper">
+        <input class="chat-input" id="chatInput" placeholder="Ask about a service or emergency..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="chat-send-btn" onclick="sendChat()">✈</button>
+        <button class="chat-mic" id="chatMic" onclick="toggleMic()" title="Voice input" aria-label="Voice input">🎤</button>
+      </div>
     </div>
   </div>
-  <div class="chat-messages" id="chatMessages"></div>
-  <div class="chat-quick-replies" id="chatQuickReplies" style="display:none;"></div>
-  <div class="chat-voice-label" id="chatVoiceLabel" style="display:none;"></div>
-  <div class="chat-input-row">
-    <input class="chat-input" id="chatInput" placeholder="Ask about a service or emergency..." onkeydown="if(event.key==='Enter')sendChat()">
-    <button class="chat-mic" id="chatMic" onclick="toggleMic()" title="Voice input" aria-label="Voice input" style="display:none;">🎤</button>
-    <button class="chat-send" onclick="sendChat()">Send</button>
-  </div>
+  <button class="chat-bubble-btn" id="chatBubble" onclick="toggleChat()" aria-label="Open chat">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  </button>
 </div>
 
 <!-- TOAST -->
@@ -1418,16 +1384,16 @@ const CONFIG = {
   businessType:      'plumbing',       // API param + data-industry CSS class
   schemaType:        'Plumber',        // schema.org @type
   emoji:             '🚰',
-  tagline:           'Licensed plumbers serving Plano, Richardson & East DFW',
+  tagline:           'Licensed plumbers serving Celina, Prosper & North DFW',
 
   // ── Contact ───────────────────────────────
   phone:       '(469) 555-0789',
   phoneRaw:    '4695550789',
-  address:     '3200 W Parker Rd',
-  city:        'Plano',
+  address:     '100 N Preston Rd',
+  city:        'Celina',
   state:       'TX',
-  zip:         '75074',
-  areasServed: ['Plano', 'Richardson', 'Murphy', 'Wylie', 'Garland'],
+  zip:         '75009',
+  areasServed: ['Celina', 'Prosper', 'McKinney', 'Allen', 'Frisco', 'Anna'],
   hours:       '24/7 Emergency',
   priceRange:  '$$',
 
@@ -1444,6 +1410,7 @@ const CONFIG = {
   hasReceipts:         true,  // Receipts & Expenses tab
   hasGallery:          true,  // Before/After gallery in customer view
   hasLanguageToggle:   true,  // EN/ES language toggle in demo bar
+  hasVoice:            true,  // TTS + STT via chat-widget.js
 
   // ── GEO / Schema ──────────────────────────
   // Fill these in during client onboarding. Leave empty strings if unknown.
@@ -3116,8 +3083,8 @@ let chatInitialized = false;
 
 function toggleChat() {
   chatOpen = !chatOpen;
-  const win = document.getElementById('chatWindow');
-  win.classList.toggle('hidden', !chatOpen);
+  const panel = document.getElementById('chatPanel');
+  panel.classList.toggle('open', chatOpen);
   if (chatOpen && !chatInitialized) {
     chatInitialized = true;
     const greeting = currentLang === 'es'
@@ -3168,7 +3135,7 @@ function addBotMsg(text) {
   div.innerHTML = `<div class="chat-bubble-msg">${escapeHtml(text)}</div>`;
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
-  speakText(text, div);
+  if (typeof speakText === 'function') speakText(text);
 }
 
 function addUserMsg(text) {
@@ -3264,141 +3231,8 @@ async function sendChat() {
   }
 }
 
-/* ═══════════════════════════════════════════
-   VOICE — TTS + STT
-═══════════════════════════════════════════ */
-let voiceMode = false;
-let recognition = null;
-let isRecording = false;
-
-function getBestVoice() {
-  const voices = speechSynthesis.getVoices();
-  if (!voices.length) return null;
-  // Priority list: modern natural/neural voices first, then best platform defaults
-  // Each entry: partial name match (case-insensitive)
-  const priority = [
-    // Chrome neural voices (best quality available in browser)
-    'Google UK English Female',
-    'Google US English',
-    // macOS enhanced/premium voices
-    'Samantha',
-    'Karen',
-    'Moira',
-    'Tessa',
-    // Windows neural voices (Windows 11+)
-    'Microsoft Jenny',
-    'Microsoft Aria',
-    'Microsoft Guy',
-    // Android
-    'English United States',
-    'en-us-x-sfg',
-  ];
-  for (const name of priority) {
-    const match = voices.find(v => v.name.includes(name) && v.lang.startsWith('en'));
-    if (match) return match;
-  }
-  // Last resort: any English voice, prefer female (generally clearer for TTS)
-  return voices.find(v => v.lang.startsWith('en-US')) || voices.find(v => v.lang.startsWith('en')) || voices[0];
-}
-
-function speakText(text, msgEl) {
-  if (!voiceMode || !window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  // Strip emoji/symbols that TTS reads out literally
-  const cleanText = text.replace(/[\u{1F000}-\u{1FFFF}]/gu, '').replace(/[✓✅🚨⚠↔●○📸📦📅🕐🕑🕚💧🔥🔧🏠🚰★·]/g, '').replace(/\s{2,}/g, ' ').trim();
-  const utterance = new SpeechSynthesisUtterance(cleanText);
-  utterance.rate = 1.05;  // Slightly faster feels more natural
-  utterance.pitch = 1.0;
-  const voice = getBestVoice();
-  if (voice) utterance.voice = voice;
-  if (msgEl) {
-    utterance.onstart = () => msgEl.classList.add('speaking');
-    utterance.onend = () => msgEl.classList.remove('speaking');
-  }
-  speechSynthesis.speak(utterance);
-}
-
-function toggleVoiceMode() {
-  voiceMode = !voiceMode;
-  const btn = document.getElementById('voiceToggle');
-  btn.classList.toggle('active', voiceMode);
-  btn.textContent = voiceMode ? '🔊' : '🔇';
-  if (!voiceMode) window.speechSynthesis?.cancel();
-  showToast(voiceMode ? 'Voice responses ON' : 'Voice responses OFF');
-}
-
-let micSendTimer = null;
-
-function initSpeechRecognition() {
-  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRec) return;
-  const micBtn = document.getElementById('chatMic');
-  if (micBtn) micBtn.style.display = '';
-  recognition = new SpeechRec();
-  recognition.continuous = true;
-  recognition.interimResults = true;
-  recognition.lang = currentLang === 'es' ? 'es-US' : 'en-US';
-  recognition.onresult = (event) => {
-    let transcript = '';
-    for (let i = 0; i < event.results.length; i++) {
-      transcript += event.results[i][0].transcript;
-    }
-    document.getElementById('chatInput').value = transcript;
-    // Reset the send timer on every result — gives the user time to pause and continue
-    clearTimeout(micSendTimer);
-    const lastResult = event.results[event.results.length - 1];
-    if (lastResult.isFinal) {
-      // Wait 2 seconds after final result before sending — user may keep talking
-      micSendTimer = setTimeout(() => {
-        if (isRecording && document.getElementById('chatInput').value.trim()) {
-          stopMic();
-          sendChat();
-        }
-      }, 2000);
-    }
-  };
-  recognition.onerror = (e) => {
-    if (e.error !== 'no-speech') stopMic();
-  };
-  recognition.onend = () => {
-    // In continuous mode, browser may still fire onend (e.g. after long silence)
-    // If user is still "recording", restart — otherwise finalize
-    if (isRecording) {
-      const input = document.getElementById('chatInput').value.trim();
-      if (input) {
-        // User stopped talking with text in the box — send after brief delay
-        clearTimeout(micSendTimer);
-        micSendTimer = setTimeout(() => {
-          if (isRecording) { stopMic(); sendChat(); }
-        }, 1500);
-      } else {
-        // No speech detected at all, just stop
-        stopMic();
-      }
-    }
-  };
-}
-
-function toggleMic() {
-  if (isRecording) { stopMic(); return; }
-  if (!recognition) return;
-  isRecording = true;
-  const micBtn = document.getElementById('chatMic');
-  const label = document.getElementById('chatVoiceLabel');
-  micBtn.classList.add('recording');
-  if (label) { label.textContent = 'Listening...'; label.style.display = ''; }
-  try { recognition.start(); } catch(e) { stopMic(); }
-}
-
-function stopMic() {
-  isRecording = false;
-  clearTimeout(micSendTimer);
-  const micBtn = document.getElementById('chatMic');
-  const label = document.getElementById('chatVoiceLabel');
-  if (micBtn) micBtn.classList.remove('recording');
-  if (label) label.style.display = 'none';
-  try { recognition?.stop(); } catch(e) {}
-}
+/* Voice functions (speakText, toggleVoiceMode, toggleMic, stopMic, etc.)
+   are now provided by /js/chat-widget.js */
 
 /* ═══════════════════════════════════════════
    SCROLL REVEAL
@@ -3457,12 +3291,7 @@ function showToast(msg) {
   renderGallery();
   renderReviews();
   initScrollReveal();
-  initSpeechRecognition();
-  // Preload voices for TTS — Chrome loads voices async, so listen for the event
-  if (window.speechSynthesis) {
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
-  }
+  // Voice init handled by /js/chat-widget.js
 })();
 </script>
 </body>

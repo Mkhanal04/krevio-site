@@ -236,18 +236,15 @@ window.addEventListener('scroll', () => {
 const chatTrigger = document.getElementById('chat-trigger');
 const chatPanel = document.getElementById('chat-panel');
 const chatMessages = document.getElementById('chat-messages');
-const chatInput = document.getElementById('chat-input');
+const chatInput = document.getElementById('chatInput');
 const chatSend = document.getElementById('chat-send');
 const chatClose = document.getElementById('chat-close');
-const chatMic = document.getElementById('chat-mic');
-const voiceToggle = document.getElementById('voice-toggle');
-const chatVoiceLabel = document.getElementById('chat-voice-label');
+// chatMic, voiceToggle, and chatVoiceLabel are managed by /js/chat-widget.js
 const pricingChatLink = document.getElementById('pricing-chat-link');
 
 let chatHistory = [];
 let chatOpen = false;
 let chatWelcomed = false;
-let voiceMode = false;
 let chatSessionId = 'krevio-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
 let chatStartTime = null;
 let chatLeadCaptured = false;
@@ -454,10 +451,8 @@ async function sendMessage(text) {
       }
     }
 
-    // Voice mode: speak the response
-    if (voiceMode && window.speechSynthesis) {
-      speakText(reply, botMsg);
-    }
+    // Voice mode: speak the response (via chat-widget.js)
+    if (typeof speakText === 'function') speakText(reply);
   } catch (err) {
     removeTyping();
     addMessage("I'm having trouble connecting. Please try again or use the contact form below.", 'bot');
@@ -472,104 +467,9 @@ chatInput.addEventListener('keydown', (e) => {
   }
 });
 
-// ─── Voice: Text-to-Speech ───────────────────────────────────────────────────
-function speakText(text, msgEl) {
-  if (!window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-US';
-
-  // Prefer natural voice
-  const voices = window.speechSynthesis.getVoices();
-  const preferred = voices.find(v => v.name.includes('Google US English')) ||
-                    voices.find(v => v.lang.startsWith('en') && v.localService) ||
-                    voices[0];
-  if (preferred) utterance.voice = preferred;
-
-  if (msgEl) {
-    utterance.onstart = () => msgEl.classList.add('speaking');
-    utterance.onend = () => msgEl.classList.remove('speaking');
-  }
-  window.speechSynthesis.speak(utterance);
-}
-
-// ─── Voice: Speech-to-Text ───────────────────────────────────────────────────
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-let recognition = null;
-let isRecording = false;
-
-if (SpeechRecognition) {
-  chatMic.style.display = 'flex';
-  recognition = new SpeechRecognition();
-  recognition.lang = 'en-US';
-  recognition.continuous = false;
-  recognition.interimResults = true;
-
-  recognition.onresult = (event) => {
-    let transcript = '';
-    for (let i = event.resultIndex; i < event.results.length; i++) {
-      transcript += event.results[i][0].transcript;
-      if (event.results[i].isFinal) {
-        chatInput.value = transcript;
-        chatInput.style.color = '';
-        stopRecording();
-        sendMessage(transcript);
-      } else {
-        chatInput.value = transcript;
-        chatInput.style.color = 'var(--krevio-gray)';
-      }
-    }
-  };
-
-  recognition.onerror = (event) => {
-    console.warn('[Voice] Recognition error:', event.error);
-    stopRecording();
-  };
-
-  recognition.onend = () => {
-    if (isRecording) stopRecording();
-  };
-}
-
-function startRecording() {
-  if (!recognition) return;
-  isRecording = true;
-  chatMic.classList.add('recording');
-  chatVoiceLabel.textContent = 'Listening…';
-  chatVoiceLabel.style.display = 'block';
-  chatInput.value = '';
-  recognition.start();
-}
-
-function stopRecording() {
-  isRecording = false;
-  chatMic.classList.remove('recording');
-  chatVoiceLabel.style.display = 'none';
-  chatInput.style.color = '';
-  try { recognition?.stop(); } catch (e) { /* ignore */ }
-}
-
-chatMic.addEventListener('click', () => {
-  if (isRecording) {
-    stopRecording();
-  } else {
-    startRecording();
-  }
-});
-
-// Voice mode toggle
-voiceToggle.addEventListener('click', () => {
-  voiceMode = !voiceMode;
-  voiceToggle.classList.toggle('voice-active', voiceMode);
-  if (!voiceMode && window.speechSynthesis) {
-    window.speechSynthesis.cancel();
-  }
-});
-
-// Load voices (needed for some browsers)
-if (window.speechSynthesis) {
-  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
-}
+// Voice (TTS, STT, voice toggle, mic) is now handled by /js/chat-widget.js
+// sendChat wrapper for widget STT auto-send compatibility
+function sendChat() { sendMessage(chatInput.value); }
 
 // ─── Conversation Logging ────────────────────────────────────────────────────
 function extractSignals(messages) {

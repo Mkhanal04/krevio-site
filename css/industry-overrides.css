@@ -97,7 +97,9 @@
   --accent:          #9333EA;
   --accentS:         rgba(147,51,234,0.06);
   --accentB:         rgba(147,51,234,0.14);
-  --hero-bg:         linear-gradient(135deg, #3B0764 0%, #6D28D9 60%, #7C3AED 100%);
+  --hero-bg:         radial-gradient(120% 120% at 0% 100%, #3B0764 0%, #6D28D9 40%, transparent 40.5%),
+                     radial-gradient(200% 150% at 100% 0%, rgba(124,58,237,0.8) 0%, rgba(109,40,217,0.9) 30%, transparent 30.5%),
+                     #1E0A2E;
   --sidebar-active:      #9333EA;
   --sidebar-active-text: #FFFFFF;
   --btn-primary-color:   #3B0764;
@@ -106,7 +108,9 @@
   --accent:          #A855F7;
   --accentS:         rgba(168,85,247,0.08);
   --accentB:         rgba(168,85,247,0.18);
-  --hero-bg:         linear-gradient(135deg, #1E0A2E 0%, #3B0764 60%, #5B21B6 100%);
+  --hero-bg:         radial-gradient(120% 120% at 0% 100%, #1E0A2E 0%, #3B0764 40%, transparent 40.5%),
+                     radial-gradient(200% 150% at 100% 0%, rgba(91,33,182,0.8) 0%, rgba(59,7,100,0.9) 30%, transparent 30.5%),
+                     #09090B;
   --sidebar-active:      #A855F7;
   --sidebar-active-text: #09090B;
   --btn-primary-color:   #1E0A2E;

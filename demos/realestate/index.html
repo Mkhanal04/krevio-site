@@ -3,45 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apex Home Solutions — Frisco TX | Property Management & Real Estate</title>
-<meta name="description" content="Full-service property management, real estate, and remodeling in Frisco, Plano, McKinney & DFW. AI-powered systems, bilingual support, 4.8★ from 124 reviews.">
+<title>Latarryn Atkins — REALTOR® | KW Frisco | DFW Homes</title>
+<meta name="description" content="Buy, sell, or invest in DFW real estate with Latarryn Atkins, REALTOR® at Keller Williams Frisco. AI-powered home search, instant market analysis, 4.9★ from 87 reviews.">
 <link rel="stylesheet" href="/css/krevio-tokens.css">
 <link rel="stylesheet" href="/css/industry-overrides.css">
+<link rel="stylesheet" href="/css/chat-widget.css">
 <script defer src="/_vercel/insights/script.js"></script>
-
+<script src="/js/chat-widget.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "RealEstateAgent",
-  "name": "Apex Home Solutions",
-  "telephone": "(469) 555-0192",
+  "name": "Latarryn Atkins",
+  "telephone": "(972) 555-0147",
   "url": "https://krevio.net/demos/realestate",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "4200 Legacy Dr",
+    "streetAddress": "5700 Eldorado Pkwy",
     "addressLocality": "Frisco",
     "addressRegion": "TX",
-    "postalCode": "75034",
+    "postalCode": "75033",
     "addressCountry": "US"
   },
   "areaServed": ["Frisco", "Plano", "McKinney", "Allen", "Prosper", "Celina"],
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "124"
+    "ratingValue": "4.9",
+    "reviewCount": "87"
   },
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
       "opens": "08:00",
-      "closes": "18:00"
+      "closes": "19:00"
     },
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Saturday"],
+      "dayOfWeek": ["Sunday"],
       "opens": "09:00",
-      "closes": "14:00"
+      "closes": "17:00"
     }
   ]
 }
@@ -124,7 +125,7 @@
 
 /* ─── Customer view layout ─── */
 #customerView { padding-top: 74px; }
-#ownerView { padding-top: 74px; }
+#ownerView { display: none; padding-top: 74px; }
 
 /* ─── Audience pathways ─── */
 .pathway-section {
@@ -790,10 +791,10 @@ input[type="checkbox"] { display: none; }
   position: absolute; top: 8px; right: 8px;
   font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: var(--radius-full);
 }
-.prop-status-badge.occupied { background: rgba(22,163,74,0.2); color: #4ade80; border: 1px solid rgba(22,163,74,0.3); }
-.prop-status-badge.vacant { background: rgba(234,179,8,0.2); color: #fbbf24; border: 1px solid rgba(234,179,8,0.3); }
-.prop-status-badge.showing { background: rgba(147,51,234,0.2); color: #c084fc; border: 1px solid rgba(147,51,234,0.3); }
-.prop-status-badge.listing { background: rgba(37,99,235,0.2); color: #93c5fd; border: 1px solid rgba(37,99,235,0.3); }
+.prop-status-badge.active   { background: rgba(22,163,74,0.2);  color: #4ade80; border: 1px solid rgba(22,163,74,0.3); }
+.prop-status-badge.contract { background: rgba(234,179,8,0.2);  color: #fbbf24; border: 1px solid rgba(234,179,8,0.3); }
+.prop-status-badge.sold     { background: rgba(37,99,235,0.2);  color: #93c5fd; border: 1px solid rgba(37,99,235,0.3); }
+.prop-status-badge.prospect { background: rgba(147,51,234,0.2); color: #c084fc; border: 1px solid rgba(147,51,234,0.3); }
 .prop-body { padding: 16px; }
 .prop-address { font-size: 13px; font-weight: 700; color: var(--t0); margin-bottom: 4px; }
 .prop-city { font-size: 11px; color: var(--t2); margin-bottom: 12px; }
@@ -896,66 +897,6 @@ input[type="checkbox"] { display: none; }
 .auto-msg-table td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--t1); }
 .auto-msg-table tr:last-child td { border-bottom: none; }
 
-/* ─── Chatbot ─── */
-.chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: var(--z-chat); }
-.chat-panel {
-  display: none; width: 340px;
-  background: var(--bg1); border: 1px solid var(--border);
-  border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg);
-  overflow: hidden; flex-direction: column; max-height: 520px;
-  margin-bottom: 12px;
-}
-.chat-panel.open { display: flex; }
-.chat-header {
-  background: var(--hero-bg); padding: 14px 16px;
-  display: flex; align-items: center; gap: 10px;
-}
-.chat-header-icon { font-size: 1.4rem; }
-.chat-header-info { flex: 1; }
-.chat-header-name { font-size: 14px; font-weight: 700; color: white; }
-.chat-header-status { font-size: 11px; color: rgba(255,255,255,0.65); }
-.chat-voice-toggle {
-  background: none; border: 1px solid rgba(255,255,255,0.3); border-radius: var(--radius-md);
-  color: rgba(255,255,255,0.7); cursor: pointer; padding: 4px 8px; font-size: 14px;
-  min-width: 32px; min-height: 32px; display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s;
-}
-.chat-voice-toggle:hover, .chat-voice-toggle.active { border-color: white; color: white; background: rgba(255,255,255,0.1); }
-.chat-close-btn { background: rgba(255,255,255,0.15); border: none; border-radius: var(--radius-md); padding: 4px 8px; color: white; cursor: pointer; font-size: 12px; }
-.chat-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; max-height: 300px; }
-.chat-voice-label { font-size: 11px; color: var(--t2); text-align: center; padding: 0 12px 4px; display: none; }
-.chat-input-row { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; align-items: center; }
-.chat-input {
-  flex: 1; padding: 8px 12px; border-radius: var(--radius-full);
-  border: 1px solid var(--border); background: var(--bg2); color: var(--t0);
-  font-size: 13px; font-family: var(--font-body);
-}
-.chat-input:focus { outline: none; border-color: var(--accent); }
-.chat-mic {
-  display: none; background: none; border: 1px solid var(--border);
-  border-radius: 50%; width: 34px; height: 34px; font-size: 14px; cursor: pointer;
-  color: var(--t2); transition: all 0.15s; flex-shrink: 0;
-}
-.chat-mic:hover, .chat-mic.recording { border-color: var(--accent); color: var(--accent); background: var(--accentS); }
-.chat-send-btn {
-  padding: 8px 14px; background: var(--accent); color: white; border: none;
-  border-radius: var(--radius-full); font-size: 13px; font-weight: 700;
-  cursor: pointer; font-family: var(--font-body); transition: opacity 0.15s;
-}
-.chat-send-btn:hover { opacity: 0.9; }
-.chat-bubble-btn {
-  width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: white;
-  font-size: 1.4rem; border: none; box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-  cursor: pointer; transition: transform 0.15s;
-}
-.chat-bubble-btn:hover { transform: scale(1.05); }
-.msg-bubble {
-  max-width: 80%; padding: 10px 13px; font-size: 13px; line-height: 1.5;
-}
-.msg-bot { align-self: flex-start; background: var(--bg2); color: var(--t0); border-radius: 4px 12px 12px 12px; }
-.msg-user { align-self: flex-end; background: var(--accent); color: white; border-radius: 12px 4px 12px 12px; }
-.msg-thinking { font-size: 12px; color: var(--t2); padding: 4px 0; }
-
 /* ─── Scroll reveal ─── */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .reveal.revealed { opacity: 1; transform: translateY(0); }
@@ -1030,13 +971,43 @@ input[type="checkbox"] { display: none; }
   .geo-cta-title { font-size: 1.4rem; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
 }
+
+/* ─── Compliance: TCPA consent ─── */
+.tcpa-consent { margin-top: 4px; }
+.form-checkbox-label {
+  display: flex; align-items: flex-start; gap: 10px;
+  cursor: pointer; font-size: 12px; color: var(--t2); line-height: 1.5;
+}
+.form-checkbox-label input[type="checkbox"] {
+  width: 16px; height: 16px; min-width: 16px; margin-top: 2px;
+  accent-color: var(--accent); cursor: pointer;
+}
+
+/* ─── Compliance: Fair Housing chatbot badge ─── */
+.chat-fair-housing {
+  font-size: 10px; color: var(--t2); text-align: center;
+  padding: 6px 12px; border-top: 1px solid var(--border);
+  background: var(--bg2); font-family: var(--font-body);
+}
+
+/* ─── Compliance: Brokerage strip (inside footer) ─── */
+.compliance-strip {
+  margin-top: 16px; padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  font-size: 11px; color: var(--cv-footer-sub, rgba(255,255,255,0.5));
+  text-align: center; line-height: 1.8;
+}
+.compliance-strip .compliance-logo {
+  max-height: 28px; width: auto; margin: 0 auto 6px; display: block; opacity: 0.8;
+}
+.compliance-strip .compliance-disclaimer { font-style: italic; }
 </style>
 </head>
 <body>
 
 <!-- ═══════════════════ CONTEXT BANNER ═══════════════════ -->
 <div class="context-banner" id="contextBanner">
-  <span>✦ This is a preview built for <strong>Apex Home Solutions</strong> by Krevio</span>
+  <span>✦ This is a preview built for <strong>Latarryn Atkins</strong> by Krevio</span>
   <a href="https://krevio.net" target="_blank" rel="noopener">— Learn what Krevio does →</a>
   <button class="context-banner-dismiss" onclick="dismissBanner()" aria-label="Dismiss">×</button>
 </div>
@@ -1045,8 +1016,8 @@ input[type="checkbox"] { display: none; }
 <div class="demo-bar" id="demoBar">
   <span class="demo-badge">Demo</span>
   <div>
-    <div class="demo-bar-title" id="barTitle">Apex Home Solutions</div>
-    <div class="demo-bar-sub">Property Management & Real Estate — AI-Powered System</div>
+    <div class="demo-bar-title" id="barTitle">Latarryn Atkins</div>
+    <div class="demo-bar-sub">REALTOR® · KW Frisco · AI-Powered Website</div>
   </div>
   <div class="demo-bar-spacer"></div>
   <div class="demo-bar-toggle">
@@ -1073,15 +1044,15 @@ input[type="checkbox"] { display: none; }
   <section class="cv-hero">
     <div class="cv-hero-inner">
       <div class="cv-hero-text">
-        <h1 data-en="See What Your Business<br>Could Look Like" data-es="Así Podría Verse<br>Tu Negocio">See What Your Business<br>Could Look Like</h1>
-        <p class="cv-hero-sub" data-en="Full-service property management, real estate & remodeling — powered by AI. Your leads. Your data. You own it all." data-es="Gestión integral de propiedades, bienes raíces y remodelación — impulsado por IA. Tus contactos. Tus datos. Todo tuyo.">Full-service property management, real estate & remodeling — powered by AI. Your leads. Your data. You own it all.</p>
+        <h1 data-en="Your DFW Home Story<br>Starts Here" data-es="Tu Historia en DFW<br>Empieza Aquí">Your DFW Home Story<br>Starts Here</h1>
+        <p class="cv-hero-sub" data-en="Buying, selling, or investing in the Dallas-Fort Worth area? Get AI-powered market analysis, instant answers, and a local REALTOR® who picks up the phone." data-es="¿Comprando, vendiendo o invirtiendo en DFW? Obtén análisis de mercado, respuestas instantáneas y una REALTOR® local que contesta el teléfono.">Buying, selling, or investing in the Dallas-Fort Worth area? Get AI-powered market analysis, instant answers, and a local REALTOR® who picks up the phone.</p>
         <div class="cv-hero-ctas">
-          <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" data-en="Get Your Custom System Built →" data-es="Construye Tu Sistema Personalizado →">Get Your Custom System Built →</button>
-          <button class="btn-outline-white" onclick="switchMode('owner')" data-en="See the Owner Dashboard" data-es="Ver el Panel de Propietario">See the Owner Dashboard</button>
+          <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" data-en="Find Your DFW Home →" data-es="Encuentra Tu Casa en DFW →">Find Your DFW Home →</button>
+          <button class="btn-outline-white" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" data-en="What's My Home Worth?" data-es="¿Cuánto Vale Mi Casa?">What's My Home Worth?</button>
         </div>
         <div class="cv-hero-trust">
-          <div class="trust-pill">🔑 Licensed &amp; Insured</div>
-          <div class="trust-pill">⭐ 4.8 · 124 Reviews</div>
+          <div class="trust-pill">🏛️ Licensed REALTOR®</div>
+          <div class="trust-pill">⭐ 4.9 · 87 Reviews</div>
           <div class="trust-pill">📍 DFW Metroplex</div>
           <div class="trust-pill">🌐 Bilingual EN / ES</div>
         </div>
@@ -1089,7 +1060,7 @@ input[type="checkbox"] { display: none; }
       <div class="geo-visual">
         <div class="geo-circle-frame">
           <span class="geo-icon">🏠</span>
-          <span class="geo-stat">500+ Properties</span>
+          <span class="geo-stat">87 Homes Sold</span>
         </div>
       </div>
     </div>
@@ -1098,11 +1069,11 @@ input[type="checkbox"] { display: none; }
   <!-- Credentials bar -->
   <div class="cv-creds">
     <div class="cv-creds-inner">
-      <div class="cred-item"><span class="cred-icon">🏛️</span> Licensed Contractor</div>
-      <div class="cred-item"><span class="cred-icon">🛡️</span> Bonded &amp; Insured</div>
-      <div class="cred-item"><span class="cred-icon">⭐</span> 4.8 · 124 Reviews</div>
-      <div class="cred-item"><span class="cred-icon">📅</span> Est. 2013</div>
-      <div class="cred-item"><span class="cred-icon">🏘️</span> 500+ Units Managed</div>
+      <div class="cred-item"><span class="cred-icon">🏛️</span> Licensed REALTOR®</div>
+      <div class="cred-item"><span class="cred-icon">🏢</span> Keller Williams Frisco</div>
+      <div class="cred-item"><span class="cred-icon">⭐</span> 4.9 · 87 Reviews</div>
+      <div class="cred-item"><span class="cred-icon">📅</span> 12+ Years Experience</div>
+      <div class="cred-item"><span class="cred-icon">🏠</span> 87 Homes Sold</div>
       <div class="cred-item"><span class="cred-icon">📍</span> Frisco, TX</div>
     </div>
   </div>
@@ -1113,25 +1084,25 @@ input[type="checkbox"] { display: none; }
       <div class="pathway-label">How can we help you?</div>
       <div class="pathway-heading">What brings you here today?</div>
       <div class="pathway-grid">
-        <div class="pathway-card" onclick="pathwaySelect('renter')">
-          <div class="pathway-card-icon">🏠</div>
-          <div class="pathway-card-label">I'm Looking to Rent</div>
-          <div class="pathway-card-desc">Browse available properties, schedule a showing</div>
-        </div>
-        <div class="pathway-card" onclick="pathwaySelect('tenant')">
-          <div class="pathway-card-icon">🔧</div>
-          <div class="pathway-card-label">I'm a Current Tenant</div>
-          <div class="pathway-card-desc">Maintenance requests, lease questions, rent info</div>
-        </div>
-        <div class="pathway-card" onclick="pathwaySelect('owner')">
-          <div class="pathway-card-icon">📊</div>
-          <div class="pathway-card-label">I'm a Property Owner</div>
-          <div class="pathway-card-desc">Management services, fees, performance track record</div>
-        </div>
         <div class="pathway-card" onclick="pathwaySelect('buyer')">
           <div class="pathway-card-icon">🏡</div>
-          <div class="pathway-card-label">I'm Buying or Selling</div>
-          <div class="pathway-card-desc">Listings, market reports, home valuation</div>
+          <div class="pathway-card-label">I'm Buying a Home</div>
+          <div class="pathway-card-desc">Browse listings, schedule showings, get pre-approval guidance</div>
+        </div>
+        <div class="pathway-card" onclick="pathwaySelect('seller')">
+          <div class="pathway-card-icon">💰</div>
+          <div class="pathway-card-label">I'm Selling My Home</div>
+          <div class="pathway-card-desc">Get a free market analysis, pricing strategy, listing plan</div>
+        </div>
+        <div class="pathway-card" onclick="pathwaySelect('investor')">
+          <div class="pathway-card-icon">📊</div>
+          <div class="pathway-card-label">I'm an Investor</div>
+          <div class="pathway-card-desc">ROI analysis, cash flow projections, DFW investment comps</div>
+        </div>
+        <div class="pathway-card" onclick="pathwaySelect('market')">
+          <div class="pathway-card-icon">🔍</div>
+          <div class="pathway-card-label">I Want a Market Report</div>
+          <div class="pathway-card-desc">Current prices, days on market, neighborhood trends in DFW</div>
         </div>
       </div>
     </div>
@@ -1141,22 +1112,22 @@ input[type="checkbox"] { display: none; }
   <section class="problem-section">
     <div class="cv-section-inner">
       <div class="cv-label" data-en="Sound Familiar?" data-es="¿Te Suena Familiar?">Sound Familiar?</div>
-      <h2 class="cv-title" data-en="The problems your competitors haven't solved yet" data-es="Los problemas que tus competidores aún no han resuelto">The problems your competitors haven't solved yet</h2>
+      <h2 class="cv-title" data-en="Real estate shouldn't feel this complicated" data-es="Los bienes raíces no deberían ser tan complicados">Real estate shouldn't feel this complicated</h2>
       <div class="problem-grid">
         <div class="problem-card reveal">
           <div class="problem-card-icon">📞</div>
-          <div class="problem-card-pain">"Tenants can't reach me after hours"</div>
-          <div class="problem-card-solution">Your AI assistant handles maintenance requests, showing inquiries, and tenant questions 24/7 — in English and Spanish. No more missed calls at midnight.</div>
+          <div class="problem-card-pain">"My last agent was impossible to reach"</div>
+          <div class="problem-card-solution">My AI assistant answers questions 24/7 — listings, pricing, school districts, offer timelines. You get real answers at 11pm on Sunday, not a voicemail.</div>
         </div>
         <div class="problem-card reveal">
-          <div class="problem-card-icon">📱</div>
-          <div class="problem-card-pain">"I'm juggling listings, tenants, and contractors from my phone"</div>
-          <div class="problem-card-solution">One dashboard shows your pipeline, active properties, maintenance queue, and upcoming showings. Everything in one place, always updated.</div>
+          <div class="problem-card-icon">📊</div>
+          <div class="problem-card-pain">"I don't know if now is the right time to buy or sell"</div>
+          <div class="problem-card-solution">Get a real market analysis in minutes — not a generic report. AI-powered comps, active competition, and honest guidance before you commit to anything.</div>
         </div>
         <div class="problem-card reveal">
           <div class="problem-card-icon">💸</div>
-          <div class="problem-card-pain">"I spend $300/mo on leads I share with 5 other agents"</div>
-          <div class="problem-card-solution">Your website captures leads directly. You own every contact. No shared leads, no platform fees — just yours.</div>
+          <div class="problem-card-pain">"Zillow keeps sending me leads that go nowhere"</div>
+          <div class="problem-card-solution">Every lead on this site comes directly to me — no shared pipeline, no platform taking a cut. When you reach out, you reach me. That's it.</div>
         </div>
       </div>
     </div>
@@ -1165,8 +1136,8 @@ input[type="checkbox"] { display: none; }
   <!-- Services -->
   <section class="cv-section services-section" id="services">
     <div class="cv-section-inner">
-      <div class="cv-label" data-en="Our Services" data-es="Nuestros Servicios">Our Services</div>
-      <h2 class="cv-title" data-en="Everything you need, under one roof" data-es="Todo lo que necesitas, bajo un mismo techo">Everything you need, under one roof</h2>
+      <div class="cv-label" data-en="How I Can Help" data-es="Cómo Puedo Ayudarte">How I Can Help</div>
+      <h2 class="cv-title" data-en="Buyers, sellers, and investors — I've got you covered" data-es="Compradores, vendedores e inversores — los tengo cubiertos">Buyers, sellers, and investors — I've got you covered</h2>
       <div class="services-grid" id="servicesGrid"></div>
     </div>
   </section>
@@ -1174,39 +1145,39 @@ input[type="checkbox"] { display: none; }
   <!-- Value prop grid -->
   <section class="value-section">
     <div class="cv-section-inner" style="position:relative;z-index:1;">
-      <div class="cv-label">What Makes This Different</div>
-      <h2 class="cv-title">Built for how you actually work</h2>
-      <p class="cv-sub">Not a template. Not a SaaS you'll outgrow. A system built around your business — that you own outright.</p>
+      <div class="cv-label">Why Work With Me</div>
+      <h2 class="cv-title">Local expertise. AI-powered tools. Personal service.</h2>
+      <p class="cv-sub">I combine 12+ years of DFW market knowledge with technology that makes buying and selling faster, smarter, and less stressful.</p>
       <div class="value-grid">
         <div class="value-card reveal">
           <div class="value-card-icon">🤖</div>
-          <div class="value-card-title">AI Chatbot, 24/7</div>
-          <div class="value-card-desc">Answers questions, schedules showings, captures leads — even at 2am. Bilingual by default.</div>
+          <div class="value-card-title">AI Assistant, 24/7</div>
+          <div class="value-card-desc">Get answers about listings, pricing, neighborhoods, and timelines any time — even when I'm showing homes. Bilingual EN/ES.</div>
         </div>
         <div class="value-card reveal">
           <div class="value-card-icon">📊</div>
-          <div class="value-card-title">Owner Dashboard</div>
-          <div class="value-card-desc">Pipeline, properties, tenants, maintenance — one screen. Stop juggling apps and spreadsheets.</div>
+          <div class="value-card-title">Real Market Data</div>
+          <div class="value-card-desc">AI-powered comparable sales, active competition, price trends, and days-on-market — specific to your neighborhood, not generic reports.</div>
         </div>
         <div class="value-card reveal">
           <div class="value-card-icon">🌐</div>
           <div class="value-card-title">Bilingual by Default</div>
-          <div class="value-card-desc">English and Spanish, automatic. Your DFW market expects it. Your competitors aren't ready.</div>
+          <div class="value-card-desc">English and Spanish, seamlessly. DFW is 30%+ Spanish-speaking — I'm ready for every client in every language.</div>
         </div>
         <div class="value-card reveal">
           <div class="value-card-icon">🔑</div>
-          <div class="value-card-title">You Own Everything</div>
-          <div class="value-card-desc">Your website, your leads, your data. Cancel anytime and keep everything. No platform lock-in.</div>
+          <div class="value-card-title">Your Leads, Not Zillow's</div>
+          <div class="value-card-desc">Every inquiry on this site comes directly to me — not into a shared pool sold to five other agents. You reach me, period.</div>
         </div>
         <div class="value-card reveal">
-          <div class="value-card-icon">🎨</div>
-          <div class="value-card-title">Built for Your Business</div>
-          <div class="value-card-desc">Not a template anyone can buy. Built for YOUR services, YOUR area, YOUR brand.</div>
+          <div class="value-card-icon">📍</div>
+          <div class="value-card-title">Deep DFW Roots</div>
+          <div class="value-card-desc">Frisco, Plano, McKinney, Allen, Prosper, Celina — I know the subdivisions, the school boundaries, and the builders. No guessing.</div>
         </div>
         <div class="value-card reveal">
           <div class="value-card-icon">🔍</div>
-          <div class="value-card-title">AI Market Intelligence</div>
-          <div class="value-card-desc">Know when new permits are filed, when competitors raise prices, when your area is trending.</div>
+          <div class="value-card-title">AI Search Visibility</div>
+          <div class="value-card-desc">When someone asks ChatGPT or Google AI for a REALTOR® in Frisco, this site is built to show up. Almost no agents are doing this yet.</div>
         </div>
       </div>
     </div>
@@ -1216,32 +1187,32 @@ input[type="checkbox"] { display: none; }
   <section class="process-section">
     <div class="cv-section-inner">
       <div class="cv-label">How It Works</div>
-      <h2 class="cv-title">From prospect to managed property — in minutes, not days</h2>
-      <p class="cv-sub">Your AI system handles the repetitive work so you can focus on relationships and deals.</p>
+      <h2 class="cv-title">From first question to closing day — I've got every step</h2>
+      <p class="cv-sub">Whether you're buying, selling, or just exploring, here's what working with me looks like.</p>
       <div class="process-steps">
         <div class="process-step reveal">
           <div class="process-badge-wrap">
             <div class="process-badge">1</div>
           </div>
           <div class="process-step-icon">🏠</div>
-          <div class="process-step-title">Lead Comes In</div>
-          <div class="process-step-desc">A tenant or buyer finds you online. Your AI chatbot greets them, answers their questions in English or Spanish, and captures their name, phone, and what they're looking for — even at 2am.</div>
+          <div class="process-step-title">Tell Me What You Need</div>
+          <div class="process-step-desc">Reach out through the site, text the AI, or call me directly. My assistant answers immediately — any time of day — and captures your goals, budget, and timeline so I'm ready when we talk.</div>
         </div>
         <div class="process-step reveal">
           <div class="process-badge-wrap">
             <div class="process-badge">2</div>
           </div>
           <div class="process-step-icon">📊</div>
-          <div class="process-step-title">You See It Instantly</div>
-          <div class="process-step-desc">The lead appears on your dashboard with a score, contact info, and suggested next step. You get a notification. One click to call, text, or schedule — right from the app.</div>
+          <div class="process-step-title">Get a Real Plan</div>
+          <div class="process-step-desc">I pull AI-powered comps, active listings, and neighborhood data specific to your situation — not a generic estimate. Buyers get a curated shortlist. Sellers get a pricing strategy with real numbers.</div>
         </div>
         <div class="process-step reveal">
           <div class="process-badge-wrap">
             <div class="process-badge">3</div>
           </div>
           <div class="process-step-icon">✅</div>
-          <div class="process-step-title">You Close the Deal</div>
-          <div class="process-step-desc">From consultation to signed lease or contract. The system tracks every step, follows up automatically with undecided leads, and helps you re-engage past clients when the timing is right.</div>
+          <div class="process-step-title">We Close the Deal</div>
+          <div class="process-step-desc">From offer to closing table, I handle negotiations, paperwork, and communication with all parties. The system keeps you updated at every step — no wondering what's happening next.</div>
         </div>
       </div>
     </div>
@@ -1250,27 +1221,27 @@ input[type="checkbox"] { display: none; }
   <!-- Stats row -->
   <div class="stats-section">
     <div class="stats-inner">
-      <div class="stats-label">The numbers your competitors don't want you to see</div>
+      <div class="stats-label">The numbers that matter in DFW real estate</div>
       <div class="stats-grid">
         <div class="stat-item reveal">
           <div class="stat-number">$183</div>
-          <div class="stat-label">Avg cost per lead on Zillow</div>
-          <div class="stat-context">Your site captures leads for $0/mo in platform fees</div>
+          <div class="stat-label">Avg Zillow lead cost per buyer</div>
+          <div class="stat-context">Reaching out here goes directly to me — zero middleman fees</div>
         </div>
         <div class="stat-item reveal">
-          <div class="stat-number">50%</div>
-          <div class="stat-label">Shared leads go to the first responder</div>
-          <div class="stat-context">Your AI responds in seconds — not hours</div>
+          <div class="stat-number">67%</div>
+          <div class="stat-label">Buyers hire the first agent they contact</div>
+          <div class="stat-context">My AI responds in seconds — not the next business day</div>
         </div>
         <div class="stat-item reveal">
-          <div class="stat-number">90%</div>
-          <div class="stat-label">Of renovating homeowners hire professionals</div>
-          <div class="stat-context">Capture them before they find someone else</div>
+          <div class="stat-number">9 days</div>
+          <div class="stat-label">Avg days on market for my listings</div>
+          <div class="stat-context">DFW average: 28 days. AI-optimized pricing makes the difference.</div>
         </div>
         <div class="stat-item reveal">
-          <div class="stat-number">2-4hr</div>
-          <div class="stat-label">Manual remodeling estimate</div>
-          <div class="stat-context">AI Good/Better/Best estimate in minutes</div>
+          <div class="stat-number">4.9★</div>
+          <div class="stat-label">Client rating across all platforms</div>
+          <div class="stat-context">87 reviews · Google, Zillow & KW profile</div>
         </div>
       </div>
     </div>
@@ -1280,14 +1251,14 @@ input[type="checkbox"] { display: none; }
   <div class="portfolio-bg">
     <section class="cv-section" id="portfolio">
       <div class="cv-section-inner">
-        <div class="cv-label">Our Work</div>
-        <h2 class="cv-title">See what we've built</h2>
-        <p class="cv-sub">Click any project to see more details.</p>
+        <div class="cv-label">Recent Transactions</div>
+        <h2 class="cv-title">Homes bought and sold in DFW</h2>
+        <p class="cv-sub">Click any transaction to see details, client outcomes, and what made it work.</p>
         <div class="portfolio-filter">
           <button class="pf-tab active" onclick="filterProjects('all',this)">All</button>
-          <button class="pf-tab" onclick="filterProjects('management',this)">Property Mgmt</button>
-          <button class="pf-tab" onclick="filterProjects('realestate',this)">Real Estate</button>
-          <button class="pf-tab" onclick="filterProjects('remodeling',this)">Remodeling</button>
+          <button class="pf-tab" onclick="filterProjects('sold',this)">Recently Sold</button>
+          <button class="pf-tab" onclick="filterProjects('listing',this)">Active Listings</button>
+          <button class="pf-tab" onclick="filterProjects('investor',this)">Investor Deals</button>
         </div>
         <div class="portfolio-grid" id="portfolioGrid"></div>
       </div>
@@ -1306,34 +1277,34 @@ input[type="checkbox"] { display: none; }
   <!-- Neighborhoods -->
   <section class="cv-section">
     <div class="cv-section-inner">
-      <div class="cv-label">Where We Work</div>
-      <h2 class="cv-title">Deep roots in DFW</h2>
-      <p class="cv-sub">500+ properties and projects across Collin County and the DFW metro area.</p>
+      <div class="cv-label">Where I Work</div>
+      <h2 class="cv-title">Deep roots across DFW</h2>
+      <p class="cv-sub">87 closings across Collin County and the north DFW metro. I know these neighborhoods — the good streets, the school zones, the builders to trust.</p>
       <div class="neighborhoods-grid">
         <div class="nbhd-card reveal">
           <div class="nbhd-city">Frisco</div>
-          <div class="nbhd-count">142 properties managed</div>
+          <div class="nbhd-count">34 homes sold</div>
           <ul class="nbhd-list">
             <li>Craig Ranch</li><li>Stonebriar</li><li>Phillips Creek</li>
           </ul>
         </div>
         <div class="nbhd-card reveal">
           <div class="nbhd-city">Plano</div>
-          <div class="nbhd-count">98 properties managed</div>
+          <div class="nbhd-count">22 homes sold</div>
           <ul class="nbhd-list">
             <li>Legacy West</li><li>Willow Bend</li><li>Deerfield</li>
           </ul>
         </div>
         <div class="nbhd-card reveal">
           <div class="nbhd-city">McKinney</div>
-          <div class="nbhd-count">74 properties managed</div>
+          <div class="nbhd-count">18 homes sold</div>
           <ul class="nbhd-list">
             <li>Stonebridge Ranch</li><li>Tucker Hill</li><li>Adriatica</li>
           </ul>
         </div>
         <div class="nbhd-card reveal">
           <div class="nbhd-city">Prosper &amp; Celina</div>
-          <div class="nbhd-count">61 properties managed</div>
+          <div class="nbhd-count">13 homes sold</div>
           <ul class="nbhd-list">
             <li>Star Trail</li><li>Windsong Ranch</li><li>Light Farms</li>
           </ul>
@@ -1346,9 +1317,9 @@ input[type="checkbox"] { display: none; }
   <div class="booking-bg">
     <section class="cv-section" id="booking">
       <div class="cv-section-inner">
-        <div class="cv-label" data-en="Get Started" data-es="Empieza Ya">Get Started</div>
-        <h2 class="cv-title" data-en="This is your dashboard. Ready to see it with your data?" data-es="¿Listo para verlo con tus datos?">This is your dashboard. Ready to see it with your data?</h2>
-        <p class="cv-sub" data-en="Tell us about your business and we'll show you what your system could look like — in under 48 hours." data-es="Cuéntanos sobre tu negocio y te mostraremos cómo podría verse tu sistema.">Tell us about your business and we'll show you what your system could look like — in under 48 hours.</p>
+        <div class="cv-label" data-en="Let's Connect" data-es="Hablemos">Let's Connect</div>
+        <h2 class="cv-title" data-en="Ready to buy, sell, or just explore? Let's talk." data-es="¿Listo para comprar, vender o explorar? Hablemos.">Ready to buy, sell, or just explore? Let's talk.</h2>
+        <p class="cv-sub" data-en="Tell me a little about what you're looking for — I'll follow up within the hour with next steps and any market data that's relevant." data-es="Cuéntame lo que buscas — te respondo en menos de una hora con datos del mercado relevantes.">Tell me a little about what you're looking for — I'll follow up within the hour with next steps and any market data that's relevant.</p>
         <div class="booking-card">
           <form id="bookingForm" onsubmit="submitBooking(event)" novalidate>
             <div class="booking-grid">
@@ -1358,51 +1329,56 @@ input[type="checkbox"] { display: none; }
               </div>
               <div class="form-group">
                 <label class="form-label" for="bfPhone" data-en="Phone *" data-es="Teléfono *">Phone *</label>
-                <input class="form-input" id="bfPhone" type="tel" placeholder="(469) 555-0000" data-ph-en="(469) 555-0000" data-ph-es="(469) 555-0000" required>
+                <input class="form-input" id="bfPhone" type="tel" placeholder="(972) 555-0000" data-ph-en="(972) 555-0000" data-ph-es="(972) 555-0000" required>
               </div>
               <div class="form-group">
                 <label class="form-label" for="bfEmail" data-en="Email *" data-es="Correo electrónico *">Email *</label>
                 <input class="form-input" id="bfEmail" type="email" placeholder="sarah@example.com" data-ph-en="sarah@example.com" data-ph-es="maria@ejemplo.com" required>
               </div>
               <div class="form-group">
-                <label class="form-label">Business Type</label>
-                <select class="form-select" id="bfBizType" required>
-                  <option value="">Select type...</option>
-                  <option>Property Management</option>
-                  <option>Real Estate Agent / Broker</option>
-                  <option>Remodeling / Contractor</option>
-                  <option>All Three</option>
-                  <option>Other Home Services</option>
+                <label class="form-label" data-en="I'm looking to…" data-es="Estoy buscando…">I'm looking to…</label>
+                <select class="form-select" id="bfGoal" required>
+                  <option value="">Select...</option>
+                  <option>Buy a home</option>
+                  <option>Sell my home</option>
+                  <option>Buy and sell (moving)</option>
+                  <option>Invest in DFW real estate</option>
+                  <option>Just get a market report</option>
                 </select>
               </div>
               <div class="form-group">
-                <label class="form-label" for="bfUnits">Properties / Units Managed</label>
-                <select class="form-select" id="bfUnits">
+                <label class="form-label" data-en="Price Range / Home Value" data-es="Rango de precio / Valor estimado">Price Range / Home Value</label>
+                <select class="form-select" id="bfBudget">
                   <option value="">Select...</option>
-                  <option>1-5</option>
-                  <option>6-20</option>
-                  <option>21-50</option>
-                  <option>50+</option>
-                  <option>Just starting</option>
+                  <option>Under $300K</option>
+                  <option>$300K – $500K</option>
+                  <option>$500K – $750K</option>
+                  <option>$750K – $1M</option>
+                  <option>$1M+</option>
                 </select>
               </div>
               <div class="form-group">
-                <label class="form-label">Biggest Pain Point</label>
-                <select class="form-select" id="bfPain">
+                <label class="form-label" data-en="Timeline" data-es="Plazo">Timeline</label>
+                <select class="form-select" id="bfTimeline">
                   <option value="">Select...</option>
-                  <option>After-hours tenant calls</option>
-                  <option>Chasing leads / no-shows</option>
-                  <option>Expensive lead platforms</option>
-                  <option>Too much admin work</option>
-                  <option>No visibility into my pipeline</option>
+                  <option>ASAP — actively looking</option>
+                  <option>1–3 months</option>
+                  <option>3–6 months</option>
+                  <option>Just exploring for now</option>
                 </select>
               </div>
               <div class="form-group full">
-                <label class="form-label" for="bfNotes" data-en="Anything else we should know? (optional)" data-es="¿Algo más que debamos saber? (opcional)">Anything else we should know? (optional)</label>
-                <textarea class="form-textarea" id="bfNotes" placeholder="Your city, current tools, specific challenges..." data-ph-en="Your city, current tools, specific challenges..." data-ph-es="Tu ciudad, herramientas actuales, desafíos específicos..."></textarea>
+                <label class="form-label" for="bfNotes" data-en="Anything I should know? (optional)" data-es="¿Algo que deba saber? (opcional)">Anything I should know? (optional)</label>
+                <textarea class="form-textarea" id="bfNotes" placeholder="Neighborhood preferences, must-haves, current situation..." data-ph-en="Neighborhood preferences, must-haves, current situation..." data-ph-es="Preferencias de vecindario, necesidades, situación actual..."></textarea>
               </div>
             </div>
-            <button class="btn-submit" id="bookingSubmitBtn" type="submit" data-en="Let's Talk — 15 Minutes, No Pressure →" data-es="Hablemos →">Let's Talk — 15 Minutes, No Pressure →</button>
+            <div class="form-group full tcpa-consent">
+              <label class="form-checkbox-label">
+                <input type="checkbox" id="tcpaConsent" required>
+                <span>I agree to receive calls, texts, and emails from <span id="tcpaBusinessName">Latarryn Atkins</span> at the number and email I provided. Message and data rates may apply. Consent is not a condition of purchase.</span>
+              </label>
+            </div>
+            <button class="btn-submit" id="bookingSubmitBtn" type="submit" data-en="Let's Talk — No Pressure →" data-es="Hablemos →">Let's Talk — No Pressure →</button>
           </form>
           <div class="form-success" id="bookingSuccess">
             <div class="form-success-icon">🏠</div>
@@ -1418,9 +1394,9 @@ input[type="checkbox"] { display: none; }
   <div class="geo-cta-section">
     <div class="geo-cta-inner">
       <div class="cv-label">Ready When You Are</div>
-      <h2 class="geo-cta-title">Let's talk. 15 minutes,<br>no pressure.</h2>
-      <p class="geo-cta-sub">We'll show you a prototype of your business built in our system — before you commit to anything. If it doesn't feel right, no harm done.</p>
-      <button class="geo-cta-btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">See What Your Business Could Look Like →</button>
+      <h2 class="geo-cta-title">Your next DFW home move<br>starts with one conversation.</h2>
+      <p class="geo-cta-sub">Buying, selling, or just figuring out if the timing is right — reach out and I'll give you honest answers and real market data. No pitch, no pressure.</p>
+      <button class="geo-cta-btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Let's Talk →</button>
     </div>
   </div>
 
@@ -1434,13 +1410,13 @@ input[type="checkbox"] { display: none; }
 
   <!-- Footer -->
   <footer class="cv-footer">
-    <div class="cv-footer-logo" id="footerLogo">🏠 Apex Home Solutions</div>
-    <div class="cv-footer-tagline" id="footerTagline" data-en="Full-Service Property Management, Real Estate & Remodeling in the DFW Metroplex" data-es="Gestión de propiedades, bienes raíces y remodelación en DFW">Full-Service Property Management, Real Estate & Remodeling in the DFW Metroplex</div>
+    <div class="cv-footer-logo" id="footerLogo">🏡 Latarryn Atkins</div>
+    <div class="cv-footer-tagline" id="footerTagline" data-en="REALTOR® · Keller Williams Frisco · DFW Buyers, Sellers & Investors" data-es="REALTOR® · Keller Williams Frisco · Compradores, Vendedores e Inversores en DFW">REALTOR® · Keller Williams Frisco · DFW Buyers, Sellers &amp; Investors</div>
     <div class="cv-footer-info">
-      <span id="footerPhone">📞 (469) 555-0192</span>
-      <span>📍 Frisco, TX 75034</span>
-      <span>⭐ 4.8 from 124+ reviews</span>
-      <span>🕐 Mon–Fri 8am–6pm, Sat 9am–2pm</span>
+      <span id="footerPhone">📞 (972) 555-0147</span>
+      <span>📍 Frisco, TX 75033</span>
+      <span>⭐ 4.9 from 87+ reviews</span>
+      <span>🕐 Mon–Sat 8am–7pm, Sun by appt</span>
     </div>
     <div class="cv-footer-credit">Powered by AI — Built by <a href="/" rel="noopener">Krevio</a></div>
     <div class="cv-footer-referral">Know a business owner who needs this? <a href="/demos/#referral">Learn about our referral program →</a></div>
@@ -1477,7 +1453,7 @@ input[type="checkbox"] { display: none; }
 
       <!-- Dashboard -->
       <div class="owner-view active" id="view-dashboard">
-        <div class="od-title" id="dashTitle">Apex Home Solutions — Overview</div>
+        <div class="od-title" id="dashTitle">Latarryn Atkins — Overview</div>
         <div class="od-sub">Updated just now · Frisco, TX</div>
         <div id="metricsGrid"></div>
         <div id="todaySnapshot"></div>
@@ -1507,7 +1483,7 @@ input[type="checkbox"] { display: none; }
       <!-- Market Score -->
       <div class="owner-view" id="view-geo">
         <div class="od-title">AI Visibility Score</div>
-        <div class="od-sub">How visible is Apex Home Solutions to AI search engines?</div>
+        <div class="od-sub">How visible is Latarryn Atkins to AI search engines?</div>
         <div id="geoScoreCard"></div>
         <div id="geoRecsCard"></div>
         <div id="contentPreviewCard"></div>
@@ -1529,7 +1505,7 @@ input[type="checkbox"] { display: none; }
 
       <!-- Dashboard bottom CTA -->
       <div class="dash-bottom-cta" id="dashBottomCta">
-        <h3 id="dashCtaTitle">This was built for Apex Home Solutions.</h3>
+        <h3 id="dashCtaTitle">This was built for Latarryn Atkins.</h3>
         <p>Want the real thing for your business? Let's talk — 15 minutes, no pressure.</p>
         <a class="dash-cta-btn" href="mailto:krevio@krevio.net?subject=I want to see this for my business">Let's Talk →</a>
       </div>
@@ -1542,24 +1518,36 @@ input[type="checkbox"] { display: none; }
 <div class="chat-widget" id="chatWidget">
   <div class="chat-panel" id="chatPanel">
     <div class="chat-header">
-      <div class="chat-header-icon">🏠</div>
+      <div class="chat-header-icon">🏡</div>
       <div class="chat-header-info">
-        <div class="chat-header-name" id="chatHeaderName">Apex Home Solutions</div>
-        <div class="chat-header-status">● Online 24/7 — AI Assistant</div>
+        <div class="chat-header-name" id="chatHeaderName">Latarryn Atkins</div>
+        <div class="chat-header-status">
+          <span class="chat-header-status-text">● Online 24/7 — AI Assistant</span>
+          <div class="chat-eq-bars">
+            <div class="chat-eq-bar"></div><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div>
+          </div>
+        </div>
       </div>
-      <button class="chat-voice-toggle" id="voiceToggle" onclick="toggleVoiceMode()" title="Toggle voice responses" aria-label="Toggle voice">🔊</button>
       <button class="chat-close-btn" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-messages" id="chatMessages"></div>
     <div class="chat-quick-replies" id="chatQuickReplies" style="display:none;padding:0 12px 8px;"></div>
     <div class="chat-voice-label" id="chatVoiceLabel"></div>
     <div class="chat-input-row">
-      <input class="chat-input" id="chatInput" type="text" placeholder="Ask about our services..." data-ph-en="Ask about our services..." data-ph-es="Pregunta sobre nuestros servicios..." onkeydown="if(event.key==='Enter')sendChat()">
-      <button class="chat-mic" id="chatMic" onclick="toggleMic()" title="Voice input" aria-label="Voice input">🎤</button>
-      <button class="chat-send-btn" onclick="sendChat()">→</button>
+      <div class="voice-active-panel">
+        <button class="stop-btn" onclick="stopVoicePlayback()">STOP LISTENING</button>
+      </div>
+      <div class="chat-input-wrapper">
+        <input class="chat-input" id="chatInput" type="text" placeholder="Ask about our services..." data-ph-en="Ask about our services..." data-ph-es="Pregunta sobre nuestros servicios..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="chat-send-btn" onclick="sendChat()">✈</button>
+        <button class="chat-mic" id="chatMic" onclick="toggleMic()" title="Voice input" aria-label="Voice input">🎤</button>
+      </div>
     </div>
+    <div class="chat-fair-housing">🏠 Fair Housing Compliant · Equal Opportunity</div>
   </div>
-  <button class="chat-bubble-btn" onclick="toggleChat()" aria-label="Open chat">🏠</button>
+  <button class="chat-bubble-btn" id="chatBubble" onclick="toggleChat()" aria-label="Open chat">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  </button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1569,21 +1557,22 @@ input[type="checkbox"] { display: none; }
    CONFIG
 ═══════════════════════════════════════════ */
 const CONFIG = {
-  businessName:      "Apex Home Solutions",
-  businessNameShort: "Apex",
+  businessName:      "Latarryn Atkins",
+  businessNameShort: "Latarryn",
   businessType:      "realestate",
+  agentType:         "agent",
   schemaType:        "RealEstateAgent",
-  emoji:             "🏠",
-  tagline:           "Full-Service Property Management, Real Estate & Remodeling in the DFW Metroplex",
-  phone:             "(469) 555-0192",
-  address:           "4200 Legacy Dr",
+  emoji:             "🏡",
+  tagline:           "REALTOR® · Keller Williams Frisco · DFW Buyers, Sellers & Investors",
+  phone:             "(972) 555-0147",
+  address:           "5700 Eldorado Pkwy",
   city:              "Frisco",
   state:             "TX",
-  zip:               "75034",
+  zip:               "75033",
   areasServed:       ["Frisco", "Plano", "McKinney", "Allen", "Prosper", "Celina"],
-  rating:            4.8,
-  reviewCount:       124,
-  hours:             "Mon-Fri 8am-6pm, Sat 9am-2pm",
+  rating:            4.9,
+  reviewCount:       87,
+  hours:             "Mon-Sat 8am-7pm, Sun by appt",
 
   hasEmergencyBooking: false,
   hasDispatch:         false,
@@ -1592,7 +1581,22 @@ const CONFIG = {
   hasReceipts:         false,
   hasGallery:          true,
   hasLanguageToggle:   true,
-  hasVoice:            true
+  hasVoice:            true,
+
+  // ── Compliance (always true for RE — not toggleable) ──
+  fairHousing: true,
+  tcpaConsent:  true,
+
+  // ── Brokerage (null = independent agent, no compliance footer) ──
+  // Populate during client onboarding. Set logo to null until asset is available.
+  brokerage: {
+    name:        "Keller Williams Realty",
+    franchise:   "kw",
+    marketCenter:"KW Frisco",
+    brokerName:  "Jane Smith",
+    logo:        null,   // "/assets/kw-logo.png" once onboarded
+    disclaimer:  "Each Office Independently Owned and Operated"
+  }
 };
 
 /* ═══════════════════════════════════════════
@@ -1600,50 +1604,50 @@ const CONFIG = {
 ═══════════════════════════════════════════ */
 const MOCK = {
   metrics: [
-    { value: '47', label: 'Active Properties', trend: '+3 this month', sub: 'Under management' },
-    { value: '$285K', label: 'Pipeline Value', trend: '+$62K this month', sub: 'Deals + proposals' },
-    { value: '12%', label: 'Avg Vacancy Rate', trend: '−4% vs last quarter', sub: 'Industry avg: 18%' },
-    { value: '94%', label: 'Rent Collection Rate', trend: 'Steady', sub: 'On-time payments' }
+    { value: '6', label: 'Active Transactions', trend: '+2 this month', sub: 'Buyers + sellers in pipeline' },
+    { value: '$3.2M', label: 'Pipeline Value', trend: '+$680K this month', sub: 'Active deals + listings' },
+    { value: '9 days', label: 'Avg Days on Market', trend: '−4 days vs last quarter', sub: 'DFW avg: 28 days' },
+    { value: '4.9★', label: 'Client Rating', trend: '87 reviews', sub: 'Google, Zillow & KW' }
   ],
   todaySnapshot: [
-    { time: '9:00 AM', client: 'Patel Family', type: 'Property Showing', address: 'Craig Ranch, Frisco', status: 'confirmed' },
-    { time: '11:30 AM', client: 'Maria Chen', type: 'Lease Renewal', address: 'Legacy West, Plano', status: 'confirmed' },
-    { time: '2:00 PM', client: 'Robert Kim', type: 'Maintenance Walk', address: 'Stonebridge, McKinney', status: 'pending' },
+    { time: '9:00 AM', client: 'Patel Family', type: 'Buyer Consultation', address: 'Craig Ranch, Frisco', status: 'confirmed' },
+    { time: '11:30 AM', client: 'Anderson Residence', type: 'Listing Appointment', address: 'Stonebriar, Frisco', status: 'confirmed' },
+    { time: '2:00 PM', client: 'Marcus Thompson', type: 'Home Tour (3 homes)', address: 'McKinney / Prosper', status: 'pending' },
     { time: '4:30 PM', client: 'New Lead (AI Chat)', type: 'Discovery Call', address: 'Windsong Ranch', status: 'ai' }
   ],
   platformComparison: {
-    platforms: 'Zillow / Realtor.com / Angi',
-    monthlyLeadCost: 390,
-    monthlySubscription: 200,
-    monthlyLeads: 6,
-    ourLeads: 11,
-    annualSavings: 7080,
+    platforms: 'Zillow Premier Agent + CRM + Email Tools',
+    monthlyLeadCost: 300,
+    monthlySubscription: 150,
+    monthlyLeads: 4,
+    ourLeads: 9,
+    annualSavings: 5400,
     breakEvenMonths: 2
   },
-  aiSummary: '47 active properties, 4 vacancies. Rent collection rate up 2% vs last month — strong performance.\n\nRecommend: The Patel Family showing today is your highest-scored lead this week (score: 88). They\'ve asked twice about pet policy — have that ready. Three units in Craig Ranch have maintenance requests open 7+ days — flag for contractor.',
+  aiSummary: '6 active transactions, $3.2M in pipeline. Strong week — Anderson listing appointment confirmed for 11:30 AM.\n\nRecommend: Patel Family consultation is your highest-scored lead this week (score: 91). They\'ve asked the AI twice about school districts in Craig Ranch — have Frisco ISD boundary maps ready. Sarah Mitchell (AI chat inquiry, $480K budget) has gone quiet for 3 days — send a market update to re-engage before she calls someone else.',
   followUps: [
-    { name: 'Patel Family', lastContact: '3 days ago', serviceType: 'Property showing scheduled', value: 1650, suggestion: 'High-score lead — confirm showing time, ask about pet policy', daysAgo: 3 },
-    { name: 'Kevin O\'Brien', lastContact: '6 weeks ago', serviceType: 'Investment property inquiry', value: 45000, suggestion: 'Spring market is hot — re-engage on that 4-plex discussion', daysAgo: 42 },
-    { name: 'Williams Duplex', lastContact: '2 weeks ago', serviceType: 'Property management inquiry', value: 4800, suggestion: 'Sent management proposal — follow up before they sign with a competitor', daysAgo: 14 }
+    { name: 'Patel Family', lastContact: '2 days ago', serviceType: 'Buyer consultation today', value: 480000, suggestion: 'Score: 91 — asked about Craig Ranch school boundaries twice. Have Frisco ISD map ready.', daysAgo: 2 },
+    { name: 'Sarah Mitchell', lastContact: '3 days ago', serviceType: 'Home purchase inquiry — $480K', value: 480000, suggestion: 'Gone quiet after AI chat. Send a "3 new listings in your range" message to re-engage.', daysAgo: 3 },
+    { name: 'Kevin O\'Brien', lastContact: '5 weeks ago', serviceType: 'Investment property — 4-plex', value: 320000, suggestion: 'Spring market is heating up. Re-engage with updated Prosper cap rate data.', daysAgo: 35 }
   ],
-  dormantClients: 9,
+  dormantClients: 7,
   leads: [
-    { id: 1, name: 'Patel Family', service: 'Property Showing', status: 'consultation', location: 'Craig Ranch', score: 88, date: 'Apr 6', value: '$1,650/mo' },
-    { id: 2, name: 'Anderson Residence', service: 'Investment Analysis', status: 'proposal', location: 'Plano', score: 74, date: 'Apr 4', value: '$320K' },
-    { id: 3, name: 'Chen Properties', service: 'Property Mgmt (3 units)', status: 'signed', location: 'Legacy West', score: 92, date: 'Mar 28', value: '$4.2K/yr' },
-    { id: 4, name: 'Sarah Mitchell', service: 'Home Purchase', status: 'inquiry', location: 'Stonebriar', score: 55, date: 'Apr 7', value: '$480K' },
-    { id: 5, name: 'Robert Kim', service: 'Remodeling Estimate', status: 'consultation', location: 'Windsong', score: 67, date: 'Apr 5', value: '$38K' },
-    { id: 6, name: 'Maria Garcia', service: 'Lease Renewal', status: 'signed', location: 'Tucker Hill', score: 90, date: 'Mar 20', value: '$1,850/mo' },
-    { id: 7, name: 'Thompson Family', service: 'Home Sale', status: 'complete', location: 'Star Trail', score: 78, date: 'Feb 15', value: '$575K' },
-    { id: 8, name: 'Williams Duplex', service: 'Property Mgmt (2 units)', status: 'inquiry', location: 'Deerfield', score: 45, date: 'Apr 7', value: '$2.8K/yr' }
+    { id: 1, name: 'Patel Family', service: 'Buyer Consultation', status: 'consultation', location: 'Craig Ranch', score: 91, date: 'Apr 6', value: '$480K budget' },
+    { id: 2, name: 'Anderson Residence', service: 'Listing Appointment', status: 'proposal', location: 'Stonebriar', score: 82, date: 'Apr 4', value: '$689K list' },
+    { id: 3, name: 'Marcus Thompson', service: 'Home Purchase', status: 'signed', location: 'McKinney', score: 95, date: 'Mar 28', value: '$412K closed' },
+    { id: 4, name: 'Sarah Mitchell', service: 'Home Purchase Inquiry', status: 'inquiry', location: 'Frisco', score: 58, date: 'Apr 7', value: '$480K budget' },
+    { id: 5, name: 'Kevin O\'Brien', service: 'Investment Analysis', status: 'consultation', location: 'Prosper', score: 71, date: 'Apr 5', value: '$320K 4-plex' },
+    { id: 6, name: 'Chen Family', service: 'Relocation Buy', status: 'signed', location: 'McKinney', score: 93, date: 'Mar 20', value: '$498K closed' },
+    { id: 7, name: 'Sharma Family', service: 'Home Sale', status: 'complete', location: 'Star Trail', score: 88, date: 'Feb 15', value: '$575K sold' },
+    { id: 8, name: 'New AI Lead', service: 'Home Purchase Inquiry', status: 'inquiry', location: 'Windsong Ranch', score: 44, date: 'Apr 7', value: '$550K budget' }
   ],
   properties: [
-    { id: 1, emoji: '🏡', address: '4521 Ridgecrest Dr', city: 'Frisco, TX', status: 'occupied', rent: '$2,450/mo', tenant: 'Garcia Family', maintenance: 0, lease: 'Expires Aug 2026' },
-    { id: 2, emoji: '🏠', address: '2819 Stonegate Blvd', city: 'Plano, TX', status: 'vacant', rent: '$1,850/mo', tenant: '—', maintenance: 0, lease: 'Listed — 12 days' },
-    { id: 3, emoji: '🏘️', address: '6103 Legacy Oaks', city: 'Frisco, TX', status: 'showing', rent: '$2,100/mo', tenant: '—', maintenance: 1, lease: '3 showings scheduled' },
-    { id: 4, emoji: '🏡', address: '932 Tucker Creek Ct', city: 'McKinney, TX', status: 'occupied', rent: '$1,975/mo', tenant: 'Kim Family', maintenance: 2, lease: 'Expires Dec 2025' },
-    { id: 5, emoji: '🏠', address: '7744 Windsong Ranch Pkwy', city: 'Prosper, TX', status: 'listing', rent: '$3,200/mo', tenant: '—', maintenance: 0, lease: 'New listing — active' },
-    { id: 6, emoji: '🏘️', address: '1456 Stonebridge Ct', city: 'McKinney, TX', status: 'occupied', rent: '$2,250/mo', tenant: 'Patel Family', maintenance: 1, lease: 'Renewing in 60 days' }
+    { id: 1, emoji: '🏡', address: '4521 Ridgecrest Dr', city: 'Frisco, TX', status: 'active',   price: '$689,000', client: 'Anderson Residence', requests: 0, txStatus: 'Listed Apr 2026 · 4 showings' },
+    { id: 2, emoji: '🏠', address: '2819 Stonegate Blvd', city: 'Plano, TX', status: 'active',   price: '$545,000', client: 'Buyer TBD',          requests: 0, txStatus: 'Active · 7 days on market' },
+    { id: 3, emoji: '🏘️', address: '6103 Legacy Oaks', city: 'Frisco, TX', status: 'contract', price: '$412,000', client: 'Marcus Thompson',     requests: 0, txStatus: 'Under contract · Closing Apr 28' },
+    { id: 4, emoji: '🏡', address: '932 Tucker Creek Ct', city: 'McKinney, TX', status: 'sold',  price: '$498,000', client: 'Chen Family',        requests: 0, txStatus: 'Closed Mar 20 · $498K' },
+    { id: 5, emoji: '🏠', address: '7744 Windsong Ranch Pkwy', city: 'Prosper, TX', status: 'sold', price: '$575,000', client: 'Sharma Family',  requests: 0, txStatus: 'Sold Feb 15 · +$14K over ask' },
+    { id: 6, emoji: '🏘️', address: '1456 Stonebridge Ct', city: 'McKinney, TX', status: 'prospect', price: '$320,000', client: 'Kevin O\'Brien', requests: 0, txStatus: 'Investment analysis in progress' }
   ],
   geoScore: {
     overall: 61,
@@ -1655,64 +1659,62 @@ const MOCK = {
       { name: 'Platform Coverage', score: 68, icon: '🌐', desc: 'Zillow, Realtor.com, Google Business, BBB' }
     ],
     recommendations: [
-      { priority: 'p1', text: 'Fix NAP inconsistency: listed as "Apex Home Solutions LLC" on Zillow but "Apex Home Solutions" on Google. Hurts AI entity matching.' },
-      { priority: 'p1', text: 'No neighborhood guides published. AI assistants can\'t recommend you for Frisco or Prosper without local content proof.' },
-      { priority: 'p2', text: 'Add neighborhood pages: "Property Management in Craig Ranch" type content boosts hyperlocal AI visibility.' },
-      { priority: 'p2', text: 'Respond to 11 unresponded Google reviews. AI models weigh owner engagement in recommendations.' },
-      { priority: 'p3', text: 'Add FAQ schema to property listings. Helps AI assistants surface your answers to common tenant questions.' }
+      { priority: 'p1', text: 'No neighborhood content published. AI assistants can\'t recommend you for "REALTOR in Frisco" or "buy a home in Prosper" without local content proof.' },
+      { priority: 'p1', text: 'KW profile name differs from Google Business name. Hurts AI entity matching — standardize to "Latarryn Atkins, REALTOR®" everywhere.' },
+      { priority: 'p2', text: 'Add neighborhood pages: "Buying a Home in Craig Ranch" and "Frisco ISD School Zones" type content boosts hyperlocal AI visibility.' },
+      { priority: 'p2', text: 'Respond to 6 unresponded Zillow reviews. AI models weigh agent engagement when generating recommendations.' },
+      { priority: 'p3', text: 'Add FAQ schema (pre-approval, listing timelines, buyer process). Helps AI assistants surface your answers when buyers search.' }
     ]
   },
   contentTitles: [
-    'What Frisco Property Owners Need to Know About the 2026 Rental Market',
-    'Tenant Screening in DFW: The Checklist We Use on Every Applicant',
-    'Investment Property Analysis: Is Prosper Still Worth It in 2026?'
+    'Is Now a Good Time to Buy in Frisco? What the 2026 DFW Market Data Says',
+    'Buying in Craig Ranch vs. Stonebriar: A Neighborhood Comparison for 2026',
+    'Investment Property in Prosper: Cap Rates, Rental Demand & What to Expect'
   ],
   reviews: [
-    { name: 'Marcus T.', rating: 5, type: 'Tenant — Maintenance Request', location: 'Frisco',
-      text: 'It was 11:45 PM and my AC stopped working. I messaged the chatbot expecting nothing until morning. By midnight it had logged my request, texted me a confirmation, and had a tech at my door by 9 AM. That\'s unheard of.' },
-    { name: 'David & Lynn Chen', rating: 5, type: 'Property Owner — 3 Units', location: 'Legacy West, Plano',
-      text: 'Our vacancy rate went from averaging 6 weeks between tenants to under 10 days. The AI handles inquiries while we sleep. We\'ve had exactly zero headaches this year.' },
-    { name: 'Priya Sharma', rating: 5, type: 'Home Seller — Above Asking', location: 'Star Trail, Frisco',
-      text: 'Our listing got 8 showings in the first 4 days and went under contract above asking. The AI-powered listing description and pricing analysis made us the most visible home in the neighborhood.' },
-    { name: 'James O\'Brien', rating: 5, type: 'Remodeling Client', location: 'Windsong Ranch, Prosper',
-      text: 'I submitted my kitchen remodel request at 7 AM on a Sunday. By 10 AM I had a Good/Better/Best estimate in my inbox. Signed with them that afternoon. Every other contractor took 2 weeks just to call back.' }
+    { name: 'Priya & Raj Sharma', rating: 5, type: 'Home Sellers — Above Asking', location: 'Star Trail, Frisco',
+      text: 'Our listing got 8 showings in the first 4 days and went under contract $14K above asking. Latarryn\'s pricing analysis was spot-on and the AI chatbot handled every inquiry while we were at work. We didn\'t lift a finger.' },
+    { name: 'Marcus Thompson', rating: 5, type: 'First-Time Buyer', location: 'Craig Ranch, Frisco',
+      text: 'I was nervous as a first-time buyer and had a hundred questions at all hours. The AI answered most of them instantly — and when I needed a real conversation, Latarryn picked up. We closed in 28 days. Could not have asked for more.' },
+    { name: 'Jennifer & David Chen', rating: 5, type: 'Relocation from Chicago', location: 'McKinney, TX',
+      text: 'We were moving from out of state and couldn\'t tour in person at first. Latarryn did video walkthroughs, pulled school data, and gave us a real neighborhood breakdown — not a sales pitch. We found our home in two weeks.' },
+    { name: 'Kevin O\'Brien', rating: 5, type: 'Investment Buyer — 4-Plex', location: 'Prosper, TX',
+      text: 'The ROI analysis she sent me in 48 hours was more detailed than anything I\'d seen from bigger firms. Numbers, comps, cash flow projection, risk flags. I made my decision with real data. Closed on the 4-plex last month.' }
   ],
   projects: [
-    { id: 1, type: 'Property Management', category: 'management', icon: '🏢', neighborhood: 'Legacy West', budget: '8% monthly', rating: '5.0',
-      desc: 'Full management of 3 residential properties. Tenant screening, lease management, maintenance coordination, and monthly owner reporting. Vacancy rate reduced from 9 weeks to 8 days.',
-      quote: '"Three properties, zero headaches." — David C.' },
-    { id: 2, type: 'Home Sale — Above Asking', category: 'realestate', icon: '🔑', neighborhood: 'Star Trail', budget: '$575K closed', rating: '5.0',
-      desc: 'AI-powered listing strategy with hyper-local pricing analysis and automated showing follow-ups. 8 showings in 4 days, accepted above-asking offer on day 5.',
+    { id: 1, type: 'Home Sale — Above Asking', category: 'sold', icon: '🔑', neighborhood: 'Star Trail, Frisco', budget: '$575K · +$14K over ask', rating: '5.0',
+      desc: 'AI-powered listing strategy with hyper-local pricing analysis and automated showing coordination. 8 showings in 4 days, accepted above-asking offer on day 5. Listed on a Thursday, under contract by Monday.',
       quote: '"Most visible home in the neighborhood." — Priya S.' },
-    { id: 3, type: 'Kitchen Remodel', category: 'remodeling', icon: '🍳', neighborhood: 'Craig Ranch', budget: '$42K', rating: '4.9',
-      desc: 'Full kitchen gut renovation — custom cabinets, quartz countertops, new layout. Estimate delivered same-day through AI chatbot. Project completed in 5 weeks.',
-      quote: '"Every other contractor took 2 weeks to call back." — James O.' },
-    { id: 4, type: 'Investment Analysis', category: 'realestate', icon: '📊', neighborhood: 'Prosper', budget: '$320K 4-plex', rating: '5.0',
-      desc: 'Full ROI analysis, rental rate comps, and cash flow projection for a 4-unit investment property. Delivered in 48 hours with comparable sales data and 5-year projection model.',
-      quote: '"The data gave us confidence to move fast." — Anderson Residence' },
-    { id: 5, type: 'Tenant Management', category: 'management', icon: '🏘️', neighborhood: 'Windsong Ranch', budget: '8% + maint', rating: '5.0',
-      desc: 'End-to-end management for a 5-unit property portfolio. AI chatbot handles all tenant communications 24/7. Owner receives weekly dashboard summary.',
-      quote: '"I stopped checking email at night." — K. Williams' },
-    { id: 6, type: 'Bathroom Remodel', category: 'remodeling', icon: '🚿', neighborhood: 'Tucker Hill', budget: '$28K', rating: '4.9',
-      desc: 'Primary bath upgrade — frameless glass shower, freestanding tub, heated floors. Matched an existing permit timeline for minimal disruption to tenant.',
-      quote: '"On time, on budget, and caught a plumbing issue we didn\'t know about." — M. Garcia' }
+    { id: 2, type: 'First-Time Buyer — New Build', category: 'sold', icon: '🏡', neighborhood: 'Craig Ranch, Frisco', budget: '$412K · Closed in 28 days', rating: '5.0',
+      desc: 'Guided a first-time buyer through a new construction purchase — builder negotiations, upgrade ROI analysis, and inspection coordination. Secured $8K in builder concessions not advertised.',
+      quote: '"Latarryn picked up every time I called." — Marcus T.' },
+    { id: 3, type: 'Active Listing — Coming Soon', category: 'listing', icon: '🏠', neighborhood: 'Stonebriar, Frisco', budget: '$689K · Listed Apr 2026', rating: '—',
+      desc: 'Luxury 4BR/3BA with pool, listed at competitive market price after full AI comp analysis. Pre-market showing requests already received. Professional photography + AI-optimized listing copy.',
+      quote: 'Listing live — inquire for showing.' },
+    { id: 4, type: 'Investment — 4-Plex Acquisition', category: 'investor', icon: '📊', neighborhood: 'Prosper, TX', budget: '$320K · 6.8% cap rate', rating: '5.0',
+      desc: 'Full ROI analysis, rental rate comps, and cash flow projection for a 4-unit investment property. Delivered in 48 hours. Helped buyer close below list price after flagging deferred maintenance in inspection.',
+      quote: '"The data gave us confidence to move fast." — Kevin O.' },
+    { id: 5, type: 'Relocation Buy — Out of State', category: 'sold', icon: '✈️', neighborhood: 'Tucker Hill, McKinney', budget: '$498K · Remote close', rating: '5.0',
+      desc: 'Represented Chicago-based buyers relocating to DFW. Full virtual tour series, school district briefing, neighborhood comparisons, and remote notarization coordination. Never missed a deadline.',
+      quote: '"Found our home in two weeks without visiting." — David & Jen C.' },
+    { id: 6, type: 'Active Listing — Investor Flip', category: 'listing', icon: '🏘️', neighborhood: 'Windsong Ranch, Prosper', budget: '$545K · 22 days on market', rating: '—',
+      desc: 'Representing a renovated flip with premium finishes in one of Prosper\'s fastest-growing neighborhoods. Staged, photographed, and listed with AI-generated listing description targeting move-up buyers.',
+      quote: 'Showing requests open — contact for details.' }
   ],
   faqs: [
-    { q: 'What does property management include?', a: 'Tenant screening, lease management, rent collection, maintenance coordination, 24/7 AI communication, and monthly owner statements. All for 8% of monthly rent.' },
-    { q: 'How fast do you fill vacancies?', a: 'Average 8-12 days vs. industry average of 6 weeks. Our AI handles inquiries 24/7 and pre-qualifies applicants before you spend any time.' },
-    { q: 'Can you handle remodeling projects?', a: 'Yes — we coordinate remodeling as part of property turnovers or separate projects. We provide Good/Better/Best estimates within 24 hours.' },
-    { q: 'Do you handle both English and Spanish speaking tenants?', a: 'Yes. Our AI chatbot and all communications are fully bilingual. DFW market is 30%+ Spanish-speaking and we\'re ready for it.' },
-    { q: 'What areas do you serve?', a: 'Frisco, Plano, McKinney, Allen, Prosper, Celina, and surrounding DFW communities. Active in Collin County and north Dallas suburbs.' }
+    { q: 'Do I need to be pre-approved before we start looking?', a: 'Not to start conversations, but yes before we tour homes seriously. I can connect you with trusted lenders in DFW who can get you pre-approved quickly — often same day.' },
+    { q: 'How do you price a home for sale?', a: 'I use AI-powered comparable sales analysis — recent closings, active competition, days on market, and neighborhood trends. No guessing. I\'ll show you the data and we set a price together.' },
+    { q: 'How fast do your listings typically sell?', a: 'My average is 9 days on market vs. the DFW average of 28 days. AI-optimized pricing, professional photography, and targeted marketing make the difference.' },
+    { q: 'Do you work with buyers relocating to DFW from out of state?', a: 'Yes — a significant part of my business is relocation. I do virtual tours, video walkthroughs, school district breakdowns, and can coordinate remote closings.' },
+    { q: 'What areas of DFW do you cover?', a: 'Frisco, Plano, McKinney, Allen, Prosper, Celina, and surrounding communities. I\'m most active in Collin County and the north Dallas suburbs.' }
   ],
   services: [
-    { name: 'Property Management', desc: 'Tenant screening, rent collection, maintenance — all for 8% of monthly rent.' },
-    { name: 'Real Estate Sales', desc: 'AI-powered buying and selling. Hyper-local pricing, automated follow-ups.' },
-    { name: 'Remodeling & Renovations', desc: 'Kitchen, bath, whole-home. Same-day estimates through the AI chatbot.' },
-    { name: 'Investment Property Analysis', desc: 'ROI, market comps, cash flow projections. Data in 48 hours.' },
-    { name: 'Tenant Communication', desc: '24/7 AI chat for maintenance requests, lease inquiries, EN + ES.' },
-    { name: 'Maintenance Coordination', desc: 'Vendor dispatch, work order tracking, cost reporting.' },
-    { name: 'Lease Management', desc: 'Renewals, rent adjustments, legal compliance support.' },
-    { name: 'Market Reports', desc: 'Monthly area trends, comparable sales, rental rate analysis.' }
+    { name: 'Buyer Representation', desc: 'I guide you from pre-approval to closing — curated search, offer strategy, inspections, and negotiations. No surprises.' },
+    { name: 'Seller Representation', desc: 'AI-powered pricing analysis, professional marketing, and negotiation expertise. Average 9 days on market.' },
+    { name: 'Free Market Analysis (CMA)', desc: 'Know exactly what your home is worth — or what a home you\'re buying is actually priced at vs. comps.' },
+    { name: 'Investment Properties', desc: 'ROI analysis, rental rate comps, cash flow projections, and DFW market trends. Data delivered in 48 hours.' },
+    { name: 'Relocation to DFW', desc: 'New to the area? I\'ll walk you through neighborhoods, school districts, commute times, and builder reputations.' },
+    { name: 'New Construction', desc: 'Builder negotiations, lot selection, spec home evaluation, and upgrade ROI analysis — before you sign anything.' }
   ],
   automation: {
     metrics: [
@@ -1722,21 +1724,21 @@ const MOCK = {
       { label: 'Booked from Auto', value: '6', trend: '$11,200 revenue', icon: '📅' }
     ],
     campaigns: [
-      { icon: '🏘️', name: 'Vacancy Alert — New Inquiry Follow-up', status: 'ACTIVE', sent: 38, desc: 'Sent to inquiries that didn\'t book a showing within 48 hours', opens: '74%', replies: 11, booked: 4 },
-      { icon: '⭐', name: 'Review Request (Post Move-in)', status: 'ACTIVE', sent: 22, desc: 'Auto-sent 30 days after tenant move-in', opens: '88%', reviews: 11, avgRating: '4.8★' },
-      { icon: '🔄', name: 'Lease Renewal Outreach (60 days prior)', status: 'ACTIVE', sent: 16, desc: 'Automated sequence starting 60 days before lease expiry', opens: '62%', replies: 8, reactivated: 5 }
+      { icon: '🏡', name: 'New Listing Alert — Buyer Match Follow-up', status: 'ACTIVE', sent: 38, desc: 'Sent to buyers whose criteria match a new listing within 2 hours of it going live', opens: '74%', replies: 11, booked: 4 },
+      { icon: '⭐', name: 'Review Request (Post Closing)', status: 'ACTIVE', sent: 22, desc: 'Auto-sent 7 days after a successful closing', opens: '88%', reviews: 11, avgRating: '4.9★' },
+      { icon: '🔄', name: 'Past Client Re-engagement (12 months)', status: 'ACTIVE', sent: 16, desc: 'Sent to past clients 12 months post-closing with a home value update', opens: '62%', replies: 8, reactivated: 5 }
     ],
     missedCalls: [
-      { date: 'Apr 6', name: 'Rohan K.', flow: 'Missed → Auto-text → Booked showing ($1,650/mo unit)', status: '✅' },
+      { date: 'Apr 6', name: 'Rohan K.', flow: 'Missed → Auto-text → Booked buyer consultation', status: '✅' },
       { date: 'Apr 4', name: 'Unknown', flow: 'Missed → Auto-text → No reply → Follow-up #2 scheduled', status: '⏳' },
-      { date: 'Apr 2', name: 'Lisa M.', flow: 'Missed → Auto-text → Called back → Signed lease', status: '✅' }
+      { date: 'Apr 2', name: 'Lisa M.', flow: 'Missed → Auto-text → Called back → Listing appointment booked', status: '✅' }
     ],
     recentMessages: [
-      { channel: '📱', name: 'Garcia Family', type: 'Lease renewal reminder', status: '✅ Opened' },
-      { channel: '📧', name: 'New Lead', type: 'Vacancy outreach', status: '✅ Replied' },
-      { channel: '📱', name: 'Kim Family', type: 'Maintenance update', status: '✅ Sent' },
-      { channel: '📧', name: 'Patel Inquiry', type: 'Showing confirmation', status: '📬 Sent' },
-      { channel: '📱', name: 'Tom R.', type: 'Missed call recovery', status: '✅ Booked' }
+      { channel: '📱', name: 'Patel Family', type: 'New listing match alert', status: '✅ Opened' },
+      { channel: '📧', name: 'Sarah Mitchell', type: 'Market update re-engagement', status: '✅ Replied' },
+      { channel: '📱', name: 'Kevin O\'Brien', type: 'Investment comps update', status: '✅ Sent' },
+      { channel: '📧', name: 'Anderson Residence', type: 'Listing prep checklist', status: '📬 Sent' },
+      { channel: '📱', name: 'New AI Lead', type: 'Missed call recovery', status: '✅ Booked' }
     ]
   }
 };
@@ -1745,7 +1747,7 @@ const MOCK = {
    TRANSLATIONS (ES)
 ═══════════════════════════════════════════ */
 const TRANS_ES = {
-  chatGreeting: `¡Hola! Soy el asistente de ${CONFIG.businessName}. 🏠 ¿Estás interesado en una propiedad, gestión de propiedades o una remodelación? Cuéntame en qué puedo ayudarte.`,
+  chatGreeting: `¡Hola! Soy el asistente de ${CONFIG.businessName}. 🏠 ¿Estás buscando comprar, vender o invertir en el área de DFW? Cuéntame en qué puedo ayudarte.`,
   chatPlaceholder: 'Pregunta sobre nuestros servicios...'
 };
 
@@ -1765,8 +1767,35 @@ function applyConfig() {
   if (el('langToggle'))      el('langToggle').style.display   = CONFIG.hasLanguageToggle ? '' : 'none';
   // Context banner business name
   const banner = el('contextBanner');
-  if (banner) banner.innerHTML = banner.innerHTML.replace('Apex Home Solutions', CONFIG.businessName);
-  document.title = `${CONFIG.businessName} — ${CONFIG.city} ${CONFIG.state} | Property Management & Real Estate`;
+  if (banner) banner.innerHTML = banner.innerHTML.replace('Latarryn Atkins', CONFIG.businessName);
+  // TCPA consent business name
+  if (el('tcpaBusinessName')) el('tcpaBusinessName').textContent = CONFIG.businessName;
+  document.title = `${CONFIG.businessName} — REALTOR® | ${CONFIG.city} ${CONFIG.state} | DFW Homes`;
+}
+
+/* ═══════════════════════════════════════════
+   COMPLIANCE FOOTER (brokerage + fair housing)
+═══════════════════════════════════════════ */
+function renderComplianceFooter() {
+  const b = CONFIG.brokerage;
+  if (!b) return;
+  const footer = document.querySelector('.cv-footer');
+  if (!footer) return;
+
+  // Append compliance strip INSIDE the existing footer — no duplicate block
+  const logoHtml = b.logo
+    ? `<img src="${b.logo}" alt="${b.name}" class="compliance-logo">`
+    : '';
+
+  const strip = document.createElement('div');
+  strip.className = 'compliance-strip';
+  strip.innerHTML = `
+    ${logoHtml}
+    <div>${escapeHtml(CONFIG.businessName)}, ${escapeHtml(b.name)}${b.marketCenter ? ` &nbsp;·&nbsp; ${escapeHtml(b.marketCenter)}` : ''}</div>
+    <div class="compliance-disclaimer">${escapeHtml(b.disclaimer)}</div>
+    <div>Equal Housing Opportunity &nbsp;·&nbsp; All properties available without regard to race, color, religion, sex, handicap, familial status, or national origin.</div>
+  `;
+  footer.appendChild(strip);
 }
 
 /* ═══════════════════════════════════════════
@@ -1790,7 +1819,7 @@ function dismissBanner() {
 ═══════════════════════════════════════════ */
 function pathwaySelect(audience) {
   // Smooth scroll to relevant section
-  const targets = { renter: 'portfolio', tenant: 'booking', owner: 'services', buyer: 'portfolio' };
+  const targets = { buyer: 'portfolio', seller: 'booking', investor: 'services', market: 'services' };
   const target = document.getElementById(targets[audience] || 'services');
   if (target) target.scrollIntoView({ behavior: 'smooth' });
   // Open chatbot with context pre-set
@@ -1802,10 +1831,10 @@ function pathwaySelect(audience) {
 
 let chatContext = null;
 const AUDIENCE_GREETINGS = {
-  renter:  { label: "I'm looking for a rental", reply: "Great! I can help you find available properties and schedule showings. What area and size are you looking for in DFW?" },
-  tenant:  { label: "I'm a current tenant", reply: "Hi! For maintenance requests, please describe the issue and I'll log it right away. You can also ask about your lease or rent payment." },
-  owner:   { label: "I'm a property owner", reply: "Welcome! I can tell you about our property management services, fees, and track record in DFW. What would you like to know?" },
-  buyer:   { label: "I'm buying or selling a home", reply: "Happy to help! I can show you active listings, discuss market conditions, or schedule a home valuation. What are you looking for?" }
+  buyer:    { label: "I'm buying a home", reply: "Great! I'd love to help you find a home in DFW. What area are you considering, and what's your approximate budget? I can pull current listings and market data right away." },
+  seller:   { label: "I'm selling my home", reply: "Perfect — I can help with that! To get you a market analysis, what's your home address or neighborhood? I'll pull recent comparable sales in your area." },
+  investor: { label: "I'm an investor", reply: "Happy to help with investment analysis! Are you looking at single-family rentals, multi-family, or new construction? I can pull cap rates and cash flow projections for DFW submarkets." },
+  market:   { label: "I want a market report", reply: "Sure! Which area or neighborhood are you curious about? I can share current median prices, days on market, and whether it's trending buyer or seller right now." }
 };
 
 /* ═══════════════════════════════════════════
@@ -1893,14 +1922,14 @@ function renderSavingsCard() {
   el.innerHTML = `
     <div class="dash-card" style="margin-bottom:20px;">
       <div class="dash-card-header">
-        <h3>Savings vs Lead Platforms</h3>
+        <h3>Cost vs Traditional Marketing</h3>
         <span class="savings-total">Saves $${annualTotal.toLocaleString()}/yr</span>
       </div>
-      <div class="savings-row"><span>${escapeHtml(pc.platforms)}: lead costs</span><span class="savings-old">$${pc.monthlyLeadCost}/mo</span></div>
-      <div class="savings-row"><span>${escapeHtml(pc.platforms)}: subscriptions</span><span class="savings-old">$${pc.monthlySubscription}/mo</span></div>
+      <div class="savings-row"><span>Zillow Premier Agent (avg)</span><span class="savings-old">$${pc.monthlyLeadCost}/mo</span></div>
+      <div class="savings-row"><span>CRM + email marketing tools</span><span class="savings-old">$${pc.monthlySubscription}/mo</span></div>
       <div class="savings-row"><span>Total monthly spend</span><span class="savings-old">$${monthlyTotal}/mo</span></div>
-      <div class="savings-row"><span>This system: ${pc.ourLeads} leads × $0</span><span class="savings-new">$0/mo</span></div>
-      <div style="margin-top:12px;font-size:12px;color:var(--t2);">Break-even: ${pc.breakEvenMonths} months. After that, pure savings.</div>
+      <div class="savings-row"><span>This site: ${pc.ourLeads} direct leads × $0</span><span class="savings-new">$0/mo</span></div>
+      <div style="margin-top:12px;font-size:12px;color:var(--t2);">Break-even: ${pc.breakEvenMonths} months. Every lead after that is free.</div>
     </div>`;
 }
 
@@ -1972,9 +2001,9 @@ function renderLeadsTable() {
 function renderPremiumTeasers() {
   const el = document.getElementById('premiumTeasers');
   const teasers = [
-    { icon: '👥', title: 'Tenant Portal', desc: 'Online payments, maintenance requests, lease docs.' },
-    { icon: '🔧', title: 'Vendor Management', desc: 'Contractor directory, ratings, and work order tracking.' },
-    { icon: '💰', title: 'Financial Reports', desc: 'P&L by property, expense tracking, owner disbursements.' }
+    { icon: '🏠', title: 'IDX Listing Search', desc: 'Live MLS listings embedded on your site — buyers search without leaving.' },
+    { icon: '📅', title: 'Showing Scheduler', desc: 'Buyers book tours directly. Syncs with your calendar automatically.' },
+    { icon: '💰', title: 'Transaction Tracker', desc: 'Earnest money, contingencies, closing dates — all in one view.' }
   ];
   el.innerHTML = `
     <h3 style="font-size:0.85rem;font-weight:700;color:var(--t2);margin:8px 0 12px;text-transform:uppercase;letter-spacing:0.06em;">Premium Features</h3>
@@ -2034,7 +2063,7 @@ function renderProperties() {
   if (propertiesInitialized) return;
   propertiesInitialized = true;
   const el = document.getElementById('propertiesGrid');
-  const statusLabel = { occupied: 'Occupied', vacant: 'Vacant', showing: 'Showing', listing: 'For Rent' };
+  const statusLabel = { active: 'Active', contract: 'Under Contract', sold: 'Closed', prospect: 'Prospect' };
   el.innerHTML = `
     <div class="properties-grid">
       ${MOCK.properties.map(p => `
@@ -2048,39 +2077,39 @@ function renderProperties() {
             <div class="prop-city">${escapeHtml(p.city)}</div>
             <div class="prop-stats">
               <div class="prop-stat-row">
-                <span class="prop-stat-label">Rent / Price</span>
-                <span class="prop-stat-value">${escapeHtml(p.rent)}</span>
+                <span class="prop-stat-label">List Price</span>
+                <span class="prop-stat-value">${escapeHtml(p.price)}</span>
               </div>
               <div class="prop-stat-row">
-                <span class="prop-stat-label">Tenant</span>
-                <span class="prop-stat-value">${escapeHtml(p.tenant)}</span>
+                <span class="prop-stat-label">Client</span>
+                <span class="prop-stat-value">${escapeHtml(p.client)}</span>
               </div>
               <div class="prop-stat-row">
-                <span class="prop-stat-label">Maintenance</span>
-                <span class="prop-stat-value ${p.maintenance > 0 ? 'alert' : ''}">${p.maintenance > 0 ? p.maintenance + ' open' : 'None'}</span>
+                <span class="prop-stat-label">Pending Docs</span>
+                <span class="prop-stat-value ${p.requests > 0 ? 'alert' : ''}">${p.requests > 0 ? p.requests + ' pending' : 'None'}</span>
               </div>
               <div class="prop-stat-row">
-                <span class="prop-stat-label">Lease</span>
-                <span class="prop-stat-value" style="font-size:11px;">${escapeHtml(p.lease)}</span>
+                <span class="prop-stat-label">Transaction</span>
+                <span class="prop-stat-value" style="font-size:11px;">${escapeHtml(p.txStatus)}</span>
               </div>
             </div>
             <div class="prop-action-row">
               <button class="prop-btn primary" onclick="showToast('Opening property details…')">Details</button>
-              <button class="prop-btn secondary" onclick="showToast('${p.maintenance > 0 ? 'Opening maintenance requests…' : 'No open requests'}')">Maintenance ${p.maintenance > 0 ? '(' + p.maintenance + ')' : ''}</button>
+              <button class="prop-btn secondary" onclick="showToast('${p.requests > 0 ? 'Opening documents…' : 'No pending documents'}')">Documents ${p.requests > 0 ? '(' + p.requests + ')' : ''}</button>
             </div>
           </div>
         </div>`).join('')}
     </div>
     <div class="dash-card" style="margin-top:0;">
       <div class="dash-card-header">
-        <h3>Portfolio Summary</h3>
-        <span class="dash-badge amber">4 need attention</span>
+        <h3>Active Pipeline</h3>
+        <span class="dash-badge amber">1 closing this month</span>
       </div>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center;">
-        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--t0);">47</div><div style="font-size:12px;color:var(--t2);">Total Units</div></div>
-        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--green);">43</div><div style="font-size:12px;color:var(--t2);">Occupied</div></div>
-        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--amber);">4</div><div style="font-size:12px;color:var(--t2);">Vacant / Showing</div></div>
-        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--accent);">6</div><div style="font-size:12px;color:var(--t2);">Maintenance Open</div></div>
+        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--t0);">6</div><div style="font-size:12px;color:var(--t2);">Total Active</div></div>
+        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--green);">2</div><div style="font-size:12px;color:var(--t2);">Listed</div></div>
+        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--amber);">1</div><div style="font-size:12px;color:var(--t2);">Under Contract</div></div>
+        <div><div style="font-family:var(--font-display);font-size:1.8rem;color:var(--accent);">2</div><div style="font-size:12px;color:var(--t2);">Closed (30 days)</div></div>
       </div>
     </div>`;
 }
@@ -2143,11 +2172,11 @@ async function generatePost() {
   const btn = document.getElementById('genBtn');
   const post = document.getElementById('generatedPost');
   btn.disabled = true; btn.textContent = 'Generating…'; post.style.display = 'none';
-  const fallback = `# What Frisco Property Owners Need to Know About the 2026 Rental Market\n\nFrisco's rental market has changed significantly in the last 18 months. Here's what the data shows:\n\n**Vacancy rates are tightening.** Average days on market for a Frisco rental dropped from 34 days in early 2025 to 18 days in Q1 2026. Well-managed properties are leasing in under 10 days.\n\n**AI-driven leasing is becoming the expectation.** Tenants — especially in the 25-40 age range — now expect to inquire, tour, and receive application decisions digitally and quickly. Properties that respond within 1 hour have a 3x higher show-to-application conversion.\n\n**Maintenance responsiveness drives renewals.** Our data shows tenants who receive a maintenance response within 4 hours are 78% more likely to renew their lease. Every delayed response is a retention risk.\n\n**What this means for owners:** Speed and responsiveness are now competitive advantages. AI-powered property management handles inquiries 24/7, auto-schedules showings, and logs maintenance requests the moment they come in — whether it's 9 AM or 11 PM.\n\nContact ${CONFIG.businessName} to see how we manage properties in Frisco, Plano, McKinney, and surrounding DFW communities.`;
+  const fallback = `# Is Now a Good Time to Buy in Frisco? What the 2026 DFW Market Data Says\n\nFrisco's housing market has shifted in the last 18 months — and buyers who understand the data are getting better deals than those who don't.\n\n**Inventory is up, but demand is still strong.** Active listings in Frisco increased 22% from Q4 2025 to Q1 2026, giving buyers more options. But well-priced homes are still moving in under 10 days.\n\n**Interest rates are creating opportunity.** The rate environment has cooled buyer competition in the $500K–$750K range — which is exactly where the best Frisco inventory lives. Sellers in that range are more negotiable than they've been in three years.\n\n**New construction is back.** Prosper and Celina builders are offering meaningful incentives — rate buydowns, closing cost credits, and free upgrades — that aren't being advertised. Knowing which builders are motivated matters.\n\n**What this means for buyers:** If you've been waiting for the "right time," the data suggests Q2 2026 is one of the better entry points in recent memory. The window won't last.\n\nReach out to ${CONFIG.businessName} for a free market analysis specific to your neighborhood and price range.`;
   try {
     const res = await fetch('/api/demos/chat', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ businessType: CONFIG.businessType, message: `Write a 250-word blog post titled "What ${CONFIG.city} Property Owners Need to Know About the 2026 Rental Market" for ${CONFIG.businessName}. Include market data and local context. Plain text only.`, history: [] }),
+      body: JSON.stringify({ businessType: CONFIG.businessType, message: `Write a 250-word blog post titled "Is Now a Good Time to Buy in ${CONFIG.city}? What the 2026 DFW Market Data Says" for ${CONFIG.businessName}, a local REALTOR®. Include buyer-focused market insights and local context. Plain text only.`, history: [] }),
       signal: AbortSignal.timeout(15000)
     });
     const data = await res.json();
@@ -2161,28 +2190,96 @@ async function generatePost() {
    KNOWLEDGE BASE
 ═══════════════════════════════════════════ */
 function initKb() {
+  renderKb();
+}
+
+function renderKb() {
   const grid = document.getElementById('kbGrid');
   grid.innerHTML = `
     <div class="kb-card">
-      <h3>Frequently Asked Questions</h3>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <h3 style="margin:0;">Frequently Asked Questions</h3>
+        <span style="font-size:11px;color:var(--t2);">What your AI chatbot knows</span>
+      </div>
+      <p style="font-size:12px;color:var(--t3);margin:0 0 14px;">Click any answer to edit it. Changes update your AI chatbot's responses.</p>
       <div class="kb-faq">
-        ${MOCK.faqs.map(f => `
-          <div class="kb-faq-item">
+        ${MOCK.faqs.map((f, i) => `
+          <div class="kb-faq-item" id="faq-item-${i}">
             <div class="kb-faq-q">${escapeHtml(f.q)}</div>
-            <div class="kb-faq-a">${escapeHtml(f.a)}</div>
+            <div class="kb-faq-a" id="faq-a-${i}">${escapeHtml(f.a)}</div>
+            <div id="faq-edit-${i}" style="display:none;margin-top:8px;">
+              <textarea id="faq-ta-${i}" style="width:100%;min-height:72px;padding:8px 10px;border:1px solid var(--accent);border-radius:var(--radius-md);background:var(--bg2);color:var(--t0);font-size:12px;font-family:var(--font-body);resize:vertical;">${escapeHtml(f.a)}</textarea>
+              <div style="display:flex;gap:8px;margin-top:6px;">
+                <button onclick="saveFaq(${i})" style="padding:5px 14px;background:var(--accent);color:white;font-size:12px;font-weight:700;border:none;border-radius:var(--radius-full);cursor:pointer;font-family:var(--font-body);">Save Changes</button>
+                <button onclick="cancelFaqEdit(${i})" style="padding:5px 14px;background:var(--bg3);color:var(--t1);font-size:12px;font-weight:600;border:none;border-radius:var(--radius-full);cursor:pointer;font-family:var(--font-body);">Cancel</button>
+              </div>
+            </div>
+            <button onclick="editFaq(${i})" id="faq-edit-btn-${i}" style="margin-top:6px;padding:3px 10px;background:none;border:1px solid var(--border);border-radius:var(--radius-full);font-size:11px;color:var(--t2);cursor:pointer;font-family:var(--font-body);">✏️ Edit answer</button>
           </div>`).join('')}
       </div>
     </div>
     <div class="kb-card">
-      <h3>Services</h3>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <h3 style="margin:0;">Services</h3>
+        <span style="font-size:11px;color:var(--t2);">What the chatbot can discuss</span>
+      </div>
+      <p style="font-size:12px;color:var(--t3);margin:0 0 14px;">Click any description to update it.</p>
       <div class="kb-svc-list">
-        ${MOCK.services.map(s => `
-          <div class="kb-svc-item">
+        ${MOCK.services.map((s, i) => `
+          <div class="kb-svc-item" id="svc-item-${i}">
             <div class="kb-svc-name">${escapeHtml(s.name)}</div>
-            <div class="kb-svc-desc">${escapeHtml(s.desc)}</div>
+            <div class="kb-svc-desc" id="svc-d-${i}">${escapeHtml(s.desc)}</div>
+            <div id="svc-edit-${i}" style="display:none;margin-top:8px;">
+              <textarea id="svc-ta-${i}" style="width:100%;min-height:56px;padding:8px 10px;border:1px solid var(--accent);border-radius:var(--radius-md);background:var(--bg2);color:var(--t0);font-size:12px;font-family:var(--font-body);resize:vertical;">${escapeHtml(s.desc)}</textarea>
+              <div style="display:flex;gap:8px;margin-top:6px;">
+                <button onclick="saveSvc(${i})" style="padding:5px 14px;background:var(--accent);color:white;font-size:12px;font-weight:700;border:none;border-radius:var(--radius-full);cursor:pointer;font-family:var(--font-body);">Save Changes</button>
+                <button onclick="cancelSvcEdit(${i})" style="padding:5px 14px;background:var(--bg3);color:var(--t1);font-size:12px;font-weight:600;border:none;border-radius:var(--radius-full);cursor:pointer;font-family:var(--font-body);">Cancel</button>
+              </div>
+            </div>
+            <button onclick="editSvc(${i})" id="svc-edit-btn-${i}" style="margin-top:4px;padding:3px 10px;background:none;border:1px solid var(--border);border-radius:var(--radius-full);font-size:11px;color:var(--t2);cursor:pointer;font-family:var(--font-body);">✏️ Edit</button>
           </div>`).join('')}
       </div>
     </div>`;
+}
+
+/* KB edit helpers */
+function editFaq(i) {
+  document.getElementById(`faq-a-${i}`).style.display = 'none';
+  document.getElementById(`faq-edit-btn-${i}`).style.display = 'none';
+  document.getElementById(`faq-edit-${i}`).style.display = 'block';
+  document.getElementById(`faq-ta-${i}`).focus();
+}
+function cancelFaqEdit(i) {
+  document.getElementById(`faq-a-${i}`).style.display = '';
+  document.getElementById(`faq-edit-btn-${i}`).style.display = '';
+  document.getElementById(`faq-edit-${i}`).style.display = 'none';
+}
+function saveFaq(i) {
+  const val = document.getElementById(`faq-ta-${i}`).value.trim();
+  if (!val) return;
+  MOCK.faqs[i].a = val;
+  document.getElementById(`faq-a-${i}`).textContent = val;
+  cancelFaqEdit(i);
+  showToast('✅ AI chatbot knowledge updated');
+}
+function editSvc(i) {
+  document.getElementById(`svc-d-${i}`).style.display = 'none';
+  document.getElementById(`svc-edit-btn-${i}`).style.display = 'none';
+  document.getElementById(`svc-edit-${i}`).style.display = 'block';
+  document.getElementById(`svc-ta-${i}`).focus();
+}
+function cancelSvcEdit(i) {
+  document.getElementById(`svc-d-${i}`).style.display = '';
+  document.getElementById(`svc-edit-btn-${i}`).style.display = '';
+  document.getElementById(`svc-edit-${i}`).style.display = 'none';
+}
+function saveSvc(i) {
+  const val = document.getElementById(`svc-ta-${i}`).value.trim();
+  if (!val) return;
+  MOCK.services[i].desc = val;
+  document.getElementById(`svc-d-${i}`).textContent = val;
+  cancelSvcEdit(i);
+  showToast('✅ AI chatbot knowledge updated');
 }
 
 /* ═══════════════════════════════════════════
@@ -2367,10 +2464,10 @@ function showQuickReplies() {
   const qrEl = document.getElementById('chatQuickReplies');
   if (!qrEl) return;
   const options = [
-    { emoji: '🏠', label: "I'm looking for a rental",  audience: 'renter' },
-    { emoji: '🔧', label: "I'm a current tenant",       audience: 'tenant' },
-    { emoji: '📊', label: "I'm a property owner",       audience: 'owner'  },
-    { emoji: '🏡', label: "I'm buying or selling",      audience: 'buyer'  }
+    { emoji: '🏡', label: "I'm buying a home",          audience: 'buyer'    },
+    { emoji: '💰', label: "I'm selling my home",        audience: 'seller'   },
+    { emoji: '📊', label: "I'm an investor",            audience: 'investor' },
+    { emoji: '🔍', label: "I want a market report",     audience: 'market'   }
   ];
   qrEl.innerHTML = options.map(o =>
     `<button class="chat-qr-btn" onclick="selectQuickReply('${o.audience}')">${o.emoji} ${o.label}</button>`
@@ -2412,27 +2509,27 @@ function addChatMessage(role, text) {
   div.appendChild(bubble);
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
-  if (isBot && voiceMode) speakText(text, bubble);
+  if (isBot && voiceMode) speakText(text);
   return bubble;
 }
 
 function getChatFallback(text) {
   const t = text.toLowerCase();
-  if (t.includes('maintenance') || t.includes('repair') || t.includes('fix') || t.includes('broken'))
-    return 'Maintenance requests can be submitted right here. I\'ll log it immediately and notify a coordinator. What needs attention?';
   if (t.includes('showing') || t.includes('tour') || t.includes('see') || t.includes('visit'))
-    return `We have several properties available for showings this week. Can you share your preferred neighborhood and bedroom count? I'll check availability right now.`;
-  if (t.includes('rent') || t.includes('lease') || t.includes('tenant') || t.includes('apply'))
-    return 'We have vacancies in Frisco, Plano, and McKinney. Rents range from $1,650–$3,200/mo. Would you like to see current listings or schedule a showing?';
-  if (t.includes('property management') || t.includes('manage') || t.includes('owner'))
-    return `${CONFIG.businessName} manages 47+ properties across DFW at 8% of monthly rent. That includes tenant screening, maintenance, rent collection, and 24/7 AI communication. How many properties do you own?`;
-  if (t.includes('remodel') || t.includes('kitchen') || t.includes('bathroom') || t.includes('estimate'))
-    return 'We provide same-day Good/Better/Best estimates for remodeling projects. Kitchen renovations start around $15K, bathrooms from $8K. Want to submit a project request?';
-  if (t.includes('cost') || t.includes('price') || t.includes('how much') || t.includes('cuánto'))
-    return 'Property management is 8% of monthly rent. Remodeling estimates are free and delivered same-day. Real estate services are commission-based. What specifically can I quote for you?';
+    return `I can schedule a showing for you. What neighborhood or price range are you focused on? I'll check availability and get something on the calendar.`;
+  if (t.includes('buy') || t.includes('buying') || t.includes('purchase') || t.includes('looking for'))
+    return `Happy to help with your home search! What's your target area and budget in DFW? I can pull current listings and recent sales comps right now.`;
+  if (t.includes('sell') || t.includes('selling') || t.includes('list') || t.includes('valuation') || t.includes('worth'))
+    return `I can give you a free market analysis. What's your home address or neighborhood? I'll pull recent comparable sales and give you a real number — not a Zestimate.`;
+  if (t.includes('invest') || t.includes('rental') || t.includes('cap rate') || t.includes('cash flow'))
+    return `DFW is still strong for investors. Prosper and Celina are seeing the best cap rates right now. Are you looking at single-family, multi-family, or new construction?`;
+  if (t.includes('price') || t.includes('market') || t.includes('how much') || t.includes('cuánto'))
+    return `DFW prices vary a lot by submarket. Frisco median is around $575K, McKinney around $450K, Prosper closer to $620K. What area are you curious about? I can get more specific.`;
+  if (t.includes('pre-approval') || t.includes('mortgage') || t.includes('lender') || t.includes('loan'))
+    return `I work with several trusted DFW lenders who can get you pre-approved quickly — often same day. Want me to make an introduction? It's free and doesn't affect your credit score.`;
   if (t.includes('español') || t.includes('spanish') || t.includes('habla'))
-    return '¡Sí! Atendemos en español. ¿En qué puedo ayudarte hoy con tu propiedad o proyecto?';
-  return `I can help with property showings, maintenance requests, remodeling estimates, and property management questions. What are you looking for?`;
+    return '¡Sí! Atiendo en español. ¿Estás buscando comprar, vender o invertir en DFW? Cuéntame en qué puedo ayudarte.';
+  return `I can help with buying, selling, investing, or just understanding the DFW market. What are you trying to figure out?`;
 }
 
 async function sendChat() {
@@ -2445,7 +2542,7 @@ async function sendChat() {
 
   const thinkingDiv = document.createElement('div');
   thinkingDiv.className = 'msg-thinking';
-  thinkingDiv.textContent = '…';
+  thinkingDiv.innerHTML = '<span></span><span></span><span></span>';
   document.getElementById('chatMessages').appendChild(thinkingDiv);
 
   try {
@@ -2465,102 +2562,6 @@ async function sendChat() {
   }
 }
 
-/* ═══════════════════════════════════════════
-   VOICE — TTS + STT
-═══════════════════════════════════════════ */
-let voiceMode = false;
-let recognition = null;
-let isRecording = false;
-let micSendTimer = null;
-
-function getBestVoice() {
-  const voices = speechSynthesis.getVoices();
-  if (!voices.length) return null;
-  const priority = [
-    'Google UK English Female', 'Google US English',
-    'Samantha', 'Karen', 'Moira', 'Tessa',
-    'Microsoft Jenny', 'Microsoft Aria', 'Microsoft Guy',
-    'English United States'
-  ];
-  for (const name of priority) {
-    const match = voices.find(v => v.name.includes(name) && v.lang.startsWith('en'));
-    if (match) return match;
-  }
-  return voices.find(v => v.lang.startsWith('en-US')) || voices.find(v => v.lang.startsWith('en')) || voices[0];
-}
-
-function speakText(text, msgEl) {
-  if (!voiceMode || !window.speechSynthesis) return;
-  window.speechSynthesis.cancel();
-  const cleanText = text.replace(/[\u{1F000}-\u{1FFFF}]/gu, '').replace(/[✓✅⚠↔●○🏠🔑📊★·]/g, '').replace(/\s{2,}/g, ' ').trim();
-  const utterance = new SpeechSynthesisUtterance(cleanText);
-  utterance.rate = 1.05; utterance.pitch = 1.0;
-  const voice = getBestVoice();
-  if (voice) utterance.voice = voice;
-  speechSynthesis.speak(utterance);
-}
-
-function toggleVoiceMode() {
-  voiceMode = !voiceMode;
-  const btn = document.getElementById('voiceToggle');
-  btn.classList.toggle('active', voiceMode);
-  btn.textContent = voiceMode ? '🔊' : '🔇';
-  if (!voiceMode) window.speechSynthesis?.cancel();
-  showToast(voiceMode ? 'Voice responses ON' : 'Voice responses OFF');
-}
-
-function initSpeechRecognition() {
-  if (!CONFIG.hasVoice) return;
-  const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SpeechRec) return;
-  const micBtn = document.getElementById('chatMic');
-  if (micBtn) micBtn.style.display = '';
-  recognition = new SpeechRec();
-  recognition.continuous = true;
-  recognition.interimResults = true;
-  recognition.lang = currentLang === 'es' ? 'es-US' : 'en-US';
-  recognition.onresult = (event) => {
-    let transcript = '';
-    for (let i = 0; i < event.results.length; i++) transcript += event.results[i][0].transcript;
-    document.getElementById('chatInput').value = transcript;
-    clearTimeout(micSendTimer);
-    const lastResult = event.results[event.results.length - 1];
-    if (lastResult.isFinal) {
-      micSendTimer = setTimeout(() => {
-        if (isRecording && document.getElementById('chatInput').value.trim()) { stopMic(); sendChat(); }
-      }, 2000);
-    }
-  };
-  recognition.onerror = (e) => { if (e.error !== 'no-speech') stopMic(); };
-  recognition.onend = () => {
-    if (isRecording) {
-      const input = document.getElementById('chatInput').value.trim();
-      if (input) { clearTimeout(micSendTimer); micSendTimer = setTimeout(() => { if (isRecording) { stopMic(); sendChat(); } }, 1500); }
-      else stopMic();
-    }
-  };
-}
-
-function toggleMic() {
-  if (isRecording) { stopMic(); return; }
-  if (!recognition) return;
-  isRecording = true;
-  const micBtn = document.getElementById('chatMic');
-  const label = document.getElementById('chatVoiceLabel');
-  micBtn.classList.add('recording');
-  if (label) { label.textContent = 'Listening...'; label.style.display = ''; }
-  try { recognition.start(); } catch(e) { stopMic(); }
-}
-
-function stopMic() {
-  isRecording = false;
-  clearTimeout(micSendTimer);
-  const micBtn = document.getElementById('chatMic');
-  const label = document.getElementById('chatVoiceLabel');
-  if (micBtn) micBtn.classList.remove('recording');
-  if (label) label.style.display = 'none';
-  try { recognition?.stop(); } catch(e) {}
-}
 
 /* ═══════════════════════════════════════════
    THEME
@@ -2671,6 +2672,8 @@ document.addEventListener('DOMContentLoaded', function() {
   renderPortfolio();
   renderReviews();
   initScrollReveal();
+  // Compliance footer (brokerage + fair housing) — runs if CONFIG.brokerage is set
+  renderComplianceFooter();
 });
 </script>
 </body>
