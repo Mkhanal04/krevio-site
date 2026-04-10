@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About these demos — Krevio</title>
+<meta name="description" content="What you're looking at when you see a Krevio demo site: real code, real AI, fictional businesses. Built to show local service business owners what a Krevio site could do for them.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://krevio.net/about-these-demos/">
+<link rel="stylesheet" href="/css/krevio-tokens.css">
+
+<style>
+/* ─────────────────────────────────────────────
+   LOCAL STYLES — /about-these-demos/
+   Uses ONLY krevio-tokens.css variables.
+   No hardcoded colors, sizes, or radii.
+   ───────────────────────────────────────────── */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--t0);
+}
+
+/* Top bar — lightweight, links back to Krevio */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg) var(--space-2xl);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg1);
+}
+.top-bar-brand {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 900;
+  color: var(--t0);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.top-bar-brand::before {
+  content: "◆ ";
+  color: var(--krevio-brand);
+}
+.top-bar-links {
+  display: flex;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+.top-bar-links a {
+  color: var(--t1);
+  text-decoration: none;
+  font-size: var(--text-md);
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.top-bar-links a:hover { color: var(--t0); }
+
+/* Hero / content wrapper */
+.content {
+  flex: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-2xl);
+  width: 100%;
+}
+.eyebrow {
+  display: inline-block;
+  background: var(--krevio-brand-subtle);
+  color: var(--krevio-brand-dark);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-xl);
+  border: 1px solid var(--krevio-brand-border);
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--text-3xl);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-xl);
+}
+.lede {
+  font-size: var(--text-lg);
+  line-height: 1.65;
+  color: var(--t1);
+  margin-bottom: var(--space-3xl);
+  max-width: 60ch;
+}
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 900;
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-lg);
+  color: var(--t0);
+  letter-spacing: -0.01em;
+}
+p {
+  font-size: var(--text-lg);
+  line-height: 1.65;
+  color: var(--t1);
+  margin-bottom: var(--space-lg);
+  max-width: 60ch;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--space-xl);
+}
+li {
+  position: relative;
+  padding-left: var(--space-xl);
+  margin-bottom: var(--space-md);
+  font-size: var(--text-lg);
+  line-height: 1.55;
+  color: var(--t1);
+  max-width: 60ch;
+}
+li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--krevio-brand);
+  font-weight: 700;
+}
+
+/* CTA row */
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-3xl);
+  border-top: 1px solid var(--border);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-full);
+  font-size: var(--text-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  border: 1px solid transparent;
+}
+.btn-primary {
+  background: var(--krevio-brand);
+  color: var(--t0);
+  border-color: var(--krevio-brand);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.btn-secondary {
+  background: var(--bg1);
+  color: var(--t0);
+  border-color: var(--borderH);
+}
+.btn-secondary:hover {
+  background: var(--bg2);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-2xl);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--t2);
+  border-top: 1px solid var(--border);
+  background: var(--bg1);
+}
+.footer a {
+  color: var(--t1);
+  text-decoration: none;
+}
+.footer a:hover { color: var(--t0); }
+
+/* Mobile */
+@media (max-width: 600px) {
+  .top-bar { padding: var(--space-md) var(--space-lg); }
+  .top-bar-links { gap: var(--space-lg); }
+  .top-bar-links a[data-hide-mobile] { display: none; }
+  .content { padding: var(--space-2xl) var(--space-lg); }
+  .cta-row .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="top-bar">
+    <a class="top-bar-brand" href="/">Krevio</a>
+    <nav class="top-bar-links">
+      <a href="/demos/">All demos</a>
+      <a href="/" data-hide-mobile>Home</a>
+      <a href="mailto:krevio@krevio.net">Contact</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="eyebrow">About these demos</div>
+    <h1>You're looking at a Krevio demo.</h1>
+    <p class="lede">
+      Every "business" on a Krevio demo page — the plumber, the landscaper, the HVAC company, the REALTOR® — is
+      <strong>fictional</strong>. The dashboards, receipts, reviews, and booking flows you see are mocked.
+      The code, the AI chatbot, and the infrastructure are <strong>real</strong> — the same stack we ship to paying customers.
+    </p>
+
+    <h2>Why it looks so real</h2>
+    <p>
+      Because the product <em>is</em> real. Krevio builds production websites + AI chatbots + lead capture for local service
+      businesses. The demos exist so a business owner can click through a working example of the thing they'd be buying
+      before they buy it.
+    </p>
+
+    <h2>What's fictional vs what's not</h2>
+    <ul>
+      <li><strong>Fictional:</strong> business names, phone numbers (all <code>555-</code> format by convention), street addresses, reviewer names, testimonial text, specific license numbers, dashboard pipeline data, booking availability, and any "transactions" you see.</li>
+      <li><strong>Real:</strong> the chatbot (Gemini 2.5 Flash), the voice responses (Google Cloud TTS), the AI lead-qualification logic, the hosting (Vercel), the design tokens, the code itself. Everything under the hood.</li>
+    </ul>
+
+    <h2>The chatbot knows it's a demo</h2>
+    <p>
+      If you ask the chatbot "are you real?" or try to book an appointment, it'll answer truthfully: it's a demo assistant,
+      not a real business. It won't invent license numbers, won't commit to bookings, and won't pretend to be a human. That's
+      intentional — public demos need to be honest about what they are.
+    </p>
+
+    <h2>Want one of these for your business?</h2>
+    <p>
+      Krevio builds these sites as a productized service for local service businesses — plumbers, HVAC companies,
+      landscapers, remodelers, real estate agents. Fixed scope, fixed price, monthly recurring. No weird consulting
+      engagements, no "learn a complex tool first." We hand you a finished website + chatbot.
+    </p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/">See what Krevio does →</a>
+      <a class="btn btn-secondary" href="/demos/">Browse all demos</a>
+      <a class="btn btn-secondary" href="mailto:krevio@krevio.net?subject=Interested%20in%20a%20Krevio%20site">Email us</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>◆ Krevio — AI-powered websites for local service businesses &nbsp;·&nbsp;
+      <a href="/">krevio.net</a> &nbsp;·&nbsp;
+      <a href="mailto:krevio@krevio.net">krevio@krevio.net</a>
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>
