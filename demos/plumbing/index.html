@@ -10,77 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <script defer src="/_vercel/insights/script.js"></script>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Plumber",
-      "name": "Lone Star Plumbing",
-      "telephone": "(469) 555-0789",
-      "url": "https://lonestarpluming.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "3200 W Parker Rd",
-        "addressLocality": "Plano",
-        "addressRegion": "TX",
-        "postalCode": "75074",
-        "addressCountry": "US"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 33.0198,
-        "longitude": -96.6989
-      },
-      "areaServed": ["Plano", "Richardson", "Murphy", "Wylie", "Garland"],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "150"
-      },
-      "priceRange": "$$",
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-          "opens": "00:00",
-          "closes": "23:59"
-        }
-      ]
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How fast can you get here for emergencies?",
-          "acceptedAnswer": {"@type": "Answer", "text": "We aim for under 60 minutes for emergencies in our service area. Call (469) 555-0789 for immediate dispatch."}
-        },
-        {
-          "@type": "Question",
-          "name": "How much does a water heater cost?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Tank water heaters: $800–$1,500 installed. Tankless: $2,000–$3,500 installed. We offer same-day replacement."}
-        },
-        {
-          "@type": "Question",
-          "name": "Do you offer financing?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Yes. We partner with GreenSky for 0% financing on jobs over $1,000. Apply at your appointment."}
-        },
-        {
-          "@type": "Question",
-          "name": "Are you licensed?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Yes. Texas Master Plumber License #M-40XXX. Fully insured with $1M liability coverage."}
-        },
-        {
-          "@type": "Question",
-          "name": "What areas do you serve?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Plano, Richardson, Murphy, Wylie, Garland, and surrounding East DFW communities."}
-        }
-      ]
-    }
-  ]
-}
-</script>
+<!-- Schema markup injected dynamically from CONFIG — see generateAndInjectSchema() below -->
 
 <style>
 /* ═══════════════════════════════════════════
@@ -1514,7 +1444,146 @@ const CONFIG = {
   hasReceipts:         true,  // Receipts & Expenses tab
   hasGallery:          true,  // Before/After gallery in customer view
   hasLanguageToggle:   true,  // EN/ES language toggle in demo bar
+
+  // ── GEO / Schema ──────────────────────────
+  // Fill these in during client onboarding. Leave empty strings if unknown.
+  googleBusinessUrl: '',  // e.g. 'https://maps.google.com/?cid=...'
+  facebookUrl:       '',  // e.g. 'https://facebook.com/lonestarpluming'
+  yelpUrl:           '',  // e.g. 'https://yelp.com/biz/lone-star-plumbing-plano'
 };
+
+/* ═══════════════════════════════════════════
+   GEO SCHEMA MARKUP
+   Generates JSON-LD structured data from CONFIG and injects it into <head>.
+   Templateable: swap CONFIG values for a different business — schema updates automatically.
+═══════════════════════════════════════════ */
+function generateAndInjectSchema() {
+  const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '');
+
+  // Collect sameAs links (filter empty strings)
+  const sameAs = [CONFIG.googleBusinessUrl, CONFIG.facebookUrl, CONFIG.yelpUrl].filter(Boolean);
+
+  // 1 — LocalBusiness
+  const localBusiness = {
+    '@context': 'https://schema.org',
+    '@type': CONFIG.schemaType || 'LocalBusiness',
+    name: CONFIG.businessName,
+    description: CONFIG.tagline,
+    telephone: CONFIG.phone,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: CONFIG.address,
+      addressLocality: CONFIG.city,
+      addressRegion: CONFIG.state,
+      postalCode: CONFIG.zip,
+      addressCountry: 'US'
+    },
+    areaServed: CONFIG.areasServed.map(a => ({ '@type': 'City', name: a })),
+    priceRange: CONFIG.priceRange,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: CONFIG.rating,
+      reviewCount: parseInt(CONFIG.reviewCount) || 150
+    },
+    openingHoursSpecification: [{
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+      opens: '00:00',
+      closes: '23:59'
+    }],
+    ...(sameAs.length ? { sameAs } : {})
+  };
+
+  // 2 — FAQPage (plumbing-specific content)
+  const faqPage = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'How fast can you get here for emergencies?',
+        acceptedAnswer: { '@type': 'Answer', text: `We aim for under 60 minutes for emergencies in our service area. Call ${CONFIG.phone} for immediate dispatch.` }
+      },
+      {
+        '@type': 'Question',
+        name: 'What areas do you serve?',
+        acceptedAnswer: { '@type': 'Answer', text: `${CONFIG.businessName} serves ${CONFIG.areasServed.join(', ')} and surrounding communities.` }
+      },
+      {
+        '@type': 'Question',
+        name: 'How much does a water heater installation cost?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Tank water heaters run $800–$1,500 installed. Tankless units run $2,000–$3,500 installed. We offer same-day replacement.' }
+      },
+      {
+        '@type': 'Question',
+        name: 'Do you offer financing?',
+        acceptedAnswer: { '@type': 'Answer', text: 'Yes. We partner with GreenSky for 0% financing on jobs over $1,000. Ask about it at your appointment.' }
+      },
+      {
+        '@type': 'Question',
+        name: 'Are you licensed and insured?',
+        acceptedAnswer: { '@type': 'Answer', text: `Yes. ${CONFIG.businessName} holds a Texas Master Plumber license and carries $1M liability insurance.` }
+      },
+      {
+        '@type': 'Question',
+        name: 'Do you offer free estimates?',
+        acceptedAnswer: { '@type': 'Answer', text: 'We provide free estimates on all major work including repiping, water heater replacement, and sewer line repair.' }
+      }
+    ]
+  };
+
+  // 3 — Service items (one per major service category)
+  const serviceNames = [
+    'Emergency Plumbing Repair',
+    'Drain Cleaning',
+    'Water Heater Installation',
+    'Whole-Home Repiping',
+    'Fixture Installation',
+    'Sewer Line Repair'
+  ];
+  const serviceSchemas = serviceNames.map(svcName => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: svcName,
+    serviceType: svcName,
+    provider: {
+      '@type': CONFIG.schemaType || 'LocalBusiness',
+      name: CONFIG.businessName
+    },
+    areaServed: {
+      '@type': 'City',
+      name: CONFIG.city,
+      containedInPlace: { '@type': 'State', name: CONFIG.state }
+    }
+  }));
+
+  // 4 — Organization
+  const organization = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: CONFIG.businessName,
+    telephone: CONFIG.phone,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: CONFIG.city,
+      addressRegion: CONFIG.state,
+      postalCode: CONFIG.zip,
+      addressCountry: 'US'
+    },
+    ...(sameAs.length ? { sameAs } : {})
+  };
+
+  // Inject all schemas into <head>
+  [localBusiness, faqPage, ...serviceSchemas, organization].forEach(schema => {
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(schema);
+    document.head.appendChild(s);
+  });
+}
+
+// Run immediately — CONFIG is defined above
+generateAndInjectSchema();
 
 /* Apply CONFIG values to the DOM and set the industry CSS attribute.
    Called once during init() after the DOM is ready. */
@@ -3006,6 +3075,31 @@ function setUrgency(type) {
    BOOKING FORM SUBMIT
 ═══════════════════════════════════════════ */
 function submitBooking(type) {
+  // Collect form data
+  const data = { type, businessName: CONFIG.businessName, timestamp: new Date().toISOString() };
+  if (type === 'emergency') {
+    const c = document.getElementById('emergencyFields');
+    data.name        = (c.querySelector('input[type="text"]')  || {}).value?.trim() || '';
+    data.phone       = (c.querySelector('input[type="tel"]')   || {}).value?.trim() || '';
+    data.description = (c.querySelector('textarea')            || {}).value?.trim() || '';
+  } else {
+    const c = document.getElementById('scheduleFields');
+    data.name        = (c.querySelector('input[type="text"]')  || {}).value?.trim() || '';
+    data.phone       = (c.querySelector('input[type="tel"]')   || {}).value?.trim() || '';
+    data.email       = (c.querySelector('input[type="email"]') || {}).value?.trim() || '';
+    data.service     = (c.querySelector('select')              || {}).value || '';
+    data.date        = (c.querySelector('input[type="date"]')  || {}).value || '';
+    data.description = (c.querySelector('textarea')            || {}).value?.trim() || '';
+  }
+
+  // Fire-and-forget: email notification (graceful — never blocks the form)
+  fetch('/api/notify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(err => console.error('[notify] failed:', err));
+
+  // Show success toast immediately — independent of API result
   if (type === 'emergency') {
     showToast('📞 We\'ll call you within 15 minutes!');
   } else {
