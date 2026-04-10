@@ -9,6 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/krevio-tokens.css">
+<link rel="stylesheet" href="/css/industry-overrides.css">
+<link rel="stylesheet" href="/css/chat-widget.css">
+<script src="/js/chat-widget.js"></script>
 <script defer src="/js/back-nav.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 
@@ -462,42 +465,7 @@ body {
 .kb-a { font-size: 13px; color: var(--t2); line-height: 1.55; display: none; }
 .kb-a.show { display: block; }
 
-/* ═══════════════════════════════════════════
-   CHATBOT
-═══════════════════════════════════════════ */
-.chat-bubble {
-  position: fixed; bottom: 24px; right: 24px; z-index: 300;
-  width: 52px; height: 52px; border-radius: 50%;
-  background: var(--accent); color: white; border: none; font-size: 24px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25); cursor: pointer; transition: transform 0.15s;
-  display: flex; align-items: center; justify-content: center;
-}
-.chat-bubble:hover { transform: scale(1.08); }
-.chat-window {
-  position: fixed; bottom: 88px; right: 24px; z-index: 300;
-  width: 340px; height: 480px;
-  background: var(--bg1); border: 1px solid var(--border);
-  border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  display: flex; flex-direction: column;
-  transition: opacity 0.2s, transform 0.2s;
-}
-.chat-window.hidden { opacity: 0; pointer-events: none; transform: translateY(10px) scale(0.97); }
-.chat-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-.chat-header-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-.chat-header-name { font-size: 13px; font-weight: 700; color: var(--t0); }
-.chat-header-status { font-size: 11px; color: var(--accent); }
-.chat-close { margin-left: auto; background: none; border: none; color: var(--t2); font-size: 18px; cursor: pointer; padding: 0 4px; }
-.chat-messages { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-.chat-msg { max-width: 82%; }
-.chat-msg-bot { align-self: flex-start; }
-.chat-msg-user { align-self: flex-end; }
-.chat-bubble-msg { padding: 10px 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; }
-.chat-msg-bot .chat-bubble-msg { background: var(--bg2); color: var(--t0); border-radius: 4px 14px 14px 14px; }
-.chat-msg-user .chat-bubble-msg { background: var(--accent); color: white; border-radius: 14px 14px 4px 14px; }
-.chat-input-row { padding: 12px; border-top: 1px solid var(--border); display: flex; gap: 8px; }
-.chat-input { flex: 1; padding: 9px 12px; background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; color: var(--t0); font-size: 13px; }
-.chat-input:focus { outline: none; border-color: var(--accent); }
-.chat-send { padding: 9px 14px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+/* Chatbot styles live in /css/chat-widget.css (unified widget) */
 
 /* ═══════════════════════════════════════════
    LANGUAGE TOGGLE
@@ -810,28 +778,56 @@ body {
 
 </div><!-- /views wrapper -->
 
-<!-- CHATBOT -->
-<button class="chat-bubble" id="chatBubble" onclick="toggleChat()" aria-label="Open chat">💬</button>
-<div class="chat-window hidden" id="chatWindow">
-  <div class="chat-header">
-    <div class="chat-header-dot"></div>
-    <div>
-      <div class="chat-header-name">Summit Air Solutions</div>
-      <div class="chat-header-status">● Online Now</div>
+<!-- CHATBOT (UI managed by /js/chat-widget.js) -->
+<div class="chat-widget" id="chatWidget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-icon">❄️</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Summit Air Solutions</div>
+        <div class="chat-header-status">
+          <span class="chat-header-status-text">● Online Now</span>
+          <div class="chat-eq-bars"><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div><div class="chat-eq-bar"></div></div>
+        </div>
+      </div>
+      <button class="chat-voice-toggle" id="voiceToggle" onclick="toggleVoiceMode()" title="Toggle voice" aria-label="Toggle voice">🔇</button>
+      <button class="chat-close-btn" onclick="toggleChat()">✕</button>
     </div>
-    <button class="chat-close" onclick="toggleChat()">×</button>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-voice-label" id="chatVoiceLabel"></div>
+    <div class="chat-input-row">
+      <div class="voice-active-panel">
+        <button class="stop-btn" onclick="stopVoicePlayback()">STOP LISTENING</button>
+      </div>
+      <div class="chat-input-wrapper">
+        <input class="chat-input" id="chatInput" placeholder="Ask about AC, heating, or maintenance..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="chat-send-btn" onclick="sendChat()">✈</button>
+        <button class="chat-mic" id="chatMic" onclick="toggleMic()" title="Voice input" aria-label="Voice input">🎤</button>
+      </div>
+    </div>
   </div>
-  <div class="chat-messages" id="chatMessages"></div>
-  <div class="chat-input-row">
-    <input class="chat-input" id="chatInput" placeholder="Ask about AC, heating, or maintenance..." onkeydown="if(event.key==='Enter')sendChat()">
-    <button class="chat-send" onclick="sendChat()">Send</button>
-  </div>
+  <button class="chat-bubble-btn" id="chatBubble" onclick="toggleChat()" aria-label="Open chat">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+  </button>
 </div>
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
+/* ═══════════════════════════════════════════
+   CONFIG — Minimal contract for the unified chat widget (js/chat-widget.js).
+   Full per-industry CONFIG lives in plumbing/realestate; hvac keeps a
+   reduced surface until it adopts the full template.
+═══════════════════════════════════════════ */
+const CONFIG = {
+  businessType: 'hvac',
+  chatEndpoint: '/api/demos/chat',
+  ttsEndpoint:  '/api/demos/tts',
+  lang:         'en-US',
+  hasVoice:     true,
+};
+
 /* ═══════════════════════════════════════════
    MOCK DATA
 ═══════════════════════════════════════════ */
@@ -1435,8 +1431,8 @@ let chatInitialized = false;
 
 function toggleChat() {
   chatOpen = !chatOpen;
-  const win = document.getElementById('chatWindow');
-  win.classList.toggle('hidden', !chatOpen);
+  const panel = document.getElementById('chatPanel');
+  panel.classList.toggle('open', chatOpen);
   if (chatOpen && !chatInitialized) {
     chatInitialized = true;
     const lang = document.documentElement.getAttribute('data-lang') || 'en';
@@ -1451,6 +1447,7 @@ function addBotMsg(text) {
   div.innerHTML = `<div class="chat-bubble-msg">${escapeHtml(text)}</div>`;
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
+  if (typeof speakText === 'function') speakText(text);
 }
 
 function addUserMsg(text) {
