@@ -1,0 +1,110 @@
+/**
+ * demo-badge.css
+ *
+ * Fixed-position "DEMO — Krevio sample site" honesty badge.
+ * Loaded on every Krevio demo page (plus the landing page) as the
+ * public-demo-readiness honesty signal. Click → /about-these-demos/
+ *
+ * Visual: LoungeLizard move #2 — three stacked shades of brand yellow
+ *         (krevio-brand-dark → krevio-brand-subtle → krevio-brand) create
+ *         depth without drop shadows.
+ *
+ * Uses ONLY krevio-tokens.css variables. No hex codes, no hardcoded
+ * padding. Works in both data-theme="light" and "dark".
+ *
+ * Markup pattern (place right after <body> open tag):
+ *
+ *   <div class="krevio-demo-badge-wrap">
+ *     <a class="krevio-demo-badge"
+ *        href="/about-these-demos/"
+ *        aria-label="This is a Krevio demo — click to learn more">
+ *       DEMO<span class="krevio-demo-badge-full"> — Krevio sample site</span>
+ *     </a>
+ *   </div>
+ */
+
+.krevio-demo-badge-wrap {
+  position: fixed;
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: var(--z-nav);
+  pointer-events: none;   /* decorative stacks don't block clicks behind */
+  width: fit-content;
+}
+
+.krevio-demo-badge-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(4px, 4px);
+  background: var(--krevio-brand-dark);
+  border-radius: var(--radius-full);
+  z-index: -2;
+  pointer-events: none;
+}
+
+.krevio-demo-badge-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(2px, 2px);
+  background: var(--krevio-brand-subtle);
+  border: 1px solid var(--krevio-brand-border);
+  border-radius: var(--radius-full);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.krevio-demo-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--krevio-brand);
+  color: var(--krevio-brand-fg);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--krevio-brand-dark);
+  letter-spacing: 0.02em;
+  transition: transform 0.15s;
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.krevio-demo-badge::before {
+  content: "●";
+  color: var(--krevio-brand-fg);
+  font-size: var(--text-xs);
+  line-height: 1;
+}
+
+.krevio-demo-badge:hover {
+  transform: translate(-1px, -1px);
+  text-decoration: none;
+  color: var(--krevio-brand-fg);
+}
+
+.krevio-demo-badge:focus-visible {
+  outline: 2px solid var(--krevio-brand-dark);
+  outline-offset: 3px;
+}
+
+/* Mobile — shrink the badge so it doesn't fight page nav.
+   Drop the " — Krevio sample site" suffix; keep just "DEMO". */
+@media (max-width: 600px) {
+  .krevio-demo-badge-wrap {
+    top: var(--space-sm);
+    right: var(--space-sm);
+  }
+  .krevio-demo-badge {
+    padding: var(--space-xs) var(--space-md);
+    font-size: var(--text-xs);
+  }
+  .krevio-demo-badge-full {
+    display: none;
+  }
+}

@@ -41,6 +41,7 @@
   --krevio-brand-subtle:  rgba(255, 184, 0, 0.08);
   --krevio-brand-border:  rgba(255, 184, 0, 0.18);
   --krevio-brand-dark:    #E6A600;   /* pressed/hover state */
+  --krevio-brand-fg:      #18181B;   /* foreground text on top of brand yellow — theme-invariant for contrast */
 }
 
 /* ─────────────────────────────────────────────
