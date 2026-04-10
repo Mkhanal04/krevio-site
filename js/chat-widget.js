@@ -12,6 +12,9 @@ let micSendTimer = null;
 let ttsAudio = new Audio();
 let audioUnlocked = false;
 
+// Debug logs off by default. Enable in DevTools with: window.__KREVIO_CHAT_DEBUG = true
+const _dbg = (...args) => { if (typeof window !== 'undefined' && window.__KREVIO_CHAT_DEBUG) console.log('[chat-widget]', ...args); };
+
 /* ═══════════════════════════════════════════
    AUTOPLAY UNLOCK
    Browsers require a user gesture before Audio.play().
@@ -21,12 +24,12 @@ let audioUnlocked = false;
 function unlockAudio() {
   if (audioUnlocked) return;
   audioUnlocked = true;
-  console.log('[TTS] Unlocking audio element via user gesture...');
+  _dbg('Unlocking audio element via user gesture');
   ttsAudio.src = 'data:audio/mpeg;base64,//NExAAAAANIAAAAAExBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq';
   ttsAudio.play().then(() => {
-    console.log('[TTS] Audio unlocked successfully.');
+    _dbg('Audio unlocked successfully');
   }).catch(e => {
-    console.log('[TTS] Unlock play promise caught:', e.message);
+    _dbg('Unlock play promise caught:', e.message);
   });
   ttsAudio.pause();
 }
@@ -68,7 +71,7 @@ function cleanForSpeech(text) {
    TTS — CLOUD FIRST, BROWSER FALLBACK
 ═══════════════════════════════════════════ */
 async function speakText(text) {
-  console.log('[TTS] speakText called. Voice Mode:', voiceMode);
+  _dbg('speakText called; voiceMode=', voiceMode);
   if (!voiceMode) return;
 
   // Stop any current playback
@@ -88,7 +91,7 @@ async function speakText(text) {
   const langCode = (typeof CONFIG !== 'undefined' && CONFIG.lang) || 'en-US';
 
   try {
-    console.log('[TTS] Fetching from', ttsEndpoint);
+    _dbg('Fetching from', ttsEndpoint);
     const statusEl = document.querySelector('.chat-header-status-text');
     if (statusEl) { statusEl.dataset._orig = statusEl.textContent; statusEl.textContent = 'Getting response\u2026'; }
 
@@ -111,9 +114,9 @@ async function speakText(text) {
     if (statusEl) statusEl.textContent = statusEl.dataset._orig || '';
 
     await ttsAudio.play();
-    console.log('[TTS] Cloud playback started.');
+    _dbg('Cloud playback started');
   } catch (err) {
-    console.error('[TTS] Cloud TTS failed:', err);
+    _dbg('Cloud TTS failed:', err && err.message);
     const statusEl = document.querySelector('.chat-header-status-text');
     if (statusEl && statusEl.dataset._orig) statusEl.textContent = statusEl.dataset._orig;
     resetVoiceUI();
@@ -121,7 +124,7 @@ async function speakText(text) {
     // Fallback to browser TTS with user notification
     if (!window.speechSynthesis) return;
     _widgetShowToast('Using basic voice \u2014 check connection');
-    console.log('[TTS] Falling back to browser speechSynthesis...');
+    _dbg('Falling back to browser speechSynthesis');
     const u = new SpeechSynthesisUtterance(clean);
     u.rate = 1.05; u.pitch = 1.0;
     const voices = speechSynthesis.getVoices();
@@ -283,7 +286,7 @@ function warmupTTS() {
     body: JSON.stringify({ text: 'Hi', lang: 'en-US' }),
     signal: AbortSignal.timeout(6000)
   }).catch(() => {});
-  console.log('[TTS] Warmup fired.');
+  _dbg('Warmup fired');
 }
 
 /* ═══════════════════════════════════════════
