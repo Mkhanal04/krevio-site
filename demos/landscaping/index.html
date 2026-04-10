@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/krevio-tokens.css">
-<link rel="stylesheet" href="/css/demo-badge.css">
+<script defer src="/js/back-nav.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 
 <script type="application/ld+json">
@@ -1072,20 +1072,11 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
 </head>
 <body>
 
-<!-- Krevio public-demo honesty badge — click for /about-these-demos/ -->
-<div class="krevio-demo-badge-wrap">
-  <a class="krevio-demo-badge"
-     href="/about-these-demos/"
-     aria-label="This is a Krevio demo — click to learn more">
-    DEMO<span class="krevio-demo-badge-full"> — Krevio sample site</span>
-  </a>
-</div>
-
 <!-- ═══════════════════ DEMO BAR ═══════════════════ -->
 <div class="demo-bar" id="demoBar">
   <div class="demo-bar-title">
     <span class="dot"></span>
-    <span class="demo-bar-label">Demo —</span>
+    <a class="demo-bar-label" href="/about-these-demos/" aria-label="What is this demo?">Demo —</a>
     Green Valley Landscaping
   </div>
   <div class="demo-bar-spacer"></div>
@@ -1097,7 +1088,7 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
   <button class="demo-bar-theme" onclick="toggleTheme()" aria-label="Toggle theme">
     <span id="themeIcon">☀</span>
   </button>
-  <a href="/demos/" class="demo-bar-back">← All Demos</a>
+  <a href="/demos/" class="demo-bar-back">← Back</a>
 </div>
 
 <!-- ═══════════════════ CUSTOMER VIEW ═══════════════════ -->

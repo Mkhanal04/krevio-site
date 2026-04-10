@@ -18,10 +18,18 @@ const NOTIFY_TO = 'krevio@krevio.net';
 // Once verified, change to: notifications@krevio.net
 const NOTIFY_FROM = 'Krevio Alerts <onboarding@resend.dev>';
 
+// Type → display label + header color. Every supported notification type must
+// have an entry here; unknown types fall through to 'inquiry' defaults.
+const TYPE_META = {
+  emergency:   { label: '🚨 EMERGENCY',           typeLabel: 'Emergency Callback',  headerBg: '#ef4444' },
+  appointment: { label: '📅 APPOINTMENT REQUEST', typeLabel: 'Appointment Request', headerBg: '#2563eb' },
+  inquiry:     { label: '💬 NEW INQUIRY',         typeLabel: 'Inquiry',             headerBg: '#6366f1' },
+};
+
 function buildEmailHtml(data) {
-  const label = data.type === 'emergency' ? '🚨 EMERGENCY' : '📅 APPOINTMENT REQUEST';
+  const meta = TYPE_META[data.type] || TYPE_META.inquiry;
   const rows = [
-    ['Type', data.type === 'emergency' ? 'Emergency Callback' : 'Appointment Request'],
+    ['Type', meta.typeLabel],
     ['Name', data.name || '—'],
     ['Phone', data.phone || '—'],
     ['Email', data.email || '—'],
@@ -40,9 +48,9 @@ function buildEmailHtml(data) {
 <html>
 <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;margin:0;padding:24px;background:#fafafa;color:#18181b;">
   <div style="max-width:520px;margin:0 auto;background:#fff;border-radius:12px;border:1px solid #e4e4e7;overflow:hidden;">
-    <div style="padding:20px 24px;background:${data.type === 'emergency' ? '#ef4444' : '#2563eb'};color:#fff;">
-      <div style="font-size:20px;font-weight:700;">${label}</div>
-      <div style="font-size:14px;opacity:0.9;margin-top:4px;">${data.businessName || 'Krevio Demo'}</div>
+    <div style="padding:20px 24px;background:${meta.headerBg};color:#fff;">
+      <div style="font-size:20px;font-weight:700;">${meta.label}</div>
+      <div style="font-size:14px;opacity:0.9;margin-top:4px;">${data.businessName || 'krevio.net'}</div>
     </div>
     <table style="width:100%;border-collapse:collapse;font-size:14px;">
       ${tableRows}
@@ -91,8 +99,9 @@ export default async function handler(req, res) {
     timestamp: body.timestamp || new Date().toISOString(),
   };
 
-  const typeLabel = data.type === 'emergency' ? 'Emergency' : 'Appointment Request';
-  const subject = `New ${typeLabel} — ${data.businessName || 'Demo'}`;
+  const meta = TYPE_META[data.type] || TYPE_META.inquiry;
+  const subjectPrefix = data.type === 'emergency' ? 'Emergency' : meta.typeLabel;
+  const subject = `New ${subjectPrefix} — ${data.businessName || 'krevio.net'}`;
 
   try {
     const emailRes = await fetch('https://api.resend.com/emails', {

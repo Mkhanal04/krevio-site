@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="/css/krevio-tokens.css">
 <link rel="stylesheet" href="/css/industry-overrides.css">
 <link rel="stylesheet" href="/css/chat-widget.css">
-<link rel="stylesheet" href="/css/demo-badge.css">
 <script defer src="/_vercel/insights/script.js"></script>
 <script src="/js/chat-widget.js"></script>
+<script defer src="/js/back-nav.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1006,15 +1006,6 @@ input[type="checkbox"] { display: none; }
 </head>
 <body>
 
-<!-- Krevio public-demo honesty badge — click for /about-these-demos/ -->
-<div class="krevio-demo-badge-wrap">
-  <a class="krevio-demo-badge"
-     href="/about-these-demos/"
-     aria-label="This is a Krevio demo — click to learn more">
-    DEMO<span class="krevio-demo-badge-full"> — Krevio sample site</span>
-  </a>
-</div>
-
 <!-- ═══════════════════ CONTEXT BANNER ═══════════════════ -->
 <div class="context-banner" id="contextBanner">
   <span>✦ Fictional REALTOR® persona <strong>Morgan Ellis</strong> — a Krevio sample site</span>
@@ -1024,7 +1015,7 @@ input[type="checkbox"] { display: none; }
 
 <!-- ═══════════════════ DEMO BAR ═══════════════════ -->
 <div class="demo-bar" id="demoBar">
-  <span class="demo-badge">Demo</span>
+  <a class="demo-badge" href="/about-these-demos/" aria-label="What is this demo?">Demo</a>
   <div>
     <div class="demo-bar-title" id="barTitle">Morgan Ellis</div>
     <div class="demo-bar-sub">REALTOR® · KW Frisco · AI-Powered Website</div>
@@ -1038,7 +1029,7 @@ input[type="checkbox"] { display: none; }
     <span id="langEN" class="active-lang">EN</span> | <span id="langES">ES</span>
   </button>
   <button class="demo-bar-theme" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">☀️</button>
-  <a class="demo-bar-back" href="/demos/">← All Demos</a>
+  <a class="demo-bar-back" href="/demos/">← Back</a>
 </div>
 
 <!-- ═══════════════════ CUSTOMER VIEW ═══════════════════ -->

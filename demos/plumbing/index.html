@@ -8,11 +8,11 @@
 <link rel="stylesheet" href="/css/krevio-tokens.css">
 <link rel="stylesheet" href="/css/industry-overrides.css">
 <link rel="stylesheet" href="/css/chat-widget.css">
-<link rel="stylesheet" href="/css/demo-badge.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <script src="/js/chat-widget.js"></script>
+<script defer src="/js/back-nav.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 
 <!-- Schema markup injected dynamically from CONFIG — see generateAndInjectSchema() below -->
@@ -1025,18 +1025,9 @@ body {
 </head>
 <body>
 
-<!-- Krevio public-demo honesty badge — click for /about-these-demos/ -->
-<div class="krevio-demo-badge-wrap">
-  <a class="krevio-demo-badge"
-     href="/about-these-demos/"
-     aria-label="This is a Krevio demo — click to learn more">
-    DEMO<span class="krevio-demo-badge-full"> — Krevio sample site</span>
-  </a>
-</div>
-
 <!-- DEMO BAR -->
 <div class="demo-bar">
-  <span class="demo-bar-label">Demo</span>
+  <a class="demo-bar-label" href="/about-these-demos/" aria-label="What is this demo?">Demo</a>
   <div class="demo-bar-title">
     <span class="dot"></span>
     <span id="demoBarName">Lone Star Plumbing</span>
@@ -1048,7 +1039,7 @@ body {
   </div>
   <button class="lang-toggle" id="langToggle" onclick="toggleLang()" aria-label="Toggle language"><span id="langEN" class="active-lang">EN</span> | <span id="langES">ES</span></button>
   <button class="demo-bar-theme" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
-  <a href="/demos/" class="demo-bar-back">← All Demos</a>
+  <a href="/demos/" class="demo-bar-back">← Back</a>
 </div>
 
 <!-- VIEWS -->
