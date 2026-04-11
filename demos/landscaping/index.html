@@ -420,6 +420,17 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
 }
 .btn-submit:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
 .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ─── Compliance: TCPA consent ─── */
+.tcpa-consent { margin-top: 4px; margin-bottom: 4px; }
+.form-checkbox-label {
+  display: flex; align-items: flex-start; gap: 10px;
+  cursor: pointer; font-size: 12px; color: var(--t2); line-height: 1.5;
+}
+.form-checkbox-label input[type="checkbox"] {
+  width: 16px; height: 16px; min-width: 16px; margin-top: 2px;
+  accent-color: var(--green); cursor: pointer;
+}
 .booking-success {
   display: none; text-align: center; padding: 32px 24px;
 }
@@ -1136,6 +1147,12 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
           <div class="form-group">
             <label class="form-label" for="bookingMsg" data-en="Tell us about your project" data-es="Mensaje (opcional)">Tell us about your project</label>
             <textarea class="form-textarea" id="bookingMsg" placeholder="Property size, current condition, goals..." data-ph-en="Property size, current condition, goals..." data-ph-es="Tamaño de la propiedad, condición actual, objetivos..."></textarea>
+          </div>
+          <div class="tcpa-consent">
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="landscapingTcpaConsent" required>
+              <span>I agree to receive calls, texts, and emails from <span class="tcpa-business-name">Green Valley Landscaping</span> at the number and email I provided. Message and data rates may apply. Consent is not a condition of purchase.</span>
+            </label>
           </div>
           <button class="btn-submit" id="bookingSubmit" type="submit" data-en="Request Free Estimate →" data-es="Solicitar Cotización →">Request Free Estimate →</button>
         </form>
@@ -1875,6 +1892,11 @@ function renderReviews() {
 ═══════════════════════════════════════════ */
 function submitBooking(e) {
   e.preventDefault();
+  const tcpa = document.getElementById('landscapingTcpaConsent');
+  if (tcpa && !tcpa.checked) {
+    tcpa.focus();
+    return;
+  }
   const btn = document.getElementById('bookingSubmit');
   btn.textContent = 'Sending...';
   btn.disabled = true;

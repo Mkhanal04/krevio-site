@@ -292,6 +292,17 @@ body {
 .form-submit.schedule-submit:hover { opacity: 0.88; transform: translateY(-1px); }
 .form-note { font-size: 12px; color: var(--t2); text-align: center; margin-top: 12px; }
 
+/* ─── Compliance: TCPA consent ─── */
+.tcpa-consent { margin-top: 4px; margin-bottom: 4px; }
+.form-checkbox-label {
+  display: flex; align-items: flex-start; gap: 10px;
+  cursor: pointer; font-size: 12px; color: var(--t2); line-height: 1.5;
+}
+.form-checkbox-label input[type="checkbox"] {
+  width: 16px; height: 16px; min-width: 16px; margin-top: 2px;
+  accent-color: var(--accent); cursor: pointer;
+}
+
 /* ═══════════════════════════════════════════
    CUSTOMER VIEW — FOOTER
 ═══════════════════════════════════════════ */
@@ -1153,6 +1164,12 @@ body {
             <label class="form-label" data-en="Brief Description *" data-es="Describe la emergencia">Brief Description *</label>
             <textarea class="form-textarea" placeholder="Describe the problem (e.g., burst pipe under sink, no hot water, sewage smell...)" data-ph-en="Describe the problem (e.g., burst pipe under sink, no hot water, sewage smell...)" data-ph-es="Describe la emergencia (ej. tubería rota, sin agua caliente...)" style="min-height:80px;" required></textarea>
           </div>
+          <div class="tcpa-consent">
+            <label class="form-checkbox-label">
+              <input type="checkbox" class="tcpa-checkbox" required>
+              <span>I agree to receive calls, texts, and emails from <span class="tcpa-business-name">Lone Star Plumbing</span> at the number and email I provided. Message and data rates may apply. Consent is not a condition of purchase.</span>
+            </label>
+          </div>
           <button class="form-submit emergency-submit" onclick="submitBooking('emergency')" data-en="📞 Call Me Now →" data-es="Llámame Ahora →" type="button">📞 Call Me Now →</button>
           <p class="form-note">We'll call within 15 minutes · <a href="tel:4695550789" style="color:inherit;">(469) 555-0789</a></p>
         </div>
@@ -1195,6 +1212,12 @@ body {
           <div class="form-group">
             <label class="form-label" data-en="Describe the Problem" data-es="Mensaje (opcional)">Describe the Problem</label>
             <textarea class="form-textarea" placeholder="Tell us what's going on..." data-ph-en="Tell us what's going on..." data-ph-es="Cuéntanos qué está pasando..."></textarea>
+          </div>
+          <div class="tcpa-consent">
+            <label class="form-checkbox-label">
+              <input type="checkbox" class="tcpa-checkbox" required>
+              <span>I agree to receive calls, texts, and emails from <span class="tcpa-business-name">Lone Star Plumbing</span> at the number and email I provided. Message and data rates may apply. Consent is not a condition of purchase.</span>
+            </label>
           </div>
           <button class="form-submit schedule-submit" onclick="submitBooking('schedule')" data-en="Schedule Appointment →" data-es="Agendar Servicio →">Schedule Appointment →</button>
           <p class="form-note">Free estimates on all major work · No obligation</p>
@@ -1572,6 +1595,11 @@ function applyConfig() {
   set('sidebarLogoName', CONFIG.businessNameShort);
   set('sidebarLogoSub',  CONFIG.businessNameSub);
   set('chatHeaderName',  CONFIG.businessName);
+
+  // TCPA consent business name (one per form — emergency + schedule)
+  document.querySelectorAll('.tcpa-business-name').forEach(el => {
+    el.textContent = CONFIG.businessName;
+  });
 
   // Language toggle visibility
   const langToggle = document.getElementById('langToggle');
@@ -3045,19 +3073,28 @@ function setUrgency(type) {
 function submitBooking(type) {
   // Collect form data
   const data = { type, businessName: CONFIG.businessName, timestamp: new Date().toISOString() };
+  let c;
   if (type === 'emergency') {
-    const c = document.getElementById('emergencyFields');
+    c = document.getElementById('emergencyFields');
     data.name        = (c.querySelector('input[type="text"]')  || {}).value?.trim() || '';
     data.phone       = (c.querySelector('input[type="tel"]')   || {}).value?.trim() || '';
     data.description = (c.querySelector('textarea')            || {}).value?.trim() || '';
   } else {
-    const c = document.getElementById('scheduleFields');
+    c = document.getElementById('scheduleFields');
     data.name        = (c.querySelector('input[type="text"]')  || {}).value?.trim() || '';
     data.phone       = (c.querySelector('input[type="tel"]')   || {}).value?.trim() || '';
     data.email       = (c.querySelector('input[type="email"]') || {}).value?.trim() || '';
     data.service     = (c.querySelector('select')              || {}).value || '';
     data.date        = (c.querySelector('input[type="date"]')  || {}).value || '';
     data.description = (c.querySelector('textarea')            || {}).value?.trim() || '';
+  }
+
+  // TCPA consent gate — required before any contact data leaves the page.
+  const tcpaBox = c.querySelector('.tcpa-checkbox');
+  if (tcpaBox && !tcpaBox.checked) {
+    showToast('Please confirm consent to be contacted.');
+    tcpaBox.focus();
+    return;
   }
 
   // Fire-and-forget: email notification (graceful — never blocks the form)
