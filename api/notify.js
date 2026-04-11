@@ -56,7 +56,12 @@ function rateLimited(ip) {
   return false;
 }
 
-const NOTIFY_FROM = 'Krevio Alerts <onboarding@resend.dev>';
+// Sender lives on the verified krevio.net domain (configured in Resend → Domains).
+// `alerts@` is a virtual address — no real mailbox needed; it just needs the
+// domain DKIM/SPF to validate. Replies route to krevio@krevio.net via Reply-To
+// so the curious customer (or Milan testing) reaches a real inbox.
+const NOTIFY_FROM = 'Krevio Alerts <alerts@krevio.net>';
+const NOTIFY_REPLY_TO = 'krevio@krevio.net';
 
 const TYPE_META = {
   emergency:   { label: '🚨 EMERGENCY',           typeLabel: 'Emergency Callback',  headerBg: '#ef4444' },
@@ -188,6 +193,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         from: NOTIFY_FROM,
         to: [notifyTo],
+        reply_to: NOTIFY_REPLY_TO,
         subject,
         html: buildEmailHtml(data),
       }),
