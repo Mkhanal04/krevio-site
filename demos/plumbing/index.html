@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <script src="/js/chat-widget.js"></script>
+<script defer src="/js/back-nav.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 
 <!-- Schema markup injected dynamically from CONFIG — see generateAndInjectSchema() below -->
@@ -1026,7 +1027,7 @@ body {
 
 <!-- DEMO BAR -->
 <div class="demo-bar">
-  <span class="demo-bar-label">Demo</span>
+  <a class="demo-bar-label" href="/about-these-demos/" aria-label="What is this demo?">Demo</a>
   <div class="demo-bar-title">
     <span class="dot"></span>
     <span id="demoBarName">Lone Star Plumbing</span>
@@ -1038,7 +1039,7 @@ body {
   </div>
   <button class="lang-toggle" id="langToggle" onclick="toggleLang()" aria-label="Toggle language"><span id="langEN" class="active-lang">EN</span> | <span id="langES">ES</span></button>
   <button class="demo-bar-theme" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
-  <a href="/demos/" class="demo-bar-back">← All Demos</a>
+  <a href="/demos/" class="demo-bar-back">← Back</a>
 </div>
 
 <!-- VIEWS -->
@@ -1489,7 +1490,7 @@ function generateAndInjectSchema() {
       {
         '@type': 'Question',
         name: 'Are you licensed and insured?',
-        acceptedAnswer: { '@type': 'Answer', text: `Yes. ${CONFIG.businessName} holds a Texas Master Plumber license and carries $1M liability insurance.` }
+        acceptedAnswer: { '@type': 'Answer', text: `Yes. ${CONFIG.businessName} is a licensed Texas Master Plumber and is fully insured. (Demo site — specific credentials not shown.)` }
       },
       {
         '@type': 'Question',
@@ -1676,7 +1677,7 @@ const DATA = {
     { q: 'How fast can you get here for emergencies?', a: 'We aim for under 60 minutes for emergencies in our service area. Call (469) 555-0789 for immediate dispatch.' },
     { q: 'How much does a water heater cost?', a: 'Tank water heaters: $800–$1,500 installed. Tankless: $2,000–$3,500 installed. We offer same-day replacement.' },
     { q: 'Do you offer financing?', a: 'Yes. We partner with GreenSky for 0% financing on jobs over $1,000. Apply at your appointment.' },
-    { q: 'Are you licensed?', a: 'Yes. Texas Master Plumber License #M-40XXX. Fully insured with $1M liability coverage.' },
+    { q: 'Are you licensed?', a: 'Yes. Licensed Texas Master Plumber, fully insured with liability coverage. (Demo site — specific license numbers are never shown in a demo.)' },
     { q: 'What areas do you serve?', a: 'Celina, Prosper, McKinney, Allen, Frisco, Anna, and surrounding North DFW communities.' }
   ],
   automation: {

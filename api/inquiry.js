@@ -78,7 +78,30 @@ export default async function handler(req, res) {
     }
   }
 
-  // Webhook notification
+  // Email notification via Resend (fire-and-forget, non-blocking).
+  // api/notify.js handles the 'inquiry' type — graceful degradation when RESEND_API_KEY is unset.
+  try {
+    const host = req.headers.host || 'krevio.net';
+    const proto = host.startsWith('localhost') || host.startsWith('127.0.0.1') ? 'http' : 'https';
+    fetch(`${proto}://${host}/api/notify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'inquiry',
+        name: inquiry.name,
+        email: inquiry.email,
+        phone: inquiry.phone,
+        businessName: inquiry.business_name,
+        description: `Industry: ${inquiry.industry}${inquiry.additional_notes ? ' | Notes: ' + inquiry.additional_notes : ''} | Source: ${inquiry.source}`,
+        timestamp: inquiry.created_at,
+      }),
+      signal: AbortSignal.timeout(3000),
+    }).catch((err) => console.warn('[Krevio Inquiry] Notify fetch failed (non-fatal):', err.message));
+  } catch (err) {
+    console.warn('[Krevio Inquiry] Notify setup failed (non-fatal):', err.message);
+  }
+
+  // Webhook notification (Discord or similar — separate channel)
   const webhookUrl = process.env.NOTIFICATION_WEBHOOK_URL;
   if (webhookUrl) {
     try {

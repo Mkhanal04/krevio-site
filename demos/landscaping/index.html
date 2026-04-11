@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/krevio-tokens.css">
+<script defer src="/js/back-nav.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 
 <script type="application/ld+json">
@@ -16,12 +18,12 @@
   "@graph": [
     {
       "@type": "LocalBusiness",
-      "name": "Green Valley Landscaping",
+      "name": "Green Valley Landscaping (Krevio Demo)",
       "telephone": "(214) 555-0123",
-      "url": "https://greenvalleymckinney.com",
+      "url": "https://krevio.net/demos/landscaping/",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "4820 Eldorado Pkwy",
+        "streetAddress": "1234 Sample Way",
         "addressLocality": "McKinney",
         "addressRegion": "TX",
         "postalCode": "75070",
@@ -1074,7 +1076,7 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
 <div class="demo-bar" id="demoBar">
   <div class="demo-bar-title">
     <span class="dot"></span>
-    <span class="demo-bar-label">Demo —</span>
+    <a class="demo-bar-label" href="/about-these-demos/" aria-label="What is this demo?">Demo —</a>
     Green Valley Landscaping
   </div>
   <div class="demo-bar-spacer"></div>
@@ -1086,7 +1088,7 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
   <button class="demo-bar-theme" onclick="toggleTheme()" aria-label="Toggle theme">
     <span id="themeIcon">☀</span>
   </button>
-  <a href="/demos/" class="demo-bar-back">← All Demos</a>
+  <a href="/demos/" class="demo-bar-back">← Back</a>
 </div>
 
 <!-- ═══════════════════ CUSTOMER VIEW ═══════════════════ -->

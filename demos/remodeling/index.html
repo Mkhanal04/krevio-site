@@ -30,6 +30,7 @@
 <link rel="stylesheet" href="/css/industry-overrides.css">
 
 <!-- Vercel analytics -->
+<script defer src="/js/back-nav.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 
 <style>
@@ -513,7 +514,7 @@
 
 <!-- DEMO BAR — Krevio chrome, same on every demo -->
 <div class="demo-bar">
-  <span class="demo-bar-label">Demo</span>
+  <a class="demo-bar-label" href="/about-these-demos/" aria-label="What is this demo?">Demo</a>
   <div class="demo-bar-title">
     <span class="dot"></span>
     <span id="demoBarName">BUSINESS_NAME</span>
@@ -527,7 +528,7 @@
     <span id="langEN" class="active-lang">EN</span> | <span id="langES">ES</span>
   </button>
   <button class="demo-bar-theme" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
-  <a href="/demos/" class="demo-bar-back">← All Demos</a>
+  <a href="/demos/" class="demo-bar-back">← Back</a>
 </div>
 
 <div style="margin-top:40px;">
@@ -975,7 +976,7 @@ const DATA = {
   faqs: [
     { q: 'How long does a kitchen remodel take?', a: 'A full kitchen remodel typically takes 4–8 weeks depending on scope. A cosmetic refresh (countertops, backsplash, paint) is usually 1–2 weeks. We\'ll give you a detailed timeline in your free estimate.' },
     { q: 'Do you offer free estimates?', a: 'Yes. We offer free in-home estimates for all projects. Carlos or Miguel will visit your home, measure the space, discuss your vision, and provide a written Good/Better/Best estimate within 48 hours.' },
-    { q: 'Are you licensed and insured in Texas?', a: 'Yes. Crestview Remodeling holds a Texas General Contractor license and carries $2M general liability insurance plus workers\' comp. We pull all required permits and work with city inspectors on your behalf.' },
+    { q: 'Are you licensed and insured in Texas?', a: 'Yes. Crestview Remodeling is licensed in Texas and carries general liability insurance plus workers\' comp. We pull all required permits and work with city inspectors on your behalf. (Demo site — specific policy numbers and coverage amounts are never shown in a demo.)' },
     { q: 'What areas do you serve?', a: 'We primarily serve Celina, Frisco, Prosper, McKinney, and Allen. We also take select projects in Gunter, Anna, and Sherman for larger renovations. Call us to confirm availability in your area.' },
     { q: 'Do you offer payment plans or financing?', a: 'Yes. We offer 12-month same-as-cash financing through GreenSky for projects over $5,000. We also accept milestone billing — typically 10% at signing, 40% at demo completion, 40% at install, 10% at final walkthrough.' },
   ],

@@ -185,3 +185,22 @@
   --sidebar-active-text: #09090B;
   --btn-primary-color:   #042F2E;
 }
+
+/* ─────────────────────────────────────────────
+   DEMO-BAR "Demo" label — shared link styling
+   Used by every demo page's .demo-bar. The label
+   is an anchor to /about-these-demos/, so it needs
+   the same visuals as the original <span> plus a
+   hover affordance.
+   ───────────────────────────────────────────── */
+a.demo-bar-label,
+a.demo-badge {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+a.demo-bar-label:hover,
+a.demo-badge:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+}

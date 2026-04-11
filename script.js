@@ -200,16 +200,16 @@ if (quoteCta && quoteStepper) {
       if (res.ok && json.success) {
         const firstName = name.split(' ')[0];
         const heading = document.getElementById('quote-success-heading');
-        if (heading) heading.textContent = `Thanks, ${firstName}! We'll send your custom quote within 24 hours.`;
+        if (heading) heading.textContent = `Thanks, ${firstName}! We'll reach out within 24 hours with next steps.`;
         showQuoteStep('success');
       } else {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Get My Quote →';
+        submitBtn.textContent = 'Send It →';
         alert(json.message || 'Something went wrong. Please try again.');
       }
     } catch (err) {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Get My Quote →';
+      submitBtn.textContent = 'Send It →';
       alert('Network error. Please try again.');
     }
   });
@@ -280,7 +280,7 @@ function toggleChat() {
     if (chatHistory.length > 0) {
       chatHistory.forEach(msg => addMessage(msg.content, msg.role === 'user' ? 'user' : 'bot', false));
     } else {
-      const welcome = "Hey! I'm Krevio's AI assistant. I can tell you about our services, show you demos, or help you get a custom quote. What's your business about?";
+      const welcome = "Hey! I'm Krevio's AI assistant. I can tell you about our services, show you demos, or help you start your project. What's your business about?";
       addMessage(welcome, 'bot', false);
     }
     saveChatSession();
