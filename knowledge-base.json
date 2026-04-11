@@ -9,30 +9,26 @@
   "services": {
     "core_build": {
       "description": "Custom website + AI chatbot + owner dashboard + GEO/SEO optimization",
-      "price_range": "Starting at $2,500",
+      "price_range": "Starting at $1,500 setup",
       "timeline": "2-4 weeks",
       "ownership": "Client owns everything — website, leads, data, code"
     },
     "managed_services": {
       "description": "Ongoing chatbot management, content updates, GEO monitoring, lead optimization, priority support",
-      "founding_note": "Founding Client Rate — first 5 clients lock in reduced pricing for 12 months",
       "tiers": {
         "starter": {
           "name": "Starter",
-          "founding_price": "$199/month",
-          "standard_price": "$249/month",
+          "price": "$497/month",
           "includes": "AI chatbot hosting + voice, basic GEO monitoring, monthly performance report, email support (48h)"
         },
         "growth": {
           "name": "Growth",
-          "founding_price": "$499/month",
-          "standard_price": "$599/month",
+          "price": "$697/month",
           "includes": "Everything in Starter + 2-4 monthly content updates (GEO + SEO optimized), Google Business Profile management, lead capture optimization, email support (24h)"
         },
         "accelerator": {
           "name": "Accelerator",
-          "founding_price": "$999/month",
-          "standard_price": "$1,199/month",
+          "price": "$997/month",
           "includes": "Everything in Growth + active GEO optimization (entity work, schema, citations), lead generation campaigns, full website management, quarterly strategy calls, priority support (12h)"
         }
       },
@@ -64,7 +60,7 @@
   },
   "differentiators": [
     "vs Thumbtack/Angi: You pay $500-$2,000/mo for shared leads with 10-20% close rates. With Krevio, you own your leads exclusively through your own website.",
-    "vs Big agencies: They charge $10K+ for setup and $1,500-$3,000/mo for SEO alone. We build custom starting at $2,500 and manage everything from $199/mo.",
+    "vs Big agencies: They charge $10K+ for setup and $1,500-$3,000/mo for SEO alone. We build custom starting at $1,500 setup and manage everything from $497/mo.",
     "vs Freelancers: Lottery quality. We deliver agency-grade work with AI precision.",
     "vs DIY (Wix/Squarespace): Generic templates. We build systems, not pages.",
     "GEO optimization: We optimize for AI search (ChatGPT, Gemini), not just Google. Almost no one offers GEO to local businesses yet.",
@@ -77,9 +73,9 @@
     "Step 3: Launch + Grow — Your system goes live on your domain. You own everything. Optional managed services to keep growing."
   ],
   "faq": [
-    { "q": "How much does it cost?", "a": "Custom builds start at $2,500. Managed services have 3 tiers: Starter at $199/mo (chatbot + GEO monitoring), Growth at $499/mo (adds content + GBP management), and Accelerator at $999/mo (full stack — GEO optimization, lead gen, website management, strategy calls). These are our founding client rates for our first 5 clients — they go up after that." },
+    { "q": "How much does it cost?", "a": "Setup starts at $1,500. Managed services have 3 tiers: Starter at $497/mo (chatbot + GEO monitoring), Growth at $697/mo (adds content + GBP management), and Accelerator at $997/mo (full stack — GEO optimization, lead gen, website management, strategy calls). No per-lead fees, month-to-month." },
     { "q": "Do I own everything?", "a": "Yes. Your website, your leads, your data, your code — all yours. If you ever cancel managed services, everything stays with you." },
-    { "q": "What about ongoing costs?", "a": "The build is a one-time investment. Managed services are optional, starting at $199/month for our Starter tier. Month-to-month — cancel anytime." },
+    { "q": "What about ongoing costs?", "a": "The build is a one-time investment. Managed services are optional, starting at $497/month for our Starter tier. Month-to-month — cancel anytime." },
     { "q": "How does this compare to Thumbtack or Angi?", "a": "On those platforms, you pay $500-$2,000/month for shared leads sent to 4-8 competitors, with 10-20% close rates and no ownership. With Krevio, you own your website, your chatbot captures leads exclusively for you, and there are no per-lead fees. Most clients save money in month 2." },
     { "q": "Do you work with businesses outside DFW?", "a": "We're based in DFW and specialize in local service businesses here, but we can work with businesses anywhere." },
     { "q": "How long does it take?", "a": "Most projects launch in 2-4 weeks from kickoff." },

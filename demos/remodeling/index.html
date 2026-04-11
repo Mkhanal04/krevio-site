@@ -511,7 +511,7 @@
     <p class="cv-hero-sub" data-en="Kitchen, bathroom & outdoor living remodels in Celina, Frisco & Prosper. Free estimates. Licensed & insured." data-es="Cocinas, baños y espacios exteriores — Celina, Frisco y Prosper. Cotizaciones gratis.">Kitchen, bathroom & outdoor living remodels in Celina, Frisco & Prosper. Free estimates. Licensed & insured.</p>
     <div class="cv-hero-pills" id="heroPills"><!-- rendered by JS --></div>
     <div class="cv-hero-ctas">
-      <button class="btn-primary" onclick="switchBooking('emergency')" data-en="Get Free Estimate" data-es="Cotización Gratis">Get Free Estimate</button>
+      <button class="btn-primary" onclick="document.getElementById('bookingSection').scrollIntoView({behavior:'smooth'})" data-en="Get Free Estimate" data-es="Cotización Gratis">Get Free Estimate</button>
       <button class="btn-outline" onclick="document.querySelector('.cv-services-bg').scrollIntoView({behavior:'smooth'})" data-en="Our Services" data-es="Nuestros Servicios">Our Services</button>
     </div>
     <div class="cv-hero-stats" id="heroStats"><!-- rendered by JS --></div>
@@ -549,30 +549,8 @@
   <section class="cv-booking-bg" id="bookingSection">
     <div class="booking-card reveal">
       <h2 class="section-title" style="margin-bottom:20px;" data-en="Request a Free Estimate" data-es="Solicitar Cotización Gratis">Request a Free Estimate</h2>
-      <!-- Urgency toggle (hidden when CONFIG.hasEmergencyBooking = false) -->
-      <div class="urgency-toggle" id="urgencyToggle">
-        <button class="urgency-btn active" id="btnEmergency" onclick="switchBooking('emergency')" data-en="🚨 Emergency" data-es="🚨 Emergencia">🚨 Emergency</button>
-        <button class="urgency-btn" id="btnSchedule" onclick="switchBooking('schedule')" data-en="📅 Schedule" data-es="📅 Agendar">📅 Schedule</button>
-      </div>
-      <!-- Emergency form -->
-      <div class="booking-form active" id="emergencyForm">
-        <div class="emergency-alert" data-en="⚡ For immediate emergencies call: PHONE" data-es="⚡ Para emergencias inmediatas llame: PHONE">⚡ For immediate emergencies call: <strong>PHONE</strong></div>
-        <div class="form-group">
-          <label class="form-label" data-en="Your Name" data-es="Tu Nombre">Your Name</label>
-          <input class="form-input" type="text" placeholder="John Smith" data-ph-en="John Smith" data-ph-es="Juan García" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-en="Phone Number" data-es="Teléfono">Phone Number</label>
-          <input class="form-input" type="tel" placeholder="(469) 555-0000" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" data-en="Describe the problem" data-es="Describe el problema">Describe the problem</label>
-          <textarea class="form-textarea" rows="3" placeholder="e.g. Pipe burst in kitchen..." data-ph-en="e.g. Pipe burst in kitchen..." data-ph-es="p.ej. Tubería rota en la cocina..."></textarea>
-        </div>
-        <button class="btn-accent" onclick="submitBooking('emergency')" data-en="Call Me Now" data-es="Llámame Ahora">Call Me Now</button>
-      </div>
       <!-- Schedule form -->
-      <div class="booking-form" id="scheduleForm">
+      <div class="booking-form active" id="scheduleForm">
         <div class="form-group">
           <label class="form-label" data-en="Your Name" data-es="Tu Nombre">Your Name</label>
           <input class="form-input" type="text" placeholder="John Smith" data-ph-en="John Smith" data-ph-es="Juan García" required>
@@ -620,7 +598,7 @@
         <div class="cv-footer-item">🕐 <span id="footerHours">HOURS</span></div>
       </div>
     </div>
-    <div class="cv-footer-credit"><a href="https://krevio.ai">Powered by Krevio</a></div>
+    <div class="cv-footer-credit"><a href="https://krevio.net">Powered by Krevio</a></div>
   </footer>
 
 </div><!-- /customer-view -->
@@ -1031,13 +1009,6 @@ function applyConfig() {
   const langToggle = document.getElementById('langToggle');
   if (langToggle) langToggle.style.display = CONFIG.hasLanguageToggle ? '' : 'none';
 
-  const urgencyToggle = document.getElementById('urgencyToggle');
-  if (urgencyToggle && !CONFIG.hasEmergencyBooking) {
-    urgencyToggle.style.display = 'none';
-    document.getElementById('emergencyForm').classList.remove('active');
-    document.getElementById('scheduleForm').classList.add('active');
-  }
-
   const gallerySection = document.getElementById('gallerySection');
   if (gallerySection) gallerySection.style.display = CONFIG.hasGallery ? '' : 'none';
 
@@ -1291,13 +1262,6 @@ function showOdView(id) {
   if (btn)  { btn.classList.add('active'); btn.setAttribute('aria-selected','true'); }
   // Close mobile sidebar
   document.getElementById('odSidebar').classList.remove('open');
-}
-
-function switchBooking(type) {
-  document.getElementById('btnEmergency').classList.toggle('active', type === 'emergency');
-  document.getElementById('btnSchedule').classList.toggle('active', type === 'schedule');
-  document.getElementById('emergencyForm').classList.toggle('active', type === 'emergency');
-  document.getElementById('scheduleForm').classList.toggle('active', type === 'schedule');
 }
 
 function submitBooking(type) {
