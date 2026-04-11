@@ -961,7 +961,16 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
   .form-row { grid-template-columns: 1fr; }
   .cv-hero-stats { gap: 20px; }
   .cv-hero-ctas { flex-direction: column; align-items: center; }
+  /* --- Demo bar: keep on a single row, hide non-essentials --- */
+  .demo-bar { padding: 0 10px; gap: 8px; }
   .demo-bar .demo-bar-label { display: none; }
+  .demo-bar-back { display: none; }
+  .demo-bar-title { font-size: 11px; min-width: 0; flex-shrink: 1; }
+  .demo-bar-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+  .demo-bar-toggle { flex-shrink: 0; }
+  .demo-bar-btn { padding: 3px 10px; font-size: 11px; white-space: nowrap; }
+  .demo-bar-theme { width: 28px; height: 28px; font-size: 13px; flex-shrink: 0; }
+  .lang-toggle { display: none !important; }
 
   /* Mobile dashboard: hide sidebar, show header */
   .mobile-header { display: flex; }

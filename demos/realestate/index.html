@@ -962,7 +962,20 @@ input[type="checkbox"] { display: none; }
   .owner-main { padding: 16px; }
   .pipeline { min-width: 700px; }
   .cv-footer-info { flex-direction: column; gap: 10px; align-items: center; }
+
+  /* --- Demo bar: keep on a single row, hide non-essentials.
+     KW compliance subtitle is dropped on phones — there's no room and the
+     "Demo" label + footer disclaimer carry the brokerage attribution. --- */
+  .demo-bar { padding: 0 10px; gap: 8px; }
+  .demo-bar-label { display: none; }
+  .demo-bar-back { display: none; }
   .demo-bar-sub { display: none; }
+  .demo-bar-title { font-size: 12px; min-width: 0; flex-shrink: 1; }
+  .demo-bar-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+  .demo-bar-toggle { flex-shrink: 0; }
+  .demo-bar-btn { padding: 4px 10px; font-size: 11px; white-space: nowrap; }
+  .demo-bar-theme { width: 28px; height: 28px; font-size: 13px; flex-shrink: 0; }
+  .lang-toggle { display: none !important; }
   .auto-metrics { grid-template-columns: repeat(2, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .geo-cta-title { font-size: 1.6rem; }
