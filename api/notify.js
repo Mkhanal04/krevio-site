@@ -1,28 +1,16 @@
 // Krevio lead-notification endpoint
 // - Per-tenant recipient routing (default tenant: 'krevio')
-// - Strict Origin allowlist (rejects foreign browser POSTs; allows empty Origin
-//   for server-to-server calls from api/inquiry.js)
-// - In-memory IP rate limit (5 req / 60s, per warm Vercel instance)
-// - Body size cap (8 KB)
+// - Strict Origin allowlist via shared _lib/limits.js (rejects foreign
+//   browser POSTs; ALLOWS empty Origin for server-to-server calls from
+//   api/inquiry.js — that's why this is the only endpoint that passes
+//   `allowEmpty: true` to isAllowedOrigin)
+// - In-memory IP rate limit (5 req / 60s) via shared token bucket
+// - Body size cap (8 KB) via shared helper
 // - Schema validation (name required; at least one of phone/email)
 // - Always returns 200 {ok:true,queued:true} so attackers can't enumerate
 //   the schema. Rejection reasons go to Vercel function logs only.
 
-const ALLOWED_ORIGINS = [
-  'https://krevio.net',
-  'https://www.krevio.net',
-  'https://krevio-site.vercel.app',
-  'http://localhost:3000',
-  'http://localhost:5500',
-  'http://127.0.0.1:5500'
-];
-
-function isAllowedOrigin(origin) {
-  if (!origin) return true; // server-to-server (e.g. api/inquiry.js → /api/notify)
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  if (/^https:\/\/krevio-site[a-z0-9-]*\.vercel\.app$/.test(origin)) return true;
-  return false;
-}
+import { applyCors, isAllowedOrigin, getClientIp, rateLimit, bodyTooLarge } from './_lib/limits.js';
 
 // Per-tenant notification routing. Add a customer here when they onboard.
 // TD-016: graduate this to a real config source (env-backed or DB) when
@@ -31,30 +19,6 @@ const TENANT_NOTIFY = {
   krevio: 'krevio@krevio.net',
 };
 const DEFAULT_TENANT = 'krevio';
-
-// In-memory token bucket: ip -> { count, windowStart }
-// Resets on cold start. Sufficient bound on bursts within a warm instance.
-const RATE_BUCKET = new Map();
-const RATE_LIMIT = 5;          // requests
-const RATE_WINDOW_MS = 60_000; // per minute
-
-function getClientIp(req) {
-  const xff = req.headers['x-forwarded-for'];
-  if (typeof xff === 'string' && xff.length) return xff.split(',')[0].trim();
-  return req.socket?.remoteAddress || 'unknown';
-}
-
-function rateLimited(ip) {
-  const now = Date.now();
-  const bucket = RATE_BUCKET.get(ip);
-  if (!bucket || now - bucket.windowStart > RATE_WINDOW_MS) {
-    RATE_BUCKET.set(ip, { count: 1, windowStart: now });
-    return false;
-  }
-  bucket.count += 1;
-  if (bucket.count > RATE_LIMIT) return true;
-  return false;
-}
 
 // Sender lives on the verified krevio.net domain (configured in Resend → Domains).
 // `alerts@` is a virtual address — no real mailbox needed; it just needs the
@@ -118,30 +82,23 @@ function silentReject(res, reason) {
 }
 
 export default async function handler(req, res) {
-  const origin = req.headers.origin || '';
-  const corsOrigin = isAllowedOrigin(origin) && origin ? origin : ALLOWED_ORIGINS[0];
-  res.setHeader('Access-Control-Allow-Origin', corsOrigin);
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Vary', 'Origin');
+  const origin = applyCors(req, res);
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, message: 'Method not allowed' });
 
-  // Origin gate — reject foreign browser POSTs. Empty Origin (server-to-server) is allowed.
-  if (!isAllowedOrigin(origin)) {
+  // Origin gate — reject foreign browser POSTs. Empty Origin (server-to-server
+  // calls from api/inquiry.js) is explicitly allowed via { allowEmpty: true }.
+  if (!isAllowedOrigin(origin, { allowEmpty: true })) {
     return silentReject(res, `origin not allowed: ${origin}`);
   }
 
-  // Body size cap (8 KB) — reject oversized payloads before parsing.
-  const contentLength = parseInt(req.headers['content-length'] || '0', 10);
-  if (contentLength > 8192) {
-    return silentReject(res, `body too large: ${contentLength}`);
+  if (bodyTooLarge(req, 8 * 1024)) {
+    return silentReject(res, `body too large: ${req.headers['content-length']}`);
   }
 
-  // Per-IP rate limit
   const ip = getClientIp(req);
-  if (rateLimited(ip)) {
+  if (rateLimit({ key: 'notify', ip, limit: 5, windowMs: 60_000 })) {
     return silentReject(res, `rate-limited ip: ${ip}`);
   }
 
