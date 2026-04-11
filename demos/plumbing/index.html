@@ -1041,7 +1041,7 @@ body {
   <a class="demo-bar-label" href="/about-these-demos/" aria-label="What is this demo?">Demo</a>
   <div class="demo-bar-title">
     <span class="dot"></span>
-    <span id="demoBarName">Lone Star Plumbing</span>
+    <span class="demo-bar-name" id="demoBarName">Lone Star Plumbing</span>
   </div>
   <div class="demo-bar-spacer"></div>
   <div class="demo-bar-toggle">
@@ -3123,6 +3123,7 @@ function toggleChat() {
   chatOpen = !chatOpen;
   const panel = document.getElementById('chatPanel');
   panel.classList.toggle('open', chatOpen);
+  if (!chatOpen && typeof stopVoicePlayback === 'function') stopVoicePlayback();
   if (chatOpen && !chatInitialized) {
     chatInitialized = true;
     const greeting = currentLang === 'es'
