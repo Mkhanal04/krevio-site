@@ -92,13 +92,16 @@
   transition: top 0.25s ease;
 }
 .demo-bar.banner-hidden { top: 0; }
-.demo-badge {
+.demo-bar-label {
   font-size: 10px; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.08em; background: var(--accentS); color: var(--accent);
   border: 1px solid var(--accentB); padding: 2px 8px; border-radius: var(--radius-full);
+  text-decoration: none; white-space: nowrap;
 }
-.demo-bar-title { font-size: 14px; font-weight: 700; color: var(--t0); }
-.demo-bar-sub { font-size: 11px; color: var(--t2); }
+.demo-bar-title { font-size: 14px; font-weight: 700; color: var(--t0); display: flex; align-items: center; gap: 8px; }
+.demo-bar-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+.demo-bar-name { color: var(--t0); }
+.demo-bar-sub { font-size: 11px; color: var(--t2); font-weight: 500; }
 .demo-bar-spacer { flex: 1; }
 .demo-bar-toggle { display: flex; gap: 4px; background: var(--bg2); padding: 3px; border-radius: var(--radius-md); }
 .demo-bar-btn {
@@ -1015,10 +1018,11 @@ input[type="checkbox"] { display: none; }
 
 <!-- ═══════════════════ DEMO BAR ═══════════════════ -->
 <div class="demo-bar" id="demoBar">
-  <a class="demo-badge" href="/about-these-demos/" aria-label="What is this demo?">Demo</a>
-  <div>
-    <div class="demo-bar-title" id="barTitle">Morgan Ellis</div>
-    <div class="demo-bar-sub">REALTOR® · KW Frisco · AI-Powered Website</div>
+  <a class="demo-bar-label" href="/about-these-demos/" aria-label="What is this demo?">Demo</a>
+  <div class="demo-bar-title">
+    <span class="dot"></span>
+    <span class="demo-bar-name" id="barTitle">Morgan Ellis</span>
+    <span class="demo-bar-sub">· REALTOR® · KW Frisco</span>
   </div>
   <div class="demo-bar-spacer"></div>
   <div class="demo-bar-toggle">
