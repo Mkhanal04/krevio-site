@@ -1,16 +1,31 @@
 // js/chat-widget.js
 // Centralized voice & chat UI logic for all Krevio pages.
-// Each page provides a CONFIG object; this widget handles TTS, STT, and voice UI.
+// Each page provides a CONFIG object; this widget handles streaming chat,
+// chunked TTS playback, STT, and voice UI.
 
 /* ═══════════════════════════════════════════
    STATE
 ═══════════════════════════════════════════ */
-let voiceMode = false;
+// Voice on by default — chat and voice should feel like one bot turn.
+// Persisted in localStorage so the user's choice survives page reloads.
+let voiceMode = (() => {
+  try {
+    const v = window.localStorage?.getItem('krevio.voiceMode');
+    return v === null ? true : v === '1';
+  } catch { return true; }
+})();
+
 let recognition = null;
 let isRecording = false;
 let micSendTimer = null;
 let ttsAudio = new Audio();
 let audioUnlocked = false;
+
+// Sentence-level audio queue
+const audioQueue = [];
+let isPlayingQueue = false;
+let currentQueueAudio = null;
+let queueGeneration = 0; // bumped on barge-in / mode change to invalidate inflight chunks
 
 // Debug logs off by default. Enable in DevTools with: window.__KREVIO_CHAT_DEBUG = true
 const _dbg = (...args) => { if (typeof window !== 'undefined' && window.__KREVIO_CHAT_DEBUG) console.log('[chat-widget]', ...args); };
@@ -36,9 +51,6 @@ function unlockAudio() {
 
 /* ═══════════════════════════════════════════
    TOAST NOTIFICATION
-   Shows a brief non-blocking message. Pages may
-   define their own showToast(); we only define a
-   fallback if none exists.
 ═══════════════════════════════════════════ */
 function _widgetShowToast(msg) {
   if (typeof showToast === 'function') { showToast(msg); return; }
@@ -68,20 +80,173 @@ function cleanForSpeech(text) {
 }
 
 /* ═══════════════════════════════════════════
-   TTS — CLOUD FIRST, BROWSER FALLBACK
+   SENTENCE BOUNDARY DETECTION
+   Walks the running buffer and slices off complete
+   sentences. Skips abbreviations so "Mr. Smith"
+   doesn't break early. Handles ., !, ?, ¡, ¿.
 ═══════════════════════════════════════════ */
-async function speakText(text) {
-  _dbg('speakText called; voiceMode=', voiceMode);
+const SENTENCE_ABBREVIATIONS = new Set([
+  'Mr','Mrs','Ms','Dr','Sr','Jr','St','Ave','Blvd','Rd',
+  'Inc','Ltd','Co','Corp','vs','etc','approx','est',
+  'Jan','Feb','Mar','Apr','Jun','Jul','Aug','Sep','Sept','Oct','Nov','Dec',
+  'No','Ph','i.e','e.g','a.m','p.m','U.S','U.K'
+]);
+
+function extractSentences(text) {
+  const sentences = [];
+  let lastEnd = 0;
+  let i = 0;
+  while (i < text.length) {
+    const c = text[i];
+    if (c === '.' || c === '!' || c === '?') {
+      // Look ahead — must be end-of-buffer OR followed by whitespace
+      const next = text[i + 1];
+      if (next !== undefined && !/\s/.test(next)) {
+        // Mid-token punctuation (e.g. "3.5", "U.S.A"). Skip.
+        i++;
+        continue;
+      }
+      // For '.', check if the preceding word is an abbreviation
+      if (c === '.') {
+        let wordStart = i;
+        while (wordStart > lastEnd && /[\w]/.test(text[wordStart - 1])) wordStart--;
+        const word = text.slice(wordStart, i);
+        if (SENTENCE_ABBREVIATIONS.has(word)) { i++; continue; }
+      }
+      // It's a sentence boundary. We need to know that the *next* non-space
+      // character actually exists, otherwise the sentence might still be
+      // growing (e.g., "Hello." right at the end of the current chunk where
+      // a space hasn't arrived yet). Only commit if there is at least one
+      // visible character after the whitespace, OR if the buffer ends here.
+      let scan = i + 1;
+      while (scan < text.length && /\s/.test(text[scan])) scan++;
+      if (scan >= text.length && next === undefined) {
+        // End of buffer with no trailing space yet — wait for more.
+        break;
+      }
+      const sentence = text.slice(lastEnd, i + 1).trim();
+      if (sentence) sentences.push(sentence);
+      lastEnd = scan;
+      i = scan;
+    } else {
+      i++;
+    }
+  }
+  return { sentences, remaining: text.slice(lastEnd) };
+}
+
+/* ═══════════════════════════════════════════
+   STREAMING CHAT HELPER
+   Centralizes the SSE parser so each demo's sendChat is
+   ~10 lines. Callbacks fire in order:
+   - onToken(chunk, fullSoFar)  — every text fragment
+   - onSentence(sentence)       — when a complete sentence lands
+   - onDone(fullText)           — stream finished cleanly
+   - onError({fallback,reason}) — Gemini error or transport failure
+═══════════════════════════════════════════ */
+async function streamChat({ message, history, businessType, signal, onToken, onSentence, onDone, onError }) {
+  const endpoint = (typeof CONFIG !== 'undefined' && CONFIG.chatEndpoint) || '/api/demos/chat';
+  let fullText = '';
+  let buffer = '';
+  let sawFallback = null;
+  let res;
+
+  try {
+    res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, history, businessType }),
+      signal
+    });
+  } catch (err) {
+    if (onError) onError({ fallback: true, reason: 'transport: ' + (err && err.message) });
+    return;
+  }
+
+  if (!res.ok || !res.body) {
+    if (onError) onError({ fallback: true, reason: 'http: ' + res.status });
+    return;
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let frameBuf = '';
+
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      frameBuf += decoder.decode(value, { stream: true });
+
+      // Split into SSE frames (separator: blank line)
+      let idx;
+      while ((idx = frameBuf.indexOf('\n\n')) !== -1) {
+        const frame = frameBuf.slice(0, idx);
+        frameBuf = frameBuf.slice(idx + 2);
+        const dataLine = frame.split('\n').find(l => l.startsWith('data:'));
+        if (!dataLine) continue;
+        const jsonStr = dataLine.slice(5).trim();
+        if (!jsonStr) continue;
+        let obj;
+        try { obj = JSON.parse(jsonStr); } catch { continue; }
+        if (obj.fallback) { sawFallback = obj; continue; }
+        if (obj.done) continue;
+        if (obj.text) {
+          fullText += obj.text;
+          buffer += obj.text;
+          if (onToken) onToken(obj.text, fullText);
+          const { sentences, remaining } = extractSentences(buffer);
+          buffer = remaining;
+          for (const s of sentences) {
+            if (onSentence) onSentence(s);
+          }
+        }
+      }
+    }
+  } catch (err) {
+    if (onError) onError({ fallback: true, reason: 'stream: ' + (err && err.message) });
+    return;
+  }
+
+  // Flush trailing buffer (final sentence without terminal punctuation)
+  const trailing = buffer.trim();
+  if (trailing && onSentence) onSentence(trailing);
+
+  if (sawFallback) {
+    if (onError) onError(sawFallback);
+  } else if (onDone) {
+    onDone(fullText);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   AUDIO QUEUE — sentence-level TTS playback
+   speakChunk() pushes a sentence to the queue and
+   starts the player if it isn't already running.
+═══════════════════════════════════════════ */
+function speakChunk(text) {
   if (!voiceMode) return;
-
-  // Stop any current playback
-  if (ttsAudio) { try { ttsAudio.pause(); } catch(e) {} }
-  window.speechSynthesis?.cancel();
-
   const clean = cleanForSpeech(text);
   if (!clean) return;
+  const gen = queueGeneration;
+  audioQueue.push({ text: clean, gen });
+  if (!isPlayingQueue) {
+    isPlayingQueue = true;
+    _playNextChunk();
+  }
+}
 
-  // UI: show voice-active state
+async function _playNextChunk() {
+  const item = audioQueue.shift();
+  if (!item) {
+    isPlayingQueue = false;
+    resetVoiceUI();
+    return;
+  }
+  // Drop stale chunks if the user barged in / cleared the queue
+  if (item.gen !== queueGeneration) { _playNextChunk(); return; }
+
+  // Voice-active UI on
   const header = document.querySelector('.chat-header');
   if (header) header.classList.add('voice-active');
   const toggleBtn = document.getElementById('voiceToggle');
@@ -91,50 +256,54 @@ async function speakText(text) {
   const langCode = (typeof CONFIG !== 'undefined' && CONFIG.lang) || 'en-US';
 
   try {
-    _dbg('Fetching from', ttsEndpoint);
-    const statusEl = document.querySelector('.chat-header-status-text');
-    if (statusEl) { statusEl.dataset._orig = statusEl.textContent; statusEl.textContent = 'Getting response\u2026'; }
-
     const res = await fetch(ttsEndpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: clean, lang: langCode }),
+      body: JSON.stringify({ text: item.text, lang: langCode }),
       signal: AbortSignal.timeout(12000)
     });
-
-    if (!res.ok) throw new Error('tts-api-error: ' + res.status);
-
+    if (!res.ok) throw new Error('tts ' + res.status);
     const blob = await res.blob();
-    if (blob.size < 100) throw new Error('tts-api-error: empty or malformed audio');
+    if (blob.size < 100) throw new Error('tts empty');
+    if (item.gen !== queueGeneration) { _playNextChunk(); return; } // barged in while fetching
 
     const url = URL.createObjectURL(blob);
-    ttsAudio.src = url;
-    ttsAudio.onended = () => { URL.revokeObjectURL(url); resetVoiceUI(); };
-
-    if (statusEl) statusEl.textContent = statusEl.dataset._orig || '';
-
-    await ttsAudio.play();
-    _dbg('Cloud playback started');
+    const audio = new Audio(url);
+    currentQueueAudio = audio;
+    audio.onended = () => { URL.revokeObjectURL(url); currentQueueAudio = null; _playNextChunk(); };
+    audio.onerror = () => { URL.revokeObjectURL(url); currentQueueAudio = null; _playNextChunk(); };
+    await audio.play();
   } catch (err) {
-    _dbg('Cloud TTS failed:', err && err.message);
-    const statusEl = document.querySelector('.chat-header-status-text');
-    if (statusEl && statusEl.dataset._orig) statusEl.textContent = statusEl.dataset._orig;
-    resetVoiceUI();
-
-    // Fallback to browser TTS with user notification
-    if (!window.speechSynthesis) return;
-    _widgetShowToast('Using basic voice \u2014 check connection');
-    _dbg('Falling back to browser speechSynthesis');
-    const u = new SpeechSynthesisUtterance(clean);
-    u.rate = 1.05; u.pitch = 1.0;
-    const voices = speechSynthesis.getVoices();
-    const preferred = ['Samantha', 'Google US English', 'Microsoft Aria'];
-    for (const name of preferred) {
-      const v = voices.find(x => x.name.includes(name));
-      if (v) { u.voice = v; break; }
+    _dbg('chunk TTS failed, falling back to speechSynthesis for this chunk:', err && err.message);
+    if (window.speechSynthesis && item.gen === queueGeneration) {
+      const u = new SpeechSynthesisUtterance(item.text);
+      u.rate = 1.05; u.pitch = 1.0;
+      u.onend = () => _playNextChunk();
+      u.onerror = () => _playNextChunk();
+      try { speechSynthesis.speak(u); } catch { _playNextChunk(); }
+    } else {
+      _playNextChunk();
     }
-    speechSynthesis.speak(u);
   }
+}
+
+function clearAudioQueue() {
+  queueGeneration++;
+  audioQueue.length = 0;
+  if (currentQueueAudio) { try { currentQueueAudio.pause(); } catch(e) {} currentQueueAudio = null; }
+  window.speechSynthesis?.cancel();
+  isPlayingQueue = false;
+}
+
+/* ═══════════════════════════════════════════
+   TTS — LEGACY (full-message) PATH
+   Kept for any caller still passing a complete reply.
+   Internally just queues the whole text as one chunk.
+═══════════════════════════════════════════ */
+async function speakText(text) {
+  _dbg('speakText called; voiceMode=', voiceMode);
+  if (!voiceMode) return;
+  speakChunk(text);
 }
 
 /* ═══════════════════════════════════════════
@@ -144,20 +313,27 @@ function resetVoiceUI() {
   const header = document.querySelector('.chat-header');
   if (header) header.classList.remove('voice-active');
   const toggleBtn = document.getElementById('voiceToggle');
-  if (toggleBtn) { toggleBtn.classList.remove('playing'); toggleBtn.textContent = '🔊'; }
+  if (toggleBtn) {
+    toggleBtn.classList.remove('playing');
+    toggleBtn.textContent = voiceMode ? '🔊' : '🔇';
+  }
+}
+
+function _persistVoiceMode() {
+  try { window.localStorage?.setItem('krevio.voiceMode', voiceMode ? '1' : '0'); } catch {}
 }
 
 function toggleVoiceMode() {
   const toggleBtn = document.getElementById('voiceToggle');
-  // If currently playing, treat click as stop
+  // If currently playing, treat click as stop (barge-in)
   if (toggleBtn && toggleBtn.classList.contains('playing')) {
-    if (ttsAudio) { try { ttsAudio.pause(); } catch(e) {} }
-    window.speechSynthesis?.cancel();
+    clearAudioQueue();
     resetVoiceUI();
     return;
   }
 
   voiceMode = !voiceMode;
+  _persistVoiceMode();
   if (toggleBtn) {
     toggleBtn.classList.toggle('active', voiceMode);
     toggleBtn.textContent = voiceMode ? '🔊' : '🔇';
@@ -167,16 +343,14 @@ function toggleVoiceMode() {
     unlockAudio();
     _widgetShowToast('Voice responses ON');
   } else {
-    if (ttsAudio) { try { ttsAudio.pause(); } catch(e) {} }
-    window.speechSynthesis?.cancel();
+    clearAudioQueue();
     resetVoiceUI();
     _widgetShowToast('Voice responses OFF');
   }
 }
 
 function stopVoicePlayback() {
-  if (ttsAudio) { try { ttsAudio.pause(); } catch(e) {} }
-  window.speechSynthesis?.cancel();
+  clearAudioQueue();
   resetVoiceUI();
   if (!isRecording) {
     document.querySelector('.voice-active-panel')?.classList.remove('active');
@@ -243,6 +417,7 @@ function toggleMic() {
   // Auto-enable voice mode when using mic
   if (!voiceMode) {
     voiceMode = true;
+    _persistVoiceMode();
     unlockAudio();
     if (toggleBtn) { toggleBtn.classList.add('active'); toggleBtn.textContent = '🔊'; }
   }
@@ -293,6 +468,13 @@ function warmupTTS() {
    INIT — runs on DOMContentLoaded
 ═══════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+  // Reflect persisted voice state on the toggle button
+  const toggleBtn = document.getElementById('voiceToggle');
+  if (toggleBtn) {
+    toggleBtn.classList.toggle('active', voiceMode);
+    toggleBtn.textContent = voiceMode ? '🔊' : '🔇';
+  }
+
   // Unlock audio on first user interaction (any click/touch anywhere)
   const unlockOnce = () => { unlockAudio(); document.removeEventListener('click', unlockOnce); document.removeEventListener('touchstart', unlockOnce); };
   document.addEventListener('click', unlockOnce);
