@@ -3,16 +3,9 @@
  * Single source of truth for all Krevio design tokens.
  *
  * - Base tokens (backgrounds, text, borders, status, shadows, typography,
- *   spacing, radius, z-index) are defined here and are IDENTICAL across every
- *   page: landing, demos, and future client sites.
+ *   spacing, radius, z-index, breakpoints) are defined here and are IDENTICAL
+ *   across every page: landing, demos, and future client sites.
  * - Industry-specific accent/hero overrides live in industry-overrides.css.
- /* ─── Krevio Global CSS Tokens ─── */
-@media screen and (max-width: 768px) {
-  .header-toggles { display: grid; grid-template-columns: 1fr 1fr 1fr; width: 100%; justify-items: center; }
-  .hero-section { margin-top: 100px; padding-top: 24px; }
-  .trust-badges { display: grid !important; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; text-align: center; padding: 0 16px; }
-  main, .page-wrapper { padding-bottom: 120px !important; }
-}
  * - Krevio brand tokens (yellow, nav bg) also live here.
  *
  * Usage:
@@ -22,7 +15,31 @@
  *
  * Theme switching:  toggle data-theme="light|dark" on <html>
  * Industry:        set data-industry="plumbing|landscaping|hvac|realestate|remodeling"
+ *
+ * MOBILE BREAKPOINTS — single source of truth.
+ * Use these in @media queries everywhere instead of magic numbers.
+ *   @media (max-width: 600px)  → phone   (--bp-phone)
+ *   @media (max-width: 900px)  → tablet  (--bp-tablet)
+ *   @media (max-width: 1200px) → desktop (--bp-desktop)
+ * CSS does not support custom properties inside @media queries directly,
+ * so the values are also documented in CLAUDE.md and enforced by the
+ * mobile smoke test in scripts/mobile-smoke.mjs.
  */
+
+/* ─────────────────────────────────────────────
+   LANDING-PAGE MOBILE OVERRIDES
+   These rules used to live mid-comment due to a
+   prior edit accident. Moved here so the parser
+   sees them as real CSS, not commented out.
+   TODO: relocate into landing's own stylesheet
+   when time allows (TD-017).
+   ───────────────────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .header-toggles { display: grid; grid-template-columns: 1fr 1fr 1fr; width: 100%; justify-items: center; }
+  .hero-section { margin-top: 100px; padding-top: 24px; }
+  .trust-badges { display: grid !important; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center; text-align: center; padding: 0 16px; }
+  main, .page-wrapper { padding-bottom: 120px !important; }
+}
 
 /* ─────────────────────────────────────────────
    GOOGLE FONTS
@@ -206,6 +223,26 @@
   --z-hamburger:201;
   --z-chat:     300;
   --z-toast:    400;
+
+  /* ─── Mobile Breakpoints ───
+     CSS custom properties don't work inside @media () queries, so these
+     are reference constants only. Use the matching pixel value in your
+     @media rule. The mobile smoke test (scripts/mobile-smoke.mjs) asserts
+     critical rules trigger at 390px.
+       --bp-phone   600px : iPhone-class portrait, primary target
+       --bp-tablet  900px : iPad portrait + small landscape phones
+       --bp-desktop 1200px: full desktop ceiling
+     Mobile-first principle: design for 390x844 first, enhance upward. */
+  --bp-phone:   600px;
+  --bp-tablet:  900px;
+  --bp-desktop: 1200px;
+
+  /* ─── Mobile Touch Targets ───
+     Apple HIG: 44x44pt minimum. We use 36px for chrome utilities (theme
+     toggle, dismiss buttons) where space is at a premium and 44px for
+     primary actions (form submits, CTAs, lead capture). */
+  --tap-min:     36px;
+  --tap-primary: 44px;
 }
 
 /* ─────────────────────────────────────────────

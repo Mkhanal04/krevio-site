@@ -961,21 +961,23 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
   .form-row { grid-template-columns: 1fr; }
   .cv-hero-stats { gap: 20px; }
   .cv-hero-ctas { flex-direction: column; align-items: center; }
-  /* --- Demo bar: keep on a single row, hide non-essentials --- */
-  .demo-bar { padding: 0 10px; gap: 8px; }
+  /* --- Demo bar: keep on a single row, hide non-essentials.
+     Bar bumped to 44px on mobile so buttons can hit --tap-min 36px floor.
+     Dashboard sidebar top offset bumped to 44px to match. --- */
+  .demo-bar { padding: 0 10px; gap: 8px; height: 44px; }
   .demo-bar .demo-bar-label { display: none; }
   .demo-bar-back { display: none; }
   .demo-bar-title { font-size: 11px; min-width: 0; flex-shrink: 1; }
   .demo-bar-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
   .demo-bar-toggle { flex-shrink: 0; }
-  .demo-bar-btn { padding: 3px 10px; font-size: 11px; white-space: nowrap; }
-  .demo-bar-theme { width: 28px; height: 28px; font-size: 13px; flex-shrink: 0; }
+  .demo-bar-btn { padding: 0 12px; height: var(--tap-min); font-size: 11px; white-space: nowrap; display: inline-flex; align-items: center; }
+  .demo-bar-theme { width: var(--tap-min); height: var(--tap-min); font-size: 14px; flex-shrink: 0; }
   .lang-toggle { display: none !important; }
 
   /* Mobile dashboard: hide sidebar, show header */
   .mobile-header { display: flex; }
   .dash-sidebar {
-    position: fixed; left: 0; top: 40px; bottom: 0; z-index: 150;
+    position: fixed; left: 0; top: 44px; bottom: 0; z-index: 150;
     width: 240px; transform: translateX(-100%); transition: transform 0.3s ease;
   }
   .dash-sidebar.mobile-open {

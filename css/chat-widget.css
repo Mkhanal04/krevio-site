@@ -269,4 +269,7 @@
   }
   .chat-header { padding: var(--space-md) var(--space-lg); }
   .chat-input-row { padding: var(--space-sm) var(--space-md) var(--space-md); }
+  /* iOS Safari auto-zooms any input under 16px on focus. Bump to 16
+     so the chat panel doesn't lurch sideways when the keyboard opens. */
+  .chat-input { font-size: 16px; min-width: 0; }
 }

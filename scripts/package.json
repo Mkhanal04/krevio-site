@@ -1,0 +1,13 @@
+{
+  "name": "krevio-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Dev-only test harness. NOT shipped — Vercel deploys from repo root and ignores this directory. The 'no npm' rule in CLAUDE.md applies to app code, not dev tooling.",
+  "scripts": {
+    "smoke": "node mobile-smoke.mjs",
+    "smoke:prod": "node mobile-smoke.mjs https://krevio.net"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}
