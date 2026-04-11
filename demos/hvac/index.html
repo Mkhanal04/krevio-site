@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-industry="hvac">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1456,6 +1456,7 @@ function toggleChat() {
   chatOpen = !chatOpen;
   const panel = document.getElementById('chatPanel');
   panel.classList.toggle('open', chatOpen);
+  if (!chatOpen && typeof stopVoicePlayback === 'function') stopVoicePlayback();
   if (chatOpen && !chatInitialized) {
     chatInitialized = true;
     const lang = document.documentElement.getAttribute('data-lang') || 'en';

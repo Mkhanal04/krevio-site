@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" data-industry="landscaping">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1913,6 +1913,7 @@ function toggleChat() {
   chatOpen = !chatOpen;
   const panel = document.getElementById('chatPanel');
   panel.classList.toggle('open', chatOpen);
+  if (!chatOpen && typeof stopVoicePlayback === 'function') stopVoicePlayback();
   if (chatOpen && chatHistory.length === 0) {
     const greeting = currentLang === 'es'
       ? TRANS_ES.chatGreeting

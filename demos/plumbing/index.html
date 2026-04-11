@@ -3123,6 +3123,7 @@ function toggleChat() {
   chatOpen = !chatOpen;
   const panel = document.getElementById('chatPanel');
   panel.classList.toggle('open', chatOpen);
+  if (!chatOpen && typeof stopVoicePlayback === 'function') stopVoicePlayback();
   if (chatOpen && !chatInitialized) {
     chatInitialized = true;
     const greeting = currentLang === 'es'
