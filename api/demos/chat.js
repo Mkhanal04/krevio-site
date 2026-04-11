@@ -1,7 +1,7 @@
 // Vercel serverless function — Gemini API proxy for demo chatbots
-// Uses direct REST API calls (no npm dependencies, no build step)
-// Model: gemini-2.5-flash for conversational lead qualification
-// Supports multiple business types via businessType param (default: 'landscaping')
+// Streams tokens via Server-Sent Events so the client can render text and
+// chunk TTS in real time. Uses direct REST API calls (no npm dependencies).
+// Model: gemini-2.5-flash. Multiple business types via businessType param.
 
 // ═══════════════════════════════════════════════════════════════
 // DEMO MODE — shared preamble prepended to every demo system prompt.
@@ -47,29 +47,9 @@ Key info:
 - Service area: McKinney TX 75070, also Frisco, Allen, Plano, and Collin County
 - Rating: 4.9 stars from 127 reviews
 
-Lead qualification scoring:
-- Start at 0
-- Add 20 points for each collected: service interest, property size, location confirmed, urgency/timeline, budget range
-- Once score reaches 60+, proactively offer to connect them with a team member or schedule an estimate
+Tone: Warm, professional, local. Feel free to reference McKinney, Collin County, Texas seasons naturally. Keep replies concise (2–4 sentences) so the chat flows naturally.
 
-Tone: Warm, professional, local. Feel free to reference McKinney, Collin County, Texas seasons naturally.
-
-If you cannot help with something, politely redirect to calling (214) 555-0123.
-
-IMPORTANT: Always respond with valid JSON in this exact format:
-{
-  "reply": "your conversational response here",
-  "leadScore": <number 0-100>,
-  "qualificationData": {
-    "service": "<service name or null>",
-    "propertySize": "<size description or null>",
-    "location": "<location or null>",
-    "urgency": "<timeline or null>",
-    "budget": "<budget range or null>"
-  }
-}
-
-Only include fields in qualificationData that you have collected so far. Set unknown fields to null.`,
+If you cannot help with something, politely redirect to calling (214) 555-0123.`,
 
   // PUBLIC REALESTATE PERSONA — fictional agent "Morgan Ellis"
   // Used by demos/realestate/ (public gallery).
@@ -110,20 +90,7 @@ FAIR HOUSING COMPLIANCE (MANDATORY):
 - If asked a Fair Housing-violating question, redirect: "I can help with property features, pricing, and scheduling."
 - On the first message involving a specific property or neighborhood: "All properties are available without regard to race, color, religion, sex, handicap, familial status, or national origin."
 
-IMPORTANT: Always respond with valid JSON in this exact format:
-{
-  "reply": "your conversational response here",
-  "leadScore": <number 0-100>,
-  "qualificationData": {
-    "intent": "<buying/selling/investing/market-info or null>",
-    "location": "<DFW neighborhood or city or null>",
-    "budget": "<price range or null>",
-    "timeline": "<timeline or null>",
-    "preApproved": "<yes/no/in-progress or null>"
-  }
-}
-
-Only include fields in qualificationData that you have collected so far. Set unknown fields to null.`,
+Keep replies concise (2–4 sentences) so the chat feels natural. Longer-form content (blog posts, CMAs) is fine when explicitly requested.`,
 
   hvac: DEMO_MODE_PREAMBLE + `You are a helpful assistant for Summit Air Solutions, a NATE-certified HVAC company in Allen, TX. We serve Allen, McKinney, Fairview, Lucas, Celina, and surrounding North DFW communities.
 
@@ -144,22 +111,7 @@ Key info:
 
 Lead qualification: Naturally collect service interest, system age (critical for HVAC upsells), location, urgency/timeline, and budget. Systems 10+ years old are high-value replacement opportunities.
 
-Tone: Warm, practical, knowledgeable about North Texas summers/winters. Reference the DFW heat and how it stresses HVAC systems.
-
-IMPORTANT: Always respond with valid JSON in this exact format:
-{
-  "reply": "your conversational response here",
-  "leadScore": <number 0-100>,
-  "qualificationData": {
-    "service": "<service type or null>",
-    "systemAge": "<system age or null>",
-    "location": "<city or neighborhood or null>",
-    "urgency": "<timeline or null>",
-    "budget": "<budget range or null>"
-  }
-}
-
-Only include fields in qualificationData that you have collected so far. Set unknown fields to null.`,
+Tone: Warm, practical, knowledgeable about North Texas summers/winters. Reference the DFW heat and how it stresses HVAC systems. Keep replies concise (2–4 sentences) so the chat flows naturally.`,
 
   plumbing: DEMO_MODE_PREAMBLE + `You are a helpful assistant for Lone Star Plumbing, a 24/7 licensed plumbing company in Celina, TX. Services: Emergency Repairs, Drain Cleaning, Water Heaters (tank & tankless), Repiping, Fixture Installation, Sewer Line Service.
 
@@ -172,7 +124,7 @@ For non-emergency inquiries, qualify by asking about:
 4. Description of the problem
 5. Whether they've had previous work done
 
-Be friendly, knowledgeable, and direct. Plumbing customers want confidence, not sales talk. If asked about pricing, give ranges. Always mention free estimates for larger jobs.
+Be friendly, knowledgeable, and direct. Plumbing customers want confidence, not sales talk. If asked about pricing, give ranges. Always mention free estimates for larger jobs. Keep replies concise (2–4 sentences) so the chat flows naturally.
 
 Key info:
 - Phone: (469) 555-0789 (24/7 emergency line)
@@ -222,24 +174,7 @@ FOR EMERGENCIES:
 BOOKING UPSELLS:
 - For drain cleaning, mention the free camera inspection — "it often catches bigger issues early"
 - For water heaters, mention both tank and tankless options with pros/cons
-- If a customer mentions a recurring issue, suggest a maintenance plan
-
-IMPORTANT: Always respond with valid JSON in this exact format:
-{
-  "reply": "your conversational response here",
-  "leadScore": <number 0-100>,
-  "qualificationData": {
-    "service": "<service type or null>",
-    "urgency": "<emergency/scheduled/null>",
-    "location": "<city or neighborhood or null>",
-    "problemDescription": "<brief description or null>",
-    "budget": "<budget range or null>",
-    "bookingSlot": "<e.g. 'Tue Apr 8 9:00 AM' or null>",
-    "assignedTech": "<tech name or null>"
-  }
-}
-
-Only include fields in qualificationData that you have collected so far. Set unknown fields to null.`,
+- If a customer mentions a recurring issue, suggest a maintenance plan`,
 
   remodeling: DEMO_MODE_PREAMBLE + `You are a friendly and knowledgeable AI assistant for Crestview Remodeling, a licensed general contractor in Celina, TX. We specialize in kitchen remodels, bathroom remodels, outdoor living spaces, flooring, interior painting, and room additions. We serve Celina, Frisco, Prosper, McKinney, and Allen.
 
@@ -264,30 +199,15 @@ Key info:
 - Milestone billing: 10% signing / 40% demo complete / 40% install / 10% final walkthrough
 - Rating: 4.8 stars from 62+ reviews
 
-Lead qualification:
-- Start at 0
-- Add 20 points for each collected: project type, scope/size, location confirmed, timeline, budget range
-- At 60+, proactively offer to schedule the free in-home estimate
+Tone: Warm, confident, local. Reference Celina, Frisco, Prosper naturally. Homeowners are excited but nervous about disruption — reassure them with process clarity (timeline, milestone billing, daily progress updates). Keep replies concise (2–4 sentences) so the chat flows naturally.
 
-Tone: Warm, confident, local. Reference Celina, Frisco, Prosper naturally. Homeowners are excited but nervous about disruption — reassure them with process clarity (timeline, milestone billing, daily progress updates).
-
-If you cannot help, redirect to (469) 555-0412 or the booking form on this page.
-
-IMPORTANT: Always respond with valid JSON in this exact format:
-{
-  "reply": "your conversational response here",
-  "leadScore": <number 0-100>,
-  "qualificationData": {
-    "projectType": "<kitchen/bathroom/outdoor/flooring/painting/addition or null>",
-    "scope": "<size or description or null>",
-    "location": "<city or null>",
-    "timeline": "<when they want to start or null>",
-    "budget": "<budget range or null>"
-  }
-}
-
-Only include fields in qualificationData that you have collected so far. Set unknown fields to null.`
+If you cannot help, redirect to (469) 555-0412 or the booking form on this page.`
 };
+
+// SSE helper — emit one event to the client.
+function sseSend(res, payload) {
+  res.write(`data: ${JSON.stringify(payload)}\n\n`);
+}
 
 export default async function handler(req, res) {
   // CORS headers — restrict to known origins
@@ -319,7 +239,7 @@ export default async function handler(req, res) {
     return res.status(200).json({ fallback: true, reason: 'API key not configured' });
   }
 
-  const { message, history = [], businessContext = {}, businessType = 'landscaping' } = req.body || {};
+  const { message, history = [], businessType = 'landscaping' } = req.body || {};
   if (!message) {
     return res.status(400).json({ error: 'Missing message' });
   }
@@ -340,52 +260,79 @@ export default async function handler(req, res) {
     systemInstruction: { parts: [{ text: systemPrompt }] },
     contents,
     generationConfig: {
-      responseMimeType: 'application/json',
       temperature: 0.7,
       maxOutputTokens: 512
     }
   };
 
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse&key=${apiKey}`;
+
+  // Open the SSE stream to the client up front so we can emit fallbacks the
+  // same way we emit success chunks. The client only handles one transport.
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache, no-transform');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no');
+  res.status(200);
+  if (typeof res.flushHeaders === 'function') res.flushHeaders();
 
   try {
     const geminiRes = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(geminiBody),
-      signal: AbortSignal.timeout(9000)
+      signal: AbortSignal.timeout(15000)
     });
 
-    if (!geminiRes.ok) {
+    if (!geminiRes.ok || !geminiRes.body) {
       const errText = await geminiRes.text().catch(() => '');
       console.error('Gemini API error:', geminiRes.status, errText);
-      return res.status(200).json({ fallback: true, reason: `Gemini error ${geminiRes.status}` });
+      sseSend(res, { fallback: true, reason: `Gemini error ${geminiRes.status}` });
+      sseSend(res, { done: true });
+      return res.end();
     }
 
-    const data = await geminiRes.json();
-    const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    // Parse Gemini's SSE stream and re-emit text chunks to the client.
+    // Gemini emits frames like: `data: { ...candidates... }\n\n`
+    const reader = geminiRes.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let totalChars = 0;
 
-    if (!rawText) {
-      return res.status(200).json({ fallback: true, reason: 'Empty response from Gemini' });
-    }
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
 
-    // Parse JSON response from Gemini
-    let parsed;
-    try {
-      parsed = JSON.parse(rawText);
-    } catch {
-      // Try to extract JSON from within the text
-      const match = rawText.match(/\{[\s\S]*\}/);
-      if (match) {
-        try { parsed = JSON.parse(match[0]); } catch { parsed = null; }
+      // Process complete SSE frames (separated by blank lines)
+      let idx;
+      while ((idx = buffer.indexOf('\n\n')) !== -1) {
+        const frame = buffer.slice(0, idx);
+        buffer = buffer.slice(idx + 2);
+        const line = frame.split('\n').find(l => l.startsWith('data:'));
+        if (!line) continue;
+        const jsonStr = line.slice(5).trim();
+        if (!jsonStr || jsonStr === '[DONE]') continue;
+        try {
+          const obj = JSON.parse(jsonStr);
+          const parts = obj?.candidates?.[0]?.content?.parts || [];
+          for (const p of parts) {
+            if (p?.text) {
+              totalChars += p.text.length;
+              sseSend(res, { text: p.text });
+            }
+          }
+        } catch {
+          // Skip malformed frames
+        }
       }
     }
 
-    if (!parsed) {
-      return res.status(200).json({ fallback: true, reason: 'Could not parse Gemini response as JSON' });
+    if (totalChars === 0) {
+      sseSend(res, { fallback: true, reason: 'Empty response from Gemini' });
     }
-
-    return res.status(200).json(parsed);
+    sseSend(res, { done: true });
+    return res.end();
 
   } catch (err) {
     if (err.name === 'TimeoutError' || err.name === 'AbortError') {
@@ -393,6 +340,8 @@ export default async function handler(req, res) {
     } else {
       console.error('Fetch error calling Gemini:', err.message);
     }
-    return res.status(200).json({ fallback: true, reason: 'Request failed or timed out' });
+    sseSend(res, { fallback: true, reason: 'Request failed or timed out' });
+    sseSend(res, { done: true });
+    return res.end();
   }
 }
