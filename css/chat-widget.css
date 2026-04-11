@@ -243,3 +243,30 @@
   padding: var(--space-sm) var(--space-md); background: rgba(0,0,0,0.2);
   border-top: 1px solid rgba(255,255,255,0.05);
 }
+
+/* ─── Mobile (≤ 600px) ───
+   Mobile is the primary surface — most demo visitors arrive on phones.
+   Make the chat panel fill the viewport so the AI conversation (which is
+   the actual product demo) gets real estate. Constrains to 75svh so the
+   bubble + safe-area still has room. svh handles iOS Safari's collapsing
+   address bar — vh would jump when the bar hides/shows.
+*/
+@media (max-width: 600px) {
+  .chat-widget { right: 12px; bottom: 12px; left: 12px; }
+  .chat-widget .chat-bubble-btn { margin-left: auto; }
+  .chat-panel {
+    width: auto;
+    max-height: min(75svh, 600px);
+    margin-bottom: var(--space-md);
+  }
+  .chat-messages {
+    /* Remove fixed height — let flex grow to fill panel.
+       Min-height ensures greeting + 2-3 messages are always visible
+       even if quick-replies push the input row up. */
+    height: auto;
+    min-height: 200px;
+    padding: var(--space-lg);
+  }
+  .chat-header { padding: var(--space-md) var(--space-lg); }
+  .chat-input-row { padding: var(--space-sm) var(--space-md) var(--space-md); }
+}

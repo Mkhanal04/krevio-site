@@ -856,11 +856,12 @@ body {
   /* --- Demo bar: compact single row --- */
   .demo-bar { height: 36px; padding: 0 8px; gap: 6px; }
   .demo-bar-title .dot { width: 6px; height: 6px; }
-  .demo-bar-title { font-size: 11px; }
-  .lang-toggle { padding: 2px 6px; font-size: 11px; }
-  .demo-bar-toggle { padding: 1px; }
-  .demo-bar-btn { padding: 2px 8px; font-size: 11px; }
-  .demo-bar-theme { width: 32px; height: 32px; font-size: 13px; }
+  .demo-bar-title { font-size: 11px; min-width: 0; flex-shrink: 1; }
+  .demo-bar-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+  .lang-toggle { display: none !important; } /* hide on phones — saves 60px; ES users can switch on tablet+ */
+  .demo-bar-toggle { padding: 1px; flex-shrink: 0; }
+  .demo-bar-btn { padding: 2px 8px; font-size: 11px; white-space: nowrap; }
+  .demo-bar-theme { width: 28px; height: 28px; font-size: 13px; flex-shrink: 0; }
 
   /* --- Customer View: Hero --- */
   .cv-hero { padding: 60px 16px 48px; }
@@ -997,8 +998,8 @@ body {
   .kb-q { font-size: 12px; }
   .kb-a { font-size: 12px; }
 
-  /* --- Chatbot: full-width on phone --- */
-  .chat-panel { width: calc(100vw - 24px); max-height: 420px; }
+  /* --- Chatbot: full-width on phone, defer max-height to shared chat-widget.css mobile rule --- */
+  .chat-panel { width: calc(100vw - 24px); }
   .chat-widget { right: 12px; bottom: 12px; }
   .chat-bubble-btn { width: 46px; height: 46px; font-size: 20px; }
 
@@ -1030,7 +1031,6 @@ body {
   .dispatch-stat { padding: 8px; }
   .dispatch-stat-value { font-size: 16px; }
   .booking-card { padding: 18px 14px; }
-  .chat-panel { max-height: 380px; }
 }
 </style>
 </head>
