@@ -1573,7 +1573,6 @@ let currentLang = 'en';
 let sidebarCollapsed = false;
 let chatOpen = false;
 let chatHistory = [];
-let leadQualification = { service: null, propertySize: null, location: null, urgency: null, budget: null, score: 0 };
 let kbFaqs = MOCK.faqs.map(f => ({...f}));
 let kbServices = MOCK.kbServices.map(s => ({...s}));
 let dashboardInitialized = false;
@@ -1943,40 +1942,29 @@ function appendChatMessage(role, text) {
 // is sendChatMessage().
 function sendChat() { return sendChatMessage(); }
 
-function showTypingIndicator() {
+// Streaming bot bubble — fills in as tokens arrive from /api/demos/chat (SSE).
+function appendStreamingBotMessage() {
   const container = document.getElementById('chatMessages');
   const wrapper = document.createElement('div');
   wrapper.className = 'chat-msg chat-msg-model';
-  wrapper.id = 'typingIndicator';
   const bubble = document.createElement('div');
   bubble.className = 'chat-bubble-msg';
   bubble.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
   wrapper.appendChild(bubble);
   container.appendChild(wrapper);
   container.scrollTop = container.scrollHeight;
-}
-
-function removeTypingIndicator() {
-  const el = document.getElementById('typingIndicator');
-  if (el) el.remove();
-}
-
-function updateLeadScore(score, data) {
-  leadQualification.score = score;
-  if (data) {
-    Object.assign(leadQualification, data);
-  }
-  // The in-chat lead-score bar was removed as part of the Phase 2 unified
-  // widget migration (TD-014). Keep the state update so any follow-on logic
-  // (e.g. the owner dashboard) still reflects the lead's qualification level.
-  const scoreBar = document.getElementById('chatScoreBar');
-  const fill = document.getElementById('chatScoreFill');
-  const num = document.getElementById('chatScoreNum');
-  if (scoreBar && fill && num && score > 0) {
-    scoreBar.style.display = 'flex';
-    fill.style.width = Math.min(score, 100) + '%';
-    num.textContent = score + '/100';
-  }
+  let started = false;
+  return {
+    append(chunk) {
+      if (!started) { bubble.textContent = ''; started = true; }
+      bubble.textContent += chunk;
+      container.scrollTop = container.scrollHeight;
+    },
+    replaceWith(text) {
+      bubble.textContent = text;
+      container.scrollTop = container.scrollHeight;
+    }
+  };
 }
 
 async function sendChatMessage() {
@@ -1989,43 +1977,27 @@ async function sendChatMessage() {
   const historyBeforeThisMsg = chatHistory.slice();
   chatHistory.push({ role: 'user', text });
 
-  showTypingIndicator();
+  const stream = appendStreamingBotMessage();
+  let gotFinal = false;
 
-  try {
-    const res = await fetch('/api/demos/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        message: text,
-        history: historyBeforeThisMsg,
-        businessContext: leadQualification
-      }),
-      signal: AbortSignal.timeout(12000)
-    });
-
-    removeTypingIndicator();
-
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-
-    if (data.fallback) {
+  await streamChat({
+    message: text,
+    history: historyBeforeThisMsg,
+    businessType: 'landscaping',
+    onToken: (chunk) => stream.append(chunk),
+    onSentence: (sentence) => speakChunk(sentence),
+    onDone: (full) => {
+      gotFinal = true;
+      chatHistory.push({ role: 'model', text: full });
+    },
+    onError: () => {
+      if (gotFinal) return;
       const fallback = getChatFallback(text);
-      appendChatMessage('model', fallback);
+      stream.replaceWith(fallback);
+      speakChunk(fallback);
       chatHistory.push({ role: 'model', text: fallback });
-    } else {
-      const reply = data.reply || getChatFallback(text);
-      appendChatMessage('model', reply);
-      chatHistory.push({ role: 'model', text: reply });
-      if (typeof data.leadScore === 'number' && data.leadScore > leadQualification.score) {
-        updateLeadScore(data.leadScore, data.qualificationData);
-      }
     }
-  } catch (err) {
-    removeTypingIndicator();
-    const fallback = getChatFallback(text);
-    appendChatMessage('model', fallback);
-    chatHistory.push({ role: 'model', text: fallback });
-  }
+  });
 
   // Cap history at 10 items (5 exchanges)
   if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);

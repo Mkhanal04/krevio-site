@@ -2513,8 +2513,34 @@ function addChatMessage(role, text) {
   div.appendChild(bubble);
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
-  if (isBot && voiceMode) speakText(text);
+  if (isBot) speakText(text);
   return bubble;
+}
+
+// Streaming variant — used by sendChat() so the bot bubble fills as
+// tokens arrive from /api/demos/chat (SSE). Returns {append, replaceWith}.
+function addStreamingChatMessage() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.style.cssText = 'display:flex;justify-content:flex-start;';
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble msg-bot';
+  bubble.textContent = '…';
+  div.appendChild(bubble);
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  let started = false;
+  return {
+    append(chunk) {
+      if (!started) { bubble.textContent = ''; started = true; }
+      bubble.textContent += chunk;
+      msgs.scrollTop = msgs.scrollHeight;
+    },
+    replaceWith(text) {
+      bubble.textContent = text;
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+  };
 }
 
 function getChatFallback(text) {
@@ -2544,26 +2570,27 @@ async function sendChat() {
   addChatMessage('user', text);
   chatHistory.push({ role: 'user', text });
 
-  const thinkingDiv = document.createElement('div');
-  thinkingDiv.className = 'msg-thinking';
-  thinkingDiv.innerHTML = '<span></span><span></span><span></span>';
-  document.getElementById('chatMessages').appendChild(thinkingDiv);
+  const stream = addStreamingChatMessage();
+  let gotFinal = false;
 
-  try {
-    const res = await fetch('/api/demos/chat', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text, history: chatHistory.slice(-6), businessType: CONFIG.businessType }),
-      signal: AbortSignal.timeout(9000)
-    });
-    const data = await res.json();
-    thinkingDiv.remove();
-    const reply = data.fallback ? getChatFallback(text) : (data.reply || getChatFallback(text));
-    addChatMessage('bot', reply);
-    chatHistory.push({ role: 'model', text: reply });
-  } catch {
-    thinkingDiv.remove();
-    addChatMessage('bot', getChatFallback(text));
-  }
+  await streamChat({
+    message: text,
+    history: chatHistory.slice(-6),
+    businessType: CONFIG.businessType,
+    onToken: (chunk) => stream.append(chunk),
+    onSentence: (sentence) => speakChunk(sentence),
+    onDone: (full) => {
+      gotFinal = true;
+      chatHistory.push({ role: 'model', text: full });
+    },
+    onError: () => {
+      if (gotFinal) return;
+      const fallback = getChatFallback(text);
+      stream.replaceWith(fallback);
+      speakChunk(fallback);
+      chatHistory.push({ role: 'model', text: fallback });
+    }
+  });
 }
 
 

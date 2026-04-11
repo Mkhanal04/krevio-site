@@ -3176,6 +3176,32 @@ function addBotMsg(text) {
   if (typeof speakText === 'function') speakText(text);
 }
 
+// Streaming variant — used by sendChat() so the bubble fills as tokens
+// arrive from /api/demos/chat (SSE). Returns {append, replaceWith}.
+function addStreamingBotMsg() {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg chat-msg-bot';
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble-msg';
+  bubble.innerHTML = '<span style="color:var(--t2);">…</span>';
+  div.appendChild(bubble);
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  let started = false;
+  return {
+    append(chunk) {
+      if (!started) { bubble.textContent = ''; started = true; }
+      bubble.textContent += chunk;
+      msgs.scrollTop = msgs.scrollHeight;
+    },
+    replaceWith(text) {
+      bubble.textContent = text;
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+  };
+}
+
 function addUserMsg(text) {
   const msgs = document.getElementById('chatMessages');
   const div = document.createElement('div');
@@ -3243,30 +3269,27 @@ async function sendChat() {
   addUserMsg(text);
   chatHistory.push({ role: 'user', text });
 
-  const thinking = document.createElement('div');
-  thinking.className = 'chat-msg chat-msg-bot';
-  thinking.innerHTML = '<div class="chat-bubble-msg" style="color:var(--t2);">...</div>';
-  document.getElementById('chatMessages').appendChild(thinking);
+  const stream = addStreamingBotMsg();
+  let gotFinal = false;
 
-  try {
-    const resp = await fetch('/api/demos/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ businessType: CONFIG.businessType, message: text, history: chatHistory.slice(-8) }),
-      signal: AbortSignal.timeout(8000)
-    });
-    const data = await resp.json();
-    thinking.remove();
-    if (data.fallback) {
-      addBotMsg(getChatFallback(text));
-    } else {
-      addBotMsg(data.reply || getChatFallback(text));
-      chatHistory.push({ role: 'model', text: data.reply || '' });
+  await streamChat({
+    message: text,
+    history: chatHistory.slice(-8),
+    businessType: CONFIG.businessType,
+    onToken: (chunk) => stream.append(chunk),
+    onSentence: (sentence) => speakChunk(sentence),
+    onDone: (full) => {
+      gotFinal = true;
+      chatHistory.push({ role: 'model', text: full });
+    },
+    onError: () => {
+      if (gotFinal) return;
+      const fallback = getChatFallback(text);
+      stream.replaceWith(fallback);
+      speakChunk(fallback);
+      chatHistory.push({ role: 'model', text: fallback });
     }
-  } catch {
-    thinking.remove();
-    addBotMsg(getChatFallback(text));
-  }
+  });
 }
 
 /* Voice functions (speakText, toggleVoiceMode, toggleMic, stopMic, etc.)
