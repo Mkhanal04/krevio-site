@@ -1,6 +1,34 @@
 // Google Cloud Text-to-Speech — Journey/Neural2 voices
 // Uses the same GOOGLE_GENERATIVE_AI_API_KEY already in Vercel env
 // Requires "Cloud Text-to-Speech API" enabled in the GCP project
+//
+// Spend protection:
+// - Per-IP rate limit (10 req / 60s, in-memory, per warm Vercel instance)
+// - Hard text size cap (1000 chars; oversized rejected with 400)
+// - Returns 429 with Retry-After header on rate limit
+// Real KV-backed limiting comes in Wave 2.
+
+const RATE_BUCKET = new Map();
+const RATE_LIMIT = 10;
+const RATE_WINDOW_MS = 60_000;
+const MAX_TEXT_CHARS = 1000;
+
+function getClientIp(req) {
+  const xff = req.headers['x-forwarded-for'];
+  if (typeof xff === 'string' && xff.length) return xff.split(',')[0].trim();
+  return req.socket?.remoteAddress || 'unknown';
+}
+
+function rateLimited(ip) {
+  const now = Date.now();
+  const bucket = RATE_BUCKET.get(ip);
+  if (!bucket || now - bucket.windowStart > RATE_WINDOW_MS) {
+    RATE_BUCKET.set(ip, { count: 1, windowStart: now });
+    return false;
+  }
+  bucket.count += 1;
+  return bucket.count > RATE_LIMIT;
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -8,9 +36,20 @@ export default async function handler(req, res) {
     return res.status(405).end('Method Not Allowed');
   }
 
+  const ip = getClientIp(req);
+  if (rateLimited(ip)) {
+    res.setHeader('Retry-After', '60');
+    console.warn('[TTS] rate-limited ip:', ip);
+    return res.status(429).json({ error: 'rate limit exceeded' });
+  }
+
   const { text, lang = 'en-US' } = req.body || {};
   if (!text || typeof text !== 'string') {
     return res.status(400).json({ error: 'text is required' });
+  }
+  if (text.length > MAX_TEXT_CHARS) {
+    console.warn('[TTS] oversized text:', text.length, 'chars from ip:', ip);
+    return res.status(400).json({ error: 'text exceeds max length' });
   }
 
   const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
