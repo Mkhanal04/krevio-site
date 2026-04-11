@@ -1,30 +1,17 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
+import { applyCors, isAllowedOrigin, getClientIp, rateLimit, bodyTooLarge } from './_lib/limits.js';
 
-const ALLOWED_ORIGINS = [
-  'https://krevio.net',
-  'https://www.krevio.net',
-  'https://krevio-site.vercel.app',
-  'http://localhost:3000',
-  'http://localhost:5500',
-  'http://127.0.0.1:5500'
-];
-
-// In-memory rate limiting: max 30 requests per IP per 5 minutes
-const rateLimitMap = new Map();
-const RATE_LIMIT_MAX = 30;
-const RATE_LIMIT_WINDOW = 5 * 60 * 1000;
-
-function checkRateLimit(ip) {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-  if (!entry || now - entry.start > RATE_LIMIT_WINDOW) {
-    rateLimitMap.set(ip, { start: now, count: 1 });
-    return true;
-  }
-  entry.count++;
-  return entry.count <= RATE_LIMIT_MAX;
-}
+// Cost protection — landing chat is publicly callable and hits unmetered
+// Gemini. Same playbook as demos/chat.js, slightly looser limits because
+// landing traffic is more bursty (a real prospect might fire 5 questions
+// in a row before slowing down).
+// - Origin allowlist via _lib/limits.js
+// - Rate limit: 30 req / 5 min via shared bucket
+// - Body cap: 8 KB
+// - History cap: last 20 turns (was already capped)
+// - Message length cap: 2000 chars (was already capped)
+// - maxOutputTokens: 500 (existing)
 
 // Load knowledge base and build system prompt
 let systemPrompt = '';
@@ -63,23 +50,31 @@ AI HONESTY:
   console.warn('[Chat] Failed to load knowledge-base.json:', err.message);
 }
 
-function isAllowedOrigin(origin) {
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  // Allow krevio-site Vercel preview subdomains
-  if (/^https:\/\/krevio-site[a-z0-9-]*\.vercel\.app$/.test(origin)) return true;
-  return false;
-}
-
 export default async function handler(req, res) {
-  const origin = req.headers.origin || '';
-  const corsOrigin = isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0];
-  res.setHeader('Access-Control-Allow-Origin', corsOrigin);
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Vary', 'Origin');
+  const origin = applyCors(req, res);
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ reply: 'Method not allowed' });
+
+  // Origin gate — refuse foreign POSTs entirely so embedded copies can't
+  // burn Gemini quota.
+  if (!isAllowedOrigin(origin)) {
+    console.warn('[Chat] origin rejected:', origin);
+    return res.status(403).json({
+      reply: "Chat is unavailable from this origin.",
+      action: null
+    });
+  }
+
+  // Body cap — landing chat history is smaller than demo chat history
+  // (no qualification scaffolding) so 8 KB is enough.
+  if (bodyTooLarge(req, 8 * 1024)) {
+    console.warn('[Chat] body too large:', req.headers['content-length']);
+    return res.status(413).json({
+      reply: "That message is too large for me to process.",
+      action: null
+    });
+  }
 
   // Check API key
   const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
@@ -90,9 +85,9 @@ export default async function handler(req, res) {
     });
   }
 
-  // Rate limiting
-  const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket?.remoteAddress || 'unknown';
-  if (!checkRateLimit(ip)) {
+  // Rate limiting via shared bucket — 30 req / 5 min
+  const ip = getClientIp(req);
+  if (rateLimit({ key: 'landing-chat', ip, limit: 30, windowMs: 5 * 60_000 })) {
     return res.status(429).json({
       reply: "You're chatting faster than I can keep up! Give me a minute and try again.",
       action: null
