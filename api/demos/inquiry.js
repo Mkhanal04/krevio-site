@@ -1,28 +1,31 @@
-const ALLOWED_ORIGINS = [
-  'https://krevio.net',
-  'https://www.krevio.net',
-  'https://krevio-site.vercel.app',
-  'http://localhost:3000',
-  'http://localhost:5500',
-  'http://127.0.0.1:5500'
-];
+import { applyCors, isAllowedOrigin, getClientIp, rateLimit, bodyTooLarge } from '../_lib/limits.js';
 
-function isAllowedOrigin(origin) {
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  if (/^https:\/\/krevio-site[a-z0-9-]*\.vercel\.app$/.test(origin)) return true;
-  return false;
-}
+// Cost protection — same playbook as api/inquiry.js, but this endpoint
+// also accepts analytics events from page beacons. Higher rate limit
+// (20/min) to leave room for legitimate event traffic; the inquiry path
+// is still effectively gated by the slower form-fill cadence.
 
 export default async function handler(req, res) {
-  const origin = req.headers.origin || '';
-  const corsOrigin = isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0];
-  res.setHeader('Access-Control-Allow-Origin', corsOrigin);
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Vary', 'Origin');
+  const origin = applyCors(req, res);
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, message: 'Method not allowed' });
+
+  if (!isAllowedOrigin(origin)) {
+    console.warn('[Demo Inquiry] origin rejected:', origin);
+    return res.status(200).json({ success: true });
+  }
+
+  if (bodyTooLarge(req, 8 * 1024)) {
+    console.warn('[Demo Inquiry] body too large:', req.headers['content-length']);
+    return res.status(200).json({ success: true });
+  }
+
+  const ip = getClientIp(req);
+  if (rateLimit({ key: 'demos-inquiry', ip, limit: 20, windowMs: 60_000 })) {
+    console.warn('[Demo Inquiry] rate-limited ip:', ip);
+    return res.status(200).json({ success: true });
+  }
 
   const body = req.body || {};
   const type = body.type || 'inquiry';
