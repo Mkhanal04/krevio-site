@@ -1,3 +1,13 @@
+// Krevio lead-notification endpoint
+// - Per-tenant recipient routing (default tenant: 'krevio')
+// - Strict Origin allowlist (rejects foreign browser POSTs; allows empty Origin
+//   for server-to-server calls from api/inquiry.js)
+// - In-memory IP rate limit (5 req / 60s, per warm Vercel instance)
+// - Body size cap (8 KB)
+// - Schema validation (name required; at least one of phone/email)
+// - Always returns 200 {ok:true,queued:true} so attackers can't enumerate
+//   the schema. Rejection reasons go to Vercel function logs only.
+
 const ALLOWED_ORIGINS = [
   'https://krevio.net',
   'https://www.krevio.net',
@@ -8,23 +18,55 @@ const ALLOWED_ORIGINS = [
 ];
 
 function isAllowedOrigin(origin) {
+  if (!origin) return true; // server-to-server (e.g. api/inquiry.js → /api/notify)
   if (ALLOWED_ORIGINS.includes(origin)) return true;
   if (/^https:\/\/krevio-site[a-z0-9-]*\.vercel\.app$/.test(origin)) return true;
   return false;
 }
 
-const NOTIFY_TO = 'krevio@krevio.net';
-// From address: uses Resend's default shared domain until krevio.net is verified in Resend.
-// Once verified, change to: notifications@krevio.net
+// Per-tenant notification routing. Add a customer here when they onboard.
+// TD-016: graduate this to a real config source (env-backed or DB) when
+// the second tenant arrives.
+const TENANT_NOTIFY = {
+  krevio: 'krevio@krevio.net',
+};
+const DEFAULT_TENANT = 'krevio';
+
+// In-memory token bucket: ip -> { count, windowStart }
+// Resets on cold start. Sufficient bound on bursts within a warm instance.
+const RATE_BUCKET = new Map();
+const RATE_LIMIT = 5;          // requests
+const RATE_WINDOW_MS = 60_000; // per minute
+
+function getClientIp(req) {
+  const xff = req.headers['x-forwarded-for'];
+  if (typeof xff === 'string' && xff.length) return xff.split(',')[0].trim();
+  return req.socket?.remoteAddress || 'unknown';
+}
+
+function rateLimited(ip) {
+  const now = Date.now();
+  const bucket = RATE_BUCKET.get(ip);
+  if (!bucket || now - bucket.windowStart > RATE_WINDOW_MS) {
+    RATE_BUCKET.set(ip, { count: 1, windowStart: now });
+    return false;
+  }
+  bucket.count += 1;
+  if (bucket.count > RATE_LIMIT) return true;
+  return false;
+}
+
 const NOTIFY_FROM = 'Krevio Alerts <onboarding@resend.dev>';
 
-// Type → display label + header color. Every supported notification type must
-// have an entry here; unknown types fall through to 'inquiry' defaults.
 const TYPE_META = {
   emergency:   { label: '🚨 EMERGENCY',           typeLabel: 'Emergency Callback',  headerBg: '#ef4444' },
   appointment: { label: '📅 APPOINTMENT REQUEST', typeLabel: 'Appointment Request', headerBg: '#2563eb' },
   inquiry:     { label: '💬 NEW INQUIRY',         typeLabel: 'Inquiry',             headerBg: '#6366f1' },
 };
+
+function escapeHtml(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
 function buildEmailHtml(data) {
   const meta = TYPE_META[data.type] || TYPE_META.inquiry;
@@ -63,13 +105,16 @@ function buildEmailHtml(data) {
 </html>`;
 }
 
-function escapeHtml(str) {
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+// Always returns 200 success-shaped response so attackers can't enumerate
+// validation rules. Rejection reasons are logged to Vercel function logs.
+function silentReject(res, reason) {
+  console.warn('[notify] rejected:', reason);
+  return res.status(200).json({ ok: true, queued: true });
 }
 
 export default async function handler(req, res) {
   const origin = req.headers.origin || '';
-  const corsOrigin = isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0];
+  const corsOrigin = isAllowedOrigin(origin) && origin ? origin : ALLOWED_ORIGINS[0];
   res.setHeader('Access-Control-Allow-Origin', corsOrigin);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -78,14 +123,34 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, message: 'Method not allowed' });
 
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.warn('[notify] RESEND_API_KEY not set — skipping email');
-    return res.status(200).json({ success: true, skipped: true, reason: 'RESEND_API_KEY not configured' });
+  // Origin gate — reject foreign browser POSTs. Empty Origin (server-to-server) is allowed.
+  if (!isAllowedOrigin(origin)) {
+    return silentReject(res, `origin not allowed: ${origin}`);
+  }
+
+  // Body size cap (8 KB) — reject oversized payloads before parsing.
+  const contentLength = parseInt(req.headers['content-length'] || '0', 10);
+  if (contentLength > 8192) {
+    return silentReject(res, `body too large: ${contentLength}`);
+  }
+
+  // Per-IP rate limit
+  const ip = getClientIp(req);
+  if (rateLimited(ip)) {
+    return silentReject(res, `rate-limited ip: ${ip}`);
   }
 
   const body = req.body || {};
   const sanitize = (v) => typeof v === 'string' ? v.trim().slice(0, 500) : '';
+
+  // Tenant routing — defaults to 'krevio' for backwards compat with existing
+  // callers (api/inquiry.js, demos/plumbing/index.html). Customer #1 sets
+  // CONFIG.tenantId in their demo.
+  const tenantId = sanitize(body.tenantId) || DEFAULT_TENANT;
+  const notifyTo = TENANT_NOTIFY[tenantId];
+  if (!notifyTo) {
+    return silentReject(res, `unknown tenantId: ${tenantId}`);
+  }
 
   const data = {
     type: sanitize(body.type) || 'inquiry',
@@ -98,6 +163,16 @@ export default async function handler(req, res) {
     businessName: sanitize(body.businessName),
     timestamp: body.timestamp || new Date().toISOString(),
   };
+
+  // Schema validation: name required, at least one contact method.
+  if (!data.name) return silentReject(res, 'missing name');
+  if (!data.phone && !data.email) return silentReject(res, 'missing phone and email');
+
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn('[notify] RESEND_API_KEY not set — skipping email');
+    return res.status(200).json({ ok: true, queued: true, skipped: 'RESEND_API_KEY not configured' });
+  }
 
   const meta = TYPE_META[data.type] || TYPE_META.inquiry;
   const subjectPrefix = data.type === 'emergency' ? 'Emergency' : meta.typeLabel;
@@ -112,7 +187,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: NOTIFY_FROM,
-        to: [NOTIFY_TO],
+        to: [notifyTo],
         subject,
         html: buildEmailHtml(data),
       }),
@@ -122,16 +197,14 @@ export default async function handler(req, res) {
     if (!emailRes.ok) {
       const errText = await emailRes.text().catch(() => '');
       console.error('[notify] Resend error:', emailRes.status, errText);
-      // Still return 200 — graceful degradation (form must not break)
-      return res.status(200).json({ success: true, notified: false, reason: `Resend ${emailRes.status}` });
+      return res.status(200).json({ ok: true, queued: true, notified: false });
     }
 
-    console.log('[notify] Email sent:', subject);
-    return res.status(200).json({ success: true, notified: true });
+    console.log('[notify] Email sent to', notifyTo, '—', subject);
+    return res.status(200).json({ ok: true, queued: true, notified: true });
 
   } catch (err) {
     console.error('[notify] Fetch error (non-fatal):', err.message);
-    // Graceful degradation — don't fail the form
-    return res.status(200).json({ success: true, notified: false, reason: err.message });
+    return res.status(200).json({ ok: true, queued: true, notified: false });
   }
 }
