@@ -1,28 +1,34 @@
-const ALLOWED_ORIGINS = [
-  'https://krevio.net',
-  'https://www.krevio.net',
-  'https://krevio-site.vercel.app',
-  'http://localhost:3000',
-  'http://localhost:5500',
-  'http://127.0.0.1:5500'
-];
+import { applyCors, isAllowedOrigin, getClientIp, rateLimit, bodyTooLarge } from './_lib/limits.js';
 
-function isAllowedOrigin(origin) {
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  if (/^https:\/\/krevio-site[a-z0-9-]*\.vercel\.app$/.test(origin)) return true;
-  return false;
-}
+// Cost protection — this endpoint writes to Supabase chatbot_conversations
+// on every chat session end. A loop POSTing junk would fill the table and
+// chew up Supabase row quota. Limits:
+// - Origin allowlist via _lib/limits.js
+// - Rate limit: 10 req / min / IP (real users end ~1 session per visit)
+// - Body cap: 64 KB (messages_json itself can be 50 KB after the existing
+//   sanitize step, plus session metadata)
 
 export default async function handler(req, res) {
-  const origin = req.headers.origin || '';
-  const corsOrigin = isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0];
-  res.setHeader('Access-Control-Allow-Origin', corsOrigin);
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Vary', 'Origin');
+  const origin = applyCors(req, res);
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, message: 'Method not allowed' });
+
+  if (!isAllowedOrigin(origin)) {
+    console.warn('[Krevio Conversation] origin rejected:', origin);
+    return res.status(200).json({ success: true });
+  }
+
+  if (bodyTooLarge(req, 64 * 1024)) {
+    console.warn('[Krevio Conversation] body too large:', req.headers['content-length']);
+    return res.status(200).json({ success: true });
+  }
+
+  const ip = getClientIp(req);
+  if (rateLimit({ key: 'log-conversation', ip, limit: 10, windowMs: 60_000 })) {
+    console.warn('[Krevio Conversation] rate-limited ip:', ip);
+    return res.status(200).json({ success: true });
+  }
 
   // Parse body — sendBeacon may send as text/plain even with Blob
   let body = req.body;

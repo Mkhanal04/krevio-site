@@ -2,6 +2,18 @@
 // Uses direct REST API calls (no npm dependencies, no build step)
 // Model: gemini-2.5-flash for conversational lead qualification
 // Supports multiple business types via businessType param (default: 'landscaping')
+//
+// Cost protection (highest exposure of any endpoint — Gemini is unmetered
+// and demos are public):
+// - Origin allowlist via _lib/limits.js
+// - Rate limit: 20 req/min/IP via shared token bucket
+// - Body size cap: 16 KB (chat history can be larger than other endpoints)
+// - Message length cap: 2000 chars per turn
+// - History cap: last 10 turns (was unbounded — a long-running tab could
+//   ship 100+ turns of context on every reply, multiplying input cost)
+// - maxOutputTokens: 512 (already set; left alone)
+
+import { applyCors, isAllowedOrigin, getClientIp, rateLimit, bodyTooLarge } from '../_lib/limits.js';
 
 // ═══════════════════════════════════════════════════════════════
 // DEMO MODE — shared preamble prepended to every demo system prompt.
@@ -290,21 +302,7 @@ Only include fields in qualificationData that you have collected so far. Set unk
 };
 
 export default async function handler(req, res) {
-  // CORS headers — restrict to known origins
-  const ALLOWED_ORIGINS = [
-    'https://krevio.net',
-    'https://www.krevio.net',
-    'https://krevio-site.vercel.app',
-    'http://localhost:3000',
-    'http://localhost:5500',
-    'http://127.0.0.1:5500'
-  ];
-  const origin = req.headers.origin || '';
-  const isAllowed = ALLOWED_ORIGINS.includes(origin) || /^https:\/\/krevio-site[a-z0-9-]*\.vercel\.app$/.test(origin);
-  res.setHeader('Access-Control-Allow-Origin', isAllowed ? origin : ALLOWED_ORIGINS[0]);
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Vary', 'Origin');
+  const origin = applyCors(req, res);
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -314,26 +312,55 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Origin gate — reject foreign browser POSTs entirely. Without this, any
+  // site on the internet can embed our chat endpoint and burn Gemini quota.
+  if (!isAllowedOrigin(origin)) {
+    console.warn('[demos/chat] origin rejected:', origin);
+    return res.status(403).json({ fallback: true, reason: 'origin not allowed' });
+  }
+
+  // Body size cap before parsing — 16 KB covers a 10-turn history with 2KB
+  // messages and stops a 10MB JSON bomb at the door.
+  if (bodyTooLarge(req, 16 * 1024)) {
+    console.warn('[demos/chat] body too large:', req.headers['content-length']);
+    return res.status(413).json({ fallback: true, reason: 'payload too large' });
+  }
+
+  // Per-IP rate limit. 20/min is generous for a real demo session (a thinking
+  // user sends maybe 1 message every 5-10 seconds) but shuts down a scripted
+  // hammer fast.
+  const ip = getClientIp(req);
+  if (rateLimit({ key: 'demos-chat', ip, limit: 20, windowMs: 60_000 })) {
+    console.warn('[demos/chat] rate-limited ip:', ip);
+    res.setHeader('Retry-After', '60');
+    return res.status(429).json({ fallback: true, reason: 'rate limit exceeded' });
+  }
+
   const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
   if (!apiKey) {
     return res.status(200).json({ fallback: true, reason: 'API key not configured' });
   }
 
   const { message, history = [], businessContext = {}, businessType = 'landscaping' } = req.body || {};
-  if (!message) {
+  if (!message || typeof message !== 'string') {
     return res.status(400).json({ error: 'Missing message' });
   }
 
   // Select system prompt by businessType; fall back to landscaping for safety
   const systemPrompt = SYSTEM_PROMPTS[businessType] || SYSTEM_PROMPTS.landscaping;
 
+  // Cap history to last 10 turns and each turn to 2000 chars. Without this
+  // a long-running tab ships ever-larger context on every reply — input
+  // tokens scale linearly, so a 50-turn conversation costs 5x a 10-turn one.
+  const safeHistory = (Array.isArray(history) ? history : []).slice(-10);
+
   // Build Gemini contents array from history + current message
   const contents = [
-    ...history.map(h => ({
-      role: h.role,
-      parts: [{ text: h.text }]
+    ...safeHistory.map(h => ({
+      role: h.role === 'user' ? 'user' : 'model',
+      parts: [{ text: String(h.text || '').slice(0, 2000) }]
     })),
-    { role: 'user', parts: [{ text: message }] }
+    { role: 'user', parts: [{ text: message.slice(0, 2000) }] }
   ];
 
   const geminiBody = {

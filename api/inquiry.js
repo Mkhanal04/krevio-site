@@ -1,28 +1,34 @@
-const ALLOWED_ORIGINS = [
-  'https://krevio.net',
-  'https://www.krevio.net',
-  'https://krevio-site.vercel.app',
-  'http://localhost:3000',
-  'http://localhost:5500',
-  'http://127.0.0.1:5500'
-];
+import { applyCors, isAllowedOrigin, getClientIp, rateLimit, bodyTooLarge } from './_lib/limits.js';
 
-function isAllowedOrigin(origin) {
-  if (ALLOWED_ORIGINS.includes(origin)) return true;
-  if (/^https:\/\/krevio-site[a-z0-9-]*\.vercel\.app$/.test(origin)) return true;
-  return false;
-}
+// Cost protection — Supabase free tier is generous but a spam loop can
+// fill the demo_inquiries table fast and trigger Resend notifications
+// every iteration. Limits:
+// - Origin allowlist via _lib/limits.js
+// - Rate limit: 5 req / min / IP (real submission is one-and-done)
+// - Body cap: 8 KB
+// Returns success-shape on rejection so probers can't enumerate the rules.
 
 export default async function handler(req, res) {
-  const origin = req.headers.origin || '';
-  const corsOrigin = isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0];
-  res.setHeader('Access-Control-Allow-Origin', corsOrigin);
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Vary', 'Origin');
+  const origin = applyCors(req, res);
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ success: false, message: 'Method not allowed' });
+
+  if (!isAllowedOrigin(origin)) {
+    console.warn('[Krevio Inquiry] origin rejected:', origin);
+    return res.status(200).json({ success: true, message: "Thank you! We'll reach out within 24 hours." });
+  }
+
+  if (bodyTooLarge(req, 8 * 1024)) {
+    console.warn('[Krevio Inquiry] body too large:', req.headers['content-length']);
+    return res.status(200).json({ success: true, message: "Thank you! We'll reach out within 24 hours." });
+  }
+
+  const ip = getClientIp(req);
+  if (rateLimit({ key: 'inquiry', ip, limit: 5, windowMs: 60_000 })) {
+    console.warn('[Krevio Inquiry] rate-limited ip:', ip);
+    return res.status(200).json({ success: true, message: "Thank you! We'll reach out within 24 hours." });
+  }
 
   const body = req.body || {};
   const { name, email, industry } = body;

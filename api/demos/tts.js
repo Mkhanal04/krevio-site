@@ -2,42 +2,83 @@
 // Uses the same GOOGLE_GENERATIVE_AI_API_KEY already in Vercel env
 // Requires "Cloud Text-to-Speech API" enabled in the GCP project
 //
-// Spend protection:
-// - Per-IP rate limit (10 req / 60s, in-memory, per warm Vercel instance)
-// - Hard text size cap (1000 chars; oversized rejected with 400)
-// - Returns 429 with Retry-After header on rate limit
-// Real KV-backed limiting comes in Wave 2.
+// Cost protection (Cloud TTS Journey-F is $16/1M chars — a determined
+// loop can rack up real money fast):
+// - Origin allowlist via _lib/limits.js
+// - Per-IP rate limit: 10 req / 60s
+// - Hard text cap: 500 chars (was 1000; demo greetings + replies fit easily)
+// - Body cap: 4 KB
+// - In-memory LRU response cache keyed by sha256(text + voice + lang),
+//   max 200 entries, 1 hr TTL. THIS IS THE BIGGEST WIN: demo replay
+//   (greeting, quick replies, repeated bot answers) hits the same strings
+//   over and over. Cache hits cost $0 — they don't touch Cloud TTS at all.
+//
+// Real KV-backed limiting + cache come in Wave 2 (TD-018).
 
-const RATE_BUCKET = new Map();
-const RATE_LIMIT = 10;
-const RATE_WINDOW_MS = 60_000;
-const MAX_TEXT_CHARS = 1000;
+import crypto from 'node:crypto';
+import { applyCors, isAllowedOrigin, getClientIp, rateLimit, bodyTooLarge } from '../_lib/limits.js';
 
-function getClientIp(req) {
-  const xff = req.headers['x-forwarded-for'];
-  if (typeof xff === 'string' && xff.length) return xff.split(',')[0].trim();
-  return req.socket?.remoteAddress || 'unknown';
+const MAX_TEXT_CHARS = 500;
+const MAX_BODY_BYTES = 4 * 1024;
+
+// LRU cache: hash -> { buffer, expiresAt }. Insertion order = LRU order
+// (Map preserves insertion order in JS). On hit, delete + re-set to bump
+// to most-recent. On overflow, drop oldest entry.
+const CACHE_MAX = 200;
+const CACHE_TTL_MS = 60 * 60 * 1000;
+const cache = new Map();
+
+function cacheKey(text, voiceName, languageCode) {
+  return crypto.createHash('sha256').update(`${voiceName}|${languageCode}|${text}`).digest('hex');
 }
 
-function rateLimited(ip) {
-  const now = Date.now();
-  const bucket = RATE_BUCKET.get(ip);
-  if (!bucket || now - bucket.windowStart > RATE_WINDOW_MS) {
-    RATE_BUCKET.set(ip, { count: 1, windowStart: now });
-    return false;
+function cacheGet(key) {
+  const entry = cache.get(key);
+  if (!entry) return null;
+  if (Date.now() > entry.expiresAt) {
+    cache.delete(key);
+    return null;
   }
-  bucket.count += 1;
-  return bucket.count > RATE_LIMIT;
+  // Bump to MRU
+  cache.delete(key);
+  cache.set(key, entry);
+  return entry.buffer;
+}
+
+function cacheSet(key, buffer) {
+  if (cache.size >= CACHE_MAX) {
+    // Drop oldest (first key in insertion order)
+    const oldest = cache.keys().next().value;
+    if (oldest) cache.delete(oldest);
+  }
+  cache.set(key, { buffer, expiresAt: Date.now() + CACHE_TTL_MS });
 }
 
 export default async function handler(req, res) {
+  const origin = applyCors(req, res);
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).end('Method Not Allowed');
   }
 
+  // Origin gate — TTS is the most expensive endpoint per call. Reject any
+  // POST that isn't from a known browser surface.
+  if (!isAllowedOrigin(origin)) {
+    console.warn('[TTS] origin rejected:', origin);
+    return res.status(403).json({ error: 'origin not allowed' });
+  }
+
+  if (bodyTooLarge(req, MAX_BODY_BYTES)) {
+    console.warn('[TTS] body too large:', req.headers['content-length']);
+    return res.status(413).json({ error: 'payload too large' });
+  }
+
   const ip = getClientIp(req);
-  if (rateLimited(ip)) {
+  if (rateLimit({ key: 'tts', ip, limit: 10, windowMs: 60_000 })) {
     res.setHeader('Retry-After', '60');
     console.warn('[TTS] rate-limited ip:', ip);
     return res.status(429).json({ error: 'rate limit exceeded' });
@@ -61,8 +102,20 @@ export default async function handler(req, res) {
   const voiceName    = isSpanish ? 'es-US-Neural2-A' : 'en-US-Journey-F';
   const languageCode = isSpanish ? 'es-US'           : 'en-US';
 
+  // Cache lookup BEFORE we hit Cloud TTS. The cache key includes voice +
+  // lang so en/es and any future voice swap don't collide.
+  const key = cacheKey(text, voiceName, languageCode);
+  const cached = cacheGet(key);
+  if (cached) {
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.setHeader('Content-Length', cached.length);
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('X-Krevio-Cache', 'hit');
+    return res.send(cached);
+  }
+
   const payload = {
-    input: { text: text.slice(0, 1000) },
+    input: { text },
     voice: { languageCode, name: voiceName },
     audioConfig: {
       audioEncoding: 'MP3',
@@ -97,8 +150,11 @@ export default async function handler(req, res) {
   }
 
   const buffer = Buffer.from(audioContent, 'base64');
+  cacheSet(key, buffer);
+
   res.setHeader('Content-Type', 'audio/mpeg');
   res.setHeader('Content-Length', buffer.length);
   res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('X-Krevio-Cache', 'miss');
   res.send(buffer);
 }
