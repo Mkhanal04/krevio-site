@@ -963,9 +963,17 @@ input[type="checkbox"] { display: none; }
   .pipeline { min-width: 700px; }
   .cv-footer-info { flex-direction: column; gap: 10px; align-items: center; }
 
+  /* --- Context banner: collapse persona detail + arrows on phones.
+     Keeps banner to a single line at 390px so the demo bar at top: 30px
+     doesn't overlap. .banner-detail wraps the verbose copy that's hidden
+     here — the persona name + "What is this?" link stay visible. --- */
+  .context-banner { padding: 5px 36px 5px 12px; font-size: 11px; gap: 6px; }
+  .context-banner .banner-detail { display: none; }
+
   /* --- Demo bar: keep on a single row, hide non-essentials.
      KW compliance subtitle is dropped on phones — there's no room and the
-     "Demo" label + footer disclaimer carry the brokerage attribution. --- */
+     "Demo" label + footer disclaimer carry the brokerage attribution.
+     Buttons sized to --tap-min (36px) for Apple HIG minimum. --- */
   .demo-bar { padding: 0 10px; gap: 8px; }
   .demo-bar-label { display: none; }
   .demo-bar-back { display: none; }
@@ -973,8 +981,8 @@ input[type="checkbox"] { display: none; }
   .demo-bar-title { font-size: 12px; min-width: 0; flex-shrink: 1; }
   .demo-bar-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
   .demo-bar-toggle { flex-shrink: 0; }
-  .demo-bar-btn { padding: 4px 10px; font-size: 11px; white-space: nowrap; }
-  .demo-bar-theme { width: 28px; height: 28px; font-size: 13px; flex-shrink: 0; }
+  .demo-bar-btn { padding: 0 12px; height: var(--tap-min); font-size: 11px; white-space: nowrap; display: inline-flex; align-items: center; }
+  .demo-bar-theme { width: var(--tap-min); height: var(--tap-min); font-size: 14px; flex-shrink: 0; }
   .lang-toggle { display: none !important; }
   .auto-metrics { grid-template-columns: repeat(2, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1024,8 +1032,8 @@ input[type="checkbox"] { display: none; }
 
 <!-- ═══════════════════ CONTEXT BANNER ═══════════════════ -->
 <div class="context-banner" id="contextBanner">
-  <span>✦ Fictional REALTOR® persona <strong>Morgan Ellis</strong> — a Krevio sample site</span>
-  <a href="/about-these-demos/" rel="noopener">— What is this? →</a>
+  <span>✦ <span class="banner-detail">Fictional REALTOR® persona </span><strong>Morgan Ellis</strong><span class="banner-detail"> — a Krevio sample site</span></span>
+  <a href="/about-these-demos/" rel="noopener"><span class="banner-detail">— </span>What is this?<span class="banner-detail"> →</span></a>
   <button class="context-banner-dismiss" onclick="dismissBanner()" aria-label="Dismiss">×</button>
 </div>
 

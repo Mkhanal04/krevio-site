@@ -853,15 +853,17 @@ body {
    RESPONSIVE — PHONE (≤ 600px)
 ═══════════════════════════════════════════ */
 @media (max-width: 600px) {
-  /* --- Demo bar: compact single row --- */
-  .demo-bar { height: 36px; padding: 0 8px; gap: 6px; }
+  /* --- Demo bar: compact single row.
+     Bar bumped to 44px on mobile (was 36) so buttons can hit the
+     --tap-min 36px floor. Sidebar/overlay top offsets below match. --- */
+  .demo-bar { height: 44px; padding: 0 8px; gap: 6px; }
   .demo-bar-title .dot { width: 6px; height: 6px; }
   .demo-bar-title { font-size: 11px; min-width: 0; flex-shrink: 1; }
   .demo-bar-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
   .lang-toggle { display: none !important; } /* hide on phones — saves 60px; ES users can switch on tablet+ */
-  .demo-bar-toggle { padding: 1px; flex-shrink: 0; }
-  .demo-bar-btn { padding: 2px 8px; font-size: 11px; white-space: nowrap; }
-  .demo-bar-theme { width: 28px; height: 28px; font-size: 13px; flex-shrink: 0; }
+  .demo-bar-toggle { padding: 2px; flex-shrink: 0; }
+  .demo-bar-btn { padding: 0 12px; height: var(--tap-min); font-size: 11px; white-space: nowrap; min-height: var(--tap-min); display: inline-flex; align-items: center; }
+  .demo-bar-theme { width: var(--tap-min); height: var(--tap-min); font-size: 14px; flex-shrink: 0; }
 
   /* --- Customer View: Hero --- */
   .cv-hero { padding: 60px 16px 48px; }
@@ -895,10 +897,11 @@ body {
   .cv-footer { padding: 32px 16px 24px; }
   .cv-footer-contact { flex-direction: column; gap: 10px; align-items: center; }
 
-  /* --- Owner Dashboard --- */
-  .od-hamburger { top: 44px; }
-  .od-sidebar { top: 36px; }
-  .od-sidebar-overlay { top: 36px; }
+  /* --- Owner Dashboard ---
+     Sidebar / overlay top offsets match the 44px mobile demo bar above. --- */
+  .od-hamburger { top: 52px; }
+  .od-sidebar { top: 44px; }
+  .od-sidebar-overlay { top: 44px; }
   .od-main { padding: 12px; }
   .od-main-header { padding-left: 44px; margin-bottom: 16px; }
   .od-main-title { font-size: 1.3rem; }
@@ -1380,7 +1383,7 @@ body {
         <button class="stop-btn" onclick="stopVoicePlayback()">STOP LISTENING</button>
       </div>
       <div class="chat-input-wrapper">
-        <input class="chat-input" id="chatInput" placeholder="Ask about a service or emergency..." onkeydown="if(event.key==='Enter')sendChat()">
+        <input class="chat-input" id="chatInput" placeholder="Ask about a service..." onkeydown="if(event.key==='Enter')sendChat()">
         <button class="chat-send-btn" onclick="sendChat()">✈</button>
         <button class="chat-mic" id="chatMic" onclick="toggleMic()" title="Voice input" aria-label="Voice input">🎤</button>
       </div>
