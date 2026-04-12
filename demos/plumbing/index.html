@@ -2358,7 +2358,7 @@ function renderKb() {
     </div>
     <div class="kb-card" style="margin-top:16px;">
       <p class="kb-info-text">These FAQs train your AI chatbot. When customers ask questions, the chatbot pulls from this knowledge base to give accurate, on-brand answers. Add, edit, or remove FAQs at any time.</p>
-      <button class="btn-accent-outline" style="margin-top:12px;" onclick="showToast('FAQ added (demo only)')">+ Add FAQ</button>
+      <button class="btn-accent-outline" style="margin-top:12px;" onclick="showToast('✅ FAQ added successfully')">+ Add FAQ</button>
     </div>
   `;
 }
@@ -2477,7 +2477,7 @@ function renderDispatch() {
     <div class="unassigned-card">
       <div class="unassigned-header">
         <span>⚠️ Unassigned Jobs (${d.unassigned.length})</span>
-        <button class="invoice-card-btn" onclick="showToast('Opening assignment view (demo only)')">Assign ↗</button>
+        <button class="invoice-card-btn" onclick="showToast('Opening assignment view…')">Assign ↗</button>
       </div>
       ${d.unassigned.map(u => `
         <div class="unassigned-item">
@@ -2983,7 +2983,7 @@ function renderMoney() {
     <div class="invoice-card">
       <div class="invoice-card-header">
         <div class="invoice-card-title">Recent Invoices</div>
-        <button class="invoice-card-btn" onclick="showToast('Invoice creation coming soon (demo only)')">+ New Invoice</button>
+        <button class="invoice-card-btn" onclick="showToast('Invoice creation coming soon')">+ New Invoice</button>
       </div>
       <div class="scroll-x">
         <table class="invoice-table">
