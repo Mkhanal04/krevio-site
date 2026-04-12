@@ -1291,15 +1291,34 @@ function showOdView(id) {
 }
 
 function submitBooking(type) {
-  if (type === 'schedule') {
-    const tcpa = document.getElementById('remodelingTcpaConsent');
-    if (tcpa && !tcpa.checked) {
-      showToast('Please confirm consent to be contacted.');
-      tcpa.focus();
-      return;
-    }
+  const tcpa = document.getElementById('remodelingTcpaConsent');
+  if (tcpa && !tcpa.checked) {
+    showToast('Please confirm consent to be contacted.');
+    tcpa.focus();
+    return;
   }
-  showToast(`Thanks! We've received your estimate request. Carlos or Miguel will call you within 2 hours to schedule your free in-home visit.`);
+
+  const c = document.getElementById('scheduleForm');
+  const data = {
+    type:         'appointment',
+    businessName: CONFIG.businessName,
+    industry:     CONFIG.businessType,
+    source:       'krevio.net',
+    timestamp:    new Date().toISOString(),
+    name:         (c.querySelector('input[type="text"]')  || {}).value?.trim() || '',
+    phone:        (c.querySelector('input[type="tel"]')   || {}).value?.trim() || '',
+    email:        (c.querySelector('input[type="email"]') || {}).value?.trim() || '',
+    service:      (document.getElementById('serviceDropdown') || {}).value || '',
+    date:         (c.querySelector('input[type="date"]')  || {}).value || '',
+  };
+
+  fetch('/api/notify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(err => console.error('[notify] failed:', err));
+
+  showToast('Thanks! We\'ve received your estimate request. Carlos or Miguel will call you within 2 hours to schedule your free in-home visit.');
 }
 
 function toggleSidebar() {
