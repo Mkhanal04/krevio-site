@@ -1421,6 +1421,7 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
    a reduced surface until it adopts the full template.
 ═══════════════════════════════════════════ */
 const CONFIG = {
+  businessName: 'Green Valley Landscaping',
   businessType: 'landscaping',
   chatEndpoint: '/api/demos/chat',
   ttsEndpoint:  '/api/demos/tts',
@@ -1926,9 +1927,32 @@ function submitBooking(e) {
   e.preventDefault();
   const tcpa = document.getElementById('landscapingTcpaConsent');
   if (tcpa && !tcpa.checked) {
+    showToast('Please confirm consent to be contacted.');
     tcpa.focus();
     return;
   }
+
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName  = document.getElementById('lastName').value.trim();
+  const data = {
+    type:         'appointment',
+    businessName: CONFIG.businessName,
+    industry:     CONFIG.businessType,
+    source:       'krevio.net',
+    timestamp:    new Date().toISOString(),
+    name:         (firstName + ' ' + lastName).trim(),
+    email:        document.getElementById('bookingEmail').value.trim(),
+    phone:        document.getElementById('bookingPhone').value.trim(),
+    service:      document.getElementById('bookingService').value,
+    description:  document.getElementById('bookingMsg').value.trim(),
+  };
+
+  fetch('/api/notify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(err => console.error('[notify] failed:', err));
+
   const btn = document.getElementById('bookingSubmit');
   btn.textContent = 'Sending...';
   btn.disabled = true;
