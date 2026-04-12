@@ -33,27 +33,51 @@ const TYPE_META = {
   inquiry:     { label: '💬 NEW INQUIRY',         typeLabel: 'Inquiry',             headerBg: '#6366f1' },
 };
 
+// Human-readable source labels for the email template
+const SOURCE_LABELS = {
+  'krevio.net':       'Website form',
+  'krevio-chatbot':   'AI chatbot',
+  'krevio-quote-flow': 'Quote flow',
+};
+
 function escapeHtml(str) {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 function buildEmailHtml(data) {
   const meta = TYPE_META[data.type] || TYPE_META.inquiry;
+  const receivedAt = new Date(data.timestamp || Date.now()).toLocaleString('en-US', {
+    timeZone: 'America/Chicago', weekday: 'short', month: 'short', day: 'numeric',
+    hour: 'numeric', minute: '2-digit', hour12: true,
+  }) + ' CT';
+
   const rows = [
-    ['Type', meta.typeLabel],
     ['Name', data.name || '—'],
-    ['Phone', data.phone || '—'],
-    ['Email', data.email || '—'],
+    data.phone ? ['Phone', data.phone] : null,
+    data.email ? ['Email', data.email] : null,
+    data.industry ? ['Industry', data.industry.charAt(0).toUpperCase() + data.industry.slice(1)] : null,
     data.service ? ['Service', data.service] : null,
     data.date ? ['Preferred Date', data.date] : null,
-    data.description ? ['Message', data.description] : null,
-    ['Business', data.businessName || '—'],
-    ['Received', new Date(data.timestamp || Date.now()).toLocaleString('en-US', { timeZone: 'America/Chicago' }) + ' CT'],
+    data.description ? ['Notes', data.description] : null,
+    data.source ? ['Source', SOURCE_LABELS[data.source] || data.source] : null,
+    ['Received', receivedAt],
   ].filter(Boolean);
 
   const tableRows = rows.map(([k, v]) =>
-    `<tr><td style="padding:8px 12px;font-weight:600;color:#52525b;white-space:nowrap;background:#f4f4f5;border-bottom:1px solid #e4e4e7;">${k}</td><td style="padding:8px 12px;color:#18181b;border-bottom:1px solid #e4e4e7;">${escapeHtml(String(v))}</td></tr>`
+    `<tr><td style="padding:10px 16px;font-weight:600;color:#52525b;white-space:nowrap;background:#f4f4f5;border-bottom:1px solid #e4e4e7;">${k}</td><td style="padding:10px 16px;color:#18181b;border-bottom:1px solid #e4e4e7;">${escapeHtml(String(v))}</td></tr>`
   ).join('');
+
+  // Quick-reply buttons: mailto link to respond directly, or tel link to call
+  const actions = [];
+  if (data.email) {
+    actions.push(`<a href="mailto:${escapeHtml(data.email)}?subject=Re: Your inquiry to Krevio" style="display:inline-block;padding:10px 20px;background:#2563eb;color:#fff;font-size:13px;font-weight:700;border-radius:6px;text-decoration:none;margin-right:8px;">Reply via Email →</a>`);
+  }
+  if (data.phone) {
+    actions.push(`<a href="tel:${escapeHtml(data.phone.replace(/[^+\d]/g, ''))}" style="display:inline-block;padding:10px 20px;background:#16a34a;color:#fff;font-size:13px;font-weight:700;border-radius:6px;text-decoration:none;">Call ${escapeHtml(data.phone)}</a>`);
+  }
+  const actionsHtml = actions.length
+    ? `<div style="padding:16px 24px;text-align:center;">${actions.join('')}</div>`
+    : '';
 
   return `<!DOCTYPE html>
 <html>
@@ -66,8 +90,9 @@ function buildEmailHtml(data) {
     <table style="width:100%;border-collapse:collapse;font-size:14px;">
       ${tableRows}
     </table>
-    <div style="padding:16px 24px;background:#f4f4f5;font-size:12px;color:#71717a;">
-      Sent by Krevio · <a href="https://krevio.net" style="color:#2563eb;">krevio.net</a>
+    ${actionsHtml}
+    <div style="padding:14px 24px;background:#f4f4f5;font-size:12px;color:#71717a;text-align:center;">
+      Sent by <strong>Krevio</strong> · <a href="https://krevio.net" style="color:#2563eb;">krevio.net</a>
     </div>
   </div>
 </body>
@@ -119,6 +144,8 @@ export default async function handler(req, res) {
     name: sanitize(body.name),
     phone: sanitize(body.phone),
     email: sanitize(body.email),
+    industry: sanitize(body.industry),
+    source: sanitize(body.source),
     service: sanitize(body.service),
     date: sanitize(body.date),
     description: sanitize(body.description),

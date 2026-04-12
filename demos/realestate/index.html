@@ -2485,7 +2485,6 @@ function toggleChat() {
     addChatMessage('bot', greeting);
     // Show audience quick replies
     if (!chatContext) showQuickReplies();
-    initSpeechRecognition();
   }
   if (chatOpen) setTimeout(() => document.getElementById('chatInput')?.focus(), 50);
 }
