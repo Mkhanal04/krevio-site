@@ -322,6 +322,20 @@ body {
 .cv-footer-referral { font-size: 13px; color: var(--t2); margin-top: 12px; }
 .cv-footer-referral a { color: var(--accent); }
 
+/* ─── Dashboard bottom CTA ─── */
+.dash-bottom-cta {
+  margin-top: 24px; padding: 24px; background: var(--accent);
+  border-radius: var(--radius-2xl, 16px); text-align: center;
+}
+.dash-bottom-cta h3 { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 6px; }
+.dash-bottom-cta p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 16px; }
+.dash-cta-btn {
+  display: inline-block; padding: 11px 28px; background: white; color: var(--accent);
+  font-size: 13px; font-weight: 800; border: none; border-radius: var(--radius-full, 9999px);
+  cursor: pointer; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s;
+}
+.dash-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
 /* ═══════════════════════════════════════════
    OWNER DASHBOARD — LAYOUT
 ═══════════════════════════════════════════ */
@@ -1053,7 +1067,7 @@ body {
   </div>
   <button class="lang-toggle" id="langToggle" onclick="toggleLang()" aria-label="Toggle language"><span id="langEN" class="active-lang">EN</span> | <span id="langES">ES</span></button>
   <button class="demo-bar-theme" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
-  <a href="/demos/" class="demo-bar-back">← Back</a>
+  <a href="/#demos" class="demo-bar-back">← Back</a>
 </div>
 
 <!-- VIEWS -->
@@ -1353,6 +1367,13 @@ body {
         </div>
         <div id="automationPanel"></div>
       </div>
+      <!-- Dashboard bottom CTA -->
+      <div class="dash-bottom-cta">
+        <h3>This was built as a demo for plumbing companies.</h3>
+        <p>Lone Star Plumbing is a fictional business — but the product is real. Want an AI-powered website + chatbot for your plumbing company? Let's talk — 15 minutes, no pressure.</p>
+        <a class="dash-cta-btn" href="mailto:krevio@krevio.net?subject=I want to see this for my plumbing business">Let's Talk →</a>
+      </div>
+
     </main>
 
   </div>

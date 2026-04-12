@@ -466,6 +466,20 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
 .cv-footer-referral a { color: var(--green); }
 .cv-footer-referral a:hover { text-decoration: underline; }
 
+/* ─── Dashboard bottom CTA ─── */
+.dash-bottom-cta {
+  margin-top: 24px; padding: 24px; background: var(--green);
+  border-radius: var(--radius-2xl, 16px); text-align: center;
+}
+.dash-bottom-cta h3 { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 6px; }
+.dash-bottom-cta p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 16px; }
+.dash-cta-btn {
+  display: inline-block; padding: 11px 28px; background: white; color: var(--green);
+  font-size: 13px; font-weight: 800; border: none; border-radius: var(--radius-full, 9999px);
+  cursor: pointer; text-decoration: none; transition: transform 0.15s, box-shadow 0.15s;
+}
+.dash-cta-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
 /* Chatbot styles live in /css/chat-widget.css (unified widget).
    Lead-scoring bar + custom score-bar were removed as part of the Phase 2
    unified-widget migration — tracked as TD-014 to re-add inside the
@@ -1020,7 +1034,7 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
   <button class="demo-bar-theme" onclick="toggleTheme()" aria-label="Toggle theme">
     <span id="themeIcon">☀</span>
   </button>
-  <a href="/demos/" class="demo-bar-back">← Back</a>
+  <a href="/#demos" class="demo-bar-back">← Back</a>
 </div>
 
 <!-- ═══════════════════ CUSTOMER VIEW ═══════════════════ -->
@@ -1373,6 +1387,13 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
           <div class="dash-view-sub">Automated campaigns, missed call recovery, and message tracking</div>
         </div>
         <div id="automationPanel"></div>
+      </div>
+
+      <!-- Dashboard bottom CTA -->
+      <div class="dash-bottom-cta">
+        <h3>This was built as a demo for landscaping companies.</h3>
+        <p>Green Valley Landscaping is a fictional business — but the product is real. Want an AI-powered website + chatbot for your landscaping company? Let's talk — 15 minutes, no pressure.</p>
+        <a class="dash-cta-btn" href="mailto:krevio@krevio.net?subject=I want to see this for my landscaping business">Let's Talk →</a>
       </div>
 
     </main>

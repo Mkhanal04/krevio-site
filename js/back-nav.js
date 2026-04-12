@@ -9,8 +9,8 @@
  *  - Targets any `.demo-bar-back` link and any element with `[data-back-nav]`.
  *  - On click: if `document.referrer` is a URL on the same host AND browser
  *    history has more than one entry, prevent default and `history.back()`.
- *  - Otherwise fall through to the element's `href` attribute (which stays
- *    as `/demos/` — the safety net for direct loads, shared links, bookmarks,
+ *  - Otherwise fall through to the element's `href` attribute (which points
+ *    to `/#demos` — the safety net for direct loads, shared links, bookmarks,
  *    and search-engine arrivals).
  *
  * This is non-breaking: JS disabled → original `href` behavior still works.
