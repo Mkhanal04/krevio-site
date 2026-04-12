@@ -818,60 +818,82 @@
     /* ── GUIDED TOUR ── */
     .tour-overlay {
       position: fixed; inset: 0; z-index: 10000;
-      background: var(--krevio-darker);
-      display: flex; flex-direction: column;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
       transition: opacity 0.4s ease, visibility 0.4s ease;
     }
     .tour-overlay.tour-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .tour-card {
+      background: var(--krevio-card-bg);
+      border: 1px solid var(--krevio-border);
+      border-radius: 16px;
+      width: 100%; max-width: 580px;
+      max-height: 90vh; overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+    }
+    .tour-close {
+      position: absolute; top: 12px; right: 12px;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: none;
+      color: var(--krevio-gray); font-size: 18px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      z-index: 1;
+    }
+    .tour-close:hover { background: rgba(255,255,255,0.2); color: var(--krevio-white); }
     .tour-slides {
       flex: 1; position: relative; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
+      min-height: 340px;
     }
     .tour-slide {
       position: absolute; inset: 0;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      padding: 40px 24px; text-align: center;
-      opacity: 0; transform: translateX(60px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      padding: 48px 32px 24px; text-align: center;
+      opacity: 0; transform: translateX(40px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
       pointer-events: none;
     }
     .tour-slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
-    .tour-slide.exit-left { opacity: 0; transform: translateX(-60px); }
+    .tour-slide.exit-left { opacity: 0; transform: translateX(-40px); }
     .tour-stat {
-      font-size: clamp(48px, 12vw, 96px); font-weight: 900;
+      font-size: clamp(40px, 10vw, 72px); font-weight: 900;
       color: var(--krevio-yellow); line-height: 1;
-      margin-bottom: 16px; letter-spacing: -0.03em;
+      margin-bottom: 12px; letter-spacing: -0.03em;
     }
     .tour-headline {
-      font-size: clamp(22px, 4vw, 36px); font-weight: 800;
-      color: var(--krevio-white); line-height: 1.2;
-      margin-bottom: 16px; max-width: 600px;
+      font-size: clamp(18px, 3.5vw, 26px); font-weight: 800;
+      color: var(--krevio-white); line-height: 1.25;
+      margin-bottom: 12px; max-width: 480px;
     }
     .tour-body {
-      font-size: clamp(14px, 2vw, 18px); color: var(--krevio-gray);
-      line-height: 1.6; max-width: 520px; margin-bottom: 24px;
+      font-size: clamp(13px, 1.8vw, 15px); color: var(--krevio-gray);
+      line-height: 1.6; max-width: 440px; margin-bottom: 16px;
     }
     .tour-tag {
-      display: inline-block; padding: 6px 16px;
+      display: inline-block; padding: 5px 14px;
       background: rgba(255, 184, 0, 0.1); border: 1px solid rgba(255, 184, 0, 0.25);
-      border-radius: 100px; font-size: 13px; font-weight: 600;
-      color: var(--krevio-yellow); margin-bottom: 20px;
+      border-radius: 100px; font-size: 12px; font-weight: 600;
+      color: var(--krevio-yellow); margin-bottom: 16px;
+      text-transform: uppercase; letter-spacing: 0.06em;
     }
     .tour-nav {
-      display: flex; align-items: center; justify-content: center;
-      gap: 16px; padding: 20px 24px 32px;
-      background: var(--krevio-darker);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      border-top: 1px solid var(--krevio-border);
     }
-    .tour-dots { display: flex; gap: 8px; }
+    .tour-dots { display: flex; gap: 6px; }
     .tour-dot {
       width: 8px; height: 8px; border-radius: 50%;
       background: var(--krevio-border); transition: background 0.3s;
     }
     .tour-dot.active { background: var(--krevio-yellow); }
     .tour-btn {
-      padding: 12px 28px; border-radius: 8px; font-size: 15px;
+      padding: 10px 24px; border-radius: 8px; font-size: 14px;
       font-weight: 600; cursor: pointer; border: none;
-      min-height: 44px; transition: all 0.18s;
+      min-height: 40px; transition: all 0.18s;
     }
     .tour-btn-next {
       background: var(--krevio-yellow); color: var(--krevio-darker);
@@ -879,18 +901,21 @@
     .tour-btn-next:hover { background: var(--krevio-yellow-hover); }
     .tour-btn-skip {
       background: transparent; color: var(--krevio-gray);
-      border: 1px solid var(--krevio-border);
     }
-    .tour-btn-skip:hover { color: var(--krevio-white); border-color: var(--krevio-gray); }
-    .tour-cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+    .tour-btn-skip:hover { color: var(--krevio-white); }
+    .tour-cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
     .tour-coming-soon {
-      margin-top: 20px; padding: 12px 20px;
+      margin-top: 12px; padding: 10px 16px;
       background: rgba(255,184,0,0.06); border: 1px solid rgba(255,184,0,0.15);
-      border-radius: 8px; font-size: 13px; color: var(--krevio-gray);
+      border-radius: 8px; font-size: 12px; color: var(--krevio-gray);
     }
     .tour-coming-soon strong { color: var(--krevio-yellow); }
     @media (max-width: 600px) {
-      .tour-nav { padding: 16px 16px 24px; }
+      .tour-overlay { padding: 16px; }
+      .tour-card { max-height: 85vh; }
+      .tour-slides { min-height: 300px; }
+      .tour-slide { padding: 40px 20px 16px; }
+      .tour-nav { padding: 12px 16px; }
       .tour-cta-row { flex-direction: column; align-items: stretch; }
     }
 
@@ -942,55 +967,58 @@
 
   <!-- GUIDED TOUR (first-visit only) -->
   <div class="tour-overlay tour-hidden" id="tourOverlay" aria-label="Welcome tour">
-    <div class="tour-slides" id="tourSlides">
+    <div class="tour-card">
+      <button class="tour-close" onclick="closeTour()" aria-label="Close tour">&times;</button>
+      <div class="tour-slides" id="tourSlides">
 
-      <!-- Slide 1: Hook -->
-      <div class="tour-slide active" data-slide="0">
-        <div class="tour-tag">The Problem</div>
-        <div class="tour-stat">40%</div>
-        <div class="tour-headline">of leads hire the first contractor who responds.</div>
-        <div class="tour-body">Yet 85% of contractors are struggling to hire enough staff to answer phones. Meanwhile, platforms like Thumbtack charge $500–$2,000/mo to send the same lead to 4–8 of your competitors.</div>
-      </div>
-
-      <!-- Slide 2: The Artificial Employee -->
-      <div class="tour-slide" data-slide="1">
-        <div class="tour-tag">The Solution</div>
-        <div class="tour-stat">24/7</div>
-        <div class="tour-headline">Your Artificial Employee never misses a lead.</div>
-        <div class="tour-body">A bilingual AI chatbot that pre-qualifies prospects, answers FAQs, books appointments, and flags emergencies — all while you're on the job site. English and Spanish, around the clock.</div>
-      </div>
-
-      <!-- Slide 3: The Math -->
-      <div class="tour-slide" data-slide="2">
-        <div class="tour-tag">The Math</div>
-        <div class="tour-stat">$497<span style="font-size:0.4em;color:var(--krevio-gray)">/mo</span></div>
-        <div class="tour-headline">Stop renting leads. Start owning your growth.</div>
-        <div class="tour-body">Thumbtack charges $2K/mo for shared leads with a 10–20% close rate. Krevio builds you a custom AI-powered system — website, chatbot, dashboard, GEO — starting at $1,500. You own everything.</div>
-      </div>
-
-      <!-- Slide 4: CTA -->
-      <div class="tour-slide" data-slide="3">
-        <div class="tour-tag">See It Live</div>
-        <div class="tour-stat" style="font-size:clamp(36px,8vw,64px);">5 Working Demos</div>
-        <div class="tour-headline">Plumbing. HVAC. Landscaping. Remodeling. Real Estate.</div>
-        <div class="tour-body">Every demo is a real, working AI system — not a mockup. Talk to the chatbot, explore the dashboard, see exactly what your business could have.</div>
-        <div class="tour-cta-row">
-          <a href="#demos" class="btn btn-primary" onclick="closeTour()">See Live Demos</a>
-          <a href="#contact" class="btn btn-outline" onclick="closeTour()">Book a Strategy Call</a>
+        <!-- Slide 1: Hook -->
+        <div class="tour-slide active" data-slide="0">
+          <div class="tour-tag">The Problem</div>
+          <div class="tour-stat">40%</div>
+          <div class="tour-headline">of leads hire the first contractor who responds.</div>
+          <div class="tour-body">Yet 85% of contractors can't hire enough staff to answer phones. Platforms like Thumbtack charge $500–$2,000/mo to send the same lead to 4–8 of your competitors.</div>
         </div>
-        <div class="tour-coming-soon"><strong>Coming Soon:</strong> Interactive 3D &amp; AR visualizers — homeowners test colors on their property in real-time. 2.5x more likely to submit contact details.</div>
-      </div>
 
-    </div>
-    <div class="tour-nav">
-      <button class="tour-btn tour-btn-skip" id="tourSkip" onclick="closeTour()">Skip</button>
-      <div class="tour-dots" id="tourDots">
-        <div class="tour-dot active"></div>
-        <div class="tour-dot"></div>
-        <div class="tour-dot"></div>
-        <div class="tour-dot"></div>
+        <!-- Slide 2: The Artificial Employee -->
+        <div class="tour-slide" data-slide="1">
+          <div class="tour-tag">The Solution</div>
+          <div class="tour-stat">24/7</div>
+          <div class="tour-headline">Your Artificial Employee never misses a lead.</div>
+          <div class="tour-body">A bilingual AI chatbot that pre-qualifies prospects, answers FAQs, books appointments, and flags emergencies — while you're on the job site.</div>
+        </div>
+
+        <!-- Slide 3: The Math -->
+        <div class="tour-slide" data-slide="2">
+          <div class="tour-tag">The Math</div>
+          <div class="tour-stat">$497<span style="font-size:0.4em;color:var(--krevio-gray)">/mo</span></div>
+          <div class="tour-headline">Stop renting leads. Start owning your growth.</div>
+          <div class="tour-body">Thumbtack: $2K/mo for shared leads, 10–20% close rate. Krevio: custom AI system — website, chatbot, dashboard, GEO — from $1,500. You own everything.</div>
+        </div>
+
+        <!-- Slide 4: CTA -->
+        <div class="tour-slide" data-slide="3">
+          <div class="tour-tag">See It Live</div>
+          <div class="tour-stat" style="font-size:clamp(32px,7vw,52px);">5 Working Demos</div>
+          <div class="tour-headline">Plumbing. HVAC. Landscaping. Remodeling. Real Estate.</div>
+          <div class="tour-body">Every demo is a real, working AI system — not a mockup. Talk to the chatbot, explore the dashboard, see what your business could have.</div>
+          <div class="tour-cta-row">
+            <a href="#demos" class="btn btn-primary" onclick="closeTour()" style="padding:10px 20px;font-size:14px;">See Live Demos</a>
+            <a href="#contact" class="btn btn-outline" onclick="closeTour()" style="padding:10px 20px;font-size:14px;">Book a Strategy Call</a>
+          </div>
+          <div class="tour-coming-soon"><strong>Coming Soon:</strong> 3D &amp; AR visualizers — 2.5x more contact submissions.</div>
+        </div>
+
       </div>
-      <button class="tour-btn tour-btn-next" id="tourNext" onclick="nextSlide()">Next</button>
+      <div class="tour-nav">
+        <button class="tour-btn tour-btn-skip" id="tourSkip" onclick="closeTour()">Skip</button>
+        <div class="tour-dots" id="tourDots">
+          <div class="tour-dot active"></div>
+          <div class="tour-dot"></div>
+          <div class="tour-dot"></div>
+          <div class="tour-dot"></div>
+        </div>
+        <button class="tour-btn tour-btn-next" id="tourNext" onclick="nextSlide()">Next</button>
+      </div>
     </div>
   </div>
 
