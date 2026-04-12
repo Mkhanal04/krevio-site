@@ -872,6 +872,7 @@ body {
    reduced surface until it adopts the full template.
 ═══════════════════════════════════════════ */
 const CONFIG = {
+  businessName: 'Summit Air Solutions',
   businessType: 'hvac',
   chatEndpoint: '/api/demos/chat',
   ttsEndpoint:  '/api/demos/tts',
@@ -1476,6 +1477,28 @@ function submitBooking() {
     tcpa.focus();
     return;
   }
+
+  const c = document.querySelector('.booking-card');
+  const data = {
+    type:         'appointment',
+    businessName: CONFIG.businessName,
+    industry:     CONFIG.businessType,
+    source:       'krevio.net',
+    timestamp:    new Date().toISOString(),
+    name:         (c.querySelector('input[type="text"]')  || {}).value?.trim() || '',
+    phone:        (c.querySelector('input[type="tel"]')   || {}).value?.trim() || '',
+    email:        (c.querySelector('input[type="email"]') || {}).value?.trim() || '',
+    service:      (c.querySelector('.form-select')        || {}).value || '',
+    date:         (c.querySelector('input[type="date"]')  || {}).value || '',
+    description:  (c.querySelector('.form-textarea')      || {}).value?.trim() || '',
+  };
+
+  fetch('/api/notify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(err => console.error('[notify] failed:', err));
+
   showToast('✅ Appointment request sent! We\'ll confirm within 2 hours.');
 }
 
