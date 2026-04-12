@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Krevio</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/css/krevio-tokens.css">
+
+<style>
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--t0);
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  padding: var(--space-lg) var(--space-2xl);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg1);
+}
+.top-bar-brand {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 900;
+  color: var(--t0);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.top-bar-brand::before {
+  content: "\25C6 ";
+  color: var(--krevio-brand);
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-3xl) var(--space-2xl);
+}
+
+.error-code {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 15vw, 8rem);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--krevio-brand);
+  margin-bottom: var(--space-lg);
+  letter-spacing: -0.04em;
+}
+
+.error-message {
+  font-size: var(--text-lg);
+  color: var(--t1);
+  margin-bottom: var(--space-2xl);
+  max-width: 40ch;
+  line-height: 1.6;
+}
+
+.cta-row {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-md);
+  font-size: var(--text-md);
+  font-weight: 600;
+  text-decoration: none;
+  min-height: var(--tap-primary);
+  transition: background 0.2s, color 0.2s;
+}
+.btn-primary {
+  background: var(--krevio-brand);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--krevio-brand-dark);
+}
+.btn-secondary {
+  background: var(--bg2);
+  color: var(--t0);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover {
+  background: var(--bg3);
+}
+
+.footer {
+  padding: var(--space-xl) var(--space-2xl);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--t2);
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .cta-row { flex-direction: column; align-items: stretch; }
+  .btn { text-align: center; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <nav class="top-bar">
+    <a class="top-bar-brand" href="/">Krevio</a>
+  </nav>
+  <main class="content">
+    <div class="error-code">404</div>
+    <p class="error-message">The page you're looking for doesn't exist or has been moved.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/">Back to Home</a>
+      <a class="btn btn-secondary" href="/#demos">Browse Demos</a>
+    </div>
+  </main>
+  <footer class="footer">
+    &copy; 2026 Aurora Labs LLC, DBA Krevio. All rights reserved.
+  </footer>
+</div>
+</body>
+</html>
