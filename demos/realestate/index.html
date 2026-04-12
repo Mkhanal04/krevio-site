@@ -2393,9 +2393,40 @@ function renderServices() {
 ═══════════════════════════════════════════ */
 async function submitBooking(e) {
   e.preventDefault();
+
+  const tcpa = document.getElementById('tcpaConsent');
+  if (tcpa && !tcpa.checked) {
+    showToast('Please confirm consent to be contacted.');
+    tcpa.focus();
+    return;
+  }
+
   const name = document.getElementById('bfName').value.trim();
+  const data = {
+    type:         'appointment',
+    businessName: CONFIG.businessName,
+    industry:     CONFIG.businessType,
+    source:       'krevio.net',
+    timestamp:    new Date().toISOString(),
+    name:         name,
+    phone:        document.getElementById('bfPhone').value.trim(),
+    email:        document.getElementById('bfEmail').value.trim(),
+    service:      document.getElementById('bfGoal').value,
+    description:  [
+      document.getElementById('bfBudget').value   ? 'Budget: '   + document.getElementById('bfBudget').value   : '',
+      document.getElementById('bfTimeline').value  ? 'Timeline: ' + document.getElementById('bfTimeline').value : '',
+      document.getElementById('bfNotes').value.trim(),
+    ].filter(Boolean).join(' | '),
+  };
+
+  fetch('/api/notify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).catch(err => console.error('[notify] failed:', err));
+
   const btn = document.getElementById('bookingSubmitBtn');
-  btn.disabled = true; btn.textContent = 'Sending…';
+  btn.disabled = true; btn.textContent = 'Sending\u2026';
   await new Promise(r => setTimeout(r, 1200));
   document.getElementById('bookingForm').style.display = 'none';
   const successEl = document.getElementById('bookingSuccess');
