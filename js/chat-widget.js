@@ -203,6 +203,7 @@ function toggleVoiceMode() {
 
   if (voiceMode) {
     unlockAudio();
+    warmupTTS(); // fire immediately so the function is warm before the first reply
     _widgetShowToast('Voice responses ON');
   } else {
     if (ttsAudio) { try { ttsAudio.pause(); } catch(e) {} }
@@ -282,6 +283,7 @@ function toggleMic() {
   if (!voiceMode) {
     voiceMode = true;
     unlockAudio();
+    warmupTTS(); // warm the function before the mic response arrives
     if (toggleBtn) { toggleBtn.classList.add('active'); toggleBtn.textContent = '🔊'; }
   }
 
