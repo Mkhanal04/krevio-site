@@ -1,5 +1,6 @@
 // Google Cloud Text-to-Speech — Journey/Neural2 voices
-// Uses the same GOOGLE_GENERATIVE_AI_API_KEY already in Vercel env
+// Uses GOOGLE_TTS_API_KEY (separate key restricted to Cloud TTS).
+// Falls back to GOOGLE_GENERATIVE_AI_API_KEY if the TTS-specific key isn't set.
 // Requires "Cloud Text-to-Speech API" enabled in the GCP project
 //
 // Cost protection (Cloud TTS Journey-F is $16/1M chars — a determined
@@ -93,7 +94,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'text exceeds max length' });
   }
 
-  const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+  const apiKey = process.env.GOOGLE_TTS_API_KEY || process.env.GOOGLE_GENERATIVE_AI_API_KEY;
   if (!apiKey) {
     return res.status(500).json({ error: 'TTS API key not configured' });
   }
