@@ -59,14 +59,37 @@ function _widgetShowToast(msg) {
 
 /* ═══════════════════════════════════════════
    TEXT CLEANING
+   ─────────────────────────────────────────
+   TTS latency scales with character count.
+   Speaking only the first 1–2 sentences keeps
+   synthesis under ~1s. The user reads the rest
+   in the chat bubble. Hard cap at 160 chars as
+   a safety net — even if sentence detection
+   fails, the TTS call stays fast.
 ═══════════════════════════════════════════ */
+const TTS_CHAR_CAP = 160;
+
 function cleanForSpeech(text) {
-  return text
+  const stripped = text
     .replace(/[\u{1F000}-\u{1FFFF}]/gu, '')
     .replace(/[✓✅⚠↔●○🏠🔑📊★·→←]/g, '')
     .replace(/\s{2,}/g, ' ')
-    .trim()
-    .slice(0, 800);
+    .trim();
+
+  // Extract first 1–2 sentences. Split on sentence-ending punctuation
+  // followed by a space or end-of-string, but NOT on abbreviations
+  // like "Dr." or "St." (single uppercase letter + period).
+  const sentences = stripped.match(/[^.!?]*(?:[.!?](?:\s|$))/g);
+  if (sentences && sentences.length) {
+    let spoken = sentences[0].trim();
+    if (sentences.length > 1 && (spoken.length + sentences[1].trim().length) <= TTS_CHAR_CAP) {
+      spoken += ' ' + sentences[1].trim();
+    }
+    return spoken.slice(0, TTS_CHAR_CAP);
+  }
+
+  // No sentence boundary found — take the whole thing, capped
+  return stripped.slice(0, TTS_CHAR_CAP);
 }
 
 /* ═══════════════════════════════════════════
