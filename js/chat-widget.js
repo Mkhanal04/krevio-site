@@ -71,6 +71,11 @@ const TTS_CHAR_CAP = 280; // 250–280 is the industry sweet spot for <1s TTS la
 
 function cleanForSpeech(text) {
   const stripped = text
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/^[-*•]\s/gm, '')
+    .replace(/^\d+\.\s/gm, '')
+    .replace(/https?:\/\/\S+/g, '')
     .replace(/[\u{1F000}-\u{1FFFF}]/gu, '')
     .replace(/[✓✅⚠↔●○🏠🔑📊★·→←]/g, '')
     .replace(/\s{2,}/g, ' ')
