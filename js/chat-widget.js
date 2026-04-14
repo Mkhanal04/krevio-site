@@ -246,6 +246,8 @@ function initSpeechRecognition() {
   recognition.onresult = (event) => {
     let transcript = '';
     for (let i = 0; i < event.results.length; i++) transcript += event.results[i][0].transcript;
+    // Autocorrect common mis-transcriptions for the brand name
+    transcript = transcript.replace(/\\b(preview|crevio|cravio|grevio|gravio)\\b/gi, 'Krevio');
     document.getElementById('chatInput').value = transcript;
     clearTimeout(micSendTimer);
     const lastResult = event.results[event.results.length - 1];
@@ -373,3 +375,45 @@ document.addEventListener('DOMContentLoaded', () => {
   // is worse than silence). The cancel() calls elsewhere are defensive
   // cleanup only — they stop any stale utterance from a previous session.
 });
+
+// ─── QUICK REPLIES (Global) ──────────────────────────────────────────────────
+window.krevioRenderQuickReplies = function() {
+  const qrEl = document.querySelector('.chat-quick-replies') || document.getElementById('chatQuickReplies');
+  if (!qrEl) return;
+  
+  const options = (typeof CONFIG !== 'undefined' && CONFIG.quickReplies) 
+    ? CONFIG.quickReplies 
+    : [
+      { emoji: '💡', label: 'What services do you offer?' },
+      { emoji: '📅', label: 'How can I book a demo?' },
+      { emoji: '🚀', label: 'Tell me about Krevio' }
+    ];
+
+  qrEl.innerHTML = options.map(o => {
+    const actionText = typeof o === 'string' ? o : o.label;
+    const displayText = typeof o === 'string' ? o : `${o.emoji ? o.emoji + ' ' : ''}${o.label}`;
+    return `<button class="chat-qr-btn" onclick="krevioSelectQuickReply('${actionText.replace(/'/g, "\\'")}')">${displayText}</button>`;
+  }).join('');
+  
+  qrEl.style.display = 'flex';
+  qrEl.style.flexDirection = 'column';
+  qrEl.style.gap = '6px';
+};
+
+window.krevioSelectQuickReply = function(text) {
+  const qrEl = document.querySelector('.chat-quick-replies') || document.getElementById('chatQuickReplies');
+  if (qrEl) qrEl.style.display = 'none';
+
+  const input = document.getElementById('chatInput') || document.querySelector('.chat-input');
+  if (input) {
+    input.value = text;
+    if (typeof sendChat === 'function') {
+      sendChat();
+    } else if (typeof sendMessage === 'function') {
+      sendMessage(text);
+    } else {
+      const sendBtn = document.querySelector('.chat-send-btn') || document.querySelector('.chat-send') || document.getElementById('chat-send');
+      if (sendBtn) sendBtn.click();
+    }
+  }
+};

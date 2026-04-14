@@ -3158,41 +3158,8 @@ function toggleChat() {
       ? TRANS_ES.chatGreeting
       : `Hi! I'm the AI assistant for ${CONFIG.businessName}. How can I help you?`;
     addBotMsg(greeting);
-    showPlumbingQuickReplies();
+    if (typeof window.krevioRenderQuickReplies === 'function') window.krevioRenderQuickReplies();
   }
-}
-
-function showPlumbingQuickReplies() {
-  const qrEl = document.getElementById('chatQuickReplies');
-  if (!qrEl) return;
-  qrEl.innerHTML = [
-    { emoji: '🚨', label: "It's an emergency — I need help now", key: 'emergency' },
-    { emoji: '📅', label: "I need to schedule a service",         key: 'schedule'  },
-    { emoji: '💰', label: "I need a price estimate",              key: 'estimate'  },
-    { emoji: '❓', label: "I have a question",                    key: 'question'  }
-  ].map(o =>
-    `<button class="chat-qr-btn" onclick="selectPlumbingReply('${o.key}')">${o.emoji} ${o.label}</button>`
-  ).join('');
-  qrEl.style.display = 'flex';
-}
-
-function selectPlumbingReply(key) {
-  const qrEl = document.getElementById('chatQuickReplies');
-  if (qrEl) qrEl.style.display = 'none';
-  const responses = {
-    emergency: { user: "🚨 It's an emergency", bot: "Understood — this is our top priority. Call us now at " + CONFIG.phone + " for immediate dispatch. If you prefer to type, describe the issue and I'll alert our on-call tech right away." },
-    schedule:  { user: "📅 I need to schedule a service", bot: "Happy to help schedule! What type of service do you need — drain cleaning, water heater, leak repair, or something else? And what area are you in?" },
-    estimate:  { user: "💰 I need a price estimate", bot: "Sure! Estimates depend on the job. Most drain cleanings run $120–$200, water heater replacements $800–$1,400. What's the issue — I can give you a ballpark." },
-    question:  { user: "❓ I have a question", bot: "Of course — what's on your mind? I can help with service areas, availability, pricing, licensing, or anything else." }
-  };
-  const r = responses[key];
-  if (!r) return;
-  addUserMsg(r.user);
-  chatHistory.push({ role: 'user', text: r.user });
-  setTimeout(() => {
-    addBotMsg(r.bot);
-    chatHistory.push({ role: 'model', text: r.bot });
-  }, 300);
 }
 
 function addBotMsg(text) {

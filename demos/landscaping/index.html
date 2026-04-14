@@ -1227,6 +1227,7 @@ input[type="range"].ba-slider::-webkit-slider-thumb {
       <button class="chat-close-btn" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies" id="chatQuickReplies" style="display:none;padding:0 12px 8px;"></div>
     <div class="chat-voice-label" id="chatVoiceLabel"></div>
     <div class="chat-input-row">
       <div class="voice-active-panel">
@@ -1431,6 +1432,12 @@ const CONFIG = {
   ttsEndpoint:  '/api/demos/tts',
   lang:         'en-US',
   hasVoice:     true,
+  quickReplies: [
+    { emoji: '🌿', label: "Get a free lawn estimate" },
+    { emoji: '🌳', label: "What landscaping services do you offer?" },
+    { emoji: '📅', label: "Schedule a consultation" },
+    { emoji: '📍', label: "Do you serve my area?" }
+  ],
 };
 
 /* ═══════════════════════════════════════════
@@ -1979,6 +1986,7 @@ function toggleChat() {
       ? TRANS_ES.chatGreeting
       : "Hi! I'm the Green Valley Landscaping assistant 🌿\n\nI can answer questions about our services, pricing, and help you schedule a free estimate. What can I help you with today?";
     appendChatMessage('model', greeting);
+    if (typeof window.krevioRenderQuickReplies === 'function') window.krevioRenderQuickReplies();
   }
   if (chatOpen) {
     setTimeout(() => document.getElementById('chatInput').focus(), 100);

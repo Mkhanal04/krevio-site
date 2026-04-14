@@ -799,6 +799,7 @@
       <button class="chat-close-btn" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies" id="chatQuickReplies" style="display:none;padding:0 12px 8px;"></div>
     <div class="chat-voice-label" id="chatVoiceLabel"></div>
     <div class="chat-input-row">
       <div class="voice-active-panel">
@@ -865,6 +866,12 @@ const CONFIG = {
   hasGallery:          true,
   hasLanguageToggle:   false,
   hasVoice:            true,  // TTS + STT via chat-widget.js
+  quickReplies: [
+    { emoji: '🍳', label: "I want a kitchen remodel" },
+    { emoji: '🛁', label: "I need a bathroom renovation" },
+    { emoji: '💰', label: "What does a remodel cost?" },
+    { emoji: '📅', label: "Schedule a free consultation" }
+  ],
 
   // ── Unified chat widget ───────────────────
   chatEndpoint: '/api/demos/chat',
@@ -1347,6 +1354,7 @@ function toggleChat() {
       ? TRANS_ES.chatGreeting
       : `Hi! I'm the ${CONFIG.businessName} assistant. How can I help you today?`;
     addBotMsg(greeting);
+    if (typeof window.krevioRenderQuickReplies === 'function') window.krevioRenderQuickReplies();
   }
 }
 

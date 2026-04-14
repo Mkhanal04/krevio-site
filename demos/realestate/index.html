@@ -1612,6 +1612,12 @@ const CONFIG = {
   hasGallery:          true,
   hasLanguageToggle:   true,
   hasVoice:            true,
+  quickReplies: [
+    { emoji: '🏡', label: "I'm buying a home" },
+    { emoji: '💰', label: "I'm selling my home" },
+    { emoji: '📊', label: "I'm an investor" },
+    { emoji: '🔍', label: "I want a market report" }
+  ],
 
   // ── Compliance (always true for RE — not toggleable) ──
   fairHousing: true,
@@ -1856,13 +1862,12 @@ function pathwaySelect(audience) {
   const target = document.getElementById(targets[audience] || 'services');
   if (target) target.scrollIntoView({ behavior: 'smooth' });
   // Open chatbot with context pre-set
-  if (!chatOpen) toggleChat();
-  chatContext = audience;
-  // If chatbot is freshly initialized, replace quick replies with context-specific ones
-  setTimeout(() => setChatContext(audience), chatInitialized ? 0 : 400);
+    if (!chatOpen) toggleChat();
+    const info = AUDIENCE_GREETINGS[audience];
+    if (info) setTimeout(() => {
+        if (typeof window.krevioSelectQuickReply === 'function') window.krevioSelectQuickReply(info.label);
+    }, chatInitialized ? 0 : 400);
 }
-
-let chatContext = null;
 const AUDIENCE_GREETINGS = {
   buyer:    { label: "I'm buying a home", reply: "Great! I'd love to help you find a home in DFW. What area are you considering, and what's your approximate budget? I can pull current listings and market data right away." },
   seller:   { label: "I'm selling my home", reply: "Perfect — I can help with that! To get you a market analysis, what's your home address or neighborhood? I'll pull recent comparable sales in your area." },
@@ -2518,48 +2523,9 @@ function toggleChat() {
       ? TRANS_ES.chatGreeting
       : `Hi! I'm the AI assistant for ${CONFIG.businessName}. How can I help you today?`;
     addChatMessage('bot', greeting);
-    // Show audience quick replies
-    if (!chatContext) showQuickReplies();
+    if (typeof window.krevioRenderQuickReplies === 'function') window.krevioRenderQuickReplies();
   }
   if (chatOpen) setTimeout(() => document.getElementById('chatInput')?.focus(), 50);
-}
-
-function showQuickReplies() {
-  const qrEl = document.getElementById('chatQuickReplies');
-  if (!qrEl) return;
-  const options = [
-    { emoji: '🏡', label: "I'm buying a home",          audience: 'buyer'    },
-    { emoji: '💰', label: "I'm selling my home",        audience: 'seller'   },
-    { emoji: '📊', label: "I'm an investor",            audience: 'investor' },
-    { emoji: '🔍', label: "I want a market report",     audience: 'market'   }
-  ];
-  qrEl.innerHTML = options.map(o =>
-    `<button class="chat-qr-btn" onclick="selectQuickReply('${o.audience}')">${o.emoji} ${o.label}</button>`
-  ).join('');
-  qrEl.style.display = 'flex';
-  qrEl.style.flexDirection = 'column';
-  qrEl.style.gap = '6px';
-}
-
-function selectQuickReply(audience) {
-  const qrEl = document.getElementById('chatQuickReplies');
-  if (qrEl) qrEl.style.display = 'none';
-  chatContext = audience;
-  const info = AUDIENCE_GREETINGS[audience];
-  if (!info) return;
-  addChatMessage('user', info.label);
-  chatHistory.push({ role: 'user', text: info.label });
-  // Use the pre-set contextual reply immediately, then follow up with API
-  addChatMessage('bot', info.reply);
-  chatHistory.push({ role: 'model', text: info.reply });
-}
-
-function setChatContext(audience) {
-  const qrEl = document.getElementById('chatQuickReplies');
-  if (qrEl) qrEl.style.display = 'none';
-  if (!chatHistory.length) {
-    selectQuickReply(audience);
-  }
 }
 
 function addChatMessage(role, text) {

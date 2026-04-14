@@ -849,6 +849,7 @@ body {
       <button class="chat-close-btn" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-quick-replies" id="chatQuickReplies" style="display:none;padding:0 12px 8px;"></div>
     <div class="chat-voice-label" id="chatVoiceLabel"></div>
     <div class="chat-input-row">
       <div class="voice-active-panel">
@@ -882,6 +883,12 @@ const CONFIG = {
   ttsEndpoint:  '/api/demos/tts',
   lang:         'en-US',
   hasVoice:     true,
+  quickReplies: [
+    { emoji: '🔥', label: "My heat isn't working" },
+    { emoji: '❄️', label: "My AC isn't cooling" },
+    { emoji: '📅', label: "Schedule a maintenance visit" },
+    { emoji: '💰', label: "What does a new system cost?" }
+  ],
 };
 
 /* ═══════════════════════════════════════════
@@ -1522,6 +1529,7 @@ function toggleChat() {
     chatInitialized = true;
     const lang = document.documentElement.getAttribute('data-lang') || 'en';
     addBotMsg(lang === 'es' ? TRANS_ES.chatGreeting : 'Hi! I\'m here for Summit Air Solutions. ❄️ Is your AC or heating system giving you trouble, or are you looking to schedule maintenance?');
+    if (typeof window.krevioRenderQuickReplies === 'function') window.krevioRenderQuickReplies();
   }
 }
 

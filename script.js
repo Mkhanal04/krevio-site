@@ -282,6 +282,7 @@ function toggleChat() {
     } else {
       const welcome = "Hey! I'm Krevio's AI assistant. I can tell you about our services, show you demos, or help you start your project. What's your business about?";
       addMessage(welcome, 'bot', false);
+      if (typeof window.krevioRenderQuickReplies === 'function') window.krevioRenderQuickReplies();
     }
     saveChatSession();
   }
