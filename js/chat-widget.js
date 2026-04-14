@@ -316,14 +316,22 @@ function stopMic() {
 
 /* ═══════════════════════════════════════════
    TTS WARMUP — eliminates Vercel cold start
+   ─────────────────────────────────────────
+   Fires on page load (not gated on voiceMode)
+   so the function is warm before the user ever
+   clicks the voice button. Cost: ~$0.00003/load
+   (2 chars × $16/1M). After first call the LRU
+   cache returns it in <200ms for free.
 ═══════════════════════════════════════════ */
 function warmupTTS() {
-  if (!voiceMode) return;
-  const ttsEndpoint = (typeof CONFIG !== 'undefined' && CONFIG.ttsEndpoint) || '/api/demos/tts';
+  // No voiceMode guard — warm on page load so first real call is fast
+  if (typeof CONFIG === 'undefined' || CONFIG.hasVoice === false) return;
+  const ttsEndpoint = CONFIG.ttsEndpoint || '/api/demos/tts';
+  const lang = CONFIG.lang || 'en-US';
   fetch(ttsEndpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text: 'Hi', lang: 'en-US' }),
+    body: JSON.stringify({ text: 'Hi', lang }),
     signal: AbortSignal.timeout(6000)
   }).catch(() => {});
   _dbg('Warmup fired');
