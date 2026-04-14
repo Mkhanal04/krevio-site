@@ -233,12 +233,12 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ─── Chat Widget ─────────────────────────────────────────────────────────────
-const chatTrigger = document.getElementById('chat-trigger');
-const chatPanel = document.getElementById('chat-panel');
-const chatMessages = document.getElementById('chat-messages');
+const chatTrigger = document.getElementById('chatBubble');
+const chatPanel = document.getElementById('chatPanel');
+const chatMessages = document.getElementById('chatMessages');
 const chatInput = document.getElementById('chatInput');
-const chatSend = document.getElementById('chat-send');
-const chatClose = document.getElementById('chat-close');
+const chatSend = document.querySelector('.chat-send-btn');
+const chatClose = document.querySelector('.chat-close-btn');
 // chatMic, voiceToggle, and chatVoiceLabel are managed by /js/chat-widget.js
 const pricingChatLink = document.getElementById('pricing-chat-link');
 
@@ -300,8 +300,11 @@ if (pricingChatLink) {
 
 function addMessage(text, type, save = true) {
   const msg = document.createElement('div');
-  msg.className = `chat-msg ${type}`;
-  msg.textContent = text;
+  msg.className = `chat-msg chat-msg-${type}`;
+  const bubble = document.createElement('div');
+  bubble.className = 'chat-bubble-msg';
+  bubble.textContent = text;
+  msg.appendChild(bubble);
   chatMessages.appendChild(msg);
   chatMessages.scrollTop = chatMessages.scrollHeight;
   if (save && type === 'user') {
@@ -315,9 +318,9 @@ function addMessage(text, type, save = true) {
 
 function addTyping() {
   const typing = document.createElement('div');
-  typing.className = 'chat-typing';
+  typing.className = 'chat-msg chat-msg-bot';
   typing.id = 'chat-typing';
-  typing.innerHTML = '<span></span><span></span><span></span>';
+  typing.innerHTML = '<div class="chat-bubble-msg msg-thinking"><span></span><span></span><span></span></div>';
   chatMessages.appendChild(typing);
   chatMessages.scrollTop = chatMessages.scrollHeight;
   return typing;
@@ -460,13 +463,7 @@ async function sendMessage(text) {
   }
 }
 
-chatSend.addEventListener('click', () => sendMessage(chatInput.value));
-chatInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage(chatInput.value);
-  }
-});
+
 
 // Voice (TTS, STT, voice toggle, mic) is now handled by /js/chat-widget.js
 // sendChat wrapper for widget STT auto-send compatibility
@@ -544,6 +541,8 @@ sendMessage = async function(text) {
 };
 
 // Remove pulse animation after it plays
-chatTrigger.addEventListener('animationend', () => {
-  chatTrigger.classList.remove('pulse');
-});
+if (chatTrigger) {
+  chatTrigger.addEventListener('animationend', () => {
+    chatTrigger.classList.remove('pulse');
+  });
+}
