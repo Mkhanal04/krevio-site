@@ -67,7 +67,7 @@ function _widgetShowToast(msg) {
    a safety net — even if sentence detection
    fails, the TTS call stays fast.
 ═══════════════════════════════════════════ */
-const TTS_CHAR_CAP = 160;
+const TTS_CHAR_CAP = 280; // 250–280 is the industry sweet spot for <1s TTS latency
 
 function cleanForSpeech(text) {
   const stripped = text
@@ -82,10 +82,12 @@ function cleanForSpeech(text) {
   const sentences = stripped.match(/[^.!?]*(?:[.!?](?:\s|$))/g);
   if (sentences && sentences.length) {
     let spoken = sentences[0].trim();
-    if (sentences.length > 1 && (spoken.length + sentences[1].trim().length) <= TTS_CHAR_CAP) {
-      spoken += ' ' + sentences[1].trim();
+    for (let i = 1; i < sentences.length; i++) {
+      const next = sentences[i].trim();
+      if (spoken.length + 1 + next.length > TTS_CHAR_CAP) break;
+      spoken += ' ' + next;
     }
-    return spoken.slice(0, TTS_CHAR_CAP);
+    return spoken;
   }
 
   // No sentence boundary found — take the whole thing, capped
