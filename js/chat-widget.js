@@ -11,6 +11,8 @@ let isRecording = false;
 let micSendTimer = null;
 let ttsAudio = new Audio();
 let audioUnlocked = false;
+let ttsFailCount = 0;        // consecutive Cloud TTS failures — circuit breaker
+const TTS_FAIL_THRESHOLD = 3; // auto-disable voice after this many consecutive failures
 
 // Debug logs off by default. Enable in DevTools with: window.__KREVIO_CHAT_DEBUG = true
 const _dbg = (...args) => { if (typeof window !== 'undefined' && window.__KREVIO_CHAT_DEBUG) console.log('[chat-widget]', ...args); };
@@ -68,7 +70,16 @@ function cleanForSpeech(text) {
 }
 
 /* ═══════════════════════════════════════════
-   TTS — CLOUD FIRST, BROWSER FALLBACK
+   TTS — CLOUD ONLY, NO BROWSER FALLBACK
+   ─────────────────────────────────────────
+   "Really bad" = Cloud TTS is persistently broken
+   (invalid key, API disabled, quota exhausted, or
+   network down). The circuit breaker auto-disables
+   voice after TTS_FAIL_THRESHOLD consecutive failures
+   so the user isn't stuck tapping a broken button.
+   A single success resets the counter.
+   Browser speechSynthesis is NEVER used — its robotic
+   output is worse than silence for a product demo.
 ═══════════════════════════════════════════ */
 async function speakText(text) {
   _dbg('speakText called; voiceMode=', voiceMode);
@@ -76,7 +87,6 @@ async function speakText(text) {
 
   // Stop any current playback
   if (ttsAudio) { try { ttsAudio.pause(); } catch(e) {} }
-  window.speechSynthesis?.cancel();
 
   const clean = cleanForSpeech(text);
   if (!clean) return;
@@ -114,6 +124,7 @@ async function speakText(text) {
     if (statusEl) statusEl.textContent = statusEl.dataset._orig || '';
 
     await ttsAudio.play();
+    ttsFailCount = 0; // success — reset circuit breaker
     _dbg('Cloud playback started');
   } catch (err) {
     _dbg('Cloud TTS failed:', err && err.message);
@@ -121,19 +132,21 @@ async function speakText(text) {
     if (statusEl && statusEl.dataset._orig) statusEl.textContent = statusEl.dataset._orig;
     resetVoiceUI();
 
-    // Fallback to browser TTS with user notification
-    if (!window.speechSynthesis) return;
-    _widgetShowToast('Using basic voice \u2014 check connection');
-    _dbg('Falling back to browser speechSynthesis');
-    const u = new SpeechSynthesisUtterance(clean);
-    u.rate = 1.05; u.pitch = 1.0;
-    const voices = speechSynthesis.getVoices();
-    const preferred = ['Samantha', 'Google US English', 'Microsoft Aria'];
-    for (const name of preferred) {
-      const v = voices.find(x => x.name.includes(name));
-      if (v) { u.voice = v; break; }
+    ttsFailCount++;
+    _dbg('TTS fail count:', ttsFailCount, '/', TTS_FAIL_THRESHOLD);
+
+    if (ttsFailCount >= TTS_FAIL_THRESHOLD) {
+      // Circuit breaker tripped — auto-disable voice mode
+      voiceMode = false;
+      ttsFailCount = 0;
+      const btn = document.getElementById('voiceToggle');
+      if (btn) { btn.classList.remove('active'); btn.textContent = '🔇'; }
+      _widgetShowToast('Voice turned off \u2014 service issue');
+      _dbg('Circuit breaker tripped — voice auto-disabled');
+    } else {
+      _widgetShowToast('Voice unavailable right now');
     }
-    speechSynthesis.speak(u);
+    // NO browser speechSynthesis fallback — silence is better than robotic
   }
 }
 
@@ -316,9 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (voiceMode && e.target.closest('.chat-send-btn, .chat-send, #chatSend')) warmupTTS();
   }, true);
 
-  // Preload browser voices as fallback
-  if (window.speechSynthesis) {
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
-  }
+  // Browser speechSynthesis is NOT used for TTS playback (robotic voice
+  // is worse than silence). The cancel() calls elsewhere are defensive
+  // cleanup only — they stop any stale utterance from a previous session.
 });
