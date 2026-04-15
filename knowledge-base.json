@@ -1,85 +1,82 @@
 {
   "company": {
     "name": "Krevio",
-    "tagline": "We build complete online systems for local service businesses",
+    "tagline": "Done-for-you front office for local service businesses",
     "location": "Dallas-Fort Worth, Texas",
-    "founder": "Milan Khanal",
     "website": "krevio.net"
   },
   "services": {
     "core_build": {
-      "description": "Custom website + AI chatbot + owner dashboard + GEO/SEO optimization",
-      "price_range": "Starting at $1,500 setup",
-      "timeline": "2-4 weeks",
-      "ownership": "Client owns everything — website, leads, data, code"
+      "description": "Professional website + AI chatbot with voice + lead capture + GEO/SEO optimization",
+      "setup_fee": "Starting at $500",
+      "timeline": "2-3 weeks",
+      "ownership": "Client owns their domain, their customer data, and their business relationships"
     },
-    "managed_services": {
-      "description": "Ongoing chatbot management, content updates, GEO monitoring, lead optimization, priority support",
-      "tiers": {
-        "starter": {
-          "name": "Starter",
-          "price": "$497/month",
-          "includes": "AI chatbot hosting + voice, basic GEO monitoring, monthly performance report, email support (48h)"
-        },
-        "growth": {
-          "name": "Growth",
-          "price": "$697/month",
-          "includes": "Everything in Starter + 2-4 monthly content updates (GEO + SEO optimized), Google Business Profile management, lead capture optimization, email support (24h)"
-        },
-        "accelerator": {
-          "name": "Accelerator",
-          "price": "$997/month",
-          "includes": "Everything in Growth + active GEO optimization (entity work, schema, citations), lead generation campaigns, full website management, quarterly strategy calls, priority support (12h)"
-        }
+    "plans": {
+      "starter": {
+        "name": "Starter",
+        "price": "$349/month",
+        "includes": "Professional mobile-first website, AI chatbot with voice (multilingual), lead capture with instant email notifications, GEO/SEO optimization, Google Reviews on website, FAQ section, before/after gallery, 5 content updates per month, email support (48h response)"
       },
-      "cancel_policy": "Month-to-month — cancel anytime, everything stays yours. Quarterly commitment available at 10% discount."
-    }
+      "pro": {
+        "name": "Pro",
+        "price": "$597/month",
+        "includes": "Everything in Starter plus Google Business Profile setup and optimization, monthly performance report, 10 content updates per month, up to 3 additional service pages, priority support (same-day response), 90-day lead guarantee"
+      }
+    },
+    "guarantees": {
+      "satisfaction": "30-day satisfaction guarantee — not happy after 30 days? Full refund of your first month.",
+      "leads": "90-day lead guarantee (Pro plan only) — 10+ qualified inquiries through your website in the first 90 days, or month 4 is free."
+    },
+    "cancel_policy": "Month-to-month — cancel anytime. Your domain and customer data go with you."
   },
   "features": [
-    "Custom mobile-first website on your domain",
-    "AI chatbot in English and Spanish — answers questions 24/7",
-    "Owner dashboard preview showing what your lead pipeline and metrics will look like",
+    "Professional mobile-first website on your own domain",
+    "AI chatbot with voice — answers customer questions 24/7 in English, Spanish, and more",
+    "Lead capture with instant email notifications when someone contacts you",
     "GEO/SEO — get found on Google AND AI search (ChatGPT, Gemini, Perplexity)",
-    "Email lead notifications — get alerted instantly when a prospect submits a request",
-    "You own everything we build — no per-lead fees, no lock-in"
+    "Google Reviews displayed on your website",
+    "We build it, we manage it — you stay on the job"
   ],
   "industries_served": [
-    "Landscaping",
-    "Real Estate / Property Management",
     "Plumbing",
     "HVAC",
-    "Remodeling / General Contractor",
+    "Landscaping",
+    "General Contractor / Handyman",
+    "Remodeling",
+    "Real Estate",
     "Any local service business"
   ],
   "demos_available": {
-    "landscaping": { "url": "/demos/landscaping/", "highlights": "Booking, seasonal follow-ups, before/after gallery" },
-    "realestate": { "url": "/demos/realestate/", "highlights": "Project portfolios, multi-service booking" },
-    "plumbing": { "url": "/demos/plumbing/", "highlights": "Emergency routing, 24/7 service, priority booking" },
-    "hvac": { "url": "/demos/hvac/", "highlights": "System tracking, maintenance plans, seasonal campaigns" },
-    "remodeling": { "url": "/demos/remodeling/", "highlights": "Project portfolio, estimate requests, before/after gallery" }
+    "plumbing": { "url": "/demos/plumbing/", "highlights": "AI chatbot, lead capture, GEO/SEO, multilingual" },
+    "hvac": { "url": "/demos/hvac/", "highlights": "Maintenance plans, multilingual chatbot, lead capture" },
+    "landscaping": { "url": "/demos/landscaping/", "highlights": "Before/after gallery, seasonal services, multilingual chatbot" },
+    "remodeling": { "url": "/demos/remodeling/", "highlights": "Project portfolio, estimate requests, before/after gallery" },
+    "realestate": { "url": "/demos/realestate/", "highlights": "REALTOR personal brand site, Fair Housing compliant, KW brokerage footer" }
   },
   "differentiators": [
-    "vs Thumbtack/Angi: You pay $500-$2,000/mo for shared leads with 10-20% close rates. With Krevio, you own your leads exclusively through your own website.",
-    "vs Big agencies: They charge $10K+ for setup and $1,500-$3,000/mo for SEO alone. We build custom starting at $1,500 setup and manage everything from $497/mo.",
-    "vs Freelancers: Lottery quality. We deliver agency-grade work with AI precision.",
-    "vs DIY (Wix/Squarespace): Generic templates. We build systems, not pages.",
-    "GEO optimization: We optimize for AI search (ChatGPT, Gemini), not just Google. Almost no one offers GEO to local businesses yet.",
-    "No long-term contracts: Month-to-month. Unlike Angi's 12-month contract with 35% cancellation penalty."
+    "vs Thumbtack/Angi: You pay $500-$2,000/mo for shared leads sent to 5 other contractors. With Krevio, your leads go directly to you through your own website. No sharing.",
+    "vs Big agencies: They charge $2,000-$5,000/mo retainer with long contracts. We deliver the same results from $349/mo. Cancel anytime.",
+    "vs DIY tools (GHL, Wix, Squarespace): $97-$209/mo plus your time to learn and manage. Most small business owners sign up, get overwhelmed, and cancel within 90 days. We hand you a finished product.",
+    "vs 'My nephew does websites': Does it have an AI chatbot that answers calls at 2 AM? Does ChatGPT know your business exists? Who maintains it?",
+    "GEO optimization: We optimize for AI search (ChatGPT, Gemini), not just Google. Almost no local business is doing this yet.",
+    "AI chatbot with voice: The only feature competitors can't easily match today. Your customers can talk to your website."
   ],
-  "geo_explanation": "GEO stands for Generative Engine Optimization. When someone asks ChatGPT or Google AI for a plumber near them, GEO makes sure YOUR business shows up. It's like SEO but for AI search engines — and almost nobody is doing it yet.",
+  "geo_explanation": "GEO stands for Generative Engine Optimization. When someone asks ChatGPT or Google AI for a plumber near them, GEO makes sure YOUR business shows up. It's like SEO but for AI search engines — and almost nobody is doing it yet for local businesses.",
   "process": [
     "Step 1: Discovery — Tell us about your business. We show you a working demo tailored to your industry.",
-    "Step 2: Build — We build your complete system in 2-4 weeks. Website, chatbot, dashboard, GEO.",
-    "Step 3: Launch + Grow — Your system goes live on your domain. You own everything. Optional managed services to keep growing."
+    "Step 2: Build — We build your professional website with AI chatbot and lead capture in 2-3 weeks.",
+    "Step 3: Launch + Grow — Your site goes live on your domain. We manage everything. You stay on the truck."
   ],
   "faq": [
-    { "q": "How much does it cost?", "a": "Setup starts at $1,500. Managed services have 3 tiers: Starter at $497/mo (chatbot + GEO monitoring), Growth at $697/mo (adds content + GBP management), and Accelerator at $997/mo (full stack — GEO optimization, lead gen, website management, strategy calls). No per-lead fees, month-to-month." },
-    { "q": "Do I own everything?", "a": "Yes. Your website, your leads, your data, your code — all yours. If you ever cancel managed services, everything stays with you." },
-    { "q": "What about ongoing costs?", "a": "The build is a one-time investment. Managed services are optional, starting at $497/month for our Starter tier. Month-to-month — cancel anytime." },
-    { "q": "How does this compare to Thumbtack or Angi?", "a": "On those platforms, you pay $500-$2,000/month for shared leads sent to 4-8 competitors, with 10-20% close rates and no ownership. With Krevio, you own your website, your chatbot captures leads exclusively for you, and there are no per-lead fees. Most clients save money in month 2." },
+    { "q": "How much does it cost?", "a": "Two plans: Starter at $349/mo and Pro at $597/mo. Setup fees start at $500. No per-lead fees, month-to-month, cancel anytime." },
+    { "q": "Do I own everything?", "a": "Your domain, your customer data, and your business relationships are yours. If you cancel, we export everything and help you transition. No lock-in." },
+    { "q": "What about ongoing costs?", "a": "Your monthly plan covers everything — website, AI chatbot, hosting, content updates, and support. No hidden fees, no usage charges." },
+    { "q": "How does this compare to Thumbtack or Angi?", "a": "On those platforms, you pay $500-$2,000/month for shared leads sent to 5 other contractors. With Krevio, you own your website, your chatbot captures leads exclusively for you, and there are no per-lead fees. Your leads go to you, not your competitors." },
     { "q": "Do you work with businesses outside DFW?", "a": "We're based in DFW and specialize in local service businesses here, but we can work with businesses anywhere." },
-    { "q": "How long does it take?", "a": "Most projects launch in 2-4 weeks from kickoff." },
-    { "q": "What is GEO?", "a": "GEO is Generative Engine Optimization — it makes your business show up when people search using AI tools like ChatGPT, Google AI, or Perplexity. Think of it as SEO for the AI age. Almost no one is doing this for local businesses yet — that's our edge." },
-    { "q": "Is there a contract?", "a": "No long-term contracts. Everything is month-to-month. We offer a 10% discount if you commit quarterly, but it's optional. Compare that to Angi's 12-month lock-in with a 35% cancellation penalty." }
+    { "q": "How long does it take?", "a": "Most projects launch in 2-3 weeks from kickoff." },
+    { "q": "What is GEO?", "a": "GEO is Generative Engine Optimization — it makes your business show up when people search using AI tools like ChatGPT, Google AI, or Perplexity. Think of it as SEO for the AI age. Almost no one is doing this for local businesses yet." },
+    { "q": "Is there a contract?", "a": "No contracts. Everything is month-to-month. Cancel anytime — your domain and data go with you. We also offer a 30-day satisfaction guarantee: not happy? Full refund of your first month." },
+    { "q": "What's the difference between Starter and Pro?", "a": "Starter gives you a great professional website with AI chatbot and lead capture. Pro adds Google Business Profile optimization, monthly performance reports, more content updates, and a 90-day lead guarantee. Starter gets you found online. Pro actively drives leads to you." }
   ]
 }
