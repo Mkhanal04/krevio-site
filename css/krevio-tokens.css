@@ -26,12 +26,10 @@
  * mobile smoke test in scripts/mobile-smoke.mjs.
  */
 
-/* ─────────────────────────────────────────────
-   GOOGLE FONTS
-   Load once here so individual pages don't
-   need their own <link> tags.
-   ───────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap');
+/* Google Fonts (DM Sans, DM Serif Display) are loaded via <link> tags in
+   each page's <head> (see _templates/base.html and the landing page) so
+   the browser can preconnect and parallelize the download. Don't re-import
+   here — duplicate load wastes a request. */
 
 /* ─────────────────────────────────────────────
    KREVIO BRAND LAYER

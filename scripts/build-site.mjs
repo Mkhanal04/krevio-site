@@ -171,6 +171,13 @@ function buildValues(config) {
   // Chat widget CONFIG — injected as JSON
   values.CONFIG_JSON = buildConfigJson(config);
 
+  // Analytics — Umami Cloud (privacy-friendly, no cookies)
+  // Set UMAMI_WEBSITE_ID env var or analyticsId in config
+  const umamiId = config.analyticsId || process.env.UMAMI_WEBSITE_ID || '';
+  values.ANALYTICS_TAG = umamiId
+    ? `<script defer src="https://cloud.umami.is/script.js" data-website-id="${umamiId}"></script>`
+    : '<!-- analytics: set analyticsId in config or UMAMI_WEBSITE_ID env var -->';
+
   // Empty slots for optional sections (filled by content files or left empty)
   values.EXTRA_HEAD = '';
   values.DEMO_STYLES = '';
@@ -215,24 +222,29 @@ function loadContentSections(businessType) {
 
 // ── Build pipeline ─────────────────────────────────────────────────
 
-function buildDemo(configPath) {
-  const fullPath = resolve(ROOT, configPath);
+// Maps {{PLACEHOLDER}} -> partial filename (without .html). The footer
+// partial includes the endcap/pill, so KREVIO_ENDCAP stays empty.
+const PARTIAL_MAP = {
+  DEMO_BAR:  'demo-bar',
+  CHAT_INIT: 'chat-init',
+  LEAD_FORM: 'lead-form',
+  SCHEMA_LD: 'schema-ld',
+  FOOTER:    'footer',
+};
 
-  // 1. Read and parse config
-  let rawConfig;
-  try {
-    rawConfig = readFileSync(fullPath, 'utf-8');
-  } catch (err) {
-    console.error(`  ERROR: Cannot read config file: ${fullPath}`);
-    console.error(`         ${err.message}`);
-    return false;
-  }
+/**
+ * Build one demo. `ctx` carries the shared inputs that are the same for
+ * every config in a single run (base template + partials), so we don't
+ * re-read those files N times when --all is passed.
+ */
+function buildDemo(configPath, ctx) {
+  const fullPath = resolve(ROOT, configPath);
 
   let config;
   try {
-    config = JSON.parse(rawConfig);
+    config = JSON.parse(readFileSync(fullPath, 'utf-8'));
   } catch (err) {
-    console.error(`  ERROR: Invalid JSON in ${configPath}`);
+    console.error(`  ERROR: ${err.code === 'ENOENT' ? 'Cannot read config file' : 'Invalid JSON'}: ${configPath}`);
     console.error(`         ${err.message}`);
     return false;
   }
@@ -246,73 +258,31 @@ function buildDemo(configPath) {
   console.log(`\n  Building: ${config.businessName} (${type})`);
   console.log(`  Config:   ${configPath}`);
 
-  // 2. Validate config against schema
   const validation = validateConfig(config, { isDemoOnly: true });
   if (!validation.valid) {
     console.error(`  VALIDATION FAILED (${validation.errors.length} errors):`);
     validation.errors.forEach(e => console.error(`    - ${e}`));
     return false;
   }
-  if (verbose) {
-    console.log(`  Validated: ${validation.fieldCount} fields, all OK`);
-  }
+  if (verbose) console.log(`  Validated: ${validation.fieldCount} fields, all OK`);
 
-  // 3. Build placeholder values
   const values = buildValues(config);
 
-  // 4. Load content sections (industry-specific HTML)
-  const contentSections = loadContentSections(type);
-  for (const [key, html] of Object.entries(contentSections)) {
+  // Industry-specific HTML sections (configs/[type].content.html)
+  for (const [key, html] of Object.entries(loadContentSections(type))) {
     values[key] = html;
   }
 
-  // 5. Load base template
-  const baseTemplate = readFile(join(TEMPLATES_DIR, 'base.html'));
-  if (!baseTemplate) {
-    console.error(`  ERROR: Cannot read base template: ${join(TEMPLATES_DIR, 'base.html')}`);
-    return false;
-  }
-
-  // 6. Load and inject partials
-  const partials = loadPartials();
-
-  // Build partial HTML with placeholder replacement
-  let html = baseTemplate;
-
-  // Replace partial injection points
-  // {{DEMO_BAR}} -> partials['demo-bar'] with placeholders replaced
-  // {{CHAT_INIT}} -> partials['chat-init'] with CONFIG_JSON
-  // {{LEAD_FORM}} -> partials['lead-form']
-  // {{SCHEMA_LD}} -> partials['schema-ld']
-  // {{FOOTER}} + {{KREVIO_ENDCAP}} -> partials['footer']
-
-  const partialMap = {
-    'DEMO_BAR': 'demo-bar',
-    'CHAT_INIT': 'chat-init',
-    'LEAD_FORM': 'lead-form',
-    'SCHEMA_LD': 'schema-ld',
-    'FOOTER': 'footer',
-  };
-
-  // First pass: inject partials where their named placeholder appears
-  for (const [placeholder, partialName] of Object.entries(partialMap)) {
-    if (partials[partialName]) {
-      // Replace placeholders within the partial first
-      const partialHtml = replacePlaceholders(partials[partialName], values);
-      values[placeholder] = partialHtml;
+  // Inject partials with their own placeholders resolved first
+  for (const [placeholder, partialName] of Object.entries(PARTIAL_MAP)) {
+    if (ctx.partials[partialName]) {
+      values[placeholder] = replacePlaceholders(ctx.partials[partialName], values);
     }
   }
-
-  // The footer partial includes both the footer and the endcap/pill,
-  // so KREVIO_ENDCAP can be empty
   values.KREVIO_ENDCAP = '';
 
-  // 7. Replace all placeholders in the assembled template
-  html = replacePlaceholders(html, values);
-
-  // 8. Write output
-  const outputDir = join(DEMOS_DIR, type);
-  const outputFile = join(outputDir, 'index.html');
+  const html = replacePlaceholders(ctx.baseTemplate, values);
+  const outputFile = join(DEMOS_DIR, type, 'index.html');
 
   if (dryRun) {
     console.log(`  Output:   ${outputFile} (DRY RUN — not written)`);
@@ -320,15 +290,10 @@ function buildDemo(configPath) {
     return true;
   }
 
-  // Ensure output directory exists
-  if (!existsSync(outputDir)) {
-    mkdirSync(outputDir, { recursive: true });
-  }
-
+  mkdirSync(dirname(outputFile), { recursive: true });
   writeFileSync(outputFile, html, 'utf-8');
-  const sizeKb = Math.round(html.length / 1024);
   console.log(`  Output:   ${outputFile}`);
-  console.log(`  Size:     ${sizeKb} KB`);
+  console.log(`  Size:     ${Math.round(html.length / 1024)} KB`);
   return true;
 }
 
@@ -364,12 +329,20 @@ function main() {
     console.log('(DRY RUN — no files will be written)');
   }
 
+  // Read base template + partials ONCE per run, not once per config.
+  const baseTemplate = readFile(join(TEMPLATES_DIR, 'base.html'));
+  if (!baseTemplate) {
+    console.error(`ERROR: Cannot read base template: ${join(TEMPLATES_DIR, 'base.html')}`);
+    process.exit(1);
+  }
+  const ctx = { baseTemplate, partials: loadPartials() };
+
   let success = 0;
   let failed = 0;
 
   for (const configPath of configs) {
     try {
-      if (buildDemo(configPath)) {
+      if (buildDemo(configPath, ctx)) {
         success++;
       } else {
         failed++;

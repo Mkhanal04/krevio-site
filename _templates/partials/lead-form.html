@@ -79,6 +79,10 @@ async function submitLeadForm(e) {
     });
     if (res.ok) {
       showToast('Request sent! We will be in touch soon.');
+      window.krevioTrack?.('lead-submitted', {
+        business: CONFIG.businessType,
+        service: payload.service || 'general',
+      });
       form.reset();
     } else {
       showToast('Something went wrong. Please call us directly.');
