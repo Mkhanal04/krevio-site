@@ -36,6 +36,10 @@
     "no-descending-specificity": null,
     "font-family-no-missing-generic-family-keyword": null
   },
+  "ignoreFiles": [
+    "../demos/**/*.html",
+    "../configs/*.content.html"
+  ],
   "overrides": [
     {
       "files": ["../css/krevio-tokens.css"],
@@ -48,6 +52,12 @@
       "files": ["../css/industry-overrides.css"],
       "rules": {
         "color-no-hex": null,
+        "scale-unlimited/declaration-strict-value": null
+      }
+    },
+    {
+      "files": ["../css/dashboard.css"],
+      "rules": {
         "scale-unlimited/declaration-strict-value": null
       }
     }
