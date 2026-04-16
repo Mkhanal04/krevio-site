@@ -4,10 +4,23 @@
   "type": "module",
   "description": "Dev-only test harness. NOT shipped — Vercel deploys from repo root and ignores this directory. The 'no npm' rule in CLAUDE.md applies to app code, not dev tooling.",
   "scripts": {
+    "build": "node build-site.mjs --all",
+    "build:dry": "node build-site.mjs --dry-run --all",
     "smoke": "node mobile-smoke.mjs",
-    "smoke:prod": "node mobile-smoke.mjs https://krevio.net"
+    "smoke:prod": "node mobile-smoke.mjs https://krevio.net",
+    "lint": "stylelint '../css/**/*.css' '../demos/**/*.html' '../index.html'",
+    "lint:fix": "stylelint '../css/**/*.css' '../demos/**/*.html' '../index.html' --fix",
+    "validate": "node validate-config.mjs",
+    "setup": "cp ../hooks/pre-commit ../.git/hooks/pre-commit && chmod +x ../.git/hooks/pre-commit"
   },
   "dependencies": {
     "playwright": "^1.49.0"
+  },
+  "devDependencies": {
+    "postcss-html": "^1.8.1",
+    "stylelint": "^17.8.0",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-declaration-strict-value": "^1.11.1"
   }
 }

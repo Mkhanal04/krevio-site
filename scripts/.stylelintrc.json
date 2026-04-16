@@ -1,0 +1,55 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-html"],
+  "plugins": ["stylelint-declaration-strict-value"],
+  "rules": {
+    "color-no-hex": true,
+    "color-named": "never",
+    "color-function-notation": null,
+    "color-function-alias-notation": null,
+    "alpha-value-notation": null,
+    "color-hex-length": null,
+    "rule-empty-line-before": null,
+    "no-duplicate-selectors": null,
+    "declaration-block-single-line-max-declarations": null,
+    "media-feature-range-notation": null,
+    "comment-empty-line-before": null,
+    "declaration-empty-line-before": null,
+    "at-rule-empty-line-before": null,
+    "keyframes-name-pattern": null,
+    "property-no-vendor-prefix": null,
+    "scale-unlimited/declaration-strict-value": [
+      ["/^padding/", "/^margin/", "font-size", "border-radius", "font-weight"],
+      {
+        "ignoreValues": {
+          "": ["0", "auto", "inherit", "initial", "unset", "none", "transparent", "currentColor", "100%", "50%"]
+        },
+        "disableFix": true,
+        "message": "Use a design token (var(--*)) instead of a hardcoded value for '${property}'"
+      }
+    ],
+    "media-feature-name-value-allowed-list": {
+      "max-width": ["600px", "900px", "1200px"],
+      "min-width": ["601px", "901px", "1201px"]
+    },
+    "selector-class-pattern": null,
+    "custom-property-pattern": null,
+    "no-descending-specificity": null,
+    "font-family-no-missing-generic-family-keyword": null
+  },
+  "overrides": [
+    {
+      "files": ["../css/krevio-tokens.css"],
+      "rules": {
+        "color-no-hex": null,
+        "scale-unlimited/declaration-strict-value": null
+      }
+    },
+    {
+      "files": ["../css/industry-overrides.css"],
+      "rules": {
+        "color-no-hex": null,
+        "scale-unlimited/declaration-strict-value": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "businessName": "Morgan Ellis",
+  "businessNameShort": "Morgan",
+  "businessNameSub": "REALTOR\u00ae",
+  "businessType": "realestate",
+  "agentType": "agent",
+  "schemaType": "RealEstateAgent",
+  "emoji": "\ud83c\udfe1",
+  "tagline": "REALTOR\u00ae \u00b7 Keller Williams Frisco \u00b7 DFW Buyers, Sellers & Investors",
+  "defaultTheme": "dark",
+
+  "phone": "(972) 555-0147",
+  "phoneRaw": "9725550147",
+  "address": "1234 Sample Way",
+  "city": "Frisco",
+  "state": "TX",
+  "zip": "75033",
+  "areasServed": ["Frisco", "Plano", "McKinney", "Allen", "Prosper", "Celina"],
+  "hours": "Mon-Sat 8am-7pm, Sun by appt",
+  "priceRange": "$$$",
+
+  "rating": "4.9",
+  "reviewCount": "87",
+
+  "hasEmergencyBooking": false,
+  "hasDispatch": false,
+  "hasCustomerCRM": true,
+  "hasMoney": true,
+  "hasReceipts": false,
+  "hasGallery": true,
+  "hasLanguageToggle": true,
+  "hasVoice": true,
+
+  "chatEndpoint": "/api/demos/chat",
+  "ttsEndpoint": "/api/demos/tts",
+  "lang": "en-US",
+
+  "fairHousing": true,
+  "tcpaConsent": true,
+  "brokerage": {
+    "name": "Keller Williams Realty (example brokerage)",
+    "franchise": "kw",
+    "marketCenter": "KW Frisco (example)",
+    "brokerName": "J. Sample, Managing Broker",
+    "logo": null,
+    "disclaimer": "Each Office Independently Owned and Operated. Demo site \u2014 fictional agent shown under KW-style compliance pattern."
+  },
+
+  "quickReplies": [
+    { "emoji": "\ud83c\udfe1", "label": "I'm buying a home" },
+    { "emoji": "\ud83d\udcb0", "label": "I'm selling my home" },
+    { "emoji": "\ud83d\udcca", "label": "I'm an investor" },
+    { "emoji": "\ud83d\udd0d", "label": "I want a market report" }
+  ],
+
+  "services": [
+    { "name": "Buyer Representation" },
+    { "name": "Seller Representation" },
+    { "name": "Free Market Analysis (CMA)" },
+    { "name": "Investment Properties" },
+    { "name": "Relocation to DFW" },
+    { "name": "New Construction" }
+  ],
+
+  "faq": [
+    { "q": "Do I need to be pre-approved before we start looking?", "a": "Not to start conversations, but yes before we tour homes seriously. I can connect you with trusted lenders in DFW who can get you pre-approved quickly \u2014 often same day." },
+    { "q": "How do you price a home for sale?", "a": "I use AI-powered comparable sales analysis \u2014 recent closings, active competition, days on market, and neighborhood trends. No guessing. I'll show you the data and we set a price together." },
+    { "q": "How fast do your listings typically sell?", "a": "My average is 9 days on market vs. the DFW average of 28 days. AI-optimized pricing, professional photography, and targeted marketing make the difference." },
+    { "q": "Do you work with buyers relocating to DFW from out of state?", "a": "Yes \u2014 a significant part of my business is relocation. I do virtual tours, video walkthroughs, school district breakdowns, and can coordinate remote closings." },
+    { "q": "What areas of DFW do you cover?", "a": "Frisco, Plano, McKinney, Allen, Prosper, Celina, and surrounding communities. I'm most active in Collin County and the north Dallas suburbs." }
+  ],
+
+  "pageTitle": "Morgan Ellis, REALTOR\u00ae \u2014 Frisco TX | Keller Williams",
+  "metaDescription": "Frisco REALTOR\u00ae with Keller Williams. AI-powered home search, CMA reports, and expert representation for buyers, sellers & investors in DFW. 4.9\u2605 from 87 reviews.",
+  "heroHeadline": "Your next chapter starts here.",
+  "heroSubtitle": "AI-powered market insights, white-glove service, and honest advice. Buying, selling, or investing in DFW.",
+  "heroPills": ["\ud83c\udfe1 Buyer & Seller Agent", "\ud83d\udcca Market Analysis", "\ud83c\udf1f 4.9\u2605 Reviews"],
+  "formHeadingEn": "Let's Talk",
+  "formHeadingEs": "Hablemos",
+  "formButtonEn": "Request a Consultation",
+  "formButtonEs": "Solicitar Consulta"
+}

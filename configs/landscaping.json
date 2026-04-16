@@ -1,0 +1,67 @@
+{
+  "businessName": "Green Valley Landscaping",
+  "businessNameShort": "Green Valley",
+  "businessNameSub": "Landscaping",
+  "businessType": "landscaping",
+  "schemaType": "LandscapingOrGardeningService",
+  "emoji": "\ud83c\udf3f",
+  "tagline": "Professional lawn care & landscaping in McKinney, Frisco & North DFW",
+  "defaultTheme": "dark",
+
+  "phone": "(214) 555-0123",
+  "phoneRaw": "2145550123",
+  "address": "456 Greenway Dr",
+  "city": "McKinney",
+  "state": "TX",
+  "zip": "75070",
+  "areasServed": ["McKinney", "Frisco", "Allen", "Plano"],
+  "hours": "Mon-Sat 7AM-6PM",
+  "priceRange": "$$",
+
+  "rating": "4.9",
+  "reviewCount": "95+",
+
+  "hasEmergencyBooking": false,
+  "hasDispatch": false,
+  "hasCustomerCRM": false,
+  "hasMoney": true,
+  "hasReceipts": false,
+  "hasGallery": true,
+  "hasLanguageToggle": false,
+  "hasVoice": true,
+
+  "chatEndpoint": "/api/demos/chat",
+  "ttsEndpoint": "/api/demos/tts",
+  "lang": "en-US",
+
+  "quickReplies": [
+    { "emoji": "\ud83c\udf3f", "label": "Get a free lawn estimate" },
+    { "emoji": "\ud83c\udf33", "label": "What landscaping services do you offer?" },
+    { "emoji": "\ud83d\udcc5", "label": "Schedule a consultation" },
+    { "emoji": "\ud83d\udccd", "label": "Do you serve my area?" }
+  ],
+
+  "services": [
+    { "name": "Lawn Maintenance", "icon": "\ud83c\udf3f", "price": "$75-150/visit" },
+    { "name": "Landscaping & Design", "icon": "\ud83c\udf33", "price": "$2,000-8,000" },
+    { "name": "Tree & Shrub Care", "icon": "\u2702\ufe0f", "price": "$200-1,500" }
+  ],
+
+  "faq": [
+    { "q": "What areas do you serve?", "a": "We serve McKinney, Frisco, Allen, Plano, and surrounding Collin County areas in Texas." },
+    { "q": "Do you offer free estimates?", "a": "Yes! We offer free on-site estimates for all services. Call (214) 555-0123 to schedule." },
+    { "q": "How much does lawn maintenance cost?", "a": "Lawn maintenance starts at $75-150 per visit depending on property size. We offer weekly and bi-weekly plans." },
+    { "q": "Are you licensed and insured?", "a": "Yes, Green Valley Landscaping is fully licensed, bonded, and insured in the state of Texas." },
+    { "q": "How long does a landscaping project take?", "a": "Most residential projects are completed in 2-4 weeks depending on scope. We'll give you a timeline during your free estimate." }
+  ],
+
+  "pageTitle": "Green Valley Landscaping \u2014 McKinney TX | Lawn Care & Landscape Design",
+  "metaDescription": "McKinney's trusted landscaping company. Professional lawn maintenance, landscape design, and tree care. 4.9\u2605 from 95+ reviews. Free estimates.",
+  "heroHeadline": "Your lawn, elevated.",
+  "heroSubtitle": "Professional lawn care, landscape design, and tree services for McKinney, Frisco & North DFW.",
+  "heroPills": ["\ud83c\udf3f Weekly Lawn Care", "\ud83c\udf33 Custom Design", "\u2702\ufe0f Tree Experts"],
+  "formHeadingEn": "Get a Free Estimate",
+  "formHeadingEs": "Obtener Estimado Gratis",
+  "formButtonEn": "Request Free Estimate",
+  "formButtonEs": "Solicitar Estimado Gratis"
+}

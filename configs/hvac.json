@@ -1,0 +1,70 @@
+{
+  "businessName": "Summit Air Solutions",
+  "businessNameShort": "Summit Air",
+  "businessNameSub": "Solutions",
+  "businessType": "hvac",
+  "schemaType": "HVACBusiness",
+  "emoji": "\u2744\ufe0f",
+  "tagline": "Allen's trusted HVAC company. NATE-certified technicians, same-day service.",
+  "defaultTheme": "dark",
+
+  "phone": "(469) 555-0345",
+  "phoneRaw": "4695550345",
+  "address": "1234 Sample Way",
+  "city": "Allen",
+  "state": "TX",
+  "zip": "75013",
+  "areasServed": ["Allen", "McKinney", "Fairview", "Lucas", "Celina"],
+  "hours": "Mon-Sat 7AM-7PM",
+  "priceRange": "$$",
+
+  "rating": "4.8",
+  "reviewCount": "180+",
+
+  "hasEmergencyBooking": false,
+  "hasDispatch": false,
+  "hasCustomerCRM": false,
+  "hasMoney": true,
+  "hasReceipts": false,
+  "hasGallery": true,
+  "hasLanguageToggle": false,
+  "hasVoice": true,
+
+  "chatEndpoint": "/api/demos/chat",
+  "ttsEndpoint": "/api/demos/tts",
+  "lang": "en-US",
+
+  "quickReplies": [
+    { "emoji": "\ud83d\udd25", "label": "My heat isn't working" },
+    { "emoji": "\u2744\ufe0f", "label": "My AC isn't cooling" },
+    { "emoji": "\ud83d\udcc5", "label": "Schedule a maintenance visit" },
+    { "emoji": "\ud83d\udcb0", "label": "What does a new system cost?" }
+  ],
+
+  "services": [
+    { "name": "AC Repair & Service", "icon": "\u2744\ufe0f", "price": "From $89 diagnostic" },
+    { "name": "Heating & Furnace", "icon": "\ud83d\udd25", "price": "From $89 diagnostic" },
+    { "name": "AC Installation", "icon": "\ud83c\udf00", "price": "From $3,500" },
+    { "name": "Maintenance Plans", "icon": "\ud83d\udd04", "price": "From $149/year" },
+    { "name": "Duct Cleaning", "icon": "\ud83d\udca8", "price": "From $299" },
+    { "name": "Smart Thermostats", "icon": "\ud83c\udf21\ufe0f", "price": "From $249 installed" }
+  ],
+
+  "faq": [
+    { "q": "How often should I service my AC?", "a": "Once a year minimum \u2014 ideally in spring before the cooling season. Our maintenance plans include both spring and fall tune-ups." },
+    { "q": "How much does a new AC system cost?", "a": "Depending on home size and efficiency: $3,500-$7,000 installed. We do a Manual J load calculation to size it properly." },
+    { "q": "What SEER rating should I get?", "a": "Texas minimum is 15 SEER. We recommend 16-18 SEER for the DFW climate \u2014 the energy savings pay back the difference in 3-4 years." },
+    { "q": "Do you offer financing?", "a": "Yes. 0% for 12 months on systems over $3,000 through GreenSky. Longer terms available." },
+    { "q": "What areas do you serve?", "a": "Allen, McKinney, Fairview, Lucas, Celina, and surrounding North DFW communities." }
+  ],
+
+  "pageTitle": "Summit Air Solutions \u2014 Allen TX | HVAC Repair, Installation & Maintenance",
+  "metaDescription": "Allen's trusted HVAC company. AC repair, furnace installation, and maintenance plans from NATE-certified technicians. 4.8\u2605 from 180+ reviews. Same-day service available.",
+  "heroHeadline": "Your comfort is our business.",
+  "heroSubtitle": "NATE-certified technicians, same-day service, and honest pricing. Heating & cooling for Allen, McKinney & North DFW.",
+  "heroPills": ["\u2744\ufe0f Same-Day AC Repair", "\ud83d\udd25 Furnace Experts", "\ud83d\udee1\ufe0f NATE Certified"],
+  "formHeadingEn": "Schedule HVAC Service",
+  "formHeadingEs": "Programar Servicio HVAC",
+  "formButtonEn": "Schedule Service",
+  "formButtonEs": "Programar Servicio"
+}

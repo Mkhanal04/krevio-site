@@ -1,0 +1,30 @@
+<!-- Customer-facing footer -->
+<footer class="cv-footer">
+  <div class="cv-footer-inner">
+    <div>
+      <div class="cv-footer-name"><span id="footerEmoji">{{EMOJI}}</span> <span id="footerName">{{BUSINESS_NAME}}</span></div>
+      <p class="cv-footer-tagline" id="footerTagline">{{TAGLINE}}</p>
+    </div>
+    <div class="cv-footer-items">
+      <div class="cv-footer-item">{{PHONE_ICON}} <a href="tel:{{PHONE_RAW}}" id="footerPhone">{{PHONE}}</a></div>
+      <div class="cv-footer-item">{{LOCATION_ICON}} <span id="footerAddress">{{ADDRESS}}, {{CITY}} {{STATE}}</span></div>
+      <div class="cv-footer-item">{{RATING_ICON}} <span id="footerRating">{{RATING}}</span> stars &middot; <span id="footerReviewCount">{{REVIEW_COUNT}}</span> reviews</div>
+      <div class="cv-footer-item">{{HOURS_ICON}} <span id="footerHours">{{HOURS}}</span></div>
+    </div>
+  </div>
+  <div class="cv-footer-credit"><a href="/">Powered by Krevio</a> &middot; <a href="/privacy/">Privacy</a></div>
+</footer>
+
+<!-- Krevio end-of-page CTA -->
+<div class="krevio-endcap">
+  <h4>Like what you see?</h4>
+  <p>This is a Krevio demo. We build sites like this for local service businesses.</p>
+  <a href="/#contact">See how it works &rarr;</a>
+</div>
+
+<!-- Krevio sticky demo pill -->
+<div class="krevio-demo-pill" id="krevioDemoPill">
+  <a href="/">This is a Krevio demo &rarr;</a>
+  <button class="krevio-demo-pill-x" onclick="this.parentElement.style.display='none';try{sessionStorage.setItem('krevio-pill-off','1')}catch(e){}" aria-label="Dismiss">&times;</button>
+</div>
+<script>try{if(sessionStorage.getItem('krevio-pill-off'))document.getElementById('krevioDemoPill').style.display='none'}catch(e){}</script>

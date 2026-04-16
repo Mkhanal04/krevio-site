@@ -41,50 +41,47 @@
 }
 
 /* ─────────────────────────────────────────────
-   LANDSCAPING — Forest Green
+   LANDSCAPING — Emerald (shifted from status --green to avoid collision)
    Nature, growth, outdoors.
    ───────────────────────────────────────────── */
 [data-industry="landscaping"][data-theme="light"] {
-  --accent:          #16A34A;
-  --accentS:         rgba(22,163,74,0.06);
-  --accentB:         rgba(22,163,74,0.14);
+  --accent:          #059669;
+  --accentS:         rgba(5,150,105,0.06);
+  --accentB:         rgba(5,150,105,0.14);
   --hero-bg:         linear-gradient(135deg, #14532D 0%, #166534 60%, #15803D 100%);
-  --sidebar-active:      #16A34A;
+  --sidebar-active:      #059669;
   --sidebar-active-text: #FFFFFF;
   --btn-primary-color:   #14532D;
 }
 [data-industry="landscaping"][data-theme="dark"] {
-  --accent:          #22C55E;
-  --accentS:         rgba(34,197,94,0.08);
-  --accentB:         rgba(34,197,94,0.18);
+  --accent:          #34D399;
+  --accentS:         rgba(52,211,153,0.08);
+  --accentB:         rgba(52,211,153,0.18);
   --hero-bg:         linear-gradient(135deg, #052E16 0%, #064E3B 60%, #065F46 100%);
-  --sidebar-active:      #22C55E;
+  --sidebar-active:      #34D399;
   --sidebar-active-text: #09090B;
   --btn-primary-color:   #052E16;
 }
 
 /* ─────────────────────────────────────────────
-   HVAC — Blue
+   HVAC — Indigo (shifted from status --blue to avoid collision)
    Cool air, reliability, technical precision.
-   (Note: current live HVAC demo uses orange —
-   this is the North Star decision; update demo
-   during HVAC rebuild.)
    ───────────────────────────────────────────── */
 [data-industry="hvac"][data-theme="light"] {
-  --accent:          #2563EB;
-  --accentS:         rgba(37,99,235,0.06);
-  --accentB:         rgba(37,99,235,0.14);
-  --hero-bg:         linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 60%, #2563EB 100%);
-  --sidebar-active:      #2563EB;
+  --accent:          #4F46E5;
+  --accentS:         rgba(79,70,229,0.06);
+  --accentB:         rgba(79,70,229,0.14);
+  --hero-bg:         linear-gradient(135deg, #312E81 0%, #3730A3 60%, #4338CA 100%);
+  --sidebar-active:      #4F46E5;
   --sidebar-active-text: #FFFFFF;
-  --btn-primary-color:   #1E3A8A;
+  --btn-primary-color:   #312E81;
 }
 [data-industry="hvac"][data-theme="dark"] {
-  --accent:          #3B82F6;
-  --accentS:         rgba(59,130,246,0.08);
-  --accentB:         rgba(59,130,246,0.18);
-  --hero-bg:         linear-gradient(135deg, #0F172A 0%, #1E3A8A 60%, #1D4ED8 100%);
-  --sidebar-active:      #3B82F6;
+  --accent:          #818CF8;
+  --accentS:         rgba(129,140,248,0.08);
+  --accentB:         rgba(129,140,248,0.18);
+  --hero-bg:         linear-gradient(135deg, #0F172A 0%, #312E81 60%, #3730A3 100%);
+  --sidebar-active:      #818CF8;
   --sidebar-active-text: #09090B;
   --btn-primary-color:   #0F172A;
 }
@@ -117,24 +114,24 @@
 }
 
 /* ─────────────────────────────────────────────
-   REMODELING — Amber / Walnut
+   REMODELING — Warm Orange (shifted from status --amber to avoid collision)
    Craftsmanship, warmth, transformation.
    ───────────────────────────────────────────── */
 [data-industry="remodeling"][data-theme="light"] {
-  --accent:          #CA8A04;
-  --accentS:         rgba(202,138,4,0.06);
-  --accentB:         rgba(202,138,4,0.14);
+  --accent:          #C2410C;
+  --accentS:         rgba(194,65,12,0.06);
+  --accentB:         rgba(194,65,12,0.14);
   --hero-bg:         linear-gradient(135deg, #78350F 0%, #92400E 60%, #B45309 100%);
-  --sidebar-active:      #CA8A04;
+  --sidebar-active:      #C2410C;
   --sidebar-active-text: #FFFFFF;
   --btn-primary-color:   #78350F;
 }
 [data-industry="remodeling"][data-theme="dark"] {
-  --accent:          #EAB308;
-  --accentS:         rgba(234,179,8,0.08);
-  --accentB:         rgba(234,179,8,0.18);
+  --accent:          #FB923C;
+  --accentS:         rgba(251,146,60,0.08);
+  --accentB:         rgba(251,146,60,0.18);
   --hero-bg:         linear-gradient(135deg, #451A03 0%, #78350F 60%, #92400E 100%);
-  --sidebar-active:      #EAB308;
+  --sidebar-active:      #FB923C;
   --sidebar-active-text: #09090B;
   --btn-primary-color:   #451A03;
 }
