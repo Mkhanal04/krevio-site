@@ -46,6 +46,18 @@
   /* Default accent when no data-industry is set */
   --accent:    var(--amber);
   --on-accent: #000;
+
+  /* Chat widget palette — shared chrome, theme-invariant.
+     The chat panel renders over a dark glassmorphic surface on every
+     page (landing + all 5 demos), so these tokens don't flip with
+     data-theme. Industry CSS can override --krevio-chat-grad-* to
+     retune the bubble gradient without touching chat-widget.css. */
+  --chat-accent-start:    #A855F7;   /* purple — gradient start, eq bar */
+  --chat-accent-end:      #6366F1;   /* indigo — gradient end */
+  --chat-accent-solid:    #9333EA;   /* mic button solid fill */
+  --chat-text-on-accent:  #FFFFFF;   /* text/icons on accent backgrounds */
+  --chat-send-bg:         #FFFFFF;   /* send button circle */
+  --chat-send-fg:         #000000;   /* send button arrow icon */
 }
 
 /* ─────────────────────────────────────────────
@@ -197,6 +209,7 @@
   --weight-medium:   500;
   --weight-semibold: 600;
   --weight-bold:     700;
+  --weight-black:    900;
 
   /* Letter spacing */
   --tracking-tight:  -0.02em;   /* headings */
@@ -204,6 +217,7 @@
   --tracking-wide:   0.025em;   /* uppercase labels, badges */
 
   /* ─── Spacing ─── */
+  --space-2xs: 2px;
   --space-xs:  4px;
   --space-sm:  8px;
   --space-md:  12px;
@@ -217,6 +231,7 @@
   --space-7xl: 7.5rem;   /* 120px — major page breaks */
 
   /* ─── Border Radius ─── */
+  --radius-2xs:   2px;
   --radius-xs:    4px;
   --radius-sm:    6px;
   --radius-md:    8px;
