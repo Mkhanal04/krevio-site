@@ -1,0 +1,47 @@
+#!/bin/sh
+# Krevio pre-commit hook — blocks commits that violate design system rules
+# Runs Stylelint on staged CSS/HTML files only (fast)
+#
+# SETUP: This file is tracked in git so the hook is shareable.
+# To install, run one of:
+#   cd scripts && npm run setup
+#   cp hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+
+# Guard: skip if Node.js is not available
+command -v node >/dev/null 2>&1 || { echo "⚠️  Node.js not found — skipping lint"; exit 0; }
+
+SCRIPTS_DIR="$(git rev-parse --show-toplevel)/scripts"
+
+# Check dependencies are installed
+if [ ! -d "$SCRIPTS_DIR/node_modules" ]; then
+  echo "⚠️  Dev dependencies not installed — run: cd scripts && npm install"
+  exit 0
+fi
+
+# Collect staged CSS and HTML files (skip deletions, node_modules, and templates)
+# Paths are prefixed with ../ since stylelint runs from scripts/
+STAGED_FILES=""
+for f in $(git diff --cached --name-only --diff-filter=ACM -- '*.css' '*.html'); do
+  case "$f" in *node_modules*|_templates/*) continue ;; esac
+  STAGED_FILES="$STAGED_FILES \"../$f\""
+done
+
+if [ -z "$STAGED_FILES" ]; then
+  exit 0
+fi
+
+echo "🔍 Checking design system compliance..."
+
+cd "$SCRIPTS_DIR"
+eval npx stylelint $STAGED_FILES
+LINT_EXIT=$?
+
+if [ $LINT_EXIT -ne 0 ]; then
+  echo ""
+  echo "❌ Design system violations found. Fix before committing."
+  echo "   Run: cd scripts && npm run lint:fix"
+  exit 1
+fi
+
+echo "✅ Design system checks passed."
+exit 0

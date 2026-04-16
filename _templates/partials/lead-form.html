@@ -1,0 +1,94 @@
+<!-- Lead capture / booking form -->
+<section class="cv-section cv-booking-bg reveal">
+  <div class="booking-card">
+    <h2 class="section-title" style="margin-bottom:20px;" data-en="{{FORM_HEADING_EN}}" data-es="{{FORM_HEADING_ES}}">{{FORM_HEADING_EN}}</h2>
+    <form id="leadForm" onsubmit="return submitLeadForm(event)">
+      <div class="form-group">
+        <label class="form-label" data-en="Your Name" data-es="Tu Nombre">Your Name</label>
+        <input class="form-input" type="text" name="name" placeholder="John Smith" data-ph-en="John Smith" data-ph-es="Juan Garcia" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Phone" data-es="Telefono">Phone</label>
+        <input class="form-input" type="tel" name="phone" placeholder="(469) 555-0000" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Email" data-es="Correo">Email</label>
+        <input class="form-input" type="email" name="email" placeholder="you@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Service Needed" data-es="Servicio">Service Needed</label>
+        <select class="form-select" name="service" id="serviceDropdown">
+          <!-- Populated by JS from CONFIG data -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Preferred Date" data-es="Fecha Preferida">Preferred Date</label>
+        <input class="form-input" type="date" name="preferredDate">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Details (optional)" data-es="Detalles (opcional)">Details (optional)</label>
+        <textarea class="form-input form-textarea" name="details" placeholder="Tell us about your project..." data-ph-en="Tell us about your project..." data-ph-es="Cuentanos sobre tu proyecto..."></textarea>
+      </div>
+      <div class="tcpa-consent">
+        <label class="form-checkbox-label">
+          <input type="checkbox" name="tcpaConsent" required>
+          <span>I agree to receive calls, texts, and emails from <span class="tcpa-business-name">{{BUSINESS_NAME}}</span> at the number and email I provided. Message and data rates may apply. Consent is not a condition of purchase.</span>
+        </label>
+      </div>
+      <button type="submit" class="btn-accent" id="leadSubmitBtn" data-en="{{FORM_BUTTON_EN}}" data-es="{{FORM_BUTTON_ES}}">{{FORM_BUTTON_EN}}</button>
+    </form>
+  </div>
+</section>
+
+<script>
+/* Lead form submission — wired to /api/demos/inquiry */
+async function submitLeadForm(e) {
+  e.preventDefault();
+  const form = document.getElementById('leadForm');
+  const btn = document.getElementById('leadSubmitBtn');
+  const fd = new FormData(form);
+
+  // Validate TCPA consent
+  if (!fd.get('tcpaConsent')) {
+    showToast('Please agree to the consent checkbox.');
+    return false;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  const payload = {
+    businessName: CONFIG.businessName,
+    businessType: CONFIG.businessType,
+    name: fd.get('name'),
+    phone: fd.get('phone'),
+    email: fd.get('email'),
+    service: fd.get('service'),
+    preferredDate: fd.get('preferredDate') || '',
+    details: fd.get('details') || '',
+    tcpaConsent: true,
+    source: 'demo-lead-form',
+    timestamp: new Date().toISOString(),
+  };
+
+  try {
+    const res = await fetch('/api/demos/inquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      showToast('Request sent! We will be in touch soon.');
+      form.reset();
+    } else {
+      showToast('Something went wrong. Please call us directly.');
+    }
+  } catch {
+    showToast('Network error. Please try again or call us.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = btn.getAttribute('data-en') || '{{FORM_BUTTON_EN}}';
+  }
+  return false;
+}
+</script>

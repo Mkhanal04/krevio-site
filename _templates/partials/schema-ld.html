@@ -1,0 +1,80 @@
+<!-- Schema.org JSON-LD — generated from CONFIG at build time -->
+<script>
+(function generateAndInjectSchema() {
+  const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '');
+
+  // Collect sameAs links (filter empty strings)
+  const sameAs = [CONFIG.googleBusinessUrl, CONFIG.facebookUrl, CONFIG.yelpUrl].filter(Boolean);
+
+  // 1 - LocalBusiness
+  const localBusiness = {
+    '@context': 'https://schema.org',
+    '@type': CONFIG.schemaType || 'LocalBusiness',
+    name: CONFIG.businessName + ' (Krevio Demo)',
+    description: CONFIG.tagline || '',
+    telephone: CONFIG.phone || '',
+    url: baseUrl,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: CONFIG.address || '',
+      addressLocality: CONFIG.city || '',
+      addressRegion: CONFIG.state || '',
+      postalCode: CONFIG.zip || '',
+      addressCountry: 'US'
+    },
+    areaServed: (CONFIG.areasServed || []).map(function(a) { return { '@type': 'City', name: a }; }),
+    priceRange: CONFIG.priceRange || '$$',
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: String(CONFIG.rating || '5.0'),
+      reviewCount: String(parseInt(CONFIG.reviewCount) || 10)
+    },
+    ...(sameAs.length ? { sameAs: sameAs } : {})
+  };
+
+  // 2 - FAQPage (from CONFIG.faq if present)
+  var schemas = [localBusiness];
+  if (CONFIG.faq && CONFIG.faq.length) {
+    schemas.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: CONFIG.faq.map(function(item) {
+        return {
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: { '@type': 'Answer', text: item.a }
+        };
+      })
+    });
+  }
+
+  // 3 - Service items (from CONFIG.services if present)
+  if (CONFIG.services && CONFIG.services.length) {
+    CONFIG.services.forEach(function(svc) {
+      schemas.push({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: svc.name,
+        serviceType: svc.name,
+        provider: {
+          '@type': CONFIG.schemaType || 'LocalBusiness',
+          name: CONFIG.businessName
+        },
+        areaServed: {
+          '@type': 'City',
+          name: CONFIG.city || '',
+          containedInPlace: { '@type': 'State', name: CONFIG.state || '' }
+        }
+      });
+    });
+  }
+
+  // Inject all schemas into <head>
+  schemas.forEach(function(schema) {
+    var s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(schema);
+    document.head.appendChild(s);
+  });
+})();
+</script>

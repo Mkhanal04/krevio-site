@@ -1,0 +1,74 @@
+{
+  "businessName": "Lone Star Plumbing",
+  "businessNameShort": "Lone Star",
+  "businessNameSub": "Plumbing",
+  "businessType": "plumbing",
+  "schemaType": "Plumber",
+  "emoji": "\ud83d\udeb0",
+  "tagline": "Licensed plumbers serving Celina, Prosper & North DFW",
+  "defaultTheme": "light",
+
+  "phone": "(469) 555-0789",
+  "phoneRaw": "4695550789",
+  "address": "100 N Preston Rd",
+  "city": "Celina",
+  "state": "TX",
+  "zip": "75009",
+  "areasServed": ["Celina", "Prosper", "McKinney", "Allen", "Frisco", "Anna"],
+  "hours": "24/7 Emergency",
+  "priceRange": "$$",
+
+  "rating": "4.9",
+  "reviewCount": "150+",
+
+  "hasEmergencyBooking": true,
+  "hasDispatch": true,
+  "hasCustomerCRM": true,
+  "hasMoney": true,
+  "hasReceipts": true,
+  "hasGallery": true,
+  "hasLanguageToggle": true,
+  "hasVoice": true,
+
+  "chatEndpoint": "/api/demos/chat",
+  "ttsEndpoint": "/api/demos/tts",
+  "lang": "en-US",
+
+  "googleBusinessUrl": "",
+  "facebookUrl": "",
+  "yelpUrl": "",
+
+  "quickReplies": [
+    { "emoji": "\ud83d\udea8", "label": "I have a plumbing emergency" },
+    { "emoji": "\ud83d\udcb0", "label": "How much does a repair cost?" },
+    { "emoji": "\ud83d\udcc5", "label": "Schedule a service call" },
+    { "emoji": "\ud83d\udca7", "label": "I need a water heater" }
+  ],
+
+  "services": [
+    { "name": "Emergency Repairs", "icon": "\ud83d\udea8", "price": "Call for pricing" },
+    { "name": "Drain Cleaning", "icon": "\ud83e\udea0", "price": "From $99" },
+    { "name": "Water Heaters", "icon": "\ud83d\udd25", "price": "From $800 installed" },
+    { "name": "Repiping", "icon": "\ud83d\udd27", "price": "From $2,500" },
+    { "name": "Fixture Installation", "icon": "\ud83c\udfe0", "price": "From $150" },
+    { "name": "Sewer Line Service", "icon": "\ud83d\udca7", "price": "From $200" }
+  ],
+
+  "faq": [
+    { "q": "How fast can you get here for emergencies?", "a": "We aim for under 60 minutes for emergencies in our service area. Call (469) 555-0789 for immediate dispatch." },
+    { "q": "How much does a water heater cost?", "a": "Tank water heaters: $800-$1,500 installed. Tankless: $2,000-$3,500 installed. We offer same-day replacement." },
+    { "q": "Do you offer financing?", "a": "Yes. We partner with GreenSky for 0% financing on jobs over $1,000. Apply at your appointment." },
+    { "q": "Are you licensed?", "a": "Yes. Licensed Texas Master Plumber, fully insured with liability coverage. (Demo site.)" },
+    { "q": "What areas do you serve?", "a": "Celina, Prosper, McKinney, Allen, Frisco, Anna, and surrounding North DFW communities." }
+  ],
+
+  "pageTitle": "Lone Star Plumbing \u2014 Celina TX | 24/7 Emergency Plumber",
+  "metaDescription": "Celina's trusted 24/7 plumber. Emergency repairs, drain cleaning, water heaters, repiping, and more. 4.9\u2605 from 150+ reviews. Licensed & insured.",
+  "heroHeadline": "Plumbing problems don't wait. Neither do we.",
+  "heroSubtitle": "24/7 emergency service, honest pricing, and licensed plumbers serving Celina, Prosper & North DFW.",
+  "heroPills": ["\ud83d\udea8 24/7 Emergency", "\u2705 Licensed & Insured", "\u26a1 60-Min Response"],
+  "formHeadingEn": "Request Service",
+  "formHeadingEs": "Solicitar Servicio",
+  "formButtonEn": "Request Service",
+  "formButtonEs": "Solicitar Servicio"
+}

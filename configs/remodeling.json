@@ -1,0 +1,70 @@
+{
+  "businessName": "Crestview Remodeling",
+  "businessNameShort": "Crestview",
+  "businessNameSub": "Remodeling",
+  "businessType": "remodeling",
+  "schemaType": "HomeAndConstructionBusiness",
+  "emoji": "\ud83c\udfd7\ufe0f",
+  "tagline": "Kitchen, bathroom & outdoor living remodels \u2014 Celina, Frisco & North DFW",
+  "defaultTheme": "light",
+
+  "phone": "(469) 555-0412",
+  "phoneRaw": "4695550412",
+  "address": "2901 Doe Run Dr",
+  "city": "Celina",
+  "state": "TX",
+  "zip": "75009",
+  "areasServed": ["Celina", "Frisco", "Prosper", "McKinney", "Allen"],
+  "hours": "Mon-Sat 8AM-5PM",
+  "priceRange": "$$",
+
+  "rating": "4.8",
+  "reviewCount": "62+",
+
+  "hasEmergencyBooking": false,
+  "hasDispatch": false,
+  "hasCustomerCRM": false,
+  "hasMoney": true,
+  "hasReceipts": false,
+  "hasGallery": true,
+  "hasLanguageToggle": false,
+  "hasVoice": true,
+
+  "chatEndpoint": "/api/demos/chat",
+  "ttsEndpoint": "/api/demos/tts",
+  "lang": "en-US",
+
+  "quickReplies": [
+    { "emoji": "\ud83c\udf73", "label": "I want a kitchen remodel" },
+    { "emoji": "\ud83d\udec1", "label": "I need a bathroom renovation" },
+    { "emoji": "\ud83d\udcb0", "label": "What does a remodel cost?" },
+    { "emoji": "\ud83d\udcc5", "label": "Schedule a free consultation" }
+  ],
+
+  "services": [
+    { "name": "Kitchen Remodel", "icon": "\ud83c\udf73", "price": "From $18,000" },
+    { "name": "Bathroom Remodel", "icon": "\ud83d\udebf", "price": "From $8,500" },
+    { "name": "Outdoor Living", "icon": "\ud83c\udf3f", "price": "From $12,000" },
+    { "name": "Flooring", "icon": "\ud83e\udeb5", "price": "From $3,500" },
+    { "name": "Interior Painting", "icon": "\ud83c\udfa8", "price": "From $1,200" },
+    { "name": "Room Additions", "icon": "\ud83c\udfe0", "price": "Custom Quote" }
+  ],
+
+  "faq": [
+    { "q": "How long does a kitchen remodel take?", "a": "A full kitchen remodel typically takes 4-8 weeks depending on scope. A cosmetic refresh (countertops, backsplash, paint) is usually 1-2 weeks. We'll give you a detailed timeline in your free estimate." },
+    { "q": "Do you offer free estimates?", "a": "Yes. We offer free in-home estimates for all projects. Carlos or Miguel will visit your home, measure the space, discuss your vision, and provide a written Good/Better/Best estimate within 48 hours." },
+    { "q": "Are you licensed and insured in Texas?", "a": "Yes. Crestview Remodeling is licensed in Texas and carries general liability insurance plus workers' comp. We pull all required permits. (Demo site.)" },
+    { "q": "What areas do you serve?", "a": "We primarily serve Celina, Frisco, Prosper, McKinney, and Allen. We also take select projects in Gunter, Anna, and Sherman for larger renovations." },
+    { "q": "Do you offer payment plans or financing?", "a": "Yes. We offer 12-month same-as-cash financing through GreenSky for projects over $5,000. We also accept milestone billing." }
+  ],
+
+  "pageTitle": "Crestview Remodeling \u2014 Celina TX | Kitchen, Bathroom & Outdoor Living",
+  "metaDescription": "Crestview Remodeling in Celina, TX. Kitchen, bathroom, and outdoor living remodels. AI-powered scheduling and customer management. Powered by Krevio.",
+  "heroHeadline": "Your dream space, built right.",
+  "heroSubtitle": "Kitchen, bathroom & outdoor living remodels in Celina, Frisco & North DFW. Free estimates, honest pricing.",
+  "heroPills": ["\ud83c\udf73 Kitchen Experts", "\ud83d\udec1 Bathroom Remodels", "\ud83c\udf1f 4.8\u2605 Reviews"],
+  "formHeadingEn": "Request a Free Estimate",
+  "formHeadingEs": "Solicitar Cotizaci\u00f3n Gratis",
+  "formButtonEn": "Request Free Estimate",
+  "formButtonEs": "Solicitar Cotizaci\u00f3n Gratis"
+}
