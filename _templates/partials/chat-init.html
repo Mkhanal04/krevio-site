@@ -1,4 +1,41 @@
 <!-- Chat widget CONFIG + init -->
 <script>
 const CONFIG = {{CONFIG_JSON}};
+
+// Umami helper — defined here so any partial loaded after this one
+// (lead-form, per-demo content) can call it without re-checking. Events
+// fired before the deferred umami script loads are queued, then flushed.
+// Polling is bounded so we don't leak an interval if umami never loads
+// (e.g. analytics unconfigured — ANALYTICS_TAG is a comment).
+(function() {
+  const queue = [];
+  let scheduled = false;
+  const flush = () => { while (queue.length) umami.track(...queue.shift()); };
+  window.krevioTrack = function(event, data) {
+    if (typeof umami !== 'undefined') { umami.track(event, data); return; }
+    queue.push([event, data]);
+    if (scheduled) return;
+    scheduled = true;
+    let tries = 20; // 20 * 250ms = 5s
+    const t = setInterval(() => {
+      if (typeof umami !== 'undefined') { clearInterval(t); flush(); }
+      else if (--tries <= 0) { clearInterval(t); queue.length = 0; }
+    }, 250);
+  };
+})();
+
+// Track first chat send per session. The chat fetch happens in per-demo
+// sendChat() (or the widget's voice flow), not in this file — so we wrap
+// fetch once, restore the original after the first match to avoid wrapping
+// every subsequent call for the page lifetime.
+(function() {
+  const orig = window.fetch;
+  window.fetch = function(url) {
+    if (typeof url === 'string' && url.includes('/api/demos/chat')) {
+      window.fetch = orig;
+      window.krevioTrack('chat-started', { business: CONFIG.businessType });
+    }
+    return orig.apply(this, arguments);
+  };
+})();
 </script>

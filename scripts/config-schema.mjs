@@ -31,57 +31,26 @@ const VALID_BUSINESS_TYPES = [
 
 const VALID_LANGS = ['en', 'en-US', 'es', 'es-US'];
 
-// ── Field definitions ───────────────────────────────────────────
+// ── Validator helpers ───────────────────────────────────────────
+// All return null on pass, an error message string on fail.
 
+const nonEmptyString = (msg) => (v) => (typeof v === 'string' && v.trim().length === 0) ? msg : null;
+const apiPath = (msg) => (v) => (typeof v === 'string' && !v.startsWith('/api/')) ? msg : null;
+const oneOf = (label, allowed) => (v) =>
+  (typeof v === 'string' && !allowed.includes(v)) ? `${label} "${v}" is not one of: ${allowed.join(', ')}` : null;
+
+// ── Field definitions ───────────────────────────────────────────
 // type: 'email' and 'array' are pseudo-types — typeof won't match,
 // so the validator skips the typeof check and relies on the custom
 // validate function for those fields instead.
+
 const CORE_FIELDS = [
-  {
-    key: 'businessName',
-    type: 'string',
-    required: true,
-    validate: (v) => (typeof v === 'string' && v.trim().length === 0)
-      ? 'businessName must be non-empty'
-      : null,
-  },
-  {
-    key: 'businessType',
-    type: 'string',
-    required: true,
-    validate: (v) => (typeof v === 'string' && !VALID_BUSINESS_TYPES.includes(v))
-      ? `businessType "${v}" is not one of: ${VALID_BUSINESS_TYPES.join(', ')}`
-      : null,
-  },
-  {
-    key: 'chatEndpoint',
-    type: 'string',
-    required: true,
-    validate: (v) => (typeof v === 'string' && !v.startsWith('/api/'))
-      ? 'chatEndpoint must start with /api/'
-      : null,
-  },
-  {
-    key: 'ttsEndpoint',
-    type: 'string',
-    required: true,
-    validate: (v) => (typeof v === 'string' && !v.startsWith('/api/'))
-      ? 'ttsEndpoint must start with /api/'
-      : null,
-  },
-  {
-    key: 'lang',
-    type: 'string',
-    required: true,
-    validate: (v) => (typeof v === 'string' && !VALID_LANGS.includes(v))
-      ? `lang "${v}" is not one of: ${VALID_LANGS.join(', ')}`
-      : null,
-  },
-  {
-    key: 'hasVoice',
-    type: 'boolean',
-    required: true,
-  },
+  { key: 'businessName',  type: 'string',  required: true, validate: nonEmptyString('businessName must be non-empty') },
+  { key: 'businessType',  type: 'string',  required: true, validate: oneOf('businessType', VALID_BUSINESS_TYPES) },
+  { key: 'chatEndpoint',  type: 'string',  required: true, validate: apiPath('chatEndpoint must start with /api/') },
+  { key: 'ttsEndpoint',   type: 'string',  required: true, validate: apiPath('ttsEndpoint must start with /api/') },
+  { key: 'lang',          type: 'string',  required: true, validate: oneOf('lang', VALID_LANGS) },
+  { key: 'hasVoice',      type: 'boolean', required: true },
 ];
 
 const PROD_FIELDS = [
@@ -91,35 +60,13 @@ const PROD_FIELDS = [
     prodOnly: true,
     validate: (v) => {
       if (typeof v !== 'string') return 'notifyEmail must be a string';
-      // Simple email check — not RFC-exhaustive, but catches obvious problems
       const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return emailRe.test(v) ? null : `notifyEmail "${v}" is not a valid email format`;
     },
   },
-  {
-    key: 'notifyEndpoint',
-    type: 'string',
-    prodOnly: true,
-    validate: (v) => (typeof v === 'string' && !v.startsWith('/api/'))
-      ? 'notifyEndpoint must start with /api/'
-      : null,
-  },
-  {
-    key: 'phone',
-    type: 'string',
-    prodOnly: true,
-    validate: (v) => (typeof v === 'string' && v.trim().length === 0)
-      ? 'phone must be non-empty'
-      : null,
-  },
-  {
-    key: 'serviceArea',
-    type: 'string',
-    prodOnly: true,
-    validate: (v) => (typeof v === 'string' && v.trim().length === 0)
-      ? 'serviceArea must be non-empty'
-      : null,
-  },
+  { key: 'notifyEndpoint', type: 'string', prodOnly: true, validate: apiPath('notifyEndpoint must start with /api/') },
+  { key: 'phone',          type: 'string', prodOnly: true, validate: nonEmptyString('phone must be non-empty') },
+  { key: 'serviceArea',    type: 'string', prodOnly: true, validate: nonEmptyString('serviceArea must be non-empty') },
 ];
 
 const OPTIONAL_FIELDS = [
@@ -180,9 +127,7 @@ const OPTIONAL_FIELDS = [
     key: 'businessHours',
     type: 'string',
     optional: true,
-    validate: (v) => (typeof v === 'string' && v.trim().length === 0)
-      ? 'businessHours must be non-empty if present'
-      : null,
+    validate: nonEmptyString('businessHours must be non-empty if present'),
   },
 ];
 
@@ -205,50 +150,34 @@ export function validateConfig(config, { isDemoOnly = false } = {}) {
 
   const fieldCount = Object.keys(config).length;
 
-  // ── Check core required fields ──
-  for (const field of CORE_FIELDS) {
-    if (!(field.key in config)) {
-      errors.push(`missing required field: ${field.key}`);
-      continue;
+  function checkField(field, val) {
+    // Pseudo-types ('email', 'array') skip the typeof gate and rely on the
+    // field's own validate() to type-check.
+    if (field.type !== 'email' && field.type !== 'array' && typeof val !== field.type) {
+      errors.push(`${field.key} must be type "${field.type}", got "${typeof val}"`);
+      return;
     }
-    const val = config[field.key];
-    // Type check (skip for email — handled by validate fn)
-    if (field.type !== 'email' && field.type !== 'array') {
-      if (typeof val !== field.type) {
-        errors.push(`${field.key} must be type "${field.type}", got "${typeof val}"`);
-        continue;
-      }
-    }
-    // Custom validation
     if (field.validate) {
       const err = field.validate(val);
       if (err) errors.push(err);
     }
   }
 
-  // ── Check production-only fields (skip for demos) ──
+  for (const field of CORE_FIELDS) {
+    if (!(field.key in config)) { errors.push(`missing required field: ${field.key}`); continue; }
+    checkField(field, config[field.key]);
+  }
+
   if (!isDemoOnly) {
     for (const field of PROD_FIELDS) {
-      if (!(field.key in config)) {
-        errors.push(`missing production field: ${field.key}`);
-        continue;
-      }
-      const val = config[field.key];
-      if (field.validate) {
-        const err = field.validate(val);
-        if (err) errors.push(err);
-      }
+      if (!(field.key in config)) { errors.push(`missing production field: ${field.key}`); continue; }
+      checkField(field, config[field.key]);
     }
   }
 
-  // ── Check optional fields (only if present) ──
   for (const field of OPTIONAL_FIELDS) {
     if (!(field.key in config)) continue;
-    const val = config[field.key];
-    if (field.validate) {
-      const err = field.validate(val);
-      if (err) errors.push(err);
-    }
+    checkField(field, config[field.key]);
   }
 
   return { valid: errors.length === 0, errors, fieldCount };
