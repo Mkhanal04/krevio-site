@@ -61,15 +61,6 @@
       "rules": {
         "scale-unlimited/declaration-strict-value": null
       }
-    },
-    {
-      "files": ["../css/chat-widget.css"],
-      "rules": {
-        "color-no-hex": null,
-        "color-named": null,
-        "scale-unlimited/declaration-strict-value": null,
-        "font-family-name-quotes": null
-      }
     }
   ]
 }
