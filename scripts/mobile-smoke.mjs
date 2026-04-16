@@ -44,6 +44,7 @@ const DEMOS = [
   { slug: 'demos/landscaping/',name: 'Landscaping' },
   { slug: 'demos/remodeling/', name: 'Remodeling' },
   { slug: 'demos/realestate/', name: 'Real Estate' },
+  { slug: 'demos/general-contractor/', name: 'General Contractor' },
 ];
 
 const failures = [];

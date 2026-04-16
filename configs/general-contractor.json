@@ -1,0 +1,76 @@
+{
+  "businessName": "John's Complete Home Services",
+  "businessNameShort": "John's",
+  "businessNameSub": "Complete Home Services",
+  "businessType": "general-contractor",
+  "schemaType": "HomeAndConstructionBusiness",
+  "emoji": "\ud83d\udd28",
+  "tagline": "Plumbing, landscaping, fencing, electrical, epoxy, power washing \u2014 Celina & North DFW",
+  "defaultTheme": "dark",
+
+  "phone": "(214) 555-0000",
+  "phoneRaw": "2145550000",
+  "address": "Celina, TX",
+  "city": "Celina",
+  "state": "TX",
+  "zip": "75009",
+  "areasServed": ["Celina", "Prosper", "Frisco", "McKinney", "Anna", "Gunter"],
+  "hours": "Mon-Sat 7AM-7PM",
+  "priceRange": "$$",
+
+  "rating": "5.0",
+  "reviewCount": "New",
+
+  "notifyEmail": "mikhanal@ttu.edu",
+  "notifyEndpoint": "/api/demos/inquiry",
+
+  "hasEmergencyBooking": false,
+  "hasDispatch": false,
+  "hasCustomerCRM": false,
+  "hasMoney": false,
+  "hasReceipts": false,
+  "hasGallery": true,
+  "hasLanguageToggle": true,
+  "hasVoice": true,
+
+  "chatEndpoint": "/api/demos/chat",
+  "ttsEndpoint": "/api/demos/tts",
+  "lang": "en-US",
+
+  "quickReplies": [
+    { "emoji": "\ud83d\udd27", "label": "What services do you offer?" },
+    { "emoji": "\ud83d\udcb0", "label": "How much does it cost?" },
+    { "emoji": "\ud83d\udcc5", "label": "Can you come out this week?" },
+    { "emoji": "\ud83d\udcde", "label": "I'd like to get a quote" }
+  ],
+
+  "services": [
+    { "name": "Plumbing", "icon": "\ud83d\udd27", "price": "Call for quote" },
+    { "name": "Handyman & Repairs", "icon": "\ud83d\udee0\ufe0f", "price": "Call for quote" },
+    { "name": "Landscaping & Hauling", "icon": "\ud83c\udf33", "price": "Call for quote" },
+    { "name": "Fencing", "icon": "\ud83e\ude93", "price": "Call for quote" },
+    { "name": "Electrical Work", "icon": "\u26a1", "price": "Call for quote" },
+    { "name": "Epoxy Flooring", "icon": "\u2728", "price": "Call for quote" },
+    { "name": "Power Washing", "icon": "\ud83d\udca6", "price": "Call for quote" }
+  ],
+
+  "faq": [
+    { "q": "What services do you offer?", "a": "I handle a wide range of home services: plumbing, handyman repairs, landscaping and hauling, fencing, electrical work, epoxy flooring, and power washing. If you need something done around your house, ask \u2014 there's a good chance I can take care of it or point you to someone who can." },
+    { "q": "What areas do you serve?", "a": "I'm based in Celina, TX and serve the North DFW area \u2014 including Celina, Prosper, Frisco, McKinney, Anna, and Gunter. For larger jobs I'll travel further into Collin County." },
+    { "q": "Do you give free estimates?", "a": "Yes. I give a free, honest estimate before any work starts. For small repair jobs I can usually quote right over the phone or a text with a photo. For bigger projects (fencing, landscaping, epoxy floors) I'll come out in person at no charge." },
+    { "q": "How quickly can you come out?", "a": "For emergencies (leaks, electrical issues) I try to be there the same day. For planned work, usually within a few days. Weekends are often available for non-urgent jobs. Text or call for current availability." },
+    { "q": "Are you licensed and insured?", "a": "Yes. I carry general liability insurance and I'm licensed for the trades I perform under Texas law. I'll happily share my insurance certificate and any required licenses before starting work on your property." },
+    { "q": "Do you do emergency calls?", "a": "For plumbing and electrical emergencies in Celina and close-by areas, yes \u2014 call me directly. For after-hours or weekend emergencies, there may be a small dispatch fee." },
+    { "q": "How do I get a quote?", "a": "Easiest: text or call with a description of what you need and a photo if you have one. You can also fill out the request form on this page and I'll get back to you the same day. Or chat with the AI assistant on this site \u2014 it can take down the details and send them to me." }
+  ],
+
+  "pageTitle": "John's Complete Home Services \u2014 Celina TX | Plumbing, Handyman, Landscaping, Fencing, Electrical, Epoxy, Power Washing",
+  "metaDescription": "Local handyman and home services in Celina, TX. Plumbing, landscaping, fencing, electrical, epoxy flooring, and power washing across North DFW. Free estimates, honest pricing, local owner.",
+  "heroHeadline": "Everything around your house \u2014 done right.",
+  "heroSubtitle": "One call for plumbing, landscaping, fencing, electrical, epoxy, and more. Local owner. Honest prices. Celina & North DFW.",
+  "heroPills": ["\u2705 Licensed & Insured", "\ud83c\udfe0 Celina-Based", "\u23f0 Same-Week Service"],
+  "formHeadingEn": "Request a Free Estimate",
+  "formHeadingEs": "Solicitar Cotizaci\u00f3n Gratis",
+  "formButtonEn": "Request Free Estimate",
+  "formButtonEs": "Solicitar Cotizaci\u00f3n Gratis"
+}

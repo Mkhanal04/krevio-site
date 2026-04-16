@@ -137,6 +137,31 @@
 }
 
 /* ─────────────────────────────────────────────
+   GENERAL CONTRACTOR — Slate
+   Trusted local craftsman, multi-trade, approachable.
+   Distinct from plumbing (teal), landscaping (emerald),
+   hvac (indigo), realestate (purple), remodeling (orange).
+   ───────────────────────────────────────────── */
+[data-industry="general-contractor"][data-theme="light"] {
+  --accent:          #475569;
+  --accentS:         rgba(71,85,105,0.06);
+  --accentB:         rgba(71,85,105,0.14);
+  --hero-bg:         linear-gradient(135deg, #0F172A 0%, #1E293B 60%, #334155 100%);
+  --sidebar-active:      #475569;
+  --sidebar-active-text: #FFFFFF;
+  --btn-primary-color:   #0F172A;
+}
+[data-industry="general-contractor"][data-theme="dark"] {
+  --accent:          #94A3B8;
+  --accentS:         rgba(148,163,184,0.08);
+  --accentB:         rgba(148,163,184,0.18);
+  --hero-bg:         linear-gradient(135deg, #020617 0%, #0F172A 60%, #1E293B 100%);
+  --sidebar-active:      #94A3B8;
+  --sidebar-active-text: #09090B;
+  --btn-primary-color:   #020617;
+}
+
+/* ─────────────────────────────────────────────
    KREVIO LANDING PAGE
    The brand itself. Yellow accent, no industry context.
    ───────────────────────────────────────────── */
