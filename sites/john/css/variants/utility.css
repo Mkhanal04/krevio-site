@@ -1,0 +1,10 @@
+/* All selectors must be prefixed with [data-variant-id="utility"] */
+
+/* Utility variant shell — Frontend Eng (Utility) fills this in.
+   Reminder from meeting-minutes-2026-04-17.md §C7:
+   - Every selector in this file MUST begin with [data-variant-id="utility"].
+   - Do NOT introduce layout-primitive classes (.container, .section, .row,
+     .grid, .col-*) at any scope. Define Utility's layout primitives here
+     with the variant prefix, or use element selectors.
+   - Spacing tokens are per-variant: define --ut-space-* here, not in chrome.
+*/

@@ -39,7 +39,9 @@
   "ignoreFiles": [
     "../demos/**/*.html",
     "../configs/*.content.html",
-    "../index.html"
+    "../index.html",
+    "../sites/john/css/variants/_test-bad.css.skip",
+    "../sites/john/css/variants/*.skip"
   ],
   "overrides": [
     {
@@ -60,6 +62,50 @@
       "files": ["../css/dashboard.css"],
       "rules": {
         "scale-unlimited/declaration-strict-value": null
+      }
+    },
+    {
+      "files": ["../sites/john/css/chrome.css"],
+      "rules": {
+        "selector-disallowed-list": [
+          ["/\\.container(\\W|$)/", "/\\.section(\\W|$)/", "/\\.row(\\W|$)/", "/\\.grid(\\W|$)/", "/\\.col-[\\w-]+/"],
+          {
+            "message": "Banned layout-primitive class in chrome.css (meeting-minutes §C7). Each variant owns its own layout primitives inside its variant-scoped stylesheet."
+          }
+        ]
+      }
+    },
+    {
+      "files": ["../sites/john/css/variants/editorial.css"],
+      "rules": {
+        "selector-disallowed-list": [
+          ["/^(?!\\[data-variant-id=[\"']editorial[\"']\\]).+/"],
+          {
+            "message": "Every selector in css/variants/editorial.css must start with [data-variant-id=\"editorial\"] (architecture-spec §1 / meeting-minutes §C7)."
+          }
+        ]
+      }
+    },
+    {
+      "files": ["../sites/john/css/variants/utility.css"],
+      "rules": {
+        "selector-disallowed-list": [
+          ["/^(?!\\[data-variant-id=[\"']utility[\"']\\]).+/"],
+          {
+            "message": "Every selector in css/variants/utility.css must start with [data-variant-id=\"utility\"] (architecture-spec §1 / meeting-minutes §C7)."
+          }
+        ]
+      }
+    },
+    {
+      "files": ["../sites/john/css/variants/warmth.css"],
+      "rules": {
+        "selector-disallowed-list": [
+          ["/^(?!\\[data-variant-id=[\"']warmth[\"']\\]).+/"],
+          {
+            "message": "Every selector in css/variants/warmth.css must start with [data-variant-id=\"warmth\"] (architecture-spec §1 / meeting-minutes §C7)."
+          }
+        ]
       }
     }
   ]

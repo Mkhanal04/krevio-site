@@ -1,0 +1,76 @@
+{
+  "currency": "USD",
+  "market": "Frisco/Little Elm/Celina DFW",
+  "last_updated": "2026-04-17",
+  "disclaimer": "Final pricing confirmed on-site. Ranges reflect typical DFW residential work.",
+  "minimum_callout": { "fee": 125, "covers": "first hour on-site" },
+  "services": {
+    "plumbing": {
+      "display_name": "Plumbing",
+      "tiers": {
+        "basic":    { "range": [125, 225], "examples": ["replace faucet", "clear single drain", "install garbage disposal"], "typical_hours": 1 },
+        "standard": { "range": [250, 600], "examples": ["replace water heater (tank)", "toilet install with rough-in check", "repair slab leak (access cut already made)"], "typical_hours": "2-4" },
+        "complex":  { "range": [600, 2200], "examples": ["repipe section of house", "tankless water heater install", "main line replacement (short run)"], "requires_onsite": true }
+      },
+      "qualifiers": ["What fixture or line?", "Is it leaking now or intermittent?", "Single-story or two-story?"]
+    },
+    "handyman": {
+      "display_name": "Handyman & general repairs",
+      "tiers": {
+        "basic":    { "range": [125, 250], "examples": ["mount TV", "hang shelves", "patch drywall (small)", "replace door hardware"], "typical_hours": 1 },
+        "standard": { "range": [275, 650], "examples": ["install ceiling fan with existing wiring", "build shelving unit", "hang interior door"], "typical_hours": "2-4" },
+        "complex":  { "range": [700, 1800], "examples": ["multi-room drywall repair", "install exterior door (new frame)", "punch list before closing"], "requires_onsite": true }
+      },
+      "qualifiers": ["What's the job?", "How many spots?", "Do you have the materials or should we bring them?"]
+    },
+    "landscaping_dirtwork": {
+      "display_name": "Dirt work, leveling, hauling",
+      "per_cubic_yard": [80, 120],
+      "tiers": {
+        "basic":    { "range": [200, 500], "examples": ["regrade small yard spot", "haul off one pickup load"], "typical_hours": "1-2" },
+        "standard": { "range": [550, 1400], "examples": ["level backyard for sod prep", "french drain (short run)"], "typical_hours": "half-day" },
+        "complex":  { "range": [1500, 5000], "examples": ["full yard regrade with drainage", "retaining wall prep"], "requires_onsite": true }
+      },
+      "qualifiers": ["How big is the area (feet on each side)?", "Is the yard accessible to a small tractor or only wheelbarrow?", "Hauling off or spreading on-site?"]
+    },
+    "fencing": {
+      "display_name": "Fence install & repair",
+      "per_linear_foot": { "wood_6ft_privacy": [28, 42], "chain_link_4ft": [14, 22] },
+      "tiers": {
+        "basic":    { "range": [175, 500], "examples": ["replace 2-3 fence boards", "reset one leaning post"], "typical_hours": "1-2" },
+        "standard": { "range": [600, 2500], "examples": ["repair 20ft section", "replace gate and hardware"], "typical_hours": "half to full day" },
+        "complex":  { "range": [2800, 9500], "examples": ["new 100-200ft fence install"], "requires_onsite": true }
+      },
+      "qualifiers": ["How many linear feet?", "Wood privacy, chain-link, or something else?", "Is the old fence still there or already gone?"]
+    },
+    "power_washing": {
+      "display_name": "Power washing",
+      "tiers": {
+        "basic":    { "range": [175, 350], "examples": ["driveway", "small patio"], "typical_hours": "1-2" },
+        "standard": { "range": [375, 750], "examples": ["house siding single-story", "driveway + walkway combo"], "typical_hours": "half-day" },
+        "complex":  { "range": [800, 1800], "examples": ["two-story house + driveway + deck"], "requires_onsite": true }
+      },
+      "qualifiers": ["House, driveway, deck, fence — which?", "One story or two?", "Any heavy staining or just buildup?"]
+    },
+    "electrical": {
+      "display_name": "Electrical (residential, non-panel)",
+      "tiers": {
+        "basic":    { "range": [150, 300], "examples": ["swap outlet or switch", "install dimmer"], "typical_hours": 1 },
+        "standard": { "range": [325, 750], "examples": ["add outlet on existing circuit", "install ceiling fan (new box)"], "typical_hours": "2-3" },
+        "complex":  { "range": [800, 2500], "examples": ["run new circuit to detached garage", "whole-room rewire"], "requires_onsite": true }
+      },
+      "qualifiers": ["What are we adding, replacing, or troubleshooting?", "Is the circuit already there or new?"],
+      "disclaimers": ["Panel work and permits referred to a licensed electrician."]
+    },
+    "epoxy_flooring": {
+      "display_name": "Epoxy flooring",
+      "per_square_foot": [4, 9],
+      "tiers": {
+        "basic":    { "range": [800, 1800], "examples": ["single-car garage, solid color"], "typical_hours": "1 day prep + cure" },
+        "standard": { "range": [1900, 3800], "examples": ["two-car garage, flake finish"], "typical_hours": "1-2 days" },
+        "complex":  { "range": [4000, 9000], "examples": ["three-car or shop with grinding + multi-coat"], "requires_onsite": true }
+      },
+      "qualifiers": ["Square footage?", "Plain color or flake/metallic finish?", "Condition of existing slab?"]
+    }
+  }
+}

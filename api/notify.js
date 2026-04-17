@@ -15,8 +15,17 @@ import { applyCors, isAllowedOrigin, getClientIp, rateLimit, bodyTooLarge } from
 // Per-tenant notification routing. Add a customer here when they onboard.
 // TD-016: graduate this to a real config source (env-backed or DB) when
 // the second tenant arrives.
+//
+// Shape change 2026-04-17: values may be strings (just a `to:` address,
+// legacy shape) or objects ({ to, subjectPrefix }). The handler normalizes
+// below. New tenants should use the object form so subject prefixes are
+// explicit per decisions-2026-04-17.
 const TENANT_NOTIFY = {
   krevio: 'krevio@krevio.net',
+  'johns-site': {
+    to: 'krevio@krevio.net',       // Milan forwards to John manually — decisions §B3
+    subjectPrefix: "[John's Site]"
+  }
 };
 const DEFAULT_TENANT = 'krevio';
 
@@ -133,10 +142,18 @@ export default async function handler(req, res) {
   // Tenant routing — defaults to 'krevio' for backwards compat with existing
   // callers (api/inquiry.js, demos/plumbing/index.html). Customer #1 sets
   // CONFIG.tenantId in their demo.
+  //
+  // Values can be a string (legacy: just a `to:` address) or an object
+  // ({ to, subjectPrefix }). Normalize to { to, subjectPrefix }.
   const tenantId = sanitize(body.tenantId) || DEFAULT_TENANT;
-  const notifyTo = TENANT_NOTIFY[tenantId];
-  if (!notifyTo) {
+  const tenantCfg = TENANT_NOTIFY[tenantId];
+  if (!tenantCfg) {
     return silentReject(res, `unknown tenantId: ${tenantId}`);
+  }
+  const notifyTo = typeof tenantCfg === 'string' ? tenantCfg : tenantCfg.to;
+  const subjectPrefix = typeof tenantCfg === 'string' ? '' : (tenantCfg.subjectPrefix || '');
+  if (!notifyTo) {
+    return silentReject(res, `tenant ${tenantId} has no notify address`);
   }
 
   const data = {
@@ -164,8 +181,10 @@ export default async function handler(req, res) {
   }
 
   const meta = TYPE_META[data.type] || TYPE_META.inquiry;
-  const subjectPrefix = data.type === 'emergency' ? 'Emergency' : meta.typeLabel;
-  const subject = `New ${subjectPrefix} — ${data.businessName || 'krevio.net'}`;
+  const typeLabel = data.type === 'emergency' ? 'Emergency' : meta.typeLabel;
+  const subject = subjectPrefix
+    ? `${subjectPrefix} New ${typeLabel} — ${data.businessName || 'krevio.net'}`
+    : `New ${typeLabel} — ${data.businessName || 'krevio.net'}`;
 
   try {
     const emailRes = await fetch('https://api.resend.com/emails', {

@@ -1,0 +1,10 @@
+/* All selectors must be prefixed with [data-variant-id="editorial"] */
+
+/* Editorial variant shell — Frontend Eng (Editorial) fills this in.
+   Reminder from meeting-minutes-2026-04-17.md §C7:
+   - Every selector in this file MUST begin with [data-variant-id="editorial"].
+   - Do NOT introduce layout-primitive classes (.container, .section, .row,
+     .grid, .col-*) at any scope. Define Editorial's layout primitives here
+     with the variant prefix, or use element selectors.
+   - Spacing tokens are per-variant: define --ed-space-* here, not in chrome.
+*/

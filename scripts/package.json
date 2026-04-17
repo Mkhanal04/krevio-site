@@ -8,8 +8,8 @@
     "build:dry": "node build-site.mjs --dry-run --all",
     "smoke": "node mobile-smoke.mjs",
     "smoke:prod": "node mobile-smoke.mjs https://krevio.net",
-    "lint": "stylelint '../css/**/*.css' '../demos/**/*.html' '../index.html'",
-    "lint:fix": "stylelint '../css/**/*.css' '../demos/**/*.html' '../index.html' --fix",
+    "lint": "stylelint '../css/**/*.css' '../sites/**/*.css' '../demos/**/*.html' '../index.html'",
+    "lint:fix": "stylelint '../css/**/*.css' '../sites/**/*.css' '../demos/**/*.html' '../index.html' --fix",
     "validate": "node validate-config.mjs",
     "setup": "cp ../hooks/pre-commit ../.git/hooks/pre-commit && chmod +x ../.git/hooks/pre-commit"
   },

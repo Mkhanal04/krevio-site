@@ -1,0 +1,11 @@
+/* All selectors must be prefixed with [data-variant-id="warmth"] */
+
+/* Warmth variant shell — Frontend Eng (Warmth) fills this in.
+   Reminder from meeting-minutes-2026-04-17.md §C7:
+   - Every selector in this file MUST begin with [data-variant-id="warmth"].
+   - Do NOT introduce layout-primitive classes (.container, .section, .row,
+     .grid, .col-*) at any scope. Define Warmth's layout primitives here
+     with the variant prefix, or use element selectors.
+   - Spacing tokens are per-variant: define --wc-space-* here, not in chrome.
+   - Gallery = slider with rope handle + first-person captions (meeting §C2).
+*/

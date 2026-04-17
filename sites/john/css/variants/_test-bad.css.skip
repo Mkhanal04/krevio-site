@@ -1,0 +1,18 @@
+/* All selectors must be prefixed with [data-variant-id="editorial"] */
+
+/* This file is deliberately named *.css.skip so stylelint does NOT lint it by
+   default. To verify the variant-scope rule is working, CI (or a dev locally)
+   can rename this file to _test-bad.css and re-run stylelint — the lint must
+   fail on the unscoped selector below.
+
+   Example of a violating selector: */
+
+/*
+.hero {
+  color: red;
+}
+
+.container {
+  padding: 16px;
+}
+*/

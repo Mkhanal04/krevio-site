@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>John's General Contracting — Frisco, TX (Preview)</title>
+  <meta name="description" content="Preview of John's General Contracting site. Single URL, three design directions — Editorial, Utility, and Warmth.">
+  <meta name="robots" content="noindex,nofollow">
+
+  <!-- Shared tokens + chrome -->
+  <link rel="stylesheet" href="/css/krevio-tokens.css">
+  <link rel="stylesheet" href="./css/chrome.css">
+
+  <!-- Per-variant stylesheets (each file's selectors must be scoped with [data-variant-id="..."]) -->
+  <link rel="stylesheet" href="./css/variants/editorial.css">
+  <link rel="stylesheet" href="./css/variants/utility.css">
+  <link rel="stylesheet" href="./css/variants/warmth.css">
+
+  <!-- Schema.org LocalBusiness (placeholder content — swap via CONFIG post-onboarding) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "John's General Contracting",
+    "description": "Plumbing, handyman, landscaping, fencing, power washing, electrical, and epoxy flooring — serving Frisco, Little Elm, Celina and surrounding DFW.",
+    "telephone": "(214) 555-0134",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3102 Main St",
+      "addressLocality": "Frisco",
+      "addressRegion": "TX",
+      "postalCode": "75034",
+      "addressCountry": "US"
+    },
+    "areaServed": ["Frisco", "Little Elm", "Celina", "DFW"],
+    "priceRange": "$$"
+  }
+  </script>
+</head>
+<body>
+
+  <div id="app" data-variant="editorial" data-theme="light">
+
+    <!-- Shared chrome: logo, variant tabs, theme toggle -->
+    <header class="chrome" role="banner">
+      <div class="chrome-inner">
+        <a class="chrome-logo" href="./" aria-label="John's General Contracting — home">
+          <span class="chrome-logo-mark" aria-hidden="true">JGC</span>
+          <span class="chrome-logo-text">John's General Contracting</span>
+        </a>
+
+        <nav class="chrome-tabs" role="tablist" aria-label="Design variants">
+          <button class="chrome-tab" role="tab" id="tab-editorial" aria-controls="variant-editorial" aria-selected="true" data-variant-target="editorial" type="button">Editorial</button>
+          <button class="chrome-tab" role="tab" id="tab-utility" aria-controls="variant-utility" aria-selected="false" tabindex="-1" data-variant-target="utility" type="button">Utility</button>
+          <button class="chrome-tab" role="tab" id="tab-warmth" aria-controls="variant-warmth" aria-selected="false" tabindex="-1" data-variant-target="warmth" type="button">Warmth</button>
+        </nav>
+
+        <button class="chrome-theme-toggle" type="button" aria-pressed="false" aria-label="Toggle dark mode" data-theme-toggle>
+          <span class="chrome-theme-icon" data-theme-icon aria-hidden="true">Light</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Preview banner strip (shared, neutral styling) -->
+    <div class="chrome-preview-banner" role="status">
+      PREVIEW — placeholder contact info. Real phone, address, and photos arrive post-onboarding.
+    </div>
+
+    <main class="chrome-main">
+
+      <!-- ======== EDITORIAL variant ======== -->
+      <section class="variant" id="variant-editorial" data-variant-id="editorial" role="tabpanel" aria-labelledby="tab-editorial" aria-hidden="false">
+        <h1>Editorial variant — placeholder headline</h1>
+        <main>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Editorial direction shell. Frontend Eng (Editorial) owns this subtree and writes all selectors prefixed with <code>[data-variant-id="editorial"]</code>.</p>
+
+          <section class="services">
+            <h2>Services</h2>
+            <p>Lorem ipsum — services placeholder for Editorial variant. Numbered reveal list goes here per design-spec.</p>
+          </section>
+
+          <section class="about">
+            <h2>About John</h2>
+            <p>Lorem ipsum — about block placeholder. Editorial uses a 4:5 full-bleed portrait slot with italic caption.</p>
+          </section>
+
+          <section class="gallery">
+            <h2>Before &amp; after</h2>
+            <p>Lorem ipsum — gallery placeholder. Editorial: drag-to-reveal slider.</p>
+          </section>
+
+          <section class="contact">
+            <h2>Get an estimate</h2>
+            <p>Lorem ipsum — contact form placeholder. Form posts to <code>/api/notify</code> with <code>tenantId=johns-site</code>.</p>
+          </section>
+
+          <section class="faq">
+            <h2>Questions</h2>
+            <p>Lorem ipsum — FAQ placeholder.</p>
+          </section>
+        </main>
+        <footer>
+          <p>Lorem ipsum — Editorial footer placeholder. &copy; John's General Contracting.</p>
+        </footer>
+      </section>
+
+      <!-- ======== UTILITY variant ======== -->
+      <section class="variant" id="variant-utility" data-variant-id="utility" role="tabpanel" aria-labelledby="tab-utility" aria-hidden="true" hidden>
+        <h1>Utility variant — placeholder headline</h1>
+        <main>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utility direction shell. Frontend Eng (Utility) owns this subtree.</p>
+
+          <section class="services">
+            <h2>Services</h2>
+            <p>Lorem ipsum — services placeholder. Utility: tight 4-up card grid at 1200px.</p>
+          </section>
+
+          <section class="about">
+            <h2>About John</h2>
+            <p>Lorem ipsum — about block placeholder. Utility: small square avatar with mono metadata row.</p>
+          </section>
+
+          <section class="gallery">
+            <h2>Before &amp; after</h2>
+            <p>Lorem ipsum — gallery placeholder. Utility: 2-column grid with mono-type chips.</p>
+          </section>
+
+          <section class="contact">
+            <h2>Request estimate</h2>
+            <p>Lorem ipsum — contact form placeholder.</p>
+          </section>
+
+          <section class="faq">
+            <h2>Questions</h2>
+            <p>Lorem ipsum — FAQ placeholder.</p>
+          </section>
+        </main>
+        <footer>
+          <p>Lorem ipsum — Utility footer placeholder. &copy; John's General Contracting.</p>
+        </footer>
+      </section>
+
+      <!-- ======== WARMTH variant ======== -->
+      <section class="variant" id="variant-warmth" data-variant-id="warmth" role="tabpanel" aria-labelledby="tab-warmth" aria-hidden="true" hidden>
+        <h1>Warmth variant — placeholder headline</h1>
+        <main>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Warmth direction shell. Frontend Eng (Warmth) owns this subtree.</p>
+
+          <section class="services">
+            <h2>Services</h2>
+            <p>Lorem ipsum — services placeholder. Warmth: paper-textured cards with subtle rotation.</p>
+          </section>
+
+          <section class="about">
+            <h2>About John</h2>
+            <p>Lorem ipsum — about block placeholder. Warmth: scrapbook-style inset portrait.</p>
+          </section>
+
+          <section class="gallery">
+            <h2>Before &amp; after</h2>
+            <p>Lorem ipsum — gallery placeholder. Warmth: slider with rope handle + first-person captions (per meeting C2).</p>
+          </section>
+
+          <section class="contact">
+            <h2>Say hi</h2>
+            <p>Lorem ipsum — contact form placeholder.</p>
+          </section>
+
+          <section class="faq">
+            <h2>Questions</h2>
+            <p>Lorem ipsum — FAQ placeholder.</p>
+          </section>
+        </main>
+        <footer>
+          <p>Lorem ipsum — Warmth footer placeholder. &copy; John's General Contracting.</p>
+        </footer>
+      </section>
+
+    </main>
+
+    <footer class="chrome-footer" role="contentinfo">
+      <p>Preview build. <a href="https://krevio.net">krevio.net</a></p>
+    </footer>
+
+  </div>
+
+  <!-- App orchestration: variant switch, theme toggle, localStorage, URL sync -->
+  <script type="module" src="./js/app.js"></script>
+
+</body>
+</html>

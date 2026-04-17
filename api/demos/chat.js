@@ -15,6 +15,7 @@
 
 import { applyCors, isAllowedOrigin, getClientIp, rateLimit, bodyTooLarge } from '../_lib/limits.js';
 import { buildPrompt } from '../_lib/prompt-builder.js';
+import { buildJohnsSitePersona } from '../_lib/johns-site-rate-card.js';
 
 const RAW_PERSONAS = {
   landscaping: `You are a friendly and helpful AI assistant for Green Valley Landscaping, a professional lawn care and landscaping company serving McKinney, TX and surrounding Collin County areas (Frisco, Allen, Plano).
@@ -328,6 +329,20 @@ const SYSTEM_PROMPTS = Object.fromEntries(
   ])
 );
 
+// johns-site is not in RAW_PERSONAS because its persona depends on
+// CONFIG.chat.estimationMode ('ranges' vs 'qualifiers-only') — resolved
+// per-request below. Rate-card source of truth lives at
+// sites/john/rate-card.json; the JS module mirrors it for inlining at
+// module load (avoids per-request disk read inside a serverless function).
+// Keep the two in sync when numbers change.
+function buildJohnsSitePrompt(estimationMode) {
+  const mode = estimationMode === 'qualifiers-only' ? 'qualifiers-only' : 'ranges';
+  return buildPrompt({
+    isDemo: false,
+    persona: buildJohnsSitePersona({ mode })
+  });
+}
+
 export default async function handler(req, res) {
   const origin = applyCors(req, res);
 
@@ -368,13 +383,20 @@ export default async function handler(req, res) {
     return res.status(200).json({ fallback: true, reason: 'API key not configured' });
   }
 
-  const { message, history = [], businessContext = {}, businessType = 'landscaping' } = req.body || {};
+  const { message, history = [], businessContext = {}, businessType = 'landscaping', estimationMode } = req.body || {};
   if (!message || typeof message !== 'string') {
     return res.status(400).json({ error: 'Missing message' });
   }
 
-  // Select system prompt by businessType; fall back to landscaping for safety
-  const systemPrompt = SYSTEM_PROMPTS[businessType] || SYSTEM_PROMPTS.landscaping;
+  // Select system prompt by businessType. `johns-site` is special — its
+  // prompt depends on CONFIG.chat.estimationMode (sent as `estimationMode`).
+  // Fall back to landscaping for unknown types.
+  let systemPrompt;
+  if (businessType === 'johns-site') {
+    systemPrompt = buildJohnsSitePrompt(estimationMode);
+  } else {
+    systemPrompt = SYSTEM_PROMPTS[businessType] || SYSTEM_PROMPTS.landscaping;
+  }
 
   // Cap history to last 10 turns and each turn to 2000 chars. Without this
   // a long-running tab ships ever-larger context on every reply — input
