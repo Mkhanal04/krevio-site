@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="./css/variants/utility.css">
   <link rel="stylesheet" href="./css/variants/warmth.css">
 
+  <!-- Utility typography (Inter + JetBrains Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <!-- Schema.org LocalBusiness (placeholder content — swap via CONFIG post-onboarding) -->
   <script type="application/ld+json">
   {
@@ -475,38 +480,422 @@
 
       <!-- ======== UTILITY variant ======== -->
       <section class="variant" id="variant-utility" data-variant-id="utility" role="tabpanel" aria-labelledby="tab-utility" aria-hidden="true" hidden>
-        <h1>Utility variant — placeholder headline</h1>
-        <main>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Utility direction shell. Frontend Eng (Utility) owns this subtree.</p>
 
-          <section class="services">
-            <h2>Services</h2>
-            <p>Lorem ipsum — services placeholder. Utility: tight 4-up card grid at 1200px.</p>
-          </section>
+        <!-- Sticky click-to-call (mobile only, CSS-gated) -->
+        <a class="ut-sticky-call" href="tel:+12145550134" aria-label="Call John at (214) 555-0134">
+          <span class="ut-sticky-call-label" data-placeholder="phone">(214) 555-0134</span>
+          <span class="ut-sticky-call-cta">Call</span>
+        </a>
 
-          <section class="about">
-            <h2>About John</h2>
-            <p>Lorem ipsum — about block placeholder. Utility: small square avatar with mono metadata row.</p>
-          </section>
+        <!-- Hero: two-column at >=900px -->
+        <section class="ut-hero" id="ut-top">
+          <div class="ut-hero-inner">
+            <div class="ut-hero-copy">
+              <p class="ut-eyebrow">01 / FRISCO, TX &middot; LOCAL &amp; REACHABLE</p>
+              <h1 class="ut-hero-headline">Your neighborhood handyman in Frisco.</h1>
+              <p class="ut-hero-subhead">Plumbing, electrical, fencing, landscaping, power washing, epoxy floors, and just about any repair you&rsquo;ve been putting off. Serving Frisco, Little Elm, Celina, and the surrounding DFW area.</p>
+              <div class="ut-hero-ctas">
+                <a class="ut-btn ut-btn-primary" href="#ut-contact">Get a free estimate</a>
+                <a class="ut-btn ut-btn-ghost" href="tel:+12145550134">Call (214) 555-0134</a>
+              </div>
+            </div>
 
-          <section class="gallery">
-            <h2>Before &amp; after</h2>
-            <p>Lorem ipsum — gallery placeholder. Utility: 2-column grid with mono-type chips.</p>
-          </section>
+            <!-- Diagnostic panel mock — the Utility identity move -->
+            <aside class="ut-diag" aria-label="Sample service estimate">
+              <header class="ut-diag-head">
+                <span class="ut-diag-dot" aria-hidden="true"></span>
+                <span class="ut-diag-label">SERVICE_ESTIMATE.json</span>
+                <span class="ut-diag-status">READY</span>
+              </header>
+              <dl class="ut-diag-rows">
+                <div class="ut-diag-row">
+                  <dt>SERVICE</dt><dd>power_washing</dd>
+                </div>
+                <div class="ut-diag-row">
+                  <dt>SCOPE</dt><dd>driveway + 1-story siding</dd>
+                </div>
+                <div class="ut-diag-row">
+                  <dt>TIER</dt><dd>standard</dd>
+                </div>
+                <div class="ut-diag-row">
+                  <dt>RANGE</dt><dd>$375 &ndash; $750</dd>
+                </div>
+                <div class="ut-diag-row">
+                  <dt>ETA</dt><dd>half-day on-site</dd>
+                </div>
+                <div class="ut-diag-row">
+                  <dt>LOCATION</dt><dd>Frisco, TX</dd>
+                </div>
+              </dl>
+              <footer class="ut-diag-foot">
+                <span>// ballpark &mdash; John confirms on-site</span>
+              </footer>
+            </aside>
+          </div>
+        </section>
 
-          <section class="contact">
-            <h2>Request estimate</h2>
-            <p>Lorem ipsum — contact form placeholder.</p>
-          </section>
+        <!-- Services: 4-up card grid at 1200px -->
+        <section class="ut-services" id="ut-services">
+          <header class="ut-section-head">
+            <p class="ut-eyebrow">02 / SERVICES</p>
+            <h2 class="ut-h1">Seven trades, one call.</h2>
+          </header>
 
-          <section class="faq">
-            <h2>Questions</h2>
-            <p>Lorem ipsum — FAQ placeholder.</p>
-          </section>
-        </main>
-        <footer>
-          <p>Lorem ipsum — Utility footer placeholder. &copy; John's General Contracting.</p>
+          <div class="ut-card-grid">
+            <a class="ut-card" href="#ut-svc-plumbing">
+              <p class="ut-card-slug">PLUMBING/01</p>
+              <h3 class="ut-card-title">Plumbing</h3>
+              <p class="ut-card-line">Leaks, clogs, water heaters &mdash; call before it gets worse.</p>
+              <p class="ut-card-meta">From $125 &middot; Same-day eligible</p>
+            </a>
+            <a class="ut-card" href="#ut-svc-handyman">
+              <p class="ut-card-slug">HANDYMAN/02</p>
+              <h3 class="ut-card-title">Handyman</h3>
+              <p class="ut-card-line">The honey-do list knocked out in one trip.</p>
+              <p class="ut-card-meta">From $125 &middot; 1-hr minimum</p>
+            </a>
+            <a class="ut-card" href="#ut-svc-landscaping">
+              <p class="ut-card-slug">LANDSCAPING/03</p>
+              <h3 class="ut-card-title">Landscaping</h3>
+              <p class="ut-card-line">Leveling, hauling, sod prep, storm cleanup &mdash; bring a shovel.</p>
+              <p class="ut-card-meta">From $200 &middot; Same-week</p>
+            </a>
+            <a class="ut-card" href="#ut-svc-fencing">
+              <p class="ut-card-slug">FENCING/04</p>
+              <h3 class="ut-card-title">Fencing</h3>
+              <p class="ut-card-line">Wood fence installs, storm repairs, gate and post fixes.</p>
+              <p class="ut-card-meta">From $175 &middot; On-site quote</p>
+            </a>
+            <a class="ut-card" href="#ut-svc-power">
+              <p class="ut-card-slug">POWER_WASHING/05</p>
+              <h3 class="ut-card-title">Power washing</h3>
+              <p class="ut-card-line">Drives, patios, siding &mdash; one wash and the house wakes up.</p>
+              <p class="ut-card-meta">From $175 &middot; Same-day eligible</p>
+            </a>
+            <a class="ut-card" href="#ut-svc-electrical">
+              <p class="ut-card-slug">ELECTRICAL/06</p>
+              <h3 class="ut-card-title">Electrical</h3>
+              <p class="ut-card-line">Outlets, switches, ceiling fans, dead circuits &mdash; the basics.</p>
+              <p class="ut-card-meta">From $150 &middot; Non-panel work</p>
+            </a>
+            <a class="ut-card" href="#ut-svc-epoxy">
+              <p class="ut-card-slug">EPOXY/07</p>
+              <h3 class="ut-card-title">Epoxy flooring</h3>
+              <p class="ut-card-line">Garage and shop floors. Clean prep, solid coats, no corners cut.</p>
+              <p class="ut-card-meta">From $800 &middot; 1&ndash;2 day turnaround</p>
+            </a>
+          </div>
+
+          <!-- Anchor paragraphs (tap-to-reveal targets) -->
+          <div class="ut-anchor-list">
+            <article class="ut-anchor" id="ut-svc-plumbing">
+              <p class="ut-anchor-slug">PLUMBING/01</p>
+              <h3 class="ut-anchor-title">Plumbing</h3>
+              <p>Leaks, clogs, water heaters, garbage disposals, broken fixtures. If it drips, backs up, or won&rsquo;t turn on, call me first before it gets worse. Same-day service when I can.</p>
+            </article>
+            <article class="ut-anchor" id="ut-svc-handyman">
+              <p class="ut-anchor-slug">HANDYMAN/02</p>
+              <h3 class="ut-anchor-title">Handyman</h3>
+              <p>Honey-do lists, drywall patches, door and trim work, mounting TVs, assembling whatever IKEA broke your spirit. If it&rsquo;s small and annoying, I&rsquo;ll knock it out in one trip.</p>
+            </article>
+            <article class="ut-anchor" id="ut-svc-landscaping">
+              <p class="ut-anchor-slug">LANDSCAPING/03</p>
+              <h3 class="ut-anchor-title">Landscaping</h3>
+              <p>Yard leveling, dirt hauling, sod prep, grading, cleanup after a storm. Not full-time lawn care &mdash; bigger one-off jobs where you need someone with a truck and a shovel that works.</p>
+            </article>
+            <article class="ut-anchor" id="ut-svc-fencing">
+              <p class="ut-anchor-slug">FENCING/04</p>
+              <h3 class="ut-anchor-title">Fencing</h3>
+              <p>Wood fence installs, repairs after storms, gate fixes, post replacements. I&rsquo;ll come look at what you&rsquo;ve got and tell you straight whether it needs a patch or a rebuild.</p>
+            </article>
+            <article class="ut-anchor" id="ut-svc-power">
+              <p class="ut-anchor-slug">POWER_WASHING/05</p>
+              <h3 class="ut-anchor-title">Power washing</h3>
+              <p>Driveways, patios, siding, fences, deck boards. North Texas dust and mildew build up fast. One wash and your house looks like you painted it.</p>
+            </article>
+            <article class="ut-anchor" id="ut-svc-electrical">
+              <p class="ut-anchor-slug">ELECTRICAL/06</p>
+              <h3 class="ut-anchor-title">Electrical</h3>
+              <p>Outlets, switches, fixture swaps, ceiling fans, troubleshooting dead circuits. For anything bigger I&rsquo;ll be straight with you about when it&rsquo;s time to bring in someone who does panel work full-time.</p>
+            </article>
+            <article class="ut-anchor" id="ut-svc-epoxy">
+              <p class="ut-anchor-slug">EPOXY/07</p>
+              <h3 class="ut-anchor-title">Epoxy flooring</h3>
+              <p>Garage floors, shop floors, patios. Clean prep, solid coats, no cut corners. Looks great, holds up to trucks and tools, easy to wipe down.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- About -->
+        <section class="ut-about" id="ut-about">
+          <header class="ut-section-head">
+            <p class="ut-eyebrow">03 / WHO</p>
+            <h2 class="ut-h1">Meet John.</h2>
+          </header>
+          <div class="ut-about-inner">
+            <div class="ut-about-id">
+              <div class="ut-avatar" aria-hidden="true">
+                <img src="./assets/portrait-john.jpg" alt="" onerror="this.style.display='none'">
+                <span class="ut-avatar-fallback">JGC</span>
+              </div>
+              <p class="ut-about-meta" data-placeholder="est-year">JOHN / FRISCO / EST 20XX</p>
+            </div>
+            <div class="ut-about-bio">
+              <p>I&rsquo;m John. I live and work right here in the DFW area and I&rsquo;ve been doing hands-on trade work for <span data-placeholder="years">several years</span>. What started as plumbing turned into &ldquo;hey John, can you also look at my fence / my yard / my garage floor?&rdquo; &mdash; and here we are. I run a small crew and we cover most of what a homeowner needs without you having to call five different guys.</p>
+              <p>I keep it simple. I show up when I say I will, I tell you what the job actually costs before I start, and I don&rsquo;t leave a mess behind. A lot of my work comes from neighbors telling other neighbors, and I&rsquo;d rather keep it that way than cut corners to chase the next job. If I can&rsquo;t do something right, I&rsquo;ll tell you and point you to someone who can.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Service area -->
+        <section class="ut-area" id="ut-area">
+          <header class="ut-section-head">
+            <p class="ut-eyebrow">04 / AREA</p>
+            <h2 class="ut-h1">Where we work.</h2>
+          </header>
+          <div class="ut-area-body">
+            <p>I work across Frisco, Little Elm, Celina, and most of the surrounding DFW area &mdash; Prosper, McKinney, The Colony, Plano on a case-by-case basis. If you&rsquo;re a little outside that ring, call anyway. If I can&rsquo;t make it work I&rsquo;ll tell you up front and probably know somebody nearby who can.</p>
+            <ul class="ut-area-tags">
+              <li>FRISCO</li>
+              <li>LITTLE_ELM</li>
+              <li>CELINA</li>
+              <li>PROSPER</li>
+              <li>MCKINNEY</li>
+              <li>THE_COLONY</li>
+              <li>PLANO</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Gallery: 2-grid, per design-spec -->
+        <section class="ut-gallery" id="ut-gallery">
+          <header class="ut-section-head">
+            <p class="ut-eyebrow">05 / BEFORE &middot; AFTER</p>
+            <h2 class="ut-h1">Recent jobs.</h2>
+            <p class="ut-section-note">Sample imagery &mdash; real John photos coming soon.</p>
+          </header>
+
+          <div class="ut-gal-list">
+            <article class="ut-gal-item">
+              <div class="ut-gal-grid">
+                <figure class="ut-gal-fig">
+                  <span class="ut-gal-tag">BEFORE</span>
+                  <img src="./assets/gallery/01-before.jpg" alt="Driveway before power washing" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                </figure>
+                <figure class="ut-gal-fig">
+                  <span class="ut-gal-tag">AFTER</span>
+                  <img src="./assets/gallery/01-after.jpg" alt="Driveway after power washing" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                </figure>
+              </div>
+              <p class="ut-gal-cap">POWER_WASHING/001 &middot; CELINA &middot; 2H</p>
+            </article>
+
+            <article class="ut-gal-item">
+              <div class="ut-gal-grid">
+                <figure class="ut-gal-fig">
+                  <span class="ut-gal-tag">BEFORE</span>
+                  <img src="./assets/gallery/02-before.jpg" alt="Fence before rebuild" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                </figure>
+                <figure class="ut-gal-fig">
+                  <span class="ut-gal-tag">AFTER</span>
+                  <img src="./assets/gallery/02-after.jpg" alt="Fence after rebuild" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                </figure>
+              </div>
+              <p class="ut-gal-cap">FENCING/002 &middot; FRISCO &middot; 1.5D</p>
+            </article>
+
+            <article class="ut-gal-item">
+              <div class="ut-gal-grid">
+                <figure class="ut-gal-fig">
+                  <span class="ut-gal-tag">BEFORE</span>
+                  <img src="./assets/gallery/03-before.jpg" alt="Garage before epoxy coat" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                </figure>
+                <figure class="ut-gal-fig">
+                  <span class="ut-gal-tag">AFTER</span>
+                  <img src="./assets/gallery/03-after.jpg" alt="Garage after epoxy coat" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                </figure>
+              </div>
+              <p class="ut-gal-cap">EPOXY/003 &middot; LITTLE_ELM &middot; 2D</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="ut-faq" id="ut-faq">
+          <header class="ut-section-head">
+            <p class="ut-eyebrow">06 / FAQ</p>
+            <h2 class="ut-h1">Common questions.</h2>
+          </header>
+
+          <div class="ut-faq-list" role="list">
+            <details class="ut-faq-item" role="listitem">
+              <summary>How much do you charge?</summary>
+              <p>It depends on the job, but I don&rsquo;t play games with pricing. After you tell me what&rsquo;s going on I can usually give you a ballpark on the phone or through the chat on this site, and then a firm number once I see it in person. No surprise line items at the end.</p>
+            </details>
+            <details class="ut-faq-item" role="listitem">
+              <summary>Can you come out today?</summary>
+              <p>A lot of the time, yes &mdash; especially for leaks, no-power situations, or anything that&rsquo;s actively getting worse. Call or text and I&rsquo;ll tell you straight whether I can make it today or first thing tomorrow.</p>
+            </details>
+            <details class="ut-faq-item" role="listitem">
+              <summary>Do you handle emergencies after hours?</summary>
+              <p>For active leaks, no-hot-water, or anything that&rsquo;s about to damage your house, call me and we&rsquo;ll figure it out. I don&rsquo;t promise 24/7 but I pick up most of the time.</p>
+            </details>
+            <details class="ut-faq-item" role="listitem">
+              <summary>How does the estimate work?</summary>
+              <p>Tell me what&rsquo;s going on. I&rsquo;ll either quote it over the phone if it&rsquo;s straightforward, or swing by and take a look. On-site estimates are free for most jobs in my service area.</p>
+            </details>
+            <details class="ut-faq-item" role="listitem">
+              <summary>How far do you travel?</summary>
+              <p>Frisco, Little Elm, Celina, and the surrounding DFW suburbs are my main area. Farther out is possible &mdash; just ask.</p>
+            </details>
+            <details class="ut-faq-item" role="listitem">
+              <summary>How do I pay?</summary>
+              <p>Cash, check, Venmo, Zelle, and credit/debit cards. I&rsquo;ll send a clean invoice either way so you&rsquo;ve got a record.</p>
+            </details>
+            <details class="ut-faq-item" role="listitem">
+              <summary>Do you warranty your work?</summary>
+              <p>Yes. If something I fixed goes wrong because of how I fixed it, I come back and make it right. Warranty length depends on the job &mdash; I&rsquo;ll tell you before I start.</p>
+            </details>
+            <details class="ut-faq-item" role="listitem">
+              <summary>Do you handle big remodels or just small stuff?</summary>
+              <p>Mostly small-to-mid jobs &mdash; repairs, installs, one-room projects, outdoor work. For full gut remodels I&rsquo;ll point you to someone who does that full-time. No ego about it.</p>
+            </details>
+            <details class="ut-faq-item" role="listitem">
+              <summary>Do you work weekends?</summary>
+              <p>Saturdays yes, most Sundays no &mdash; that&rsquo;s family time. If it&rsquo;s an emergency, call anyway.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- Contact form -->
+        <section class="ut-contact" id="ut-contact">
+          <header class="ut-section-head">
+            <p class="ut-eyebrow">07 / REQUEST</p>
+            <h2 class="ut-h1">Get a free estimate.</h2>
+            <p class="ut-section-note">Tell me what&rsquo;s going on and I&rsquo;ll get back to you the same day.</p>
+          </header>
+
+          <form class="ut-form" data-ut-form novalidate>
+            <div class="ut-form-row">
+              <label class="ut-form-field">
+                <span class="ut-form-label">NAME</span>
+                <input type="text" name="name" required autocomplete="name" placeholder="Your name">
+              </label>
+              <label class="ut-form-field">
+                <span class="ut-form-label">PHONE</span>
+                <input type="tel" name="phone" autocomplete="tel" placeholder="(214) 555-0134">
+              </label>
+            </div>
+            <div class="ut-form-row">
+              <label class="ut-form-field">
+                <span class="ut-form-label">EMAIL</span>
+                <input type="email" name="email" autocomplete="email" placeholder="you@example.com">
+              </label>
+              <label class="ut-form-field">
+                <span class="ut-form-label">ZIP / ADDRESS</span>
+                <input type="text" name="location" placeholder="75034 or street address">
+              </label>
+            </div>
+            <label class="ut-form-field ut-form-field--full">
+              <span class="ut-form-label">WHAT DO YOU NEED?</span>
+              <textarea name="message" rows="4" required placeholder="Short description &mdash; leak, fence down, garage floor, anything."></textarea>
+            </label>
+            <label class="ut-form-field ut-form-field--full">
+              <span class="ut-form-label">HOW&rsquo;D YOU HEAR ABOUT ME? <span class="ut-form-opt">(OPTIONAL)</span></span>
+              <input type="text" name="referral" placeholder="Google, neighbor, etc.">
+            </label>
+            <p class="ut-form-error" data-form-error hidden role="alert"></p>
+            <div class="ut-form-actions">
+              <button type="submit" class="ut-btn ut-btn-primary" data-form-submit>
+                <span>Send it</span>
+              </button>
+              <span class="ut-form-note">I read every message. No spam, no resold data.</span>
+            </div>
+          </form>
+
+          <div class="ut-form-success" data-form-success hidden role="status" aria-live="polite">
+            <p class="ut-form-success-slug">STATUS / 200_OK</p>
+            <p class="ut-form-success-msg">Got it &mdash; thanks. I&rsquo;ll call or text you back today. If it&rsquo;s urgent, go ahead and call (214) 555-0134.</p>
+          </div>
+        </section>
+
+        <!-- Chat widget (Utility command-palette feel) -->
+        <div class="ut-chat" data-chat-root>
+          <button type="button" class="ut-chat-trigger" data-chat-open aria-expanded="false" aria-controls="ut-chat-panel">
+            <span class="ut-chat-trigger-prefix" aria-hidden="true">/</span>
+            <span class="ut-chat-trigger-label">Ask about pricing or scope</span>
+            <span class="ut-chat-trigger-kbd" aria-hidden="true">&#8984;K</span>
+          </button>
+
+          <div class="ut-chat-panel" id="ut-chat-panel" data-chat-panel aria-hidden="true" hidden>
+            <header class="ut-chat-head">
+              <span class="ut-chat-head-dot" aria-hidden="true"></span>
+              <span class="ut-chat-head-title">JOHN.ASSISTANT</span>
+              <button type="button" class="ut-chat-close" data-chat-close aria-label="Close chat">&times;</button>
+            </header>
+            <div class="ut-chat-log" data-chat-log role="log" aria-live="polite"></div>
+            <form class="ut-chat-form" data-chat-form>
+              <span class="ut-chat-form-prefix" aria-hidden="true">/</span>
+              <input type="text" name="message" autocomplete="off" placeholder="ask about pricing, scope, timing&hellip;" data-chat-input aria-label="Ask a question">
+              <button type="submit" class="ut-chat-send" aria-label="Send">
+                <span aria-hidden="true">&#8629;</span>
+              </button>
+            </form>
+            <p class="ut-chat-foot">Ballpark ranges based on typical Frisco/Celina jobs. John confirms final pricing on-site.</p>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="ut-footer">
+          <div class="ut-footer-inner">
+            <div class="ut-footer-col">
+              <p class="ut-footer-slug">BRAND</p>
+              <p class="ut-footer-brand" data-placeholder="business-name">John&rsquo;s General Contracting</p>
+              <p class="ut-footer-tagline">Frisco handyman &amp; general contracting</p>
+            </div>
+            <div class="ut-footer-col">
+              <p class="ut-footer-slug">CONTACT</p>
+              <p><a href="tel:+12145550134" data-placeholder="phone">(214) 555-0134</a></p>
+              <p data-placeholder="address">3102 Main St, Frisco, TX 75034</p>
+            </div>
+            <div class="ut-footer-col">
+              <p class="ut-footer-slug">HOURS</p>
+              <p>Mon&ndash;Sat &middot; 7a&ndash;7p</p>
+              <p>Sun &middot; Closed</p>
+            </div>
+            <div class="ut-footer-col">
+              <p class="ut-footer-slug">AREA</p>
+              <p>Frisco &middot; Little Elm</p>
+              <p>Celina &middot; DFW</p>
+            </div>
+          </div>
+          <div class="ut-footer-strip">
+            <span class="ut-footer-dot" aria-hidden="true"></span>
+            <span>ALL SYSTEMS OPERATIONAL</span>
+            <span class="ut-footer-sep" aria-hidden="true">&middot;</span>
+            <span>&copy; <span data-placeholder="year">2026</span> <span data-placeholder="business-name">John&rsquo;s General Contracting</span></span>
+          </div>
         </footer>
+
+        <!-- Utility module loader. Self-contained; mounts when variant is
+             active and unmounts when another variant takes over. Lives
+             inside the Utility section so Frontend Eng (Utility) owns it
+             without editing shared app.js. -->
+        <script type="module">
+          import { mount, unmount } from './js/variants/utility.js';
+          const root = document.querySelector('[data-variant-id="utility"]');
+          const app = document.getElementById('app');
+          if (root && app) {
+            let mounted = false;
+            const isActive = () => app.dataset.variant === 'utility';
+            const sync = () => {
+              if (isActive() && !mounted) { mount(root); mounted = true; }
+              else if (!isActive() && mounted) { unmount(root); mounted = false; }
+            };
+            sync();
+            new MutationObserver(sync).observe(app, { attributes: true, attributeFilter: ['data-variant'] });
+          }
+        </script>
       </section>
 
       <!-- ======== WARMTH variant ======== -->
