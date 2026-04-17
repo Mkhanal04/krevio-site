@@ -1,0 +1,120 @@
+{
+  "version": "0.1.0",
+  "generated": "2026-04-17",
+  "notes": "Two-track placeholder asset map for John's prototype. Track A (current) = Unsplash hotlinks, ship-ready. Track B (midjourney_prompt) = v6+ prompts Milan runs later; swap the 'current' URL to the generated file path once rendered. Every slot carries placeholder: true so Frontend Eng can render a SAMPLE badge.",
+  "contract": {
+    "placeholder_flag": "When placeholder is true, Frontend Eng renders a small 'SAMPLE' corner badge on the rendered <img> via the data-placeholder attribute contract.",
+    "swap_flow": "To replace an Unsplash placeholder with a Midjourney-generated image: (1) save the generated file into sites/john/assets/ or sites/john/assets/gallery/, (2) change the slot's 'current' value to the local path, (3) flip 'placeholder' to false if the image is final, (4) clear 'attribution' if the image is no longer Unsplash-sourced.",
+    "sizing": "Unsplash hotlinks use ?w=1600&q=80&auto=format&fit=crop. Hero slots are landscape; portrait is 4:5; gallery pairs are landscape 3:2 for coherent before/after comparison."
+  },
+  "slots": {
+    "hero-editorial": {
+      "current": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80&auto=format&fit=crop",
+      "attribution": "Photo by Jeriden Villegas on Unsplash",
+      "midjourney_prompt": "Editorial wide-shot portrait of a North Texas contractor's weathered hands resting on a clean workbench at golden hour, warm window light raking across a single wrench and a leather work glove, shallow depth of field, muted earth tones with deep blacks, shot on medium format film, magazine cover composition with generous negative space on the right for a serif headline overlay, no faces, no logos, photojournalism aesthetic --ar 16:9 --style raw --stylize 250 --v 6",
+      "alt": "Placeholder editorial hero image — contractor's hands and tools in warm window light",
+      "placeholder": true,
+      "variant": "editorial",
+      "aspect": "16:9"
+    },
+    "hero-utility": {
+      "current": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80&auto=format&fit=crop",
+      "attribution": "Photo by Danist Soh on Unsplash",
+      "midjourney_prompt": "Clean utilitarian product-catalog style photograph of a neatly organized contractor tool wall on a white pegboard, hammers drills tape measures arranged on a precise grid, cool neutral light, no humans, no branding, flat frontal composition, soft shadow separation, subtle electric-blue accent on one tool handle, minimal Linear/Vercel/Raycast marketing aesthetic, precise and technical --ar 16:9 --style raw --stylize 150 --v 6",
+      "alt": "Placeholder utility hero image — organized contractor tool wall on neutral background",
+      "placeholder": true,
+      "variant": "utility",
+      "aspect": "16:9"
+    },
+    "hero-warmth": {
+      "current": "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=1600&q=80&auto=format&fit=crop",
+      "attribution": "Photo by Annie Gray on Unsplash",
+      "midjourney_prompt": "Warm first-person over-the-shoulder view of a craftsman's hands running a planer along a cedar board in a sun-dappled Texas workshop, terracotta and linen color palette, dust motes floating in the light, shallow depth of field, handmade and tactile mood, reminiscent of Our Place or Cometeer brand photography, no face visible, no logos, feels like a neighbor at work --ar 3:2 --style raw --stylize 300 --v 6",
+      "alt": "Placeholder warmth hero image — craftsman's hands working cedar in sun-lit workshop",
+      "placeholder": true,
+      "variant": "warmth",
+      "aspect": "3:2"
+    },
+    "portrait-john": {
+      "current": "https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=1200&q=80&auto=format&fit=crop",
+      "attribution": "Photo by Jesse Orrico on Unsplash",
+      "midjourney_prompt": "Silhouette portrait of a contractor in work jacket and cap standing in a dimly lit workshop doorway, face not visible, backlit by warm afternoon sun, dust in the air, muted earth palette, photojournalistic, for placeholder-portrait-use-only, no recognizable features, no logos --ar 4:5 --style raw --stylize 200 --v 6",
+      "alt": "Placeholder portrait — silhouette contractor, face hidden, pending John's real photo",
+      "placeholder": true,
+      "variant": "shared",
+      "aspect": "4:5"
+    },
+    "gallery-01-before": {
+      "current": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80&auto=format&fit=crop",
+      "attribution": "Photo by Scott Webb on Unsplash",
+      "midjourney_prompt": null,
+      "alt": "Before — stained and dirty concrete driveway with dust buildup",
+      "placeholder": true,
+      "variant": "shared",
+      "aspect": "3:2",
+      "pair": "01",
+      "state": "before",
+      "service": "power-washing"
+    },
+    "gallery-01-after": {
+      "current": "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1600&q=80&auto=format&fit=crop",
+      "attribution": "Photo by Francesca Tosolini on Unsplash",
+      "midjourney_prompt": null,
+      "alt": "After — clean pressure-washed concrete driveway",
+      "placeholder": true,
+      "variant": "shared",
+      "aspect": "3:2",
+      "pair": "01",
+      "state": "after",
+      "service": "power-washing"
+    },
+    "gallery-02-before": {
+      "current": "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1600&q=80&auto=format&fit=crop",
+      "attribution": "Photo by Lance Asper on Unsplash",
+      "midjourney_prompt": null,
+      "alt": "Before — weathered and storm-damaged wood privacy fence",
+      "placeholder": true,
+      "variant": "shared",
+      "aspect": "3:2",
+      "pair": "02",
+      "state": "before",
+      "service": "fencing"
+    },
+    "gallery-02-after": {
+      "current": "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=1600&q=80&auto=format&fit=crop",
+      "attribution": "Photo by Randy Fath on Unsplash",
+      "midjourney_prompt": null,
+      "alt": "After — freshly built cedar privacy fence with clean vertical boards",
+      "placeholder": true,
+      "variant": "shared",
+      "aspect": "3:2",
+      "pair": "02",
+      "state": "after",
+      "service": "fencing"
+    },
+    "gallery-03-before": {
+      "current": "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?w=1600&q=80&auto=format&fit=crop",
+      "attribution": "Photo by Jeff Sheldon on Unsplash",
+      "midjourney_prompt": null,
+      "alt": "Before — overgrown side yard with weeds and untended grass",
+      "placeholder": true,
+      "variant": "shared",
+      "aspect": "3:2",
+      "pair": "03",
+      "state": "before",
+      "service": "landscaping"
+    },
+    "gallery-03-after": {
+      "current": "https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=1600&q=80&auto=format&fit=crop",
+      "attribution": "Photo by Daniel Watson on Unsplash",
+      "midjourney_prompt": null,
+      "alt": "After — tidy and cleaned-up yard with even grass line",
+      "placeholder": true,
+      "variant": "shared",
+      "aspect": "3:2",
+      "pair": "03",
+      "state": "after",
+      "service": "landscaping"
+    }
+  }
+}
