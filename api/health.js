@@ -10,21 +10,16 @@ export default function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
-  const checks = {
-    google_api_key: !!process.env.GOOGLE_GENERATIVE_AI_API_KEY,
-    resend_api_key: !!process.env.RESEND_API_KEY
-  };
+  // Critical env must be present for the site to function (chat + TTS).
+  // Non-critical env (Resend) degrades gracefully — don't block healthy on it.
+  // Env var names are deliberately NOT surfaced in the response body; we signal
+  // health via HTTP status so monitors flag outages without advertising our
+  // secret inventory.
+  const healthy = !!process.env.GOOGLE_GENERATIVE_AI_API_KEY;
 
-  // GOOGLE_GENERATIVE_AI_API_KEY is critical — chat and TTS depend on it.
-  // RESEND_API_KEY is non-critical — email notifications degrade gracefully.
-  const critical = checks.google_api_key;
-  const status = critical ? 'healthy' : 'degraded';
-  const httpCode = critical ? 200 : 503;
-
-  return res.status(httpCode).json({
-    status,
+  return res.status(healthy ? 200 : 503).json({
+    status: healthy ? 'healthy' : 'degraded',
     version: '1.0.0',
-    timestamp: new Date().toISOString(),
-    checks
+    timestamp: new Date().toISOString()
   });
 }
