@@ -11,23 +11,18 @@
   <link rel="stylesheet" href="/css/krevio-tokens.css">
   <link rel="stylesheet" href="./css/chrome.css">
 
-  <!-- Fonts used by Warmth variant (DM Serif Display / Alegreya Sans / Caveat).
-       Other variants can add their own @import or <link> lines; scoping is not
-       possible for font loading, but each variant's CSS names its own face via
-       --wc-font-* / --ed-font-* / --ut-font-* tokens. -->
+  <!-- Google Fonts (shared deduped block):
+       Fraunces + Inter (Editorial) · Inter + JetBrains Mono (Utility) · DM Serif Display + Alegreya Sans + Caveat (Warmth).
+       Scoping is not possible for font loading, but each variant's CSS names its own face via
+       --ed-font-* / --ut-font-* / --wc-font-* tokens. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Alegreya+Sans:wght@400;500;700&family=Caveat:wght@500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=Caveat:wght@500;700&family=DM+Serif+Display&family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
 
   <!-- Per-variant stylesheets (each file's selectors must be scoped with [data-variant-id="..."]) -->
   <link rel="stylesheet" href="./css/variants/editorial.css">
   <link rel="stylesheet" href="./css/variants/utility.css">
   <link rel="stylesheet" href="./css/variants/warmth.css">
-
-  <!-- Utility typography (Inter + JetBrains Mono) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Schema.org LocalBusiness (placeholder content — swap via CONFIG post-onboarding) -->
   <script type="application/ld+json">
@@ -241,9 +236,9 @@
               <div class="ed-gallery" data-ed-ba>
                 <script type="application/json" data-ed-ba-pairs>
 [
-  {"caption": "Celina driveway · Power washing · March 2026", "before": "./assets/gallery/celina-driveway-before.jpg", "after": "./assets/gallery/celina-driveway-after.jpg"},
-  {"caption": "Frisco backyard · Fence rebuild · February 2026", "before": "./assets/gallery/frisco-fence-before.jpg", "after": "./assets/gallery/frisco-fence-after.jpg"},
-  {"caption": "Little Elm garage · Epoxy flake finish · January 2026", "before": "./assets/gallery/little-elm-epoxy-before.jpg", "after": "./assets/gallery/little-elm-epoxy-after.jpg"}
+  {"caption": "Celina driveway · Power washing · March 2026", "before": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80&auto=format&fit=crop", "after": "https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1600&q=80&auto=format&fit=crop"},
+  {"caption": "Frisco backyard · Fence rebuild · February 2026", "before": "https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1600&q=80&auto=format&fit=crop", "after": "https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=1600&q=80&auto=format&fit=crop"},
+  {"caption": "Little Elm garage · Epoxy flake finish · January 2026", "before": "https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?w=1600&q=80&auto=format&fit=crop", "after": "https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=1600&q=80&auto=format&fit=crop"}
 ]
                 </script>
 
@@ -445,7 +440,6 @@
                 <div class="ed-footer-col">
                   <p class="ed-footer-col-label">Contact</p>
                   <a href="tel:+12145550134" data-placeholder="phone">(214) 555-0134</a>
-                  <a href="mailto:hello@example.com">hello@example.com</a>
                   <p>3102 Main St, Frisco, TX 75034</p>
                 </div>
                 <div class="ed-footer-col">
@@ -643,7 +637,7 @@
           <div class="ut-about-inner">
             <div class="ut-about-id">
               <div class="ut-avatar" aria-hidden="true">
-                <img src="./assets/portrait-john.jpg" alt="" onerror="this.style.display='none'">
+                <img src="https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=1200&q=80&auto=format&fit=crop" alt="" data-placeholder="true" onerror="this.style.display='none'">
                 <span class="ut-avatar-fallback">JGC</span>
               </div>
               <p class="ut-about-meta" data-placeholder="est-year">JOHN / FRISCO / EST 20XX</p>
@@ -688,11 +682,11 @@
               <div class="ut-gal-grid">
                 <figure class="ut-gal-fig">
                   <span class="ut-gal-tag">BEFORE</span>
-                  <img src="./assets/gallery/01-before.jpg" alt="Driveway before power washing" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80&auto=format&fit=crop" alt="Driveway before power washing" loading="lazy" data-placeholder="true" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
                 </figure>
                 <figure class="ut-gal-fig">
                   <span class="ut-gal-tag">AFTER</span>
-                  <img src="./assets/gallery/01-after.jpg" alt="Driveway after power washing" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                  <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=1600&q=80&auto=format&fit=crop" alt="Driveway after power washing" loading="lazy" data-placeholder="true" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
                 </figure>
               </div>
               <p class="ut-gal-cap">POWER_WASHING/001 &middot; CELINA &middot; 2H</p>
@@ -702,11 +696,11 @@
               <div class="ut-gal-grid">
                 <figure class="ut-gal-fig">
                   <span class="ut-gal-tag">BEFORE</span>
-                  <img src="./assets/gallery/02-before.jpg" alt="Fence before rebuild" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                  <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=1600&q=80&auto=format&fit=crop" alt="Fence before rebuild" loading="lazy" data-placeholder="true" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
                 </figure>
                 <figure class="ut-gal-fig">
                   <span class="ut-gal-tag">AFTER</span>
-                  <img src="./assets/gallery/02-after.jpg" alt="Fence after rebuild" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                  <img src="https://images.unsplash.com/photo-1564069114553-7215e1ff1890?w=1600&q=80&auto=format&fit=crop" alt="Fence after rebuild" loading="lazy" data-placeholder="true" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
                 </figure>
               </div>
               <p class="ut-gal-cap">FENCING/002 &middot; FRISCO &middot; 1.5D</p>
@@ -716,11 +710,11 @@
               <div class="ut-gal-grid">
                 <figure class="ut-gal-fig">
                   <span class="ut-gal-tag">BEFORE</span>
-                  <img src="./assets/gallery/03-before.jpg" alt="Garage before epoxy coat" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                  <img src="https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?w=1600&q=80&auto=format&fit=crop" alt="Garage before epoxy coat" loading="lazy" data-placeholder="true" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
                 </figure>
                 <figure class="ut-gal-fig">
                   <span class="ut-gal-tag">AFTER</span>
-                  <img src="./assets/gallery/03-after.jpg" alt="Garage after epoxy coat" loading="lazy" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
+                  <img src="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=1600&q=80&auto=format&fit=crop" alt="Garage after epoxy coat" loading="lazy" data-placeholder="true" onerror="this.parentElement.classList.add('ut-gal-fig--fallback'); this.remove();">
                 </figure>
               </div>
               <p class="ut-gal-cap">EPOXY/003 &middot; LITTLE_ELM &middot; 2D</p>

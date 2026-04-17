@@ -1090,3 +1090,26 @@
     align-items: stretch;
   }
 }
+
+/* ──────────────────────────
+   Image wiring — Unsplash placeholders (per assets/manifest.json)
+   Overrides the gradient tokens with a layered linear-gradient + url()
+   so the hero and portrait show actual imagery while keeping the scrim.
+   Local image files do not exist in the repo (Track A Unsplash hotlinks).
+   Swap these URLs when Track B Midjourney renders land.
+   ────────────────────────── */
+[data-variant-id="editorial"] {
+  --ed-hero-image:
+    linear-gradient(180deg, hsl(30deg 10% 15% / 0.45) 0%, hsl(0deg 0% 7% / 0.75) 100%),
+    url("https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80&auto=format&fit=crop");
+  --ed-portrait-image:
+    linear-gradient(160deg, hsl(25deg 10% 20% / 0.25) 0%, hsl(20deg 10% 8% / 0.55) 100%),
+    url("https://images.unsplash.com/photo-1504257432389-52343af06ae3?w=1200&q=80&auto=format&fit=crop");
+}
+[data-variant-id="editorial"] .ed-hero,
+[data-variant-id="editorial"] .ed-portrait,
+[data-variant-id="editorial"] .ed-ba-before,
+[data-variant-id="editorial"] .ed-ba-after {
+  background-size: cover;
+  background-position: center;
+}
