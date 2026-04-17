@@ -50,8 +50,29 @@ const DEMOS = [
 const failures = [];
 const fail = (page, msg) => failures.push(`[${page}] ${msg}`);
 
+// Vercel preview URLs are SSO-gated. When VERCEL_AUTOMATION_BYPASS_SECRET is
+// set (CI), inject the bypass headers only for *.vercel.app targets so runs
+// against krevio.net stay unchanged. The cookie form makes the bypass stick
+// across follow-up navigations. See TD-020 + Vercel Protection Bypass docs.
+function buildExtraHeaders(url) {
+  const bypass = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
+  if (!bypass) return undefined;
+  const host = new URL(url).hostname;
+  if (!host.endsWith('.vercel.app')) return undefined;
+  return {
+    'x-vercel-protection-bypass': bypass,
+    'x-vercel-set-bypass-cookie': 'samesitenone',
+  };
+}
+
 async function checkPage(browser, url, name) {
-  const ctx = await browser.newContext({ viewport: VIEWPORT, deviceScaleFactor: 3, isMobile: true });
+  const extraHTTPHeaders = buildExtraHeaders(url);
+  const ctx = await browser.newContext({
+    viewport: VIEWPORT,
+    deviceScaleFactor: 3,
+    isMobile: true,
+    ...(extraHTTPHeaders ? { extraHTTPHeaders } : {}),
+  });
   const page = await ctx.newPage();
   let resp;
   try {
