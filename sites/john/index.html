@@ -70,38 +70,407 @@
 
       <!-- ======== EDITORIAL variant ======== -->
       <section class="variant" id="variant-editorial" data-variant-id="editorial" role="tabpanel" aria-labelledby="tab-editorial" aria-hidden="false">
-        <h1>Editorial variant — placeholder headline</h1>
-        <main>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Editorial direction shell. Frontend Eng (Editorial) owns this subtree and writes all selectors prefixed with <code>[data-variant-id="editorial"]</code>.</p>
 
-          <section class="services">
-            <h2>Services</h2>
-            <p>Lorem ipsum — services placeholder for Editorial variant. Numbered reveal list goes here per design-spec.</p>
+        <!-- Sticky mobile click-to-call -->
+        <a class="ed-sticky-call" href="tel:+12145550134" aria-label="Call John at (214) 555-0134">
+          <span class="ed-sticky-call-label" data-placeholder="phone">(214) 555-0134</span>
+          <span class="ed-sticky-call-cta">Call now</span>
+        </a>
+
+        <div class="ed-page">
+
+          <!-- Hero -->
+          <section class="ed-hero" aria-labelledby="ed-hero-h1">
+            <div class="ed-hero-inner">
+              <p class="ed-hero-eyebrow">Frisco · Little Elm · Celina</p>
+              <h1 class="ed-hero-h1" id="ed-hero-h1">One call. I handle the whole job.</h1>
+              <p class="ed-hero-sub">Plumbing, electrical, fencing, landscaping, epoxy — Frisco and the surrounding DFW area.</p>
+              <div class="ed-hero-ctas">
+                <a class="ed-btn ed-btn-primary" href="#ed-contact" data-ed-hero-cta>Get a free estimate</a>
+                <a class="ed-btn ed-btn-ghost" href="tel:+12145550134" data-placeholder="phone">Call (214) 555-0134</a>
+              </div>
+            </div>
           </section>
 
-          <section class="about">
-            <h2>About John</h2>
-            <p>Lorem ipsum — about block placeholder. Editorial uses a 4:5 full-bleed portrait slot with italic caption.</p>
+          <!-- Services — numbered reveal list -->
+          <section class="ed-section" aria-labelledby="ed-services-h2">
+            <div class="ed-wrap">
+              <p class="ed-eyebrow">01 · Services</p>
+              <h2 class="ed-section-title" id="ed-services-h2">What I take on.</h2>
+              <p class="ed-section-lead">Seven trades under one number. Tap a line to read the long version.</p>
+
+              <ul class="ed-services-list" role="list">
+                <li class="ed-service" data-ed-service data-open="false">
+                  <button class="ed-service-head" type="button" aria-expanded="false">
+                    <span class="ed-service-num">01</span>
+                    <span class="ed-service-name">Plumbing</span>
+                    <svg class="ed-service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-service-body">
+                    <div class="ed-service-body-inner">
+                      Leaks, clogs, water heaters, garbage disposals, broken fixtures. If it drips, backs up, or won't turn on, call me first before it gets worse. Same-day service when I can.
+                    </div>
+                  </div>
+                </li>
+
+                <li class="ed-service" data-ed-service data-open="false">
+                  <button class="ed-service-head" type="button" aria-expanded="false">
+                    <span class="ed-service-num">02</span>
+                    <span class="ed-service-name">Handyman</span>
+                    <svg class="ed-service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-service-body">
+                    <div class="ed-service-body-inner">
+                      Honey-do lists, drywall patches, door and trim work, mounting TVs, assembling whatever IKEA broke your spirit. If it's small and annoying, I'll knock it out in one trip.
+                    </div>
+                  </div>
+                </li>
+
+                <li class="ed-service" data-ed-service data-open="false">
+                  <button class="ed-service-head" type="button" aria-expanded="false">
+                    <span class="ed-service-num">03</span>
+                    <span class="ed-service-name">Landscaping</span>
+                    <svg class="ed-service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-service-body">
+                    <div class="ed-service-body-inner">
+                      Yard leveling, dirt hauling, sod prep, grading, cleanup after a storm. Not full-time lawn care — bigger one-off jobs where you need someone with a truck and a shovel that works.
+                    </div>
+                  </div>
+                </li>
+
+                <li class="ed-service" data-ed-service data-open="false">
+                  <button class="ed-service-head" type="button" aria-expanded="false">
+                    <span class="ed-service-num">04</span>
+                    <span class="ed-service-name">Fencing</span>
+                    <svg class="ed-service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-service-body">
+                    <div class="ed-service-body-inner">
+                      Wood fence installs, repairs after storms, gate fixes, post replacements. I'll come look at what you've got and tell you straight whether it needs a patch or a rebuild.
+                    </div>
+                  </div>
+                </li>
+
+                <li class="ed-service" data-ed-service data-open="false">
+                  <button class="ed-service-head" type="button" aria-expanded="false">
+                    <span class="ed-service-num">05</span>
+                    <span class="ed-service-name">Power washing</span>
+                    <svg class="ed-service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-service-body">
+                    <div class="ed-service-body-inner">
+                      Driveways, patios, siding, fences, deck boards. North Texas dust and mildew build up fast. One wash and your house looks like you painted it.
+                    </div>
+                  </div>
+                </li>
+
+                <li class="ed-service" data-ed-service data-open="false">
+                  <button class="ed-service-head" type="button" aria-expanded="false">
+                    <span class="ed-service-num">06</span>
+                    <span class="ed-service-name">Electrical</span>
+                    <svg class="ed-service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-service-body">
+                    <div class="ed-service-body-inner">
+                      Outlets, switches, fixture swaps, ceiling fans, troubleshooting dead circuits. For anything bigger I'll be straight with you about when it's time to bring in someone who does panel work full-time.
+                    </div>
+                  </div>
+                </li>
+
+                <li class="ed-service" data-ed-service data-open="false">
+                  <button class="ed-service-head" type="button" aria-expanded="false">
+                    <span class="ed-service-num">07</span>
+                    <span class="ed-service-name">Epoxy flooring</span>
+                    <svg class="ed-service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-service-body">
+                    <div class="ed-service-body-inner">
+                      Garage floors, shop floors, patios. Clean prep, solid coats, no cut corners. Looks great, holds up to trucks and tools, easy to wipe down.
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </section>
 
-          <section class="gallery">
-            <h2>Before &amp; after</h2>
-            <p>Lorem ipsum — gallery placeholder. Editorial: drag-to-reveal slider.</p>
+          <!-- About -->
+          <section class="ed-section" aria-labelledby="ed-about-h2">
+            <div class="ed-wrap">
+              <p class="ed-eyebrow">02 · About</p>
+              <h2 class="ed-section-title" id="ed-about-h2">Meet John.</h2>
+
+              <div class="ed-about-grid">
+                <figure class="ed-about-figure">
+                  <div class="ed-portrait" role="img" aria-label="Portrait of John in his Frisco shop"></div>
+                  <figcaption class="ed-portrait-caption">John, in his Frisco shop.</figcaption>
+                </figure>
+                <div class="ed-about-copy">
+                  <p>I'm John. I live and work right here in the DFW area and I've been doing hands-on trade work for years. What started as plumbing turned into "hey John, can you also look at my fence / my yard / my garage floor?" — and here we are. I run a small crew and we cover most of what a homeowner needs without you having to call five different guys.</p>
+                  <p>I keep it simple. I show up when I say I will, I tell you what the job actually costs before I start, and I don't leave a mess behind. A lot of my work comes from neighbors telling other neighbors, and I'd rather keep it that way than cut corners to chase the next job. If I can't do something right, I'll tell you and point you to someone who can.</p>
+
+                  <div class="ed-service-area">
+                    <p class="ed-service-area-label">Service area</p>
+                    <p>I work across Frisco, Little Elm, Celina, and most of the surrounding DFW area — Prosper, McKinney, The Colony, Plano on a case-by-case basis. If you're a little outside that ring, call anyway. If I can't make it work I'll tell you up front and probably know somebody nearby who can.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </section>
 
-          <section class="contact">
-            <h2>Get an estimate</h2>
-            <p>Lorem ipsum — contact form placeholder. Form posts to <code>/api/notify</code> with <code>tenantId=johns-site</code>.</p>
+          <!-- Before / after gallery -->
+          <section class="ed-section" aria-labelledby="ed-gallery-h2">
+            <div class="ed-wrap">
+              <p class="ed-eyebrow">03 · Recent work</p>
+              <h2 class="ed-section-title" id="ed-gallery-h2">Before, after.</h2>
+              <p class="ed-section-lead">Drag the handle to reveal the finished job.</p>
+
+              <div class="ed-gallery" data-ed-ba>
+                <script type="application/json" data-ed-ba-pairs>
+[
+  {"caption": "Celina driveway · Power washing · March 2026", "before": "./assets/gallery/celina-driveway-before.jpg", "after": "./assets/gallery/celina-driveway-after.jpg"},
+  {"caption": "Frisco backyard · Fence rebuild · February 2026", "before": "./assets/gallery/frisco-fence-before.jpg", "after": "./assets/gallery/frisco-fence-after.jpg"},
+  {"caption": "Little Elm garage · Epoxy flake finish · January 2026", "before": "./assets/gallery/little-elm-epoxy-before.jpg", "after": "./assets/gallery/little-elm-epoxy-after.jpg"}
+]
+                </script>
+
+                <div class="ed-ba-slider" data-ed-ba-slider>
+                  <div class="ed-ba-layer ed-ba-before" aria-hidden="true"></div>
+                  <div class="ed-ba-layer ed-ba-after" aria-hidden="true"></div>
+                  <span class="ed-ba-tag ed-ba-tag-before">Before</span>
+                  <span class="ed-ba-tag ed-ba-tag-after">After</span>
+                  <span class="ed-ba-divider" aria-hidden="true"></span>
+                  <button class="ed-ba-handle" type="button" aria-label="Drag to reveal after photo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg>
+                  </button>
+                </div>
+
+                <div class="ed-ba-nav">
+                  <p class="ed-ba-caption" data-ed-ba-caption>&nbsp;</p>
+                  <span class="ed-ba-count" data-ed-ba-count>1 / 3</span>
+                  <div class="ed-ba-arrows">
+                    <button class="ed-ba-arrow" type="button" aria-label="Previous project" data-ed-ba-prev>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+                    </button>
+                    <button class="ed-ba-arrow" type="button" aria-label="Next project" data-ed-ba-next>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- No-JS / no-pairs fallback: 2-grid -->
+                <div class="ed-ba-fallback" aria-hidden="true">
+                  <figure>
+                    <div class="ed-ba-layer" data-state="before"></div>
+                    <figcaption>Celina driveway · Before</figcaption>
+                  </figure>
+                  <figure>
+                    <div class="ed-ba-layer" data-state="after"></div>
+                    <figcaption>Celina driveway · After</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </section>
 
-          <section class="faq">
-            <h2>Questions</h2>
-            <p>Lorem ipsum — FAQ placeholder.</p>
+          <!-- Contact form -->
+          <section class="ed-section" id="ed-contact" aria-labelledby="ed-contact-h2">
+            <div class="ed-wrap">
+              <p class="ed-eyebrow">04 · Get an estimate</p>
+              <h2 class="ed-section-title" id="ed-contact-h2">Tell me what's going on.</h2>
+
+              <div class="ed-form-wrap">
+                <p class="ed-form-lede">Tell me what's going on and I'll get back to you the same day.</p>
+
+                <form class="ed-form" data-ed-form novalidate>
+                  <div class="ed-field">
+                    <label for="ed-name">Name</label>
+                    <input id="ed-name" name="name" type="text" autocomplete="name" required>
+                  </div>
+                  <div class="ed-field">
+                    <label for="ed-phone">Phone</label>
+                    <input id="ed-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+                  </div>
+                  <div class="ed-field">
+                    <label for="ed-email">Email</label>
+                    <input id="ed-email" name="email" type="email" autocomplete="email" inputmode="email">
+                  </div>
+                  <div class="ed-field">
+                    <label for="ed-address">Address or zip code</label>
+                    <input id="ed-address" name="address" type="text" autocomplete="street-address">
+                  </div>
+                  <div class="ed-field">
+                    <label for="ed-message">What do you need help with?</label>
+                    <textarea id="ed-message" name="message" rows="4"></textarea>
+                  </div>
+                  <div class="ed-field">
+                    <label for="ed-source">How'd you hear about me? (optional)</label>
+                    <input id="ed-source" name="source" type="text">
+                  </div>
+                  <div class="ed-form-submit-row">
+                    <button class="ed-btn ed-btn-primary" type="submit" data-ed-form-submit>Send it</button>
+                    <p class="ed-form-status" data-ed-form-status role="status" aria-live="polite"></p>
+                  </div>
+                </form>
+              </div>
+            </div>
           </section>
-        </main>
-        <footer>
-          <p>Lorem ipsum — Editorial footer placeholder. &copy; John's General Contracting.</p>
-        </footer>
+
+          <!-- FAQ -->
+          <section class="ed-section" aria-labelledby="ed-faq-h2">
+            <div class="ed-wrap">
+              <p class="ed-eyebrow">05 · Questions</p>
+              <h2 class="ed-section-title" id="ed-faq-h2">The things people usually ask.</h2>
+
+              <ul class="ed-faq-list" role="list">
+                <li class="ed-faq-item" data-ed-faq data-open="false">
+                  <button class="ed-faq-q" type="button" aria-expanded="false">
+                    <span>How much do you charge?</span>
+                    <svg class="ed-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-faq-a">
+                    <div class="ed-faq-a-inner">It depends on the job, but I don't play games with pricing. After you tell me what's going on I can usually give you a ballpark on the phone or through the chat on this site, and then a firm number once I see it in person. No surprise line items at the end.</div>
+                  </div>
+                </li>
+
+                <li class="ed-faq-item" data-ed-faq data-open="false">
+                  <button class="ed-faq-q" type="button" aria-expanded="false">
+                    <span>Can you come out today?</span>
+                    <svg class="ed-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-faq-a">
+                    <div class="ed-faq-a-inner">A lot of the time, yes — especially for leaks, no-power situations, or anything that's actively getting worse. Call or text and I'll tell you straight whether I can make it today or first thing tomorrow.</div>
+                  </div>
+                </li>
+
+                <li class="ed-faq-item" data-ed-faq data-open="false">
+                  <button class="ed-faq-q" type="button" aria-expanded="false">
+                    <span>Do you handle emergencies after hours?</span>
+                    <svg class="ed-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-faq-a">
+                    <div class="ed-faq-a-inner">For active leaks, no-hot-water, or anything that's about to damage your house, call me and we'll figure it out. I don't promise 24/7 but I pick up most of the time.</div>
+                  </div>
+                </li>
+
+                <li class="ed-faq-item" data-ed-faq data-open="false">
+                  <button class="ed-faq-q" type="button" aria-expanded="false">
+                    <span>How does the estimate work?</span>
+                    <svg class="ed-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-faq-a">
+                    <div class="ed-faq-a-inner">Tell me what's going on. I'll either quote it over the phone if it's straightforward, or swing by and take a look. On-site estimates are free for most jobs in my service area.</div>
+                  </div>
+                </li>
+
+                <li class="ed-faq-item" data-ed-faq data-open="false">
+                  <button class="ed-faq-q" type="button" aria-expanded="false">
+                    <span>How far do you travel?</span>
+                    <svg class="ed-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-faq-a">
+                    <div class="ed-faq-a-inner">Frisco, Little Elm, Celina, and the surrounding DFW suburbs are my main area. Farther out is possible — just ask.</div>
+                  </div>
+                </li>
+
+                <li class="ed-faq-item" data-ed-faq data-open="false">
+                  <button class="ed-faq-q" type="button" aria-expanded="false">
+                    <span>How do I pay?</span>
+                    <svg class="ed-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-faq-a">
+                    <div class="ed-faq-a-inner">Cash, check, Venmo, Zelle, and credit/debit cards. I'll send a clean invoice either way so you've got a record.</div>
+                  </div>
+                </li>
+
+                <li class="ed-faq-item" data-ed-faq data-open="false">
+                  <button class="ed-faq-q" type="button" aria-expanded="false">
+                    <span>Do you warranty your work?</span>
+                    <svg class="ed-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-faq-a">
+                    <div class="ed-faq-a-inner">Yes. If something I fixed goes wrong because of how I fixed it, I come back and make it right. Warranty length depends on the job — I'll tell you before I start.</div>
+                  </div>
+                </li>
+
+                <li class="ed-faq-item" data-ed-faq data-open="false">
+                  <button class="ed-faq-q" type="button" aria-expanded="false">
+                    <span>Do you handle big remodels or just small stuff?</span>
+                    <svg class="ed-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-faq-a">
+                    <div class="ed-faq-a-inner">Mostly small-to-mid jobs — repairs, installs, one-room projects, outdoor work. For full gut remodels I'll point you to someone who does that full-time. No ego about it.</div>
+                  </div>
+                </li>
+
+                <li class="ed-faq-item" data-ed-faq data-open="false">
+                  <button class="ed-faq-q" type="button" aria-expanded="false">
+                    <span>Do you work weekends?</span>
+                    <svg class="ed-faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="ed-faq-a">
+                    <div class="ed-faq-a-inner">Saturdays yes, most Sundays no — that's family time. If it's an emergency, call anyway.</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Footer -->
+          <footer class="ed-footer" role="contentinfo">
+            <div class="ed-wrap">
+              <div class="ed-footer-grid">
+                <div class="ed-footer-col">
+                  <p class="ed-footer-col-label">Hours</p>
+                  <p>Mon–Sat 7am–7pm</p>
+                  <p>Closed Sundays</p>
+                </div>
+                <div class="ed-footer-col">
+                  <p class="ed-footer-col-label">Service area</p>
+                  <p>Frisco · Little Elm · Celina · Surrounding DFW</p>
+                </div>
+                <div class="ed-footer-col">
+                  <p class="ed-footer-col-label">Contact</p>
+                  <a href="tel:+12145550134" data-placeholder="phone">(214) 555-0134</a>
+                  <a href="mailto:hello@example.com">hello@example.com</a>
+                  <p>3102 Main St, Frisco, TX 75034</p>
+                </div>
+                <div class="ed-footer-col">
+                  <p class="ed-footer-col-label">Preview</p>
+                  <p>Placeholder contact info. Real phone, address, and hours confirmed before go-live.</p>
+                </div>
+              </div>
+
+              <div class="ed-footer-bottom">
+                <span>&copy; 2026 John's General Contracting</span>
+                <span>Built with Krevio</span>
+              </div>
+            </div>
+          </footer>
+
+          <!-- Chat widget (lightweight) -->
+          <div class="ed-chat">
+            <button class="ed-chat-pill" type="button" aria-expanded="false" aria-controls="ed-chat-panel" data-ed-chat-pill>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 6h16v10H7l-3 3V6z"/></svg>
+              <span>Ask John</span>
+            </button>
+            <div class="ed-chat-panel" id="ed-chat-panel" role="dialog" aria-label="Chat with John's assistant" data-ed-chat-panel data-open="false">
+              <div class="ed-chat-header">
+                <span class="ed-chat-title">John's assistant</span>
+                <button class="ed-chat-close" type="button" aria-label="Close chat" data-ed-chat-close>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                </button>
+              </div>
+              <div class="ed-chat-log" data-ed-chat-log role="log" aria-live="polite"></div>
+              <form class="ed-chat-form" data-ed-chat-form>
+                <label for="ed-chat-input" class="visually-hidden" style="position:absolute;left:-9999px">Type your question</label>
+                <input class="ed-chat-input" id="ed-chat-input" type="text" autocomplete="off" placeholder="Tell me what's going on…" data-ed-chat-input>
+                <button class="ed-chat-send" type="submit" data-ed-chat-send>Send</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       <!-- ======== UTILITY variant ======== -->
@@ -186,6 +555,9 @@
 
   <!-- App orchestration: variant switch, theme toggle, localStorage, URL sync -->
   <script type="module" src="./js/app.js"></script>
+
+  <!-- Editorial variant module (auto-mounts on DOMContentLoaded if active) -->
+  <script type="module" src="./js/variants/editorial.js"></script>
 
 </body>
 </html>
