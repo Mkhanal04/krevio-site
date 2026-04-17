@@ -40,6 +40,8 @@ jobs:
         run: cd scripts && npm run lint
 
   # Slowest (Playwright). Isolated so lint/validate fail fast without waiting.
+  # Targets the PR's Vercel preview on pull_request events, krevio.net on push to
+  # main. Fixes TD-020: smoke must verify the code under review, not production.
   smoke:
     runs-on: ubuntu-latest
     steps:
@@ -63,5 +65,58 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: cd scripts && npx playwright install --with-deps chromium
 
+      - name: Resolve smoke target URL
+        id: target
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT: ${{ github.event_name }}
+          PR: ${{ github.event.pull_request.number }}
+          SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -eu
+          if [ "$EVENT" = "pull_request" ]; then
+            echo "PR #$PR — waiting for Vercel preview (SHA $SHA)..."
+          else
+            echo "Push — waiting for Vercel production deploy (SHA $SHA)..."
+          fi
+
+          for i in $(seq 1 30); do
+            STATE=$(gh api "repos/$REPO/commits/$SHA/statuses" \
+              --jq '[.[] | select(.context == "Vercel")] | .[0].state // "missing"')
+
+            if [ "$STATE" = "failure" ] || [ "$STATE" = "error" ]; then
+              echo "✗ Vercel build failed (state: $STATE)"
+              exit 1
+            fi
+
+            if [ "$STATE" = "success" ]; then
+              if [ "$EVENT" = "pull_request" ]; then
+                # Regex is project-prefix anchored to avoid matching vercel.live
+                # feedback/telemetry links that also appear in the bot comment.
+                URL=$(gh api "repos/$REPO/issues/$PR/comments" \
+                  --jq '.[] | select(.user.login == "vercel[bot]") | .body' \
+                  | grep -oE 'https://krevio-site[a-z0-9-]*\.vercel\.app' \
+                  | head -1 || true)
+                if [ -n "$URL" ]; then
+                  echo "url=$URL" >> "$GITHUB_OUTPUT"
+                  echo "✓ Preview ready: $URL"
+                  exit 0
+                fi
+                echo "  attempt $i/30 — Vercel success but no preview URL in PR comment yet"
+              else
+                echo "url=https://krevio.net" >> "$GITHUB_OUTPUT"
+                echo "✓ Production deploy ready, smoking krevio.net"
+                exit 0
+              fi
+            else
+              echo "  attempt $i/30 — Vercel state: $STATE"
+            fi
+            sleep 10
+          done
+
+          echo "✗ Vercel did not become ready within 5 min"
+          exit 1
+
       - name: Mobile smoke test (390x844)
-        run: cd scripts && npm run smoke
+        run: cd scripts && npm run smoke -- "${{ steps.target.outputs.url }}"
