@@ -24,9 +24,9 @@ const VALID_BUSINESS_TYPES = [
   'landscaping',
   'realestate',
   'remodeling',
-  'krevio',            // landing page chatbot
-  'general-contractor', // planned: John's multi-service site
-  'multi-service',      // planned: future multi-service clients
+  'general-contractor', // John's Complete Home Services (multi-trade)
+  'krevio',             // landing page chatbot
+  'multi-service',      // reserved: future multi-service clients (not yet wired)
 ];
 
 const VALID_LANGS = ['en', 'en-US', 'es', 'es-US'];

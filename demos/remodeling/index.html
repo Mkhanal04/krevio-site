@@ -375,7 +375,7 @@ body {
 </section>
 
 <script>
-/* Lead form submission — wired to /api/demos/inquiry */
+/* Lead form submission — wired to /api/notify (shared with the 4 pre-template demos). */
 async function submitLeadForm(e) {
   e.preventDefault();
   const form = document.getElementById('leadForm');
@@ -391,22 +391,22 @@ async function submitLeadForm(e) {
   btn.disabled = true;
   btn.textContent = 'Sending...';
 
+  // Payload keys match /api/notify's schema (industry / date / description).
   const payload = {
     businessName: CONFIG.businessName,
-    businessType: CONFIG.businessType,
+    industry: CONFIG.businessType,
     name: fd.get('name'),
     phone: fd.get('phone'),
     email: fd.get('email'),
     service: fd.get('service'),
-    preferredDate: fd.get('preferredDate') || '',
-    details: fd.get('details') || '',
-    tcpaConsent: true,
+    date: fd.get('preferredDate') || '',
+    description: fd.get('details') || '',
     source: 'demo-lead-form',
     timestamp: new Date().toISOString(),
   };
 
   try {
-    const res = await fetch('/api/demos/inquiry', {
+    const res = await fetch('/api/notify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),

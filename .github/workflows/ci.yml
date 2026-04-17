@@ -3,29 +3,56 @@ name: CI
 on:
   pull_request:
     branches: [main]
+    paths-ignore:
+      - '**/*.md'
+      - '.github/ISSUE_TEMPLATE/**'
   push:
     branches: [main]
+    paths-ignore:
+      - '**/*.md'
+      - '.github/ISSUE_TEMPLATE/**'
 
 jobs:
-  quality-checks:
+  # Zero-dep, <2s — runs fastest, fails loudest on config drift.
+  validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: CONFIG schema validation
+        run: node scripts/validate-config.mjs
 
+  # Design-token policy. Needs scripts/ dev deps.
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
           cache-dependency-path: scripts/package-lock.json
-
       - name: Install dev dependencies
         run: cd scripts && npm ci
-
       - name: Stylelint — design system compliance
         run: cd scripts && npm run lint
 
-      - name: CONFIG schema validation
-        run: node scripts/validate-config.mjs
+  # Slowest (Playwright). Isolated so lint/validate fail fast without waiting.
+  # Targets the PR's Vercel preview on pull_request events, krevio.net on push to
+  # main. Fixes TD-020: smoke must verify the code under review, not production.
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: scripts/package-lock.json
+      - name: Install dev dependencies
+        run: cd scripts && npm ci
 
       - name: Cache Playwright browsers
         id: playwright-cache
@@ -38,5 +65,60 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: cd scripts && npx playwright install --with-deps chromium
 
+      - name: Resolve smoke target URL
+        id: target
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          EVENT: ${{ github.event_name }}
+          PR: ${{ github.event.pull_request.number }}
+          SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -eu
+          if [ "$EVENT" = "pull_request" ]; then
+            echo "PR #$PR — waiting for Vercel preview (SHA $SHA)..."
+          else
+            echo "Push — waiting for Vercel production deploy (SHA $SHA)..."
+          fi
+
+          for i in $(seq 1 30); do
+            STATE=$(gh api "repos/$REPO/commits/$SHA/statuses" \
+              --jq '[.[] | select(.context == "Vercel")] | .[0].state // "missing"')
+
+            if [ "$STATE" = "failure" ] || [ "$STATE" = "error" ]; then
+              echo "✗ Vercel build failed (state: $STATE)"
+              exit 1
+            fi
+
+            if [ "$STATE" = "success" ]; then
+              if [ "$EVENT" = "pull_request" ]; then
+                # Regex is project-prefix anchored to avoid matching vercel.live
+                # feedback/telemetry links that also appear in the bot comment.
+                URL=$(gh api "repos/$REPO/issues/$PR/comments" \
+                  --jq '.[] | select(.user.login == "vercel[bot]") | .body' \
+                  | grep -oE 'https://krevio-site[a-z0-9-]*\.vercel\.app' \
+                  | head -1 || true)
+                if [ -n "$URL" ]; then
+                  echo "url=$URL" >> "$GITHUB_OUTPUT"
+                  echo "✓ Preview ready: $URL"
+                  exit 0
+                fi
+                echo "  attempt $i/30 — Vercel success but no preview URL in PR comment yet"
+              else
+                echo "url=https://krevio.net" >> "$GITHUB_OUTPUT"
+                echo "✓ Production deploy ready, smoking krevio.net"
+                exit 0
+              fi
+            else
+              echo "  attempt $i/30 — Vercel state: $STATE"
+            fi
+            sleep 10
+          done
+
+          echo "✗ Vercel did not become ready within 5 min"
+          exit 1
+
       - name: Mobile smoke test (390x844)
-        run: cd scripts && npm run smoke
+        env:
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        run: cd scripts && npm run smoke -- "${{ steps.target.outputs.url }}"

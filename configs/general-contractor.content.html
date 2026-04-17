@@ -1,0 +1,431 @@
+<!--
+  general-contractor.content.html
+  Industry-specific content sections for John's multi-service contractor site.
+  Injected into _templates/base.html by scripts/build-site.mjs.
+  DO NOT include shared template chrome (demo bar, footer, chat init).
+
+  Phase 1: marketing preview with placeholder gallery / reviews.
+  When John sends real photos + testimonials, replace the DATA.gallery
+  and DATA.reviews arrays at the bottom of this file.
+-->
+
+<!-- SECTION: EXTRA_HEAD -->
+<style>
+/* ── Multi-service-specific styles ── */
+.cv-services-bg .services-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.service-card {
+  text-align: left;
+}
+.service-card .service-icon {
+  font-size: 2.4rem;
+  margin-bottom: var(--space-md);
+}
+.service-card .service-cta {
+  display: inline-block;
+  margin-top: var(--space-md);
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+/* "Why choose a local owner" strip */
+.cv-why-bg { background: var(--bg1); }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-xl);
+  margin-top: var(--space-2xl);
+}
+.why-item {
+  text-align: center;
+}
+.why-icon {
+  font-size: 2.2rem;
+  margin-bottom: var(--space-md);
+}
+.why-title {
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--t0);
+  margin-bottom: var(--space-xs);
+}
+.why-desc {
+  font-size: var(--text-sm);
+  color: var(--t2);
+  line-height: 1.5;
+}
+
+/* FAQ */
+.cv-faq-bg { background: var(--bg); }
+.faq-list {
+  max-width: 720px;
+  margin: var(--space-2xl) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.faq-item {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.faq-question {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: var(--space-lg) var(--space-xl);
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  color: var(--t0);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+.faq-question .faq-chevron {
+  color: var(--accent);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+.faq-answer {
+  padding: 0 var(--space-xl) var(--space-lg);
+  font-size: var(--text-sm);
+  color: var(--t2);
+  line-height: 1.6;
+  display: none;
+}
+.faq-item.open .faq-answer { display: block; }
+
+@media (max-width: 600px) {
+  .cv-services-bg .services-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+}
+</style>
+<!-- /SECTION -->
+
+<!-- SECTION: HERO_SECTION -->
+<section class="cv-hero">
+  <div class="cv-hero-inner">
+    <div class="cv-hero-badge">
+      <span class="stars">★★★★★</span>
+      <span data-en="Local owner · Celina, TX" data-es="Dueño local · Celina, TX">Local owner · Celina, TX</span>
+    </div>
+    <h1 data-en="Everything around your house — done right." data-es="Todo en su casa, hecho bien.">Everything around your house — done right.</h1>
+    <p class="cv-hero-sub" data-en="One call for plumbing, landscaping, fencing, electrical, epoxy floors &amp; more. Local owner. Honest prices. Celina &amp; North DFW." data-es="Una llamada para plomeria, jardineria, cercas, electricidad, pisos epoxicos y mas. Dueno local. Precios honestos. Celina y Norte de DFW.">One call for plumbing, landscaping, fencing, electrical, epoxy floors &amp; more. Local owner. Honest prices. Celina &amp; North DFW.</p>
+    <div class="cv-hero-pills" id="heroPills"></div>
+    <div class="cv-hero-ctas">
+      <button class="btn-primary" onclick="document.getElementById('bookingSection').scrollIntoView({behavior:'smooth'})" data-en="Request Free Estimate" data-es="Cotizacion Gratis">Request Free Estimate</button>
+      <button class="btn-outline" onclick="document.querySelector('.cv-services-bg').scrollIntoView({behavior:'smooth'})" data-en="See Services" data-es="Ver Servicios">See Services</button>
+    </div>
+    <div class="cv-hero-stats" id="heroStats"></div>
+  </div>
+</section>
+<!-- /SECTION -->
+
+<!-- SECTION: CONTENT_SECTIONS -->
+<!-- Services -->
+<section class="cv-services-bg">
+  <div class="cv-section">
+    <div class="section-header reveal">
+      <div class="section-label" data-en="What I Do" data-es="Lo Que Hago">What I Do</div>
+      <h2 class="section-title" data-en="One contractor. Seven trades." data-es="Un contratista. Siete oficios.">One contractor. Seven trades.</h2>
+      <p class="section-sub" data-en="Plumbing, handyman, landscaping, fencing, electrical, epoxy floors, and power washing — all from one local owner who shows up when he says he will." data-es="Plomería, trabajos generales, jardinería, cercas, electricidad, pisos epóxicos, y lavado a presión — todo del mismo dueño local.">Plumbing, handyman, landscaping, fencing, electrical, epoxy floors, and power washing — all from one local owner who shows up when he says he will.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- Why a Local Owner -->
+<section class="cv-why-bg">
+  <div class="cv-section">
+    <div class="section-header reveal">
+      <div class="section-label" data-en="Why Call Me" data-es="Por Que Llamarme">Why Call Me</div>
+      <h2 class="section-title" data-en="You talk to the guy doing the work." data-es="Hablas directamente con quien hace el trabajo.">You talk to the guy doing the work.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <div class="why-icon">👨‍🔧</div>
+        <div class="why-title" data-en="Owner on every job" data-es="Dueño en cada trabajo">Owner on every job</div>
+        <div class="why-desc" data-en="No call centers. No subcontractors you've never met. I quote it, I do it, I stand behind it." data-es="Sin centros de llamadas. Yo cotizo, yo hago el trabajo, yo respondo por él.">No call centers. No subcontractors you've never met. I quote it, I do it, I stand behind it.</div>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-icon">✅</div>
+        <div class="why-title" data-en="Honest estimates" data-es="Cotizaciones honestas">Honest estimates</div>
+        <div class="why-desc" data-en="Free, upfront quote before I start. No surprise fees. If the job runs into something unexpected, we talk first." data-es="Cotización gratis y clara. Sin tarifas sorpresa.">Free, upfront quote before I start. No surprise fees. If the job runs into something unexpected, we talk first.</div>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-icon">⏰</div>
+        <div class="why-title" data-en="Show up when I say I will" data-es="Llego cuando digo">Show up when I say I will</div>
+        <div class="why-desc" data-en="You'll hear from me the same day you reach out, and I'll be at your door when I tell you I will." data-es="Te contesto el mismo día y llego a la hora que dije.">You'll hear from me the same day you reach out, and I'll be at your door when I tell you I will.</div>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-icon">🏠</div>
+        <div class="why-title" data-en="Celina local" data-es="Local de Celina">Celina local</div>
+        <div class="why-desc" data-en="Based in Celina, working across North DFW. I know the neighborhoods, the soil, the city inspectors." data-es="Basado en Celina, trabajando en todo el Norte de DFW.">Based in Celina, working across North DFW. I know the neighborhoods, the soil, the city inspectors.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="cv-faq-bg">
+  <div class="cv-section">
+    <div class="section-header reveal">
+      <div class="section-label" data-en="FAQ" data-es="Preguntas">FAQ</div>
+      <h2 class="section-title" data-en="Common questions" data-es="Preguntas frecuentes">Common questions</h2>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+<!-- /SECTION -->
+
+<!-- SECTION: LEAD_FORM -->
+<section class="cv-section cv-booking-bg reveal" id="bookingSection">
+  <div class="booking-card">
+    <h2 class="section-title" style="margin-bottom:20px;" data-en="Request a Free Estimate" data-es="Solicitar Cotizacion Gratis">Request a Free Estimate</h2>
+    <p style="color:var(--t2); font-size:14px; margin-bottom:20px;" data-en="Tell me what you need. I'll text or email back the same day." data-es="Cuentame lo que necesitas. Te contesto el mismo dia.">Tell me what you need. I'll text or email back the same day.</p>
+    <form id="leadForm" onsubmit="return submitLeadForm(event)">
+      <div class="form-group">
+        <label class="form-label" data-en="Your Name" data-es="Tu Nombre">Your Name</label>
+        <input class="form-input" type="text" name="name" placeholder="John Smith" data-ph-en="John Smith" data-ph-es="Juan Garcia" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Phone" data-es="Telefono">Phone</label>
+        <input class="form-input" type="tel" name="phone" placeholder="(469) 555-0000" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Email" data-es="Correo">Email</label>
+        <input class="form-input" type="email" name="email" placeholder="you@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Service Needed" data-es="Servicio">Service Needed</label>
+        <select class="form-select" name="service" id="serviceDropdown"></select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Preferred Date" data-es="Fecha Preferida">Preferred Date</label>
+        <input class="form-input" type="date" name="preferredDate">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Details (optional)" data-es="Detalles (opcional)">Details (optional)</label>
+        <textarea class="form-input form-textarea" name="details" placeholder="Tell me what's going on..." data-ph-en="Tell me what's going on..." data-ph-es="Cuentame que pasa..."></textarea>
+      </div>
+      <div class="tcpa-consent">
+        <label class="form-checkbox-label">
+          <input type="checkbox" name="tcpaConsent" required>
+          <span>I agree to receive calls, texts, and emails from <span class="tcpa-business-name">{{BUSINESS_NAME}}</span> at the number and email I provided. Message and data rates may apply. Consent is not a condition of purchase.</span>
+        </label>
+      </div>
+      <button type="submit" class="btn-accent" id="leadSubmitBtn" data-en="{{FORM_BUTTON_EN}}" data-es="{{FORM_BUTTON_ES}}">{{FORM_BUTTON_EN}}</button>
+    </form>
+  </div>
+</section>
+
+<script>
+/* Lead form submission — wired to /api/demos/inquiry */
+async function submitLeadForm(e) {
+  e.preventDefault();
+  const form = document.getElementById('leadForm');
+  const btn = document.getElementById('leadSubmitBtn');
+  const fd = new FormData(form);
+  if (!fd.get('tcpaConsent')) { showToast('Please agree to the consent checkbox.'); return false; }
+  btn.disabled = true; btn.textContent = 'Sending...';
+  const payload = {
+    businessName: CONFIG.businessName, businessType: CONFIG.businessType,
+    name: fd.get('name'), phone: fd.get('phone'), email: fd.get('email'),
+    service: fd.get('service'), preferredDate: fd.get('preferredDate') || '',
+    details: fd.get('details') || '', tcpaConsent: true,
+    source: 'general-contractor-lead-form', timestamp: new Date().toISOString(),
+  };
+  try {
+    const res = await fetch('/api/demos/inquiry', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    if (res.ok) {
+      showToast('Thanks! I got your request and will be in touch today.');
+      window.krevioTrack?.('lead-submitted', { business: CONFIG.businessType, service: payload.service || 'general' });
+      form.reset();
+    } else { showToast('Something went wrong. Please call or text me directly.'); }
+  } catch { showToast('Network error. Please try again or call me.'); }
+  finally { btn.disabled = false; btn.textContent = btn.getAttribute('data-en') || 'Request Free Estimate'; }
+  return false;
+}
+</script>
+<!-- /SECTION -->
+
+<!-- SECTION: EXTRA_SCRIPTS -->
+<script>
+/* ═══════════════════════════════════════════
+   DATA — edit these when real content arrives
+   ═══════════════════════════════════════════ */
+const DATA = {
+  services: [
+    {
+      icon: '\ud83d\udd27',
+      name: 'Plumbing',
+      blurb: 'Leaks, clogs, water heaters, fixture installs, repipes. Same-day for emergencies.',
+      features: ['Leak detection & repair', 'Drain cleaning', 'Water heater install', 'Fixture replacement'],
+    },
+    {
+      icon: '\ud83d\udee0\ufe0f',
+      name: 'Handyman & Repairs',
+      blurb: 'The list of small things you keep meaning to fix. One afternoon, all handled.',
+      features: ['Drywall & patching', 'Door & cabinet repair', 'Mounting & assembly', 'General fixes'],
+    },
+    {
+      icon: '\ud83c\udf33',
+      name: 'Landscaping & Hauling',
+      blurb: 'Yard leveling, dirt moving, debris hauling, basic landscape work.',
+      features: ['Dirt & grading', 'Cleanouts & haul-off', 'Sod & mulch', 'Tree & brush removal'],
+    },
+    {
+      icon: '\ud83e\ude93',
+      name: 'Fencing',
+      blurb: 'Install and repair wood, metal, and chain-link fences across North DFW.',
+      features: ['New fence install', 'Repair & replace', 'Gate install', 'Stain & seal'],
+    },
+    {
+      icon: '\u26a1',
+      name: 'Electrical Work',
+      blurb: 'Outlets, fixtures, ceiling fans, troubleshooting. Licensed work.',
+      features: ['Outlets & switches', 'Lighting & fans', 'Panel work', 'Troubleshooting'],
+    },
+    {
+      icon: '\u2728',
+      name: 'Epoxy Flooring',
+      blurb: 'Garage and patio epoxy floors. Durable, easy to clean, great-looking.',
+      features: ['Garage floors', 'Patios & shops', 'Flake & metallic finish', 'Repair & recoat'],
+    },
+    {
+      icon: '\ud83d\udca6',
+      name: 'Power Washing',
+      blurb: 'Driveways, siding, decks, fences. Pressure-washed the right way \u2014 without damage.',
+      features: ['Driveways & walkways', 'Siding & brick', 'Decks & fences', 'Concrete cleaning'],
+    },
+  ],
+};
+
+/* ═══════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════ */
+function escapeHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function showToast(msg) { const el = document.getElementById('toast'); if (!el) return; el.textContent = msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 3000); }
+
+/* ═══════════════════════════════════════════
+   RENDER — CUSTOMER VIEW
+   ═══════════════════════════════════════════ */
+function renderHeroPills() {
+  const pills = CONFIG.heroPills || ['\u2705 Licensed & Insured', '\ud83c\udfe0 Celina-Based'];
+  const el = document.getElementById('heroPills');
+  if (el) el.innerHTML = pills.map(p => '<span class="cv-hero-pill">' + escapeHtml(p) + '</span>').join('');
+}
+function renderHeroStats() {
+  const stats = [
+    { num: '7', label: 'Services' },
+    { num: (CONFIG.areasServed || []).length + '+', label: 'Cities Served' },
+    { num: CONFIG.hours || 'Mon-Sat', label: 'Availability' },
+    { num: 'Same-Day', label: 'Response' },
+  ];
+  const el = document.getElementById('heroStats');
+  if (el) el.innerHTML = stats.map(s =>
+    '<div class="cv-hero-stat"><div class="cv-hero-stat-num">' + escapeHtml(s.num) + '</div><div class="cv-hero-stat-label">' + escapeHtml(s.label) + '</div></div>'
+  ).join('');
+}
+function renderServices() {
+  const el = document.getElementById('servicesGrid');
+  if (!el) return;
+  el.innerHTML = DATA.services.map(s =>
+    '<div class="service-card reveal">' +
+      '<div class="service-icon">' + s.icon + '</div>' +
+      '<div class="service-name">' + escapeHtml(s.name) + '</div>' +
+      '<p class="service-desc">' + escapeHtml(s.blurb) + '</p>' +
+      '<ul class="service-features">' + s.features.map(f => '<li>' + escapeHtml(f) + '</li>').join('') + '</ul>' +
+      '<a class="service-cta" href="#bookingSection">Get a quote \u2192</a>' +
+    '</div>'
+  ).join('');
+  const dd = document.getElementById('serviceDropdown');
+  if (dd) dd.innerHTML = '<option value="">Choose a service...</option>' +
+    DATA.services.map(s => '<option>' + escapeHtml(s.name) + '</option>').join('') +
+    '<option>Something else</option>';
+}
+function renderFaq() {
+  const el = document.getElementById('faqList');
+  if (!el || !CONFIG.faq) return;
+  el.innerHTML = CONFIG.faq.map((f, i) =>
+    '<div class="faq-item" data-idx="' + i + '">' +
+      '<button class="faq-question" type="button" onclick="toggleFaq(' + i + ')">' +
+        '<span>' + escapeHtml(f.q) + '</span>' +
+        '<span class="faq-chevron">\u25be</span>' +
+      '</button>' +
+      '<div class="faq-answer">' + escapeHtml(f.a) + '</div>' +
+    '</div>'
+  ).join('');
+}
+function toggleFaq(idx) {
+  const item = document.querySelector('.faq-item[data-idx="' + idx + '"]');
+  if (item) item.classList.toggle('open');
+}
+
+/* ═══════════════════════════════════════════
+   VIEW SWITCHER + DEMO BAR
+   ═══════════════════════════════════════════ */
+function switchView(view) {
+  const isCustomer = view === 'customer';
+  const cv = document.getElementById('customerView');
+  const btnC = document.getElementById('btnCustomer');
+  const btnO = document.getElementById('btnOwner');
+  if (cv) cv.classList.toggle('active', isCustomer);
+  if (btnC) btnC.classList.toggle('active', isCustomer);
+  if (btnO) btnO.classList.toggle('active', !isCustomer);
+  if (!isCustomer) showToast('Dashboard is part of the Complete plan \u2014 coming soon.');
+}
+function toggleTheme() {
+  const html = document.documentElement;
+  const cur = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  const btn = document.getElementById('themeBtn');
+  if (btn) btn.textContent = html.getAttribute('data-theme') === 'dark' ? '\ud83c\udf19' : '\u2600\ufe0f';
+}
+let currentLang = 'en';
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const t = el.getAttribute('data-' + currentLang);
+    if (t) el.textContent = t;
+  });
+  document.querySelectorAll('[data-ph-en]').forEach(el => {
+    const t = el.getAttribute('data-ph-' + currentLang);
+    if (t) el.placeholder = t;
+  });
+  document.getElementById('langEN').classList.toggle('active-lang', currentLang === 'en');
+  document.getElementById('langES').classList.toggle('active-lang', currentLang === 'es');
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+   ═══════════════════════════════════════════ */
+function initReveal() {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  renderHeroPills();
+  renderHeroStats();
+  renderServices();
+  renderFaq();
+  initReveal();
+});
+</script>
+<!-- /SECTION -->
