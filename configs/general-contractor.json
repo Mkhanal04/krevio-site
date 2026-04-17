@@ -29,9 +29,9 @@
   "hasCustomerCRM": false,
   "hasMoney": false,
   "hasReceipts": false,
-  "hasGallery": true,
-  "hasLanguageToggle": true,
-  "hasVoice": true,
+  "hasGallery": false,
+  "hasLanguageToggle": false,
+  "hasVoice": false,
 
   "chatEndpoint": "/api/demos/chat",
   "ttsEndpoint": "/api/demos/tts",

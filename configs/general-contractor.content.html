@@ -30,28 +30,6 @@
   font-weight: var(--weight-semibold);
 }
 
-/* Gallery placeholders (no photos yet) */
-.gallery-item.placeholder {
-  background: var(--bg1);
-  border: 2px dashed var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-  padding: var(--space-xl);
-  text-align: center;
-}
-.gallery-placeholder-icon {
-  font-size: 2.4rem;
-  margin-bottom: var(--space-md);
-  opacity: 0.6;
-}
-.gallery-placeholder-text {
-  font-size: var(--text-sm);
-  color: var(--t2);
-  line-height: 1.4;
-}
-
 /* "Why choose a local owner" strip */
 .cv-why-bg { background: var(--bg1); }
 .why-grid {
@@ -194,18 +172,6 @@
   </div>
 </section>
 
-<!-- Gallery — placeholders until John sends photos -->
-<section class="cv-gallery-bg" id="gallerySection">
-  <div class="cv-section">
-    <div class="section-header reveal">
-      <div class="section-label" data-en="Recent Work" data-es="Trabajo Reciente">Recent Work</div>
-      <h2 class="section-title" data-en="Before &amp; After" data-es="Antes y Despues">Before &amp; After</h2>
-      <p class="section-sub" data-en="Real project photos coming soon. Ask me about a specific job over text or chat \u2014 I can send recent pictures." data-es="Fotos de proyectos reales muy pronto.">Real project photos coming soon. Ask me about a specific job over text or chat &mdash; I can send recent pictures.</p>
-    </div>
-    <div class="gallery-grid" id="galleryGrid"></div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section class="cv-faq-bg">
   <div class="cv-section">
@@ -339,16 +305,6 @@ const DATA = {
       features: ['Driveways & walkways', 'Siding & brick', 'Decks & fences', 'Concrete cleaning'],
     },
   ],
-  // Gallery is all placeholders until John sends photos.
-  // Replace these with { before: '/img/job-x-before.jpg', after: '/img/job-x-after.jpg', job: '...', location: '...' }
-  gallery: [
-    { placeholder: true, icon: '\ud83d\udcf7', label: 'Recent plumbing job' },
-    { placeholder: true, icon: '\ud83d\udcf7', label: 'Fence install \u2014 Celina' },
-    { placeholder: true, icon: '\ud83d\udcf7', label: 'Epoxy garage floor' },
-    { placeholder: true, icon: '\ud83d\udcf7', label: 'Power wash \u2014 driveway' },
-    { placeholder: true, icon: '\ud83d\udcf7', label: 'Electrical work' },
-    { placeholder: true, icon: '\ud83d\udcf7', label: 'Yard leveling & hauling' },
-  ],
 };
 
 /* ═══════════════════════════════════════════
@@ -393,27 +349,6 @@ function renderServices() {
   if (dd) dd.innerHTML = '<option value="">Choose a service...</option>' +
     DATA.services.map(s => '<option>' + escapeHtml(s.name) + '</option>').join('') +
     '<option>Something else</option>';
-}
-function renderGallery() {
-  const el = document.getElementById('galleryGrid');
-  if (!el) return;
-  el.innerHTML = DATA.gallery.map(g => {
-    if (g.placeholder) {
-      return '<div class="gallery-item placeholder reveal">' +
-        '<div>' +
-          '<div class="gallery-placeholder-icon">' + g.icon + '</div>' +
-          '<div class="gallery-placeholder-text">' + escapeHtml(g.label) + '<br><em>Photo coming soon</em></div>' +
-        '</div>' +
-      '</div>';
-    }
-    // Real photo rendering (used once John sends photos):
-    return '<div class="gallery-item reveal">' +
-      '<div class="gallery-before"><img src="' + escapeHtml(g.before) + '" alt="Before"></div>' +
-      '<div class="gallery-after"><img src="' + escapeHtml(g.after) + '" alt="After"></div>' +
-      '<div class="gallery-job">' + escapeHtml(g.job) + '</div>' +
-      '<div class="gallery-loc">' + escapeHtml(g.location || '') + '</div>' +
-    '</div>';
-  }).join('');
 }
 function renderFaq() {
   const el = document.getElementById('faqList');
@@ -489,7 +424,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderHeroPills();
   renderHeroStats();
   renderServices();
-  renderGallery();
   renderFaq();
   initReveal();
 });
